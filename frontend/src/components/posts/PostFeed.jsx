@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPosts, getSavedPosts } from '../../api/posts.js';
+import { getAllowance, getPosts, getSavedPosts } from '../../api/posts.js';
 import { getErrorMessage } from '../../utils/getErrorMessage.js';
 import Alert from '../ui/Alert.jsx';
 import Button from '../ui/Button.jsx';
@@ -15,6 +15,20 @@ export default function PostFeed({ source }) {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState('');
+  const [allowance, setAllowance] = useState(null); // today's posting limit, for the composer
+
+  // If the allowance cannot be loaded the composer still works; the server enforces the limit anyway.
+  const refreshAllowance = () =>
+    getAllowance()
+      .then(setAllowance)
+      .catch(() => {});
+
+  useEffect(() => {
+    if (source !== 'all') return;
+    getAllowance()
+      .then(setAllowance)
+      .catch(() => {});
+  }, [source]);
 
   useEffect(() => {
     let ignore = false; // an answer that arrives after the list was closed is ignored
@@ -49,8 +63,14 @@ export default function PostFeed({ source }) {
     }
   }
 
-  const addPost = (post) => setPosts((current) => [post, ...current]);
-  const removePost = (id) => setPosts((current) => current.filter((post) => post.id !== id));
+  function addPost(post, nextAllowance) {
+    setPosts((current) => [post, ...current]);
+    setAllowance(nextAllowance);
+  }
+  function removePost(id) {
+    setPosts((current) => current.filter((post) => post.id !== id));
+    if (source === 'all') refreshAllowance(); // deleting today's post frees a slot
+  }
   const updatePost = (updated) =>
     // In the Saved list, a post that is no longer saved disappears.
     source === 'saved' && !updated.savedByMe
@@ -64,7 +84,7 @@ export default function PostFeed({ source }) {
 
   return (
     <div className="space-y-6">
-      {source === 'all' && <CreatePostForm onCreated={addPost} />}
+      {source === 'all' && <CreatePostForm allowance={allowance} onCreated={addPost} onAllowanceChange={setAllowance} />}
 
       {error && <Alert>{error}</Alert>}
 

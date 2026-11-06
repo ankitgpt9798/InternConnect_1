@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Post, { CAPTION_MAX, COMMENT_MAX, HIDE_AFTER_REPORTS, REPORT_REASONS } from '../models/Post.js';
 import { deleteMedia, uploadMedia } from '../utils/cloudinary.js';
+import { getPostingAllowance } from '../utils/postingLimit.js';
 import { toText } from '../utils/validators.js';
 
 const PAGE_SIZE = 10;
@@ -79,7 +80,13 @@ export const getPosts = (req, res) => sendPage(req, res, {});
 // GET /api/posts/saved?page=1 - posts the logged-in user saved
 export const getSavedPosts = (req, res) => sendPage(req, res, { savedBy: req.user._id });
 
-// POST /api/posts - multipart form: caption and/or one "media" file
+// GET /api/posts/allowance - how many posts the logged-in user may still publish today
+export async function getAllowance(req, res) {
+  res.json({ allowance: await getPostingAllowance(req.user) });
+}
+
+// POST /api/posts - multipart form: caption and/or one "media" file.
+// The daily posting limit is checked before this runs (middleware/postingLimit.js).
 export async function createPost(req, res) {
   const caption = toText(req.body?.caption);
 
@@ -102,7 +109,7 @@ export async function createPost(req, res) {
 
   const post = await Post.create({ author: req.user._id, caption, media });
   await post.populate(POPULATE);
-  res.status(201).json({ post: postResponse(post, req.user._id) });
+  res.status(201).json({ post: postResponse(post, req.user._id), allowance: await getPostingAllowance(req.user) });
 }
 
 // GET /api/posts/:id
@@ -129,7 +136,8 @@ export async function deletePost(req, res) {
     }
   }
   await post.deleteOne();
-  res.json({ message: 'Post deleted.' });
+  // Deleting a post made today frees one of today's posts again.
+  res.json({ message: 'Post deleted.', allowance: await getPostingAllowance(req.user) });
 }
 
 // POST /api/posts/:id/like - like, or unlike if already liked

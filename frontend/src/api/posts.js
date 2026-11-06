@@ -7,9 +7,13 @@ export const getSavedPosts = (page = 1) => api.get('/posts/saved', { params: { p
 
 export const getPost = (id) => api.get(`/posts/${id}`).then((res) => res.data.post);
 
+// { friendCount, dailyLimit (null = unlimited), postsToday, remaining, resetsAt }
+export const getAllowance = () => api.get('/posts/allowance').then((res) => res.data.allowance);
+
 // formData holds "caption" and an optional "media" file; onUploadProgress reports the upload.
+// Returns { post, allowance }.
 export const createPost = (formData, onUploadProgress) =>
-  api.post('/posts', formData, { onUploadProgress }).then((res) => res.data.post);
+  api.post('/posts', formData, { onUploadProgress }).then((res) => res.data);
 
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 

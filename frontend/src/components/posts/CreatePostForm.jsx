@@ -4,6 +4,7 @@ import { createPost } from '../../api/posts.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getErrorMessage } from '../../utils/getErrorMessage.js';
 import Avatar from '../Avatar.jsx';
+import PostingAllowance from '../PostingAllowance.jsx';
 import Button from '../ui/Button.jsx';
 
 // The same limits as the backend (backend/src/middleware/upload.js).
@@ -21,7 +22,8 @@ function checkFile(file) {
   return '';
 }
 
-export default function CreatePostForm({ onCreated }) {
+// allowance: today's posting limit (see PostingAllowance); the server checks it again on every post.
+export default function CreatePostForm({ allowance, onCreated, onAllowanceChange }) {
   const { user } = useAuth();
   const [caption, setCaption] = useState('');
   const [file, setFile] = useState(null);
@@ -56,20 +58,24 @@ export default function CreatePostForm({ onCreated }) {
     setError('');
     setProgress(0);
     try {
-      const post = await createPost(formData, (event) => {
+      const data = await createPost(formData, (event) => {
         if (event.total) setProgress(Math.round((event.loaded / event.total) * 100));
       });
       setCaption('');
       setFile(null);
-      onCreated(post);
+      onCreated(data.post, data.allowance);
     } catch (err) {
       setError(getErrorMessage(err));
+      // A refused post (no friends, or today's limit reached) comes back with the current allowance.
+      if (err.response?.data?.allowance) onAllowanceChange(err.response.data.allowance);
     } finally {
       setProgress(null);
     }
   }
 
   const posting = progress !== null;
+  // Until the allowance has loaded, posting stays possible; the server has the final say.
+  const canPost = !allowance || allowance.dailyLimit === null || allowance.remaining > 0;
 
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -85,7 +91,8 @@ export default function CreatePostForm({ onCreated }) {
             maxLength={CAPTION_MAX}
             value={caption}
             onChange={(event) => setCaption(event.target.value)}
-            placeholder="Share an update, a photo or a video…"
+            disabled={!canPost}
+            placeholder={canPost ? 'Share an update, a photo or a video…' : 'Posting is not available right now.'}
             className="block w-full resize-y rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200 focus:outline-none"
           />
           <p className="mt-1 text-right text-xs text-slate-500">
@@ -115,13 +122,17 @@ export default function CreatePostForm({ onCreated }) {
 
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
+      <div className="mt-3">
+        <PostingAllowance allowance={allowance} />
+      </div>
+
       <div className="mt-3 flex items-center justify-between gap-3">
         <input ref={fileInput} type="file" accept={[...IMAGE_TYPES, ...VIDEO_TYPES].join(',')} onChange={handleFileChange} hidden />
-        <Button type="button" variant="ghost" size="sm" onClick={() => fileInput.current.click()} disabled={posting}>
+        <Button type="button" variant="ghost" size="sm" onClick={() => fileInput.current.click()} disabled={posting || !canPost}>
           <ImagePlus className="size-4" />
           Photo / video
         </Button>
-        <Button type="submit" size="sm" disabled={posting}>
+        <Button type="submit" size="sm" disabled={posting || !canPost}>
           {posting ? `Posting… ${progress}%` : 'Post'}
         </Button>
       </div>

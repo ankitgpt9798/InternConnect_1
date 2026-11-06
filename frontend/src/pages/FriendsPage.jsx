@@ -1,7 +1,9 @@
 import { Check, Search, UserPlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { acceptRequest, deleteRequest, getFriends, removeFriend, searchStudents, sendRequest } from '../api/friends.js';
+import { getAllowance } from '../api/posts.js';
 import Avatar from '../components/Avatar.jsx';
+import PostingAllowance from '../components/PostingAllowance.jsx';
 import Alert from '../components/ui/Alert.jsx';
 import Button from '../components/ui/Button.jsx';
 import { getErrorMessage } from '../utils/getErrorMessage.js';
@@ -39,6 +41,7 @@ const Empty = ({ children }) => <p className="mt-3 text-sm text-slate-500">{chil
 export default function FriendsPage() {
   const [lists, setLists] = useState(null); // { friends, received, sent }
   const [results, setResults] = useState(null);
+  const [allowance, setAllowance] = useState(null); // the posting limit depends on the number of friends
   const [query, setQuery] = useState('');
   const [searchedFor, setSearchedFor] = useState('');
   const [busy, setBusy] = useState(''); // what is waiting for the server
@@ -46,10 +49,11 @@ export default function FriendsPage() {
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text }
 
   useEffect(() => {
-    Promise.all([getFriends(), searchStudents('')])
-      .then(([nextLists, nextResults]) => {
+    Promise.all([getFriends(), searchStudents(''), getAllowance()])
+      .then(([nextLists, nextResults, nextAllowance]) => {
         setLists(nextLists);
         setResults(nextResults);
+        setAllowance(nextAllowance);
       })
       .catch((err) => setMessage({ type: 'error', text: getErrorMessage(err) }));
   }, []);
@@ -60,9 +64,14 @@ export default function FriendsPage() {
     setMessage(null);
     try {
       const data = await request();
-      const [nextLists, nextResults] = await Promise.all([getFriends(), searchStudents(searchedFor)]);
+      const [nextLists, nextResults, nextAllowance] = await Promise.all([
+        getFriends(),
+        searchStudents(searchedFor),
+        getAllowance(),
+      ]);
       setLists(nextLists);
       setResults(nextResults);
+      setAllowance(nextAllowance);
       setMessage({ type: 'success', text: data.message });
     } catch (err) {
       setMessage({ type: 'error', text: getErrorMessage(err) });
@@ -133,6 +142,19 @@ export default function FriendsPage() {
       </div>
 
       {message && <Alert type={message.type}>{message.text}</Alert>}
+
+      {allowance && (
+        <section className="rounded-2xl border border-brand-100 bg-brand-50 p-5">
+          <h2 className="font-semibold text-brand-900">Your posting limit in Public Space</h2>
+          <div className="mt-1">
+            <PostingAllowance allowance={allowance} showFriendsLink={false} />
+          </div>
+          <p className="mt-2 text-xs text-slate-500">
+            Each friend lets you post once a day: 1 friend = 1 post, 2 friends = 2 posts, and so on. With more than 10
+            friends you can post as often as you like. The count restarts at midnight (IST).
+          </p>
+        </section>
+      )}
 
       {lists.received.length > 0 && (
         <Section title="Friend requests" count={lists.received.length}>

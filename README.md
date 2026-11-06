@@ -5,13 +5,14 @@ connect with other students in a shared Public Space.
 
 > **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
-> friend requests and a friends list. The rest of the six modules follow.
+> friend requests and a friends list; a daily posting limit based on the number of friends.
+> The rest of the six modules follow.
 
 ## Modules
 
 | # | Module | Status |
 | - | ------ | ------ |
-| 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Planned |
+| 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | In progress |
 | 2 | Forgot password with OTP verification | Planned |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Planned |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
@@ -45,6 +46,19 @@ connect with other students in a shared Public Space.
 | Email    | Valid email address, unique (case-insensitive) |
 | Mobile   | 10 digits starting with 6, 7, 8 or 9, unique |
 | Password | 8 to 64 characters (bcrypt only uses the first 72 bytes, so longer ones are refused) |
+
+## Public Space posting limit
+
+The number of posts a student may publish per day depends on their number of friends:
+
+| Friends | Posts per day |
+| ------- | ------------- |
+| 0 | Cannot post |
+| 1 to 10 | The same as the number of friends (1 friend = 1 post, 2 friends = 2 posts … 10 friends = 10 posts) |
+| More than 10 | Unlimited |
+
+The day restarts at midnight India Standard Time (server clock). Deleting a post made today frees that post again.
+The limit is checked before an upload is read, so a refused post never sends its file to Cloudinary.
 
 ## Prerequisites
 
@@ -136,8 +150,9 @@ InternConnect_1/
 | POST   | `/api/auth/logout`   | No  | Clears the login cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page) |
-| POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file. Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary |
+| POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file. Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. 403 with no friends, 429 when today's limit is reached |
 | GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |
+| GET    | `/api/posts/allowance` | Yes | Today's posting limit: `{ friendCount, dailyLimit, postsToday, remaining, resetsAt }` (`null` = unlimited) |
 | GET    | `/api/posts/:id`     | Yes | One post |
 | DELETE | `/api/posts/:id`     | Yes | Deletes your own post and its photo or video (403 for someone else's post) |
 | POST   | `/api/posts/:id/like` | Yes | Like, or unlike if you already liked it |

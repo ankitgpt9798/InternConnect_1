@@ -3,6 +3,7 @@ import {
   addComment,
   createPost,
   deletePost,
+  getAllowance,
   getPost,
   getPosts,
   getSavedPosts,
@@ -12,6 +13,7 @@ import {
   toggleSave,
 } from '../controllers/postController.js';
 import { protect } from '../middleware/auth.js';
+import { checkPostingLimit } from '../middleware/postingLimit.js';
 import { uploadPostMedia } from '../middleware/upload.js';
 
 const router = Router();
@@ -20,8 +22,11 @@ const router = Router();
 router.use(protect);
 
 router.get('/', getPosts);
-router.post('/', uploadPostMedia, createPost);
-router.get('/saved', getSavedPosts); // before "/:id", so "saved" is not read as a post id
+// The limit is checked first, so a refused post never uploads its file.
+router.post('/', checkPostingLimit, uploadPostMedia, createPost);
+// These come before "/:id", so "saved" and "allowance" are not read as post ids.
+router.get('/saved', getSavedPosts);
+router.get('/allowance', getAllowance);
 router.get('/:id', getPost);
 router.delete('/:id', deletePost);
 
