@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import api from '../api/axios.js';
+import { buttonClasses } from '../components/ui/buttonStyles.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function StatusRow({ label, value, ok }) {
   return (
@@ -14,6 +17,7 @@ function StatusRow({ label, value, ok }) {
 }
 
 export default function HomePage() {
+  const { user, loading } = useAuth();
   // null while the first check is still running
   const [health, setHealth] = useState(null);
 
@@ -34,6 +38,24 @@ export default function HomePage() {
         <p className="mt-3 max-w-2xl text-brand-100">
           Find internships, build your resume and connect with fellow students.
         </p>
+        {!loading && (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {user ? (
+              <Link to="/dashboard" className={buttonClasses({ variant: 'inverse', size: 'lg' })}>
+                Go to dashboard
+              </Link>
+            ) : (
+              <>
+                <Link to="/register" className={buttonClasses({ variant: 'inverse', size: 'lg' })}>
+                  Create an account
+                </Link>
+                <Link to="/login" className={buttonClasses({ variant: 'outlineLight', size: 'lg' })}>
+                  Log in
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </section>
 
       <section className="max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

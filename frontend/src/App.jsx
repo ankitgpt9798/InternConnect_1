@@ -1,13 +1,30 @@
 import { Route, Routes } from 'react-router';
+import GuestRoute from './components/GuestRoute.jsx';
 import MainLayout from './components/layout/MainLayout.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import DashboardPage from './pages/DashboardPage.jsx';
 import HomePage from './pages/HomePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 
 export default function App() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
+
+        {/* Only for visitors who are not logged in */}
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
+
+        {/* Only for logged-in users */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
