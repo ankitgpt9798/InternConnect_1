@@ -13,7 +13,7 @@ connect with other students in a shared Public Space.
 | # | Module | Status |
 | - | ------ | ------ |
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
-| 2 | Forgot password with OTP verification | Planned |
+| 2 | Forgot password with OTP verification | In progress |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Planned |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
 | 5 | Six languages, with OTP verification for French | Planned |
@@ -46,6 +46,16 @@ connect with other students in a shared Public Space.
 | Email    | Valid email address, unique (case-insensitive) |
 | Mobile   | 10 digits starting with 6, 7, 8 or 9, unique |
 | Password | 8 to 64 characters (bcrypt only uses the first 72 bytes, so longer ones are refused) |
+
+## Forgot password
+
+- **Forgot password?** on the login page asks for the email or mobile number and sends a 6-digit code to it.
+  Codes work for 10 minutes, a new code can be requested after 60 seconds (it replaces the old one), and only a
+  bcrypt hash of each code is stored (MongoDB deletes expired codes by itself).
+- The option can be used **once per day** (calendar day in India time); after that the student sees
+  "You can use this option only once per day."
+- Emails go to the **Mailtrap** sandbox inbox (mailtrap.io), not to real addresses. **SMS is simulated:** no SMS
+  provider is set up, so the text, including the code, is printed in the backend terminal.
 
 ## Public Space posting limit
 
@@ -119,22 +129,22 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, posts, friends, notifications, health)
+│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
-│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification)
+│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
-│   │   │                    IST dates, notifications
+│   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance and API calls (posts, friends, notifications)
+│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
-│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, hashtag,
+│       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
 │       │                    friends, notifications, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
@@ -151,6 +161,7 @@ InternConnect_1/
 | POST   | `/api/auth/login`    | No  | Body `{ identifier, password }` (identifier = email or mobile number). 200 with the user and the login cookie; 401 wrong details |
 | POST   | `/api/auth/logout`   | No  | Clears the login cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
+| POST   | `/api/auth/forgot-password` | No | Body `{ identifier }` (email or mobile number). Sends a 6-digit code by email (Mailtrap) or mock SMS. 404 unknown account; 429 "You can use this option only once per day." or "Please wait N seconds" (60 s between codes) |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page). `&feed=friends`: only your friends' posts and yours; `&tag=internship`: only posts with that hashtag |
 | POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file, plus optional `mentions` (ids of your friends, up to 10). Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. Up to 10 `#hashtags` are taken from the caption. 403 with no friends, 429 when today's limit is reached |
 | GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |

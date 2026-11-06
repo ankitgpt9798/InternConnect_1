@@ -3,6 +3,7 @@ import GuestRoute from './components/GuestRoute.jsx';
 import MainLayout from './components/layout/MainLayout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import FriendsPage from './pages/FriendsPage.jsx';
 import HashtagPage from './pages/HashtagPage.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -23,6 +24,7 @@ export default function App() {
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         </Route>
 
         {/* Only for logged-in users */}

@@ -13,6 +13,8 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true, select: false },
     // Accepted friends. Both students are added to each other's list.
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    // When "Forgot password" last set a new password (it can be used once per day).
+    lastPasswordResetAt: { type: Date, default: null },
   },
   { timestamps: true },
 );

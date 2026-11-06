@@ -69,6 +69,11 @@ export default function LoginPage() {
           error={errors.password}
           autoComplete="current-password"
         />
+        <div className="text-right">
+          <Link to="/forgot-password" className="text-sm font-medium text-brand-700 hover:underline">
+            Forgot password?
+          </Link>
+        </div>
         <Button type="submit" loading={submitting} className="w-full">
           Log in
         </Button>

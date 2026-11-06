@@ -10,6 +10,8 @@ const REQUIRED_ENV = [
   'CLOUDINARY_CLOUD_NAME',
   'CLOUDINARY_API_KEY',
   'CLOUDINARY_API_SECRET',
+  'MAILTRAP_USER',
+  'MAILTRAP_PASS',
 ];
 const missing = REQUIRED_ENV.filter((key) => !process.env[key]);
 if (missing.length > 0) {
