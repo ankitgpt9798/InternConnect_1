@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getMe, login, logout, register } from '../controllers/authController.js';
-import { forgotPassword } from '../controllers/passwordController.js';
+import { forgotPassword, resetPassword } from '../controllers/passwordController.js';
 import { protect } from '../middleware/auth.js';
 
 const router = Router();
@@ -12,5 +12,6 @@ router.get('/me', protect, getMe);
 
 // Forgot password (no login needed)
 router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
 
 export default router;

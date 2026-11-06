@@ -6,14 +6,15 @@ connect with other students in a shared Public Space.
 > **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
 > friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
-> hashtags, mentions and notifications (Module 1 complete). The rest of the six modules follow.
+> hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
+> generated letters-only password (Module 2 complete). The rest of the six modules follow.
 
 ## Modules
 
 | # | Module | Status |
 | - | ------ | ------ |
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
-| 2 | Forgot password with OTP verification | In progress |
+| 2 | Forgot password with OTP verification | Done |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Planned |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
 | 5 | Six languages, with OTP verification for French | Planned |
@@ -52,7 +53,11 @@ connect with other students in a shared Public Space.
 - **Forgot password?** on the login page asks for the email or mobile number and sends a 6-digit code to it.
   Codes work for 10 minutes, a new code can be requested after 60 seconds (it replaces the old one), and only a
   bcrypt hash of each code is stored (MongoDB deletes expired codes by itself).
-- The option can be used **once per day** (calendar day in India time); after that the student sees
+- After 5 incorrect codes the code stops working and a new one is needed; a correct code works only once.
+- With the right code the system generates a **new 12-letter password made only of upper- and lowercase letters**
+  (no numbers or special characters), saves it hashed, shows it once on screen (with a Copy button) and sends it to the
+  same email or phone. The old password stops working.
+- A password can be reset **once per day** (calendar day in India time); after that the student sees
   "You can use this option only once per day."
 - Emails go to the **Mailtrap** sandbox inbox (mailtrap.io), not to real addresses. **SMS is simulated:** no SMS
   provider is set up, so the text, including the code, is printed in the backend terminal.
@@ -134,7 +139,8 @@ InternConnect_1/
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
-│   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking
+│   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
+│   │   │                    letters-only password generator
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
@@ -162,6 +168,7 @@ InternConnect_1/
 | POST   | `/api/auth/logout`   | No  | Clears the login cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
 | POST   | `/api/auth/forgot-password` | No | Body `{ identifier }` (email or mobile number). Sends a 6-digit code by email (Mailtrap) or mock SMS. 404 unknown account; 429 "You can use this option only once per day." or "Please wait N seconds" (60 s between codes) |
+| POST   | `/api/auth/reset-password` | No | Body `{ identifier, otp }`. With the right code: a new 12-letter password (upper- and lowercase letters only) is saved, returned once as `password` and sent to the same email or phone. 400 wrong (with `attemptsLeft`), expired or locked code |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page). `&feed=friends`: only your friends' posts and yours; `&tag=internship`: only posts with that hashtag |
 | POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file, plus optional `mentions` (ids of your friends, up to 10). Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. Up to 10 `#hashtags` are taken from the caption. 403 with no friends, 429 when today's limit is reached |
 | GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |

@@ -1,7 +1,16 @@
 import User from '../models/User.js';
+import { generateLetterPassword } from '../utils/generatePassword.js';
 import { startOfIstDay } from '../utils/istTime.js';
 import { maskEmail, maskPhone } from '../utils/mask.js';
-import { createOtp, deleteOtp, OTP_MINUTES, OTP_RESEND_SECONDS, secondsUntilResend } from '../utils/otp.js';
+import {
+  createOtp,
+  deleteOtp,
+  OTP_MINUTES,
+  OTP_RESEND_SECONDS,
+  otpErrorMessage,
+  secondsUntilResend,
+  verifyOtp,
+} from '../utils/otp.js';
 import { sendEmail } from '../utils/sendEmail.js';
 import { sendSms } from '../utils/sendSms.js';
 import { EMAIL_REGEX, PHONE_REGEX, toText } from '../utils/validators.js';
@@ -11,6 +20,7 @@ export const DAILY_LIMIT_MESSAGE = 'You can use this option only once per day.';
 
 // "Forgot password" may set a new password once per calendar day (IST).
 const resetToday = (user) => user.lastPasswordResetAt && user.lastPasswordResetAt >= startOfIstDay();
+const destinationOf = (user, byEmail) => (byEmail ? maskEmail(user.email) : maskPhone(user.phone));
 
 // Reads { identifier } (email or 10-digit mobile number) and finds the account.
 // Sends the error response itself and returns null when the identifier is invalid or unknown.
@@ -55,7 +65,7 @@ export async function forgotPassword(req, res) {
     return res.status(502).json({ message: 'The code could not be sent. Please try again.' });
   }
 
-  const destination = byEmail ? maskEmail(user.email) : maskPhone(user.phone);
+  const destination = destinationOf(user, byEmail);
   res.json({
     message: `We sent a 6-digit code to ${destination}.`,
     channel: byEmail ? 'email' : 'phone',
@@ -63,4 +73,37 @@ export async function forgotPassword(req, res) {
     expiresInMinutes: OTP_MINUTES,
     resendAfterSeconds: OTP_RESEND_SECONDS,
   });
+}
+
+// POST /api/auth/reset-password  { identifier, otp }
+// Checks the code, then sets a new letters-only password, shows it once and sends it to the same email or phone.
+export async function resetPassword(req, res) {
+  const account = await findAccount(req, res);
+  if (!account) return;
+  const { user, byEmail } = account;
+
+  const otp = toText(req.body?.otp);
+  if (!/^\d{6}$/.test(otp)) return res.status(400).json({ message: 'Enter the 6-digit code.' });
+  if (resetToday(user)) return res.status(429).json({ message: DAILY_LIMIT_MESSAGE });
+
+  const result = await verifyOtp(user._id, PURPOSE, otp);
+  if (!result.ok) {
+    return res.status(400).json({ message: otpErrorMessage(result), attemptsLeft: result.attemptsLeft });
+  }
+
+  const password = generateLetterPassword();
+  user.password = password; // the User model hashes it before saving
+  user.lastPasswordResetAt = new Date();
+  await user.save();
+
+  // The password is also shown on screen, so a failed delivery does not undo the reset.
+  const text = `Your new InternConnect password is ${password}. Log in with it and keep it somewhere safe.`;
+  try {
+    if (byEmail) await sendEmail({ to: user.email, subject: 'Your new InternConnect password', text });
+    else await sendSms({ to: user.phone, text });
+  } catch (error) {
+    console.error('The new password could not be sent:', error.message);
+  }
+
+  res.json({ message: 'Your password has been reset.', password, sentTo: destinationOf(user, byEmail) });
 }
