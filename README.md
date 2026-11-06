@@ -4,7 +4,8 @@ InternConnect is a MERN stack web app where students find and apply for internsh
 connect with other students in a shared Public Space.
 
 > **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
-> protected pages); Public Space posts with photo and video uploads. The rest of the six modules follow.
+> protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports.
+> The rest of the six modules follow.
 
 ## Modules
 
@@ -136,7 +137,16 @@ InternConnect_1/
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page) |
 | POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file. Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary |
+| GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |
 | GET    | `/api/posts/:id`     | Yes | One post |
 | DELETE | `/api/posts/:id`     | Yes | Deletes your own post and its photo or video (403 for someone else's post) |
+| POST   | `/api/posts/:id/like` | Yes | Like, or unlike if you already liked it |
+| POST   | `/api/posts/:id/comments` | Yes | Body `{ text }`, 1 to 500 characters |
+| POST   | `/api/posts/:id/share` | Yes | Counts a share (the app copies the post's link) |
+| POST   | `/api/posts/:id/save` | Yes | Save, or unsave if already saved |
+| POST   | `/api/posts/:id/report` | Yes | Body `{ reason }`: `spam`, `inappropriate`, `harassment` or `other`. Once per post, not your own. After 3 reports the post is hidden from everyone except its author |
+
+Posts are returned with `likeCount`, `likedByMe`, `comments`, `shareCount`, `savedByMe`, `reportedByMe` and `isMine`;
+the lists of who liked, saved or reported a post are never sent.
 
 Errors are returned as `{ "message": "..." }`, plus `"errors": { "field": "..." }` for invalid form fields.

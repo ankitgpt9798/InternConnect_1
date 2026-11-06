@@ -31,7 +31,7 @@ export default function PostDetailPage() {
       {error ? (
         <Alert>{error}</Alert>
       ) : post ? (
-        <PostCard post={post} onDeleted={() => navigate('/public-space')} />
+        <PostCard post={post} onUpdated={setPost} onRemoved={() => navigate('/public-space')} />
       ) : (
         <p className="py-8 text-center text-slate-500">Loading post…</p>
       )}
