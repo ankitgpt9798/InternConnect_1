@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+@theme {
+  /* System fonts, with fallbacks that cover Hindi (Devanagari) and Chinese. */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Nirmala UI', 'Microsoft YaHei', 'Noto Sans', sans-serif;
+
+  /* InternConnect brand blue, used as bg-brand-700, text-brand-700, etc. */
+  --color-brand-50: #eff8ff;
+  --color-brand-100: #dbeefe;
+  --color-brand-200: #bfe2fe;
+  --color-brand-300: #93d0fd;
+  --color-brand-400: #60b4fa;
+  --color-brand-500: #3b94f6;
+  --color-brand-600: #2575eb;
+  --color-brand-700: #1d5fd8;
+  --color-brand-800: #1e4daf;
+  --color-brand-900: #1e438a;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
+}
