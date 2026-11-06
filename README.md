@@ -4,8 +4,8 @@ InternConnect is a MERN stack web app where students find and apply for internsh
 connect with other students in a shared Public Space.
 
 > **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
-> protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports.
-> The rest of the six modules follow.
+> protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
+> friend requests and a friends list. The rest of the six modules follow.
 
 ## Modules
 
@@ -105,9 +105,9 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, posts, health)
+│   │   ├── controllers/     Request handlers (auth, posts, friends, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
-│   │   ├── models/          Mongoose models (User, Post)
+│   │   ├── models/          Mongoose models (User, Post, FriendRequest)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads
 │   │   ├── app.js           Express app (middleware and routes)
@@ -116,10 +116,10 @@ InternConnect_1/
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance and API calls (posts)
+│       ├── api/             Axios instance and API calls (posts, friends)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
-│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, 404)
+│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, friends, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
@@ -148,5 +148,14 @@ InternConnect_1/
 
 Posts are returned with `likeCount`, `likedByMe`, `comments`, `shareCount`, `savedByMe`, `reportedByMe` and `isMine`;
 the lists of who liked, saved or reported a post are never sent.
+
+| Method | Route                | Login needed | Description |
+| ------ | -------------------- | ------------ | ----------- |
+| GET    | `/api/users/search?q=` | Yes | Students by name (any case, up to 20), each with `status`: `friend`, `request_sent`, `request_received` or `none`. No text: the newest students |
+| GET    | `/api/friends`       | Yes | `{ friends, received, sent }` |
+| POST   | `/api/friends/requests` | Yes | Body `{ userId }`. Refused for yourself, an existing friend, a repeated request, or when that student already sent you one |
+| POST   | `/api/friends/requests/:id/accept` | Yes | Only the student who received the request; both become friends |
+| DELETE | `/api/friends/requests/:id` | Yes | The receiver declines, or the sender cancels |
+| DELETE | `/api/friends/:userId` | Yes | Removes the friendship for both students |
 
 Errors are returned as `{ "message": "..." }`, plus `"errors": { "field": "..." }` for invalid form fields.

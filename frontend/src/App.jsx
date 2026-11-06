@@ -3,6 +3,7 @@ import GuestRoute from './components/GuestRoute.jsx';
 import MainLayout from './components/layout/MainLayout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
+import FriendsPage from './pages/FriendsPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/public-space" element={<PublicSpacePage />} />
           <Route path="/posts/:id" element={<PostDetailPage />} />
+          <Route path="/friends" element={<FriendsPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

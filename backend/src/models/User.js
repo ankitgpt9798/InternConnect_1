@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema(
     // bcrypt hash of the password. select: false leaves it out of every query
     // unless it is asked for with .select('+password').
     password: { type: String, required: true, select: false },
+    // Accepted friends. Both students are added to each other's list.
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   },
   { timestamps: true },
 );

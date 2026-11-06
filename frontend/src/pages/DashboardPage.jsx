@@ -1,6 +1,12 @@
-import { MessagesSquare } from 'lucide-react';
+import { MessagesSquare, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
+
+// The parts of InternConnect available so far, shown as cards on the dashboard.
+const MODULES = [
+  { to: '/public-space', icon: MessagesSquare, title: 'Public Space', text: 'Share posts, photos and videos with other students.' },
+  { to: '/friends', icon: Users, title: 'Friends', text: 'Find students, send friend requests and manage your friends.' },
+];
 
 function Detail({ label, value }) {
   return (
@@ -33,18 +39,21 @@ export default function DashboardPage() {
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2">
-        <Link
-          to="/public-space"
-          className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
-        >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-            <MessagesSquare className="size-5" />
-          </span>
-          <span>
-            <span className="block font-semibold text-slate-900">Public Space</span>
-            <span className="mt-0.5 block text-sm text-slate-600">Share posts, photos and videos with other students.</span>
-          </span>
-        </Link>
+        {MODULES.map(({ to, icon: Icon, title, text }) => (
+          <Link
+            key={to}
+            to={to}
+            className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+          >
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <Icon className="size-5" />
+            </span>
+            <span>
+              <span className="block font-semibold text-slate-900">{title}</span>
+              <span className="mt-0.5 block text-sm text-slate-600">{text}</span>
+            </span>
+          </Link>
+        ))}
       </section>
     </div>
   );
