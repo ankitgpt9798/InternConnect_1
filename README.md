@@ -7,8 +7,9 @@ connect with other students in a shared Public Space.
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
 > friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
-> generated letters-only password (Module 2 complete); internship listings and applications with plan quotas.
-> The rest of the six modules follow.
+> generated letters-only password (Module 2 complete); internship listings, applications with plan quotas and plans
+> bought with Razorpay Test Mode within 5:00-11:45 AM IST, verified on the server, with emailed invoices (Module 3
+> complete). The rest of the six modules follow.
 
 ## Modules
 
@@ -16,7 +17,7 @@ connect with other students in a shared Public Space.
 | - | ------ | ------ |
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
 | 2 | Forgot password with OTP verification | Done |
-| 3 | Subscription-based internship applications (Razorpay Test Mode) | In progress |
+| 3 | Subscription-based internship applications (Razorpay Test Mode) | Done |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
 | 5 | Six languages, with OTP verification for French | Planned |
 | 6 | Login activity tracking and device security | Planned |
@@ -85,6 +86,23 @@ count). When a paid plan ends the student is back on Free. With no applications 
 message to upgrade. The **Plans** page shows the plan in force, the applications used and left and when the count
 restarts; the apply form shows the same.
 
+### Buying a plan (Razorpay Test Mode)
+
+1. On the **Plans** page the student chooses Bronze, Silver or Gold. The server creates a Razorpay order with the
+   price from its own plan list (never from the browser). **Plan payments can only be started between 5:00 AM and
+   11:45 AM IST** (server clock); outside that window the request is refused and the page says when it opens.
+2. The student pays in **Razorpay Checkout** (Razorpay's own window), for example with Razorpay's test card or
+   Netbanking → any bank → **Success**. No real money moves.
+3. The server **verifies the payment**: it checks Razorpay's signature (HMAC-SHA256 with the key secret), fetches
+   the payment from Razorpay to confirm the order, amount and status (capturing it if needed), and marks it paid only
+   once. Only then does the plan start (30 days, replacing the current plan).
+4. An **invoice** (number, plan, amount, payment and order IDs, dates) is emailed to the Mailtrap inbox, and the
+   payment appears in the **Payment history** on the Plans page.
+
+The backend refuses to start unless `RAZORPAY_KEY_ID` is a Test Mode key (`rzp_test_…`); the key secret never leaves
+the server. For local testing outside the window, `PAYMENT_WINDOW_TEST_OPEN=true` in `backend/.env` opens it; the
+backend prints a warning when it is on, and it is ignored when `NODE_ENV=production`.
+
 ## Public Space posting limit
 
 The number of posts a student may publish per day depends on their number of friends:
@@ -151,7 +169,8 @@ git-ignored and must never be committed.
 | `DNS_SERVERS` | Optional: DNS servers for networks where Node cannot resolve `mongodb+srv://` addresses |
 | `JWT_SECRET` | Signs login tokens |
 | `MAILTRAP_USER`, `MAILTRAP_PASS` | Mailtrap Email Testing sandbox for OTP and invoice emails |
-| `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys |
+| `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys (only `rzp_test_` keys are accepted) |
+| `PAYMENT_WINDOW_TEST_OPEN` | Optional, local testing only: `true` allows plan payments outside 5:00-11:45 AM IST (ignored in production) |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Photo and video uploads |
 
 ## Project structure
@@ -162,14 +181,16 @@ InternConnect_1/
 │   ├── src/
 │   │   ├── config/          MongoDB connection
 │   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships,
-│   │   │                    subscriptions, health)
+│   │   │                    subscriptions, payments, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
-│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application)
+│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application,
+│   │   │                    Payment)
 │   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
-│   │   │                    letters-only password generator, plans, application quotas
+│   │   │                    letters-only password generator, plans, application quotas, payment window,
+│   │   │                    Razorpay (orders, signature check), completing a payment and the invoice email
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
@@ -177,12 +198,12 @@ InternConnect_1/
 │   ├── public/              Static files (favicon)
 │   └── src/
 │       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships,
-│       │                    subscriptions)
+│       │                    subscriptions, payments)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
 │       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
 │       │                    friends, notifications, internships, internship, my applications, plans, 404)
-│       ├── utils/           Form validation, API error messages, "time ago" dates
+│       ├── utils/           Form validation, API error messages, "time ago" dates, formatting, Razorpay Checkout
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
 └── package.json             Scripts that run both apps
@@ -233,6 +254,10 @@ author's accepted friends.
 | GET    | `/api/applications` | Yes | Your applications, newest first |
 | GET    | `/api/subscriptions/plans` | Yes | The four plans with prices in rupees |
 | GET    | `/api/subscriptions/me` | Yes | `{ plan, startedAt, expiresAt, used, limit, remaining, resetsAt }` (`null` limit = unlimited) |
+| GET    | `/api/payments/window` | Yes | Whether plan payments are open now (5:00-11:45 AM IST) and when they open next |
+| POST   | `/api/payments/subscription/order` | Yes | Body `{ plan }` (`bronze`, `silver` or `gold`). Creates a Razorpay order and returns what Checkout needs. 403 outside the payment window |
+| POST   | `/api/payments/verify` | Yes | Body: Razorpay's `{ razorpay_order_id, razorpay_payment_id, razorpay_signature }`. Verifies the signature and the payment with Razorpay, starts the plan and emails the invoice. 400 not verified; 404 not your order; 409 already completed |
+| GET    | `/api/payments` | Yes | Your completed payments with invoice numbers |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |
