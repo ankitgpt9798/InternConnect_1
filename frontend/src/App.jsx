@@ -6,6 +6,8 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import PostDetailPage from './pages/PostDetailPage.jsx';
+import PublicSpacePage from './pages/PublicSpacePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 
 export default function App() {
@@ -23,6 +25,8 @@ export default function App() {
         {/* Only for logged-in users */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/public-space" element={<PublicSpacePage />} />
+          <Route path="/posts/:id" element={<PostDetailPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

@@ -4,6 +4,7 @@ import express from 'express';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
+import postRoutes from './routes/postRoutes.js';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cookieParser()); // fills req.cookies
 
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
 
 // Must come after all routes.
 app.use(notFound);

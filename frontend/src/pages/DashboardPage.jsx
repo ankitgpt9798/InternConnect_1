@@ -1,3 +1,5 @@
+import { MessagesSquare } from 'lucide-react';
+import { Link } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
 
 function Detail({ label, value }) {
@@ -28,6 +30,21 @@ export default function DashboardPage() {
           <Detail label="Mobile number" value={user.phone} />
           <Detail label="Member since" value={memberSince} />
         </dl>
+      </section>
+
+      <section className="grid gap-4 sm:grid-cols-2">
+        <Link
+          to="/public-space"
+          className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+        >
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+            <MessagesSquare className="size-5" />
+          </span>
+          <span>
+            <span className="block font-semibold text-slate-900">Public Space</span>
+            <span className="mt-0.5 block text-sm text-slate-600">Share posts, photos and videos with other students.</span>
+          </span>
+        </Link>
       </section>
     </div>
   );

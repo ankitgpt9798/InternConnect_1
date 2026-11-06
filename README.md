@@ -3,8 +3,8 @@
 InternConnect is a MERN stack web app where students find and apply for internships, build a resume and
 connect with other students in a shared Public Space.
 
-> **Status:** Milestones 1–2 are complete: project setup, and registration and login with email or phone
-> (JWT in an httpOnly cookie, protected pages). The six feature modules are built in the next milestones.
+> **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
+> protected pages); Public Space posts with photo and video uploads. The rest of the six modules follow.
 
 ## Modules
 
@@ -104,22 +104,22 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, health)
-│   │   ├── middleware/      auth.js (protect: logged-in users only), 404 and error handling
-│   │   ├── models/          Mongoose models (User)
+│   │   ├── controllers/     Request handlers (auth, posts, health)
+│   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
+│   │   ├── models/          Mongoose models (User, Post)
 │   │   ├── routes/          API routes (mounted under /api)
-│   │   ├── utils/           Login cookie (JWT) and input validation helpers
+│   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance
-│       ├── components/      Layout (navbar, footer), ui/ (button, form field, alert), route guards, AuthCard
+│       ├── api/             Axios instance and API calls (posts)
+│       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
-│       ├── pages/           One component per page (home, login, register, dashboard, 404)
-│       ├── utils/           Form validation and API error messages
+│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, 404)
+│       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
 └── package.json             Scripts that run both apps
@@ -134,5 +134,9 @@ InternConnect_1/
 | POST   | `/api/auth/login`    | No  | Body `{ identifier, password }` (identifier = email or mobile number). 200 with the user and the login cookie; 401 wrong details |
 | POST   | `/api/auth/logout`   | No  | Clears the login cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
+| GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page) |
+| POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file. Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary |
+| GET    | `/api/posts/:id`     | Yes | One post |
+| DELETE | `/api/posts/:id`     | Yes | Deletes your own post and its photo or video (403 for someone else's post) |
 
 Errors are returned as `{ "message": "..." }`, plus `"errors": { "field": "..." }` for invalid form fields.
