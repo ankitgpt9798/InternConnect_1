@@ -6,6 +6,7 @@ import { getErrorMessage } from '../../utils/getErrorMessage.js';
 import { timeAgo } from '../../utils/timeAgo.js';
 import Avatar from '../Avatar.jsx';
 import CommentSection from './CommentSection.jsx';
+import PostCaption from './PostCaption.jsx';
 import ReportForm from './ReportForm.jsx';
 
 function ActionButton({ icon: Icon, label, count, active = false, activeClass = '', filled = false, ...props }) {
@@ -121,7 +122,7 @@ export default function PostCard({ post, onUpdated, onRemoved }) {
           ))}
       </header>
 
-      {post.caption && <p className="px-4 pb-3 break-words whitespace-pre-line text-slate-800">{post.caption}</p>}
+      {post.caption && <PostCaption text={post.caption} hashtags={post.hashtags} mentions={post.mentions} />}
 
       {post.media &&
         (post.media.type === 'video' ? (

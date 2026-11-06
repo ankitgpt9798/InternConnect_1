@@ -1,7 +1,8 @@
 import api from './axios.js';
 
 // Public Space API calls. Each one returns the useful part of the response.
-export const getPosts = (page = 1) => api.get('/posts', { params: { page } }).then((res) => res.data);
+// filters: { feed: 'friends' } or { tag: 'internship' }
+export const getPosts = (page = 1, filters = {}) => api.get('/posts', { params: { page, ...filters } }).then((res) => res.data);
 
 export const getSavedPosts = (page = 1) => api.get('/posts/saved', { params: { page } }).then((res) => res.data);
 

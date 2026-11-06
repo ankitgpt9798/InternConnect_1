@@ -38,6 +38,8 @@ const postSchema = new mongoose.Schema(
     author: { type: ObjectId, ref: 'User', required: true },
     caption: { type: String, trim: true, maxlength: CAPTION_MAX, default: '' },
     media: { type: mediaSchema, default: null },
+    hashtags: [String], // lowercase, without "#", taken from the caption
+    mentions: [{ type: ObjectId, ref: 'User' }], // friends of the author mentioned in the post
     likes: [{ type: ObjectId, ref: 'User' }], // students who liked the post
     comments: [commentSchema],
     shareCount: { type: Number, default: 0 },
@@ -51,6 +53,8 @@ const postSchema = new mongoose.Schema(
 // The feed and the saved list are read newest first.
 postSchema.index({ createdAt: -1 });
 postSchema.index({ savedBy: 1, createdAt: -1 });
+postSchema.index({ hashtags: 1, createdAt: -1 });
+postSchema.index({ author: 1, createdAt: -1 });
 
 const Post = mongoose.model('Post', postSchema);
 

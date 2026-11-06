@@ -5,7 +5,8 @@ connect with other students in a shared Public Space.
 
 > **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
-> friend requests and a friends list; a daily posting limit based on the number of friends.
+> friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
+> hashtags and mentions.
 > The rest of the six modules follow.
 
 ## Modules
@@ -123,7 +124,7 @@ InternConnect_1/
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest)
 │   │   ├── routes/          API routes (mounted under /api)
-│   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads
+│   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit, IST dates
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
@@ -133,7 +134,8 @@ InternConnect_1/
 │       ├── api/             Axios instance and API calls (posts, friends)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
-│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, friends, 404)
+│       ├── pages/           One component per page (home, login, register, dashboard, Public Space, post, hashtag,
+│       │                    friends, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
@@ -149,8 +151,8 @@ InternConnect_1/
 | POST   | `/api/auth/login`    | No  | Body `{ identifier, password }` (identifier = email or mobile number). 200 with the user and the login cookie; 401 wrong details |
 | POST   | `/api/auth/logout`   | No  | Clears the login cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
-| GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page) |
-| POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file. Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. 403 with no friends, 429 when today's limit is reached |
+| GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page). `&feed=friends`: only your friends' posts and yours; `&tag=internship`: only posts with that hashtag |
+| POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file, plus optional `mentions` (ids of your friends, up to 10). Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. Up to 10 `#hashtags` are taken from the caption. 403 with no friends, 429 when today's limit is reached |
 | GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |
 | GET    | `/api/posts/allowance` | Yes | Today's posting limit: `{ friendCount, dailyLimit, postsToday, remaining, resetsAt }` (`null` = unlimited) |
 | GET    | `/api/posts/:id`     | Yes | One post |
@@ -161,8 +163,13 @@ InternConnect_1/
 | POST   | `/api/posts/:id/save` | Yes | Save, or unsave if already saved |
 | POST   | `/api/posts/:id/report` | Yes | Body `{ reason }`: `spam`, `inappropriate`, `harassment` or `other`. Once per post, not your own. After 3 reports the post is hidden from everyone except its author |
 
-Posts are returned with `likeCount`, `likedByMe`, `comments`, `shareCount`, `savedByMe`, `reportedByMe` and `isMine`;
-the lists of who liked, saved or reported a post are never sent.
+Posts are returned with `hashtags`, `mentions` (`[{ id, name }]`), `likeCount`, `likedByMe`, `comments`, `shareCount`,
+`savedByMe`, `reportedByMe` and `isMine`; the lists of who liked, saved or reported a post are never sent.
+
+**Hashtags and mentions:** `#internship` at the start of the caption or after a space becomes a hashtag (stored in
+lowercase; letters of any language, digits and `_`) and links to its page, `/hashtags/internship`. Students mention
+friends with the **Mention a friend** button, which adds `@Name` to the caption; the server keeps only mentions of the
+author's accepted friends.
 
 | Method | Route                | Login needed | Description |
 | ------ | -------------------- | ------------ | ----------- |

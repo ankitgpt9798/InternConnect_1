@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 import Post, { CAPTION_MAX, COMMENT_MAX, HIDE_AFTER_REPORTS, REPORT_REASONS } from '../models/Post.js';
 import { deleteMedia, uploadMedia } from '../utils/cloudinary.js';
+import { extractHashtags, TAG_PATTERN } from '../utils/hashtags.js';
 import { getPostingAllowance } from '../utils/postingLimit.js';
 import { toText } from '../utils/validators.js';
 
 const PAGE_SIZE = 10;
+const MAX_MENTIONS = 10;
 const POPULATE = [
   { path: 'author', select: 'name' },
+  { path: 'mentions', select: 'name' },
   { path: 'comments.user', select: 'name' },
 ];
 
@@ -20,6 +23,8 @@ function postResponse(post, userId) {
     author: { id: post.author._id, name: post.author.name },
     caption: post.caption,
     media: post.media ? { url: post.media.url, type: post.media.type } : null,
+    hashtags: post.hashtags,
+    mentions: post.mentions.map((user) => ({ id: user._id, name: user.name })),
     likeCount: post.likes.length,
     likedByMe: includes(post.likes, userId),
     comments: post.comments.map((comment) => ({
@@ -75,7 +80,25 @@ async function sendPage(req, res, filter) {
 }
 
 // GET /api/posts?page=1 - all posts
-export const getPosts = (req, res) => sendPage(req, res, {});
+//   &feed=friends     only posts by the user's friends and the user
+//   &tag=internship   only posts with that hashtag
+export function getPosts(req, res) {
+  const filter = {};
+  if (req.query.feed === 'friends') filter.author = { $in: [...req.user.friends, req.user._id] };
+
+  const tag = toText(req.query.tag).replace(/^#/, '').toLowerCase();
+  if (tag) {
+    if (!TAG_PATTERN.test(tag)) return res.status(400).json({ message: 'That is not a valid hashtag.' });
+    filter.hashtags = tag;
+  }
+  return sendPage(req, res, filter);
+}
+
+// The "mentions" form field may arrive once or several times. Only accepted friends of the author are kept.
+function friendMentions(value, user) {
+  const ids = [].concat(value ?? []).filter((id) => typeof id === 'string' && mongoose.isValidObjectId(id));
+  return [...new Set(ids)].filter((id) => user.friends.some((friend) => friend.equals(id))).slice(0, MAX_MENTIONS);
+}
 
 // GET /api/posts/saved?page=1 - posts the logged-in user saved
 export const getSavedPosts = (req, res) => sendPage(req, res, { savedBy: req.user._id });
@@ -107,7 +130,13 @@ export async function createPost(req, res) {
     }
   }
 
-  const post = await Post.create({ author: req.user._id, caption, media });
+  const post = await Post.create({
+    author: req.user._id,
+    caption,
+    media,
+    hashtags: extractHashtags(caption),
+    mentions: friendMentions(req.body?.mentions, req.user),
+  });
   await post.populate(POPULATE);
   res.status(201).json({ post: postResponse(post, req.user._id), allowance: await getPostingAllowance(req.user) });
 }

@@ -3,6 +3,7 @@ import PostFeed from '../components/posts/PostFeed.jsx';
 
 const TABS = [
   { id: 'all', label: 'All posts' },
+  { id: 'friends', label: 'Friends' },
   { id: 'saved', label: 'Saved' },
 ];
 
