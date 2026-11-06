@@ -12,3 +12,10 @@ export function startOfIstDay(date = new Date()) {
 
 // The next midnight IST, when the daily limit restarts.
 export const startOfNextIstDay = (date = new Date()) => new Date(startOfIstDay(date).getTime() + DAY_MS);
+
+// Midnight IST on the 1st of the Indian calendar month of `date` (monthsAhead = 1 gives the next month).
+export function startOfIstMonth(date = new Date(), monthsAhead = 0) {
+  const indianTime = new Date(date.getTime() + IST_OFFSET_MS);
+  const firstOfMonth = Date.UTC(indianTime.getUTCFullYear(), indianTime.getUTCMonth() + monthsAhead, 1);
+  return new Date(firstOfMonth - IST_OFFSET_MS);
+}

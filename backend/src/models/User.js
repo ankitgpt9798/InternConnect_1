@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
+import { PLAN_IDS } from '../utils/plans.js';
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,6 +16,12 @@ const userSchema = new mongoose.Schema(
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     // When "Forgot password" last set a new password (it can be used once per day).
     lastPasswordResetAt: { type: Date, default: null },
+    // The plan bought most recently. A paid plan works until expiresAt; after that the student is on Free.
+    subscription: {
+      plan: { type: String, enum: PLAN_IDS, default: 'free' },
+      startedAt: { type: Date, default: null },
+      expiresAt: { type: Date, default: null },
+    },
   },
   { timestamps: true },
 );

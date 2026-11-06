@@ -13,6 +13,7 @@ import InternshipsPage from './pages/InternshipsPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import NotificationsPage from './pages/NotificationsPage.jsx';
+import PlansPage from './pages/PlansPage.jsx';
 import PostDetailPage from './pages/PostDetailPage.jsx';
 import PublicSpacePage from './pages/PublicSpacePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/internships" element={<InternshipsPage />} />
           <Route path="/internships/:id" element={<InternshipDetailPage />} />
           <Route path="/applications" element={<ApplicationsPage />} />
+          <Route path="/plans" element={<PlansPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

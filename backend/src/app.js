@@ -9,6 +9,7 @@ import healthRoutes from './routes/healthRoutes.js';
 import internshipRoutes from './routes/internshipRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import postRoutes from './routes/postRoutes.js';
+import subscriptionRoutes from './routes/subscriptionRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/internships', internshipRoutes);
 app.use('/api/applications', applicationRoutes);
+app.use('/api/subscriptions', subscriptionRoutes);
 
 // Must come after all routes.
 app.use(notFound);

@@ -1,4 +1,4 @@
-import { Briefcase, ClipboardList, MessagesSquare, Users } from 'lucide-react';
+import { Briefcase, ClipboardList, Crown, MessagesSquare, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 const MODULES = [
   { to: '/internships', icon: Briefcase, title: 'Internships', text: 'Browse open internships and apply with a cover letter.' },
   { to: '/applications', icon: ClipboardList, title: 'My applications', text: 'See every internship you have applied for.' },
+  { to: '/plans', icon: Crown, title: 'Plans', text: 'See your plan and how many applications you have left this month.' },
   { to: '/public-space', icon: MessagesSquare, title: 'Public Space', text: 'Share posts, photos and videos with other students.' },
   { to: '/friends', icon: Users, title: 'Friends', text: 'Find students, send friend requests and manage your friends.' },
 ];

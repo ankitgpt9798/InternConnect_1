@@ -11,6 +11,7 @@ const LINKS = [
   { to: '/internships', label: 'Internships' },
   { to: '/public-space', label: 'Public Space' },
   { to: '/friends', label: 'Friends' },
+  { to: '/plans', label: 'Plans' },
 ];
 
 const linkClasses = ({ isActive }) =>

@@ -7,8 +7,8 @@ connect with other students in a shared Public Space.
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
 > friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
-> generated letters-only password (Module 2 complete); internship listings and applications. The rest of the six
-> modules follow.
+> generated letters-only password (Module 2 complete); internship listings and applications with plan quotas.
+> The rest of the six modules follow.
 
 ## Modules
 
@@ -69,6 +69,21 @@ There is no employer portal in the assignment, so the listings are sample data f
 `npm run seed:internships`. Logged-in students can search open internships (by title, company, skill or city, and by
 work mode), read the details and apply once per internship with a cover letter of 50 to 1000 characters. Closed
 internships (deadline passed) leave the list. **My applications** lists every application.
+
+### Plans and application quotas
+
+| Plan   | Price            | Internship applications |
+| ------ | ---------------- | ----------------------- |
+| Free   | ₹0               | 1 a month               |
+| Bronze | ₹100 for 30 days | 3                       |
+| Silver | ₹300 for 30 days | 5                       |
+| Gold   | ₹1,000 for 30 days | Unlimited             |
+
+Every student starts on Free, whose applications are counted per calendar month (India time). A paid plan lasts
+30 days from the payment and its applications are counted within that period (applications made before it do not
+count). When a paid plan ends the student is back on Free. With no applications left, applying is refused with a
+message to upgrade. The **Plans** page shows the plan in force, the applications used and left and when the count
+restarts; the apply form shows the same.
 
 ## Public Space posting limit
 
@@ -146,25 +161,27 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships, health)
+│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships,
+│   │   │                    subscriptions, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application)
 │   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
-│   │   │                    letters-only password generator
+│   │   │                    letters-only password generator, plans, application quotas
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships)
+│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships,
+│       │                    subscriptions)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
 │       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
-│       │                    friends, notifications, internships, internship, my applications, 404)
+│       │                    friends, notifications, internships, internship, my applications, plans, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
@@ -212,8 +229,10 @@ author's accepted friends.
 | DELETE | `/api/friends/:userId` | Yes | Removes the friendship for both students |
 | GET    | `/api/internships?search=&workMode=` | Yes | Open internships, closing soonest first; each has `appliedAt` (null if you have not applied) |
 | GET    | `/api/internships/:id` | Yes | One internship |
-| POST   | `/api/internships/:id/apply` | Yes | Body `{ coverLetter }` (50 to 1000 characters). 409 already applied; 400 closed |
+| POST   | `/api/internships/:id/apply` | Yes | Body `{ coverLetter }` (50 to 1000 characters). 409 already applied; 400 closed; 403 no applications left on your plan |
 | GET    | `/api/applications` | Yes | Your applications, newest first |
+| GET    | `/api/subscriptions/plans` | Yes | The four plans with prices in rupees |
+| GET    | `/api/subscriptions/me` | Yes | `{ plan, startedAt, expiresAt, used, limit, remaining, resetsAt }` (`null` limit = unlimited) |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |

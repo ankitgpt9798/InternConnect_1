@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Application, { COVER_LETTER_MAX, COVER_LETTER_MIN } from '../models/Application.js';
 import Internship, { WORK_MODES } from '../models/Internship.js';
+import { getApplicationQuota } from '../utils/quota.js';
 import { escapeRegex, toText } from '../utils/validators.js';
 
 function internshipResponse(internship, application = null) {
@@ -71,9 +72,23 @@ export async function applyToInternship(req, res) {
     return res.status(409).json({ message: 'You have already applied for this internship.' });
   }
 
+  // Each plan allows a number of applications a month (Free 1, Bronze 3, Silver 5, Gold unlimited).
+  const quota = await getApplicationQuota(req.user);
+  if (quota.remaining === 0) {
+    const period = quota.plan.id === 'free' ? 'this month' : 'this plan period';
+    return res.status(403).json({
+      message: `You have used all ${quota.limit} of your ${quota.plan.name} plan's applications for ${period}. Upgrade your plan to apply for more.`,
+      quota,
+    });
+  }
+
   try {
     const application = await Application.create({ user: req.user._id, internship: internship._id, coverLetter });
-    res.status(201).json({ message: `You applied for ${internship.title} at ${internship.company}.`, appliedAt: application.createdAt });
+    res.status(201).json({
+      message: `You applied for ${internship.title} at ${internship.company}.`,
+      appliedAt: application.createdAt,
+      quota: await getApplicationQuota(req.user),
+    });
   } catch (error) {
     // Two applications sent at the same moment: the unique index stops the second one.
     if (error.code === 11000) return res.status(409).json({ message: 'You have already applied for this internship.' });

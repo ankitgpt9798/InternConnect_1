@@ -2,7 +2,9 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { applyToInternship, getInternship } from '../api/internships.js';
+import { getMySubscription } from '../api/subscriptions.js';
 import { InternshipFacts } from '../components/internships/InternshipCard.jsx';
+import QuotaSummary from '../components/QuotaSummary.jsx';
 import Alert from '../components/ui/Alert.jsx';
 import Button from '../components/ui/Button.jsx';
 import { formatDate } from '../utils/format.js';
@@ -15,6 +17,7 @@ const COVER_LETTER_MAX = 1000;
 export default function InternshipDetailPage() {
   const { id } = useParams();
   const [internship, setInternship] = useState(null);
+  const [quota, setQuota] = useState(null); // applications used and left on the student's plan
   const [coverLetter, setCoverLetter] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -24,6 +27,10 @@ export default function InternshipDetailPage() {
     getInternship(id)
       .then(setInternship)
       .catch((err) => setError(err.response?.status === 404 ? 'This internship does not exist.' : getErrorMessage(err)));
+    // If the quota cannot be loaded the form still works; the server checks the quota anyway.
+    getMySubscription()
+      .then(setQuota)
+      .catch(() => {});
   }, [id]);
 
   async function handleApply(event) {
@@ -39,8 +46,10 @@ export default function InternshipDetailPage() {
       const data = await applyToInternship(id, coverLetter);
       setSuccess(data.message);
       setInternship({ ...internship, appliedAt: data.appliedAt });
+      setQuota(data.quota);
     } catch (err) {
       setError(getErrorMessage(err));
+      if (err.response?.data?.quota) setQuota(err.response.data.quota); // refused because no applications are left
     } finally {
       setSending(false);
     }
@@ -95,6 +104,7 @@ export default function InternshipDetailPage() {
               <p className="mt-2 text-sm text-slate-600">Applications for this internship are closed.</p>
             ) : (
               <form onSubmit={handleApply} noValidate className="mt-3 space-y-3">
+                <QuotaSummary quota={quota} />
                 {error && <Alert>{error}</Alert>}
                 <label htmlFor="cover-letter" className="block text-sm font-medium text-slate-700">
                   Why should we pick you? (cover letter)
@@ -110,7 +120,7 @@ export default function InternshipDetailPage() {
                 <p className="text-xs text-slate-500">
                   {coverLetter.trim().length}/{COVER_LETTER_MAX} characters (at least {COVER_LETTER_MIN})
                 </p>
-                <Button type="submit" loading={sending}>
+                <Button type="submit" loading={sending} disabled={quota?.remaining === 0}>
                   Submit application
                 </Button>
               </form>
