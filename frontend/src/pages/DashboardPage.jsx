@@ -1,9 +1,11 @@
-import { MessagesSquare, Users } from 'lucide-react';
+import { Briefcase, ClipboardList, MessagesSquare, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
 
 // The parts of InternConnect available so far, shown as cards on the dashboard.
 const MODULES = [
+  { to: '/internships', icon: Briefcase, title: 'Internships', text: 'Browse open internships and apply with a cover letter.' },
+  { to: '/applications', icon: ClipboardList, title: 'My applications', text: 'See every internship you have applied for.' },
   { to: '/public-space', icon: MessagesSquare, title: 'Public Space', text: 'Share posts, photos and videos with other students.' },
   { to: '/friends', icon: Users, title: 'Friends', text: 'Find students, send friend requests and manage your friends.' },
 ];

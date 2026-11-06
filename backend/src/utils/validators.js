@@ -9,6 +9,9 @@ export const PASSWORD_MAX = 64;
 // that could change a MongoDB query) becomes an empty string and fails validation.
 export const toText = (value) => (typeof value === 'string' ? value.trim() : '');
 
+// Lets a search for "c++" or "a.b" match those characters literally instead of as a regular expression.
+export const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // Returns { field: message } for every invalid field; an empty object means the data is valid.
 export function validateRegister({ name, email, phone, password }) {
   const errors = {};

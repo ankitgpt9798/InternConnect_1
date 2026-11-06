@@ -7,7 +7,8 @@ connect with other students in a shared Public Space.
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
 > friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
-> generated letters-only password (Module 2 complete). The rest of the six modules follow.
+> generated letters-only password (Module 2 complete); internship listings and applications. The rest of the six
+> modules follow.
 
 ## Modules
 
@@ -15,7 +16,7 @@ connect with other students in a shared Public Space.
 | - | ------ | ------ |
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
 | 2 | Forgot password with OTP verification | Done |
-| 3 | Subscription-based internship applications (Razorpay Test Mode) | Planned |
+| 3 | Subscription-based internship applications (Razorpay Test Mode) | In progress |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
 | 5 | Six languages, with OTP verification for French | Planned |
 | 6 | Login activity tracking and device security | Planned |
@@ -62,6 +63,13 @@ connect with other students in a shared Public Space.
 - Emails go to the **Mailtrap** sandbox inbox (mailtrap.io), not to real addresses. **SMS is simulated:** no SMS
   provider is set up, so the text, including the code, is printed in the backend terminal.
 
+## Internships and applications
+
+There is no employer portal in the assignment, so the listings are sample data from fictional companies, loaded with
+`npm run seed:internships`. Logged-in students can search open internships (by title, company, skill or city, and by
+work mode), read the details and apply once per internship with a cover letter of 50 to 1000 characters. Closed
+internships (deadline passed) leave the list. **My applications** lists every application.
+
 ## Public Space posting limit
 
 The number of posts a student may publish per day depends on their number of friends:
@@ -92,6 +100,9 @@ npm run install:all
 # Create the backend settings file and fill in the values (never commit it)
 Copy-Item backend\.env.example backend\.env
 
+# Load the 12 sample internship listings (fictional companies; safe to run again, it only refreshes deadlines)
+npm run seed:internships
+
 # Start the API (http://localhost:5000) and the React app (http://localhost:5173) together
 npm run dev
 ```
@@ -109,6 +120,7 @@ the API and the API can reach MongoDB. You can also open http://localhost:5000/a
 | `npm run dev:backend`  | Starts only the API (restarts on file changes) |
 | `npm run dev:frontend` | Starts only the React app                      |
 | `npm run build`        | Production build of the React app (`frontend/dist`) |
+| `npm run seed:internships` | Adds the sample internship listings, or refreshes their deadlines |
 | `npm run lint`         | Checks the frontend code with ESLint           |
 
 ## Environment variables
@@ -134,9 +146,10 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, health)
+│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
-│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp)
+│   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application)
+│   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
@@ -147,11 +160,11 @@ InternConnect_1/
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset)
+│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
 │       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
-│       │                    friends, notifications, 404)
+│       │                    friends, notifications, internships, internship, my applications, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
@@ -197,6 +210,10 @@ author's accepted friends.
 | POST   | `/api/friends/requests/:id/accept` | Yes | Only the student who received the request; both become friends |
 | DELETE | `/api/friends/requests/:id` | Yes | The receiver declines, or the sender cancels |
 | DELETE | `/api/friends/:userId` | Yes | Removes the friendship for both students |
+| GET    | `/api/internships?search=&workMode=` | Yes | Open internships, closing soonest first; each has `appliedAt` (null if you have not applied) |
+| GET    | `/api/internships/:id` | Yes | One internship |
+| POST   | `/api/internships/:id/apply` | Yes | Body `{ coverLetter }` (50 to 1000 characters). 409 already applied; 400 closed |
+| GET    | `/api/applications` | Yes | Your applications, newest first |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |

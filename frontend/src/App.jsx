@@ -2,11 +2,14 @@ import { Route, Routes } from 'react-router';
 import GuestRoute from './components/GuestRoute.jsx';
 import MainLayout from './components/layout/MainLayout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ApplicationsPage from './pages/ApplicationsPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import FriendsPage from './pages/FriendsPage.jsx';
 import HashtagPage from './pages/HashtagPage.jsx';
 import HomePage from './pages/HomePage.jsx';
+import InternshipDetailPage from './pages/InternshipDetailPage.jsx';
+import InternshipsPage from './pages/InternshipsPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import NotificationsPage from './pages/NotificationsPage.jsx';
@@ -35,6 +38,9 @@ export default function App() {
           <Route path="/hashtags/:tag" element={<HashtagPage />} />
           <Route path="/friends" element={<FriendsPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/internships" element={<InternshipsPage />} />
+          <Route path="/internships/:id" element={<InternshipDetailPage />} />
+          <Route path="/applications" element={<ApplicationsPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

@@ -8,6 +8,7 @@ import { buttonClasses } from '../ui/buttonStyles.js';
 // Pages linked in the navbar for logged-in users.
 const LINKS = [
   { to: '/dashboard', label: 'Dashboard' },
+  { to: '/internships', label: 'Internships' },
   { to: '/public-space', label: 'Public Space' },
   { to: '/friends', label: 'Friends' },
 ];
@@ -59,7 +60,7 @@ export default function Navbar() {
         {!loading &&
           (user ? (
             <div className="flex items-center gap-1">
-              <div className="hidden items-center gap-1 md:flex">
+              <div className="hidden items-center gap-1 lg:flex">
                 {LINKS.map((link) => (
                   <NavLink key={link.to} to={link.to} className={linkClasses}>
                     {link.label}
@@ -71,7 +72,7 @@ export default function Navbar() {
                 to="/notifications"
                 onClick={() => setMenuOpen(false)}
                 aria-label={badge > 0 ? `Notifications, ${badge} unread` : 'Notifications'}
-                className="relative rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:ml-1"
+                className="relative rounded-lg p-2 text-slate-700 hover:bg-slate-100 lg:ml-1"
               >
                 <Bell className="size-5" />
                 {badge > 0 && (
@@ -81,7 +82,7 @@ export default function Navbar() {
                 )}
               </Link>
 
-              <div className="hidden items-center md:flex">
+              <div className="hidden items-center lg:flex">
                 <span className="ml-2 text-sm text-slate-600">Hi, {user.name.split(' ')[0]}</span>
                 <button type="button" onClick={handleLogout} className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'ml-3' })}>
                   Log out
@@ -94,7 +95,7 @@ export default function Navbar() {
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                className="rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:hidden"
+                className="rounded-lg p-2 text-slate-700 hover:bg-slate-100 lg:hidden"
               >
                 {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
               </button>
@@ -112,7 +113,7 @@ export default function Navbar() {
       </nav>
 
       {user && menuOpen && (
-        <div id="mobile-menu" className="space-y-1 border-t border-slate-200 px-4 py-3 md:hidden">
+        <div id="mobile-menu" className="space-y-1 border-t border-slate-200 px-4 py-3 lg:hidden">
           <p className="px-3 pb-1 text-sm text-slate-500">Logged in as {user.name}</p>
           {LINKS.map((link) => (
             <NavLink key={link.to} to={link.to} onClick={() => setMenuOpen(false)} className={(state) => `block ${linkClasses(state)}`}>

@@ -2,15 +2,13 @@ import mongoose from 'mongoose';
 import FriendRequest from '../models/FriendRequest.js';
 import User from '../models/User.js';
 import { notify, removeNotifications } from '../utils/notify.js';
-import { toText } from '../utils/validators.js';
+import { escapeRegex, toText } from '../utils/validators.js';
 
 const SEARCH_LIMIT = 20;
 const SEARCH_MAX = 50;
 
 const includes = (ids, id) => ids.some((item) => item.equals(id));
 const person = (user) => ({ id: user._id, name: user.name });
-// Lets a search for "c++" or "a.b" match those characters literally instead of as a regular expression.
-const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const studentNotFound = (res) => res.status(404).json({ message: 'Student not found.' });
 const requestNotFound = (res) => res.status(404).json({ message: 'Friend request not found.' });
