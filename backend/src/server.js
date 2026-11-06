@@ -3,7 +3,7 @@ import 'dotenv/config';
 import app from './app.js';
 import connectDB from './config/db.js';
 
-const REQUIRED_ENV = ['MONGODB_URI', 'CLIENT_URL'];
+const REQUIRED_ENV = ['MONGODB_URI', 'CLIENT_URL', 'JWT_SECRET'];
 const missing = REQUIRED_ENV.filter((key) => !process.env[key]);
 if (missing.length > 0) {
   console.error(`Missing environment variables: ${missing.join(', ')}. Copy backend/.env.example to backend/.env.`);
