@@ -96,6 +96,14 @@ export async function verifyPayment(req, res) {
   const paid = await completePayment(payment, paymentId);
   if (!paid) return res.status(409).json({ message: 'This payment has already been completed.' });
 
+  if (paid.purpose === 'resume') {
+    return res.json({
+      message: 'Payment successful. Your resume PDF is ready and attached to your profile. The invoice has been emailed to you.',
+      invoiceNumber: paid.invoiceNumber,
+      generatedResumeId: paid.generatedResume,
+    });
+  }
+
   const user = await User.findById(req.user._id);
   const subscription = await getApplicationQuota(user);
   res.json({
@@ -105,7 +113,7 @@ export async function verifyPayment(req, res) {
   });
 }
 
-// GET /api/payments - the student's completed payments, newest first
+// GET /api/payments - the student's completed payments (plans and resume PDFs), newest first
 export async function getMyPayments(req, res) {
   const payments = await Payment.find({ user: req.user._id, status: 'paid' }).sort({ paidAt: -1 });
   res.json({

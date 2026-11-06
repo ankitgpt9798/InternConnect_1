@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-// What a code is for. Later modules add their own purposes (login, French, resume).
-export const OTP_PURPOSES = ['password_reset'];
+// What a code is for. Later modules add their own purposes (login, French).
+export const OTP_PURPOSES = ['password_reset', 'resume'];
 
 // A one-time code sent by email or SMS. Only a hash of the code is stored, like a password.
 const otpSchema = new mongoose.Schema(

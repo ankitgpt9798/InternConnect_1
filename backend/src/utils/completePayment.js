@@ -1,3 +1,4 @@
+import GeneratedResume from '../models/GeneratedResume.js';
 import Payment from '../models/Payment.js';
 import User from '../models/User.js';
 import { formatIst, istDateKey } from './istTime.js';
@@ -27,6 +28,32 @@ function subscriptionInvoice({ user, plan, payment, expiresAt }) {
   ].join('\n');
 }
 
+function resumeInvoice({ user, payment }) {
+  return [
+    `InternConnect invoice ${payment.invoiceNumber}`,
+    '',
+    `Billed to: ${user.name} (${user.email})`,
+    'Item: Premium resume PDF',
+    `Amount paid: ₹${(payment.amountPaise / 100).toFixed(2)} (INR)`,
+    `Paid on: ${formatIst(payment.paidAt)} IST`,
+    `Razorpay payment ID: ${payment.razorpayPaymentId}`,
+    `Razorpay order ID: ${payment.razorpayOrderId}`,
+    '',
+    'Your resume PDF is attached to your profile: download it from the Dashboard or the Resume Builder page.',
+    'This was a Razorpay Test Mode payment: no real money was charged.',
+  ].join('\n');
+}
+
+async function emailInvoice(userId, subject, makeText) {
+  const user = await User.findById(userId);
+  try {
+    await sendEmail({ to: user.email, subject, text: makeText(user) });
+  } catch (error) {
+    // What was paid for is already given, so a failed email is only logged.
+    console.error('The invoice email could not be sent:', error.message);
+  }
+}
+
 // Called once a payment has been verified with Razorpay. Marks it paid, only once even if two requests arrive
 // together, and gives the student what they paid for. Returns the paid payment, or null if it was already done.
 export async function completePayment(payment, razorpayPaymentId, now = new Date()) {
@@ -42,18 +69,21 @@ export async function completePayment(payment, razorpayPaymentId, now = new Date
     const plan = planById(paid.plan);
     const expiresAt = new Date(now.getTime() + PLAN_DAYS * DAY_MS);
     await User.updateOne({ _id: paid.user }, { $set: { subscription: { plan: plan.id, startedAt: now, expiresAt } } });
+    await emailInvoice(paid.user, `Your InternConnect invoice ${paid.invoiceNumber} (${plan.name} plan)`, (user) =>
+      subscriptionInvoice({ user, plan, payment: paid, expiresAt }),
+    );
+  }
 
-    // The plan is already active, so a failed email is only logged.
-    const user = await User.findById(paid.user);
-    try {
-      await sendEmail({
-        to: user.email,
-        subject: `Your InternConnect invoice ${paid.invoiceNumber} (${plan.name} plan)`,
-        text: subscriptionInvoice({ user, plan, payment: paid, expiresAt }),
-      });
-    } catch (error) {
-      console.error('The invoice email could not be sent:', error.message);
-    }
+  if (paid.purpose === 'resume') {
+    // The PDF is made from the copy of the resume taken when the email code was verified,
+    // and becomes the resume attached to the student's profile.
+    const generated = await GeneratedResume.create({ user: paid.user, payment: paid._id, content: paid.resumeContent });
+    await Payment.updateOne({ _id: paid._id }, { $set: { generatedResume: generated._id } });
+    await User.updateOne({ _id: paid.user }, { $set: { resume: generated._id } });
+    paid.generatedResume = generated._id;
+    await emailInvoice(paid.user, `Your InternConnect invoice ${paid.invoiceNumber} (premium resume PDF)`, (user) =>
+      resumeInvoice({ user, payment: paid }),
+    );
   }
   return paid;
 }

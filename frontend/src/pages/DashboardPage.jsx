@@ -1,5 +1,7 @@
 import { Briefcase, ClipboardList, Crown, FileText, MessagesSquare, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { getGeneratedResumes, resumePdfUrl } from '../api/resumes.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
 // The parts of InternConnect available so far, shown as cards on the dashboard.
@@ -24,6 +26,14 @@ function Detail({ label, value }) {
 export default function DashboardPage() {
   const { user } = useAuth();
   const memberSince = new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  const [profileResume, setProfileResume] = useState(undefined); // undefined while loading, null when there is none
+
+  // The paid resume PDF attached to the profile (the latest one).
+  useEffect(() => {
+    getGeneratedResumes()
+      .then((resumes) => setProfileResume(resumes.find((resume) => resume.onProfile) ?? null))
+      .catch(() => setProfileResume(null));
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -39,6 +49,22 @@ export default function DashboardPage() {
           <Detail label="Email" value={user.email} />
           <Detail label="Mobile number" value={user.phone} />
           <Detail label="Member since" value={memberSince} />
+          <Detail
+            label="Resume"
+            value={
+              profileResume === undefined ? (
+                'Loading…'
+              ) : profileResume ? (
+                <a href={resumePdfUrl(profileResume.id)} className="font-semibold text-brand-700 hover:underline">
+                  Download resume PDF
+                </a>
+              ) : (
+                <Link to="/resume" className="font-semibold text-brand-700 hover:underline">
+                  Create one in the Resume Builder
+                </Link>
+              )
+            }
+          />
         </dl>
       </section>
 

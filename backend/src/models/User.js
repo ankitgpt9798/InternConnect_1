@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema(
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     // When "Forgot password" last set a new password (it can be used once per day).
     lastPasswordResetAt: { type: Date, default: null },
+    // The latest paid resume PDF, attached to the student's profile.
+    resume: { type: mongoose.Schema.Types.ObjectId, ref: 'GeneratedResume', default: null },
     // The plan bought most recently. A paid plan works until expiresAt; after that the student is on Free.
     subscription: {
       plan: { type: String, enum: PLAN_IDS, default: 'free' },

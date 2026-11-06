@@ -10,6 +10,9 @@ const paymentSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     purpose: { type: String, enum: PAYMENT_PURPOSES, required: true },
     plan: { type: String, default: null }, // for subscription payments
+    // For resume payments: the resume as it was when the email code was verified, and the PDF made after payment.
+    resumeContent: { type: mongoose.Schema.Types.Mixed, default: null },
+    generatedResume: { type: mongoose.Schema.Types.ObjectId, ref: 'GeneratedResume', default: null },
     amountPaise: { type: Number, required: true, min: 1 },
     currency: { type: String, default: 'INR' },
     razorpayOrderId: { type: String, required: true, unique: true },

@@ -1,7 +1,8 @@
-import { CheckCircle2, CircleAlert } from 'lucide-react';
+import { CheckCircle2, CircleAlert, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { getMyResume, saveMyResume } from '../api/resumes.js';
+import { getGeneratedResumes, getMyResume, resumePdfUrl, saveMyResume } from '../api/resumes.js';
 import EntryList from '../components/resume/EntryList.jsx';
+import PremiumPdfPanel from '../components/resume/PremiumPdfPanel.jsx';
 import TextArea from '../components/resume/TextArea.jsx';
 import Alert from '../components/ui/Alert.jsx';
 import Button from '../components/ui/Button.jsx';
@@ -36,6 +37,8 @@ export default function ResumeBuilderPage() {
   const [skillsText, setSkillsText] = useState('');
   const [certificationsText, setCertificationsText] = useState('');
   const [readiness, setReadiness] = useState(null);
+  const [unsaved, setUnsaved] = useState(false); // changes not saved yet (the PDF uses the saved draft)
+  const [pdfs, setPdfs] = useState([]); // paid resume PDFs, newest first
   const [message, setMessage] = useState(null); // { type, text, errors }
   const [saving, setSaving] = useState(false);
 
@@ -44,16 +47,31 @@ export default function ResumeBuilderPage() {
     setSkillsText(data.resume.skills.join(', '));
     setCertificationsText(data.resume.certifications.join('\n'));
     setReadiness(data.readiness);
+    setUnsaved(false);
   }
+
+  const loadPdfs = () =>
+    getGeneratedResumes()
+      .then(setPdfs)
+      .catch(() => {});
 
   useEffect(() => {
     getMyResume()
       .then(load)
       .catch((err) => setMessage({ type: 'error', text: getErrorMessage(err) }));
+    getGeneratedResumes()
+      .then(setPdfs)
+      .catch(() => {});
   }, []);
 
-  const setPersonal = (key, value) => setResume((current) => ({ ...current, personal: { ...current.personal, [key]: value } }));
-  const setPart = (key, value) => setResume((current) => ({ ...current, [key]: value }));
+  function setPersonal(key, value) {
+    setResume((current) => ({ ...current, personal: { ...current.personal, [key]: value } }));
+    setUnsaved(true);
+  }
+  function setPart(key, value) {
+    setResume((current) => ({ ...current, [key]: value }));
+    setUnsaved(true);
+  }
 
   async function handleSave(event) {
     event.preventDefault();
@@ -122,6 +140,32 @@ export default function ResumeBuilderPage() {
         </section>
       )}
 
+      <PremiumPdfPanel ready={!!readiness?.ready} unsaved={unsaved} onGenerated={loadPdfs} />
+
+      {pdfs.length > 0 && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900">Your resume PDFs</h2>
+          <ul className="mt-2 divide-y divide-slate-100">
+            {pdfs.map((pdf) => (
+              <li key={pdf.id} className="flex flex-wrap items-center justify-between gap-2 py-3">
+                <div>
+                  <p className="text-sm font-medium text-slate-900">
+                    {pdf.fullName}
+                    {pdf.onProfile && (
+                      <span className="ml-2 rounded-full bg-green-50 px-2 py-0.5 text-xs font-semibold text-green-700">On your profile</span>
+                    )}
+                  </p>
+                  <p className="text-xs text-slate-500">Created {new Date(pdf.createdAt).toLocaleString('en-IN')}</p>
+                </div>
+                <a href={resumePdfUrl(pdf.id)} className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
+                  <Download className="size-4" /> Download PDF
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="text-lg font-semibold text-slate-900">Personal details</h2>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -164,14 +208,20 @@ export default function ResumeBuilderPage() {
           id="skills"
           placeholder="React, Node.js, MongoDB"
           value={skillsText}
-          onChange={(e) => setSkillsText(e.target.value)}
+          onChange={(e) => {
+            setSkillsText(e.target.value);
+            setUnsaved(true);
+          }}
           hint="Separate skills with commas (up to 30)."
         />
         <TextArea
           label="Certifications (optional)"
           id="certifications"
           value={certificationsText}
-          onChange={(e) => setCertificationsText(e.target.value)}
+          onChange={(e) => {
+            setCertificationsText(e.target.value);
+            setUnsaved(true);
+          }}
           hint="One per line (up to 10)."
         />
       </section>

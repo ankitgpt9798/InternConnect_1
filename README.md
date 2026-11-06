@@ -9,7 +9,8 @@ connect with other students in a shared Public Space.
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
 > generated letters-only password (Module 2 complete); internship listings, applications with plan quotas and plans
 > bought with Razorpay Test Mode within 5:00-11:45 AM IST, verified on the server, with emailed invoices (Module 3
-> complete); the Resume Builder form with saved drafts. The rest of the six modules follow.
+> complete); the Resume Builder with saved drafts and a premium ATS-friendly PDF after an email code and a ₹50
+> Razorpay payment (Module 4 complete). The rest of the six modules follow.
 
 ## Modules
 
@@ -18,7 +19,7 @@ connect with other students in a shared Public Space.
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
 | 2 | Forgot password with OTP verification | Done |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Done |
-| 4 | Premium Resume Builder with PDF generation (₹50 test payment) | In progress |
+| 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Done |
 | 5 | Six languages, with OTP verification for French | Planned |
 | 6 | Login activity tracking and device security | Planned |
 
@@ -27,7 +28,7 @@ connect with other students in a shared Public Space.
 | Layer    | Technology                                   |
 | -------- | -------------------------------------------- |
 | Frontend | React 19, Vite, Tailwind CSS 4, React Router, Axios, Context API |
-| Backend  | Node.js, Express 5, Mongoose, JWT (jsonwebtoken), bcryptjs, cookie-parser |
+| Backend  | Node.js, Express 5, Mongoose, JWT (jsonwebtoken), bcryptjs, cookie-parser, Multer, Cloudinary, Nodemailer, Razorpay, PDFKit |
 | Database | MongoDB Atlas                                |
 
 ## Authentication
@@ -114,6 +115,19 @@ degree), at least one skill, a company and role for every experience and a name 
 uses built-in fonts, it also lists any section with characters other than English (Latin) letters, such as ₹, Hindi
 or emoji.
 
+### Premium resume PDF (₹50)
+
+1. With a saved, ready draft the student clicks **Get my resume PDF – ₹50**. A 6-digit code is emailed to the
+   **registered** address (Mailtrap): 10 minutes, 5 tries, 60 seconds between codes.
+2. With the right code the server copies the resume as it is now and creates a **₹50 Razorpay order**. This is the only
+   way to create a resume order, so the email code cannot be skipped. **There is no time window** for resume payments.
+3. The student pays in Razorpay Checkout; the server verifies the payment exactly as for plans (signature and
+   Razorpay's own record), then creates the PDF from the copy, **attaches it to the profile** (shown on the Dashboard)
+   and emails the invoice.
+4. The PDF uses one **ATS-friendly template**: a single column of real, selectable text (name, contact line, Summary,
+   Education, Experience, Projects, Skills, Certifications) drawn with PDFKit. Downloading it again is free, and only
+   its owner can download it. Editing the resume later does not change a paid PDF; a new PDF needs a new payment.
+
 ## Public Space posting limit
 
 The number of posts a student may publish per day depends on their number of friends:
@@ -195,14 +209,14 @@ InternConnect_1/
 │   │   │                    subscriptions, payments, resumes, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application,
-│   │   │                    Payment, Resume)
+│   │   │                    Payment, Resume, GeneratedResume)
 │   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
 │   │   │                    letters-only password generator, plans, application quotas, payment window,
 │   │   │                    Razorpay (orders, signature check), completing a payment and the invoice email,
-│   │   │                    resume content rules
+│   │   │                    resume content rules, resume PDF template
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
@@ -272,6 +286,10 @@ author's accepted friends.
 | GET    | `/api/payments` | Yes | Your completed payments with invoice numbers |
 | GET    | `/api/resumes/me` | Yes | `{ resume, readiness: { ready, missing } }` (a new draft is pre-filled from the account) |
 | PUT    | `/api/resumes/me` | Yes | Saves the draft; 400 with `errors: [{ field, message }]` for invalid values |
+| POST   | `/api/resumes/me/otp` | Yes | Emails the code for the premium PDF (the saved draft must be ready). 429 "Please wait N seconds" |
+| POST   | `/api/resumes/me/otp/verify` | Yes | Body `{ otp }`. With the right code: creates the ₹50 Razorpay order and returns `{ checkout }`; then pay and call `/api/payments/verify` |
+| GET    | `/api/resumes/generated` | Yes | Your paid resume PDFs, newest first (`onProfile` marks the one on your profile) |
+| GET    | `/api/resumes/generated/:id/pdf` | Yes | Downloads the PDF (owner only) |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |
