@@ -9,7 +9,7 @@ connect with other students in a shared Public Space.
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
 > generated letters-only password (Module 2 complete); internship listings, applications with plan quotas and plans
 > bought with Razorpay Test Mode within 5:00-11:45 AM IST, verified on the server, with emailed invoices (Module 3
-> complete). The rest of the six modules follow.
+> complete); the Resume Builder form with saved drafts. The rest of the six modules follow.
 
 ## Modules
 
@@ -18,7 +18,7 @@ connect with other students in a shared Public Space.
 | 1 | Public Space and social engagement (friends, posts, likes, comments, shares) | Done |
 | 2 | Forgot password with OTP verification | Done |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Done |
-| 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Planned |
+| 4 | Premium Resume Builder with PDF generation (₹50 test payment) | In progress |
 | 5 | Six languages, with OTP verification for French | Planned |
 | 6 | Login activity tracking and device security | Planned |
 
@@ -103,6 +103,17 @@ The backend refuses to start unless `RAZORPAY_KEY_ID` is a Test Mode key (`rzp_t
 the server. For local testing outside the window, `PAYMENT_WINDOW_TEST_OPEN=true` in `backend/.env` opens it; the
 backend prints a warning when it is on, and it is ignored when `NODE_ENV=production`.
 
+## Resume Builder
+
+Each student has one resume draft (`/resume`): personal details, a career summary, education, experience and
+internships, projects (up to 5 of each), skills (up to 30) and certifications (up to 10). A new draft starts with the
+name, email and phone of the account. Drafts can be saved while incomplete; values that are too long, badly
+formatted links or emails, and too many entries are refused. A checklist shows what is still needed before a PDF can
+be made: name, email, phone, a summary of at least 30 characters, at least one education entry (institution and
+degree), at least one skill, a company and role for every experience and a name for every project. Because the PDF
+uses built-in fonts, it also lists any section with characters other than English (Latin) letters, such as ₹, Hindi
+or emoji.
+
 ## Public Space posting limit
 
 The number of posts a student may publish per day depends on their number of friends:
@@ -181,16 +192,17 @@ InternConnect_1/
 │   ├── src/
 │   │   ├── config/          MongoDB connection
 │   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships,
-│   │   │                    subscriptions, payments, health)
+│   │   │                    subscriptions, payments, resumes, health)
 │   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application,
-│   │   │                    Payment)
+│   │   │                    Payment, Resume)
 │   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
 │   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
 │   │   │                    letters-only password generator, plans, application quotas, payment window,
-│   │   │                    Razorpay (orders, signature check), completing a payment and the invoice email
+│   │   │                    Razorpay (orders, signature check), completing a payment and the invoice email,
+│   │   │                    resume content rules
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
 │   └── .env.example
@@ -198,11 +210,11 @@ InternConnect_1/
 │   ├── public/              Static files (favicon)
 │   └── src/
 │       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships,
-│       │                    subscriptions, payments)
+│       │                    subscriptions, payments, resumes)
 │       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
 │       ├── context/         AuthContext (logged-in user, login, register, logout)
 │       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
-│       │                    friends, notifications, internships, internship, my applications, plans, 404)
+│       │                    friends, notifications, internships, internship, my applications, plans, resume, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates, formatting, Razorpay Checkout
 │       ├── App.jsx          Routes
 │       └── main.jsx         Entry point
@@ -258,6 +270,8 @@ author's accepted friends.
 | POST   | `/api/payments/subscription/order` | Yes | Body `{ plan }` (`bronze`, `silver` or `gold`). Creates a Razorpay order and returns what Checkout needs. 403 outside the payment window |
 | POST   | `/api/payments/verify` | Yes | Body: Razorpay's `{ razorpay_order_id, razorpay_payment_id, razorpay_signature }`. Verifies the signature and the payment with Razorpay, starts the plan and emails the invoice. 400 not verified; 404 not your order; 409 already completed |
 | GET    | `/api/payments` | Yes | Your completed payments with invoice numbers |
+| GET    | `/api/resumes/me` | Yes | `{ resume, readiness: { ready, missing } }` (a new draft is pre-filled from the account) |
+| PUT    | `/api/resumes/me` | Yes | Saves the draft; 400 with `errors: [{ field, message }]` for invalid values |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |

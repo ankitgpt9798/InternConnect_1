@@ -9,6 +9,7 @@ import { buttonClasses } from '../ui/buttonStyles.js';
 const LINKS = [
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/internships', label: 'Internships' },
+  { to: '/resume', label: 'Resume' },
   { to: '/public-space', label: 'Public Space' },
   { to: '/friends', label: 'Friends' },
   { to: '/plans', label: 'Plans' },

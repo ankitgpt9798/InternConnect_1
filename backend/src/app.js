@@ -10,6 +10,7 @@ import internshipRoutes from './routes/internshipRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import postRoutes from './routes/postRoutes.js';
+import resumeRoutes from './routes/resumeRoutes.js';
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
@@ -30,6 +31,7 @@ app.use('/api/internships', internshipRoutes);
 app.use('/api/applications', applicationRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/resumes', resumeRoutes);
 
 // Must come after all routes.
 app.use(notFound);

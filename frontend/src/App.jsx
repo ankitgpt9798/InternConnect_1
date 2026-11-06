@@ -17,6 +17,7 @@ import PlansPage from './pages/PlansPage.jsx';
 import PostDetailPage from './pages/PostDetailPage.jsx';
 import PublicSpacePage from './pages/PublicSpacePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import ResumeBuilderPage from './pages/ResumeBuilderPage.jsx';
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/internships/:id" element={<InternshipDetailPage />} />
           <Route path="/applications" element={<ApplicationsPage />} />
           <Route path="/plans" element={<PlansPage />} />
+          <Route path="/resume" element={<ResumeBuilderPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
