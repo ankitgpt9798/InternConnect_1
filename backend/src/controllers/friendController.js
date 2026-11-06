@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import FriendRequest from '../models/FriendRequest.js';
 import User from '../models/User.js';
+import { notify, removeNotifications } from '../utils/notify.js';
 import { toText } from '../utils/validators.js';
 
 const SEARCH_LIMIT = 20;
@@ -79,6 +80,7 @@ export async function sendRequest(req, res) {
 
   try {
     const request = await FriendRequest.create({ from: me._id, to: other._id });
+    await notify({ recipient: other._id, actor: me._id, type: 'friend_request' });
     res.status(201).json({ message: `Friend request sent to ${other.name}.`, request: { id: request._id, user: person(other) } });
   } catch (error) {
     // The unique index refuses a second request to the same student.
@@ -102,6 +104,9 @@ export async function acceptRequest(req, res) {
     User.updateOne({ _id: me._id }, { $addToSet: { friends: request.from } }),
     User.updateOne({ _id: request.from }, { $addToSet: { friends: me._id } }),
   ]);
+  // The request is no longer pending, so its notification goes; the sender hears that it was accepted.
+  await removeNotifications({ type: 'friend_request', actor: request.from, recipient: me._id });
+  await notify({ recipient: request.from, actor: me._id, type: 'friend_accept' });
   const friend = await User.findById(request.from).select('name');
   res.json({ message: `You and ${friend.name} are now friends.`, friend: person(friend) });
 }
@@ -116,6 +121,7 @@ export async function deleteRequest(req, res) {
     $or: [{ from: me._id }, { to: me._id }],
   });
   if (!request) return requestNotFound(res);
+  await removeNotifications({ type: 'friend_request', actor: request.from, recipient: request.to });
   res.json({ message: 'Friend request removed.' });
 }
 

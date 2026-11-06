@@ -8,6 +8,7 @@ import HashtagPage from './pages/HashtagPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import NotificationsPage from './pages/NotificationsPage.jsx';
 import PostDetailPage from './pages/PostDetailPage.jsx';
 import PublicSpacePage from './pages/PublicSpacePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/posts/:id" element={<PostDetailPage />} />
           <Route path="/hashtags/:tag" element={<HashtagPage />} />
           <Route path="/friends" element={<FriendsPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

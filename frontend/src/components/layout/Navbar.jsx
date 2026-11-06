@@ -1,6 +1,7 @@
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router';
+import { Bell, Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
+import { getUnreadCount } from '../../api/notifications.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { buttonClasses } from '../ui/buttonStyles.js';
 
@@ -19,13 +20,30 @@ const linkClasses = ({ isActive }) =>
 export default function Navbar() {
   const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false); // the menu on small screens
+  const [unread, setUnread] = useState(0);
+
+  // The unread count is fetched again on every page change (no live connection is kept open).
+  useEffect(() => {
+    if (!user) return;
+    let ignore = false;
+    getUnreadCount()
+      .then((count) => !ignore && setUnread(count))
+      .catch(() => {});
+    return () => {
+      ignore = true;
+    };
+  }, [user, pathname]);
 
   async function handleLogout() {
     setMenuOpen(false);
     await logout();
     navigate('/login');
   }
+
+  // The Notifications page marks everything as read, so no badge is shown there.
+  const badge = pathname === '/notifications' ? 0 : unread;
 
   return (
     <header className="border-b border-slate-200 bg-white">
@@ -40,18 +58,36 @@ export default function Navbar() {
         {/* Nothing is shown until we know whether someone is logged in, so the buttons do not flicker. */}
         {!loading &&
           (user ? (
-            <>
+            <div className="flex items-center gap-1">
               <div className="hidden items-center gap-1 md:flex">
                 {LINKS.map((link) => (
                   <NavLink key={link.to} to={link.to} className={linkClasses}>
                     {link.label}
                   </NavLink>
                 ))}
-                <span className="ml-3 text-sm text-slate-600">Hi, {user.name.split(' ')[0]}</span>
-                <button type="button" onClick={handleLogout} className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'ml-2' })}>
+              </div>
+
+              <Link
+                to="/notifications"
+                onClick={() => setMenuOpen(false)}
+                aria-label={badge > 0 ? `Notifications, ${badge} unread` : 'Notifications'}
+                className="relative rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:ml-1"
+              >
+                <Bell className="size-5" />
+                {badge > 0 && (
+                  <span className="absolute top-0.5 right-0.5 min-w-4 rounded-full bg-red-600 px-1 text-center text-[10px] leading-4 font-bold text-white">
+                    {badge > 9 ? '9+' : badge}
+                  </span>
+                )}
+              </Link>
+
+              <div className="hidden items-center md:flex">
+                <span className="ml-2 text-sm text-slate-600">Hi, {user.name.split(' ')[0]}</span>
+                <button type="button" onClick={handleLogout} className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'ml-3' })}>
                   Log out
                 </button>
               </div>
+
               <button
                 type="button"
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -62,7 +98,7 @@ export default function Navbar() {
               >
                 {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
               </button>
-            </>
+            </div>
           ) : (
             <div className="flex items-center gap-2">
               <Link to="/login" className={buttonClasses({ variant: 'ghost', size: 'sm' })}>

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import Post, { CAPTION_MAX, COMMENT_MAX, HIDE_AFTER_REPORTS, REPORT_REASONS } from '../models/Post.js';
 import { deleteMedia, uploadMedia } from '../utils/cloudinary.js';
 import { extractHashtags, TAG_PATTERN } from '../utils/hashtags.js';
+import { notify, removeNotifications } from '../utils/notify.js';
 import { getPostingAllowance } from '../utils/postingLimit.js';
 import { toText } from '../utils/validators.js';
 
@@ -138,6 +139,9 @@ export async function createPost(req, res) {
     mentions: friendMentions(req.body?.mentions, req.user),
   });
   await post.populate(POPULATE);
+  await Promise.all(
+    post.mentions.map((friend) => notify({ recipient: friend._id, actor: req.user._id, type: 'mention', post: post._id })),
+  );
   res.status(201).json({ post: postResponse(post, req.user._id), allowance: await getPostingAllowance(req.user) });
 }
 
@@ -165,6 +169,7 @@ export async function deletePost(req, res) {
     }
   }
   await post.deleteOne();
+  await removeNotifications({ post: post._id });
   // Deleting a post made today frees one of today's posts again.
   res.json({ message: 'Post deleted.', allowance: await getPostingAllowance(req.user) });
 }
@@ -175,8 +180,12 @@ export async function toggleLike(req, res) {
   if (!post) return notFound(res);
 
   const userId = req.user._id;
-  const update = includes(post.likes, userId) ? { $pull: { likes: userId } } : { $addToSet: { likes: userId } };
-  await Post.updateOne({ _id: post._id }, update);
+  const liked = includes(post.likes, userId);
+  await Post.updateOne({ _id: post._id }, liked ? { $pull: { likes: userId } } : { $addToSet: { likes: userId } });
+
+  // An unlike takes the "liked your post" notification back.
+  if (liked) await removeNotifications({ actor: userId, type: 'like', post: post._id });
+  else await notify({ recipient: post.author._id, actor: userId, type: 'like', post: post._id });
   await sendPost(res, post._id, userId);
 }
 
@@ -191,6 +200,7 @@ export async function addComment(req, res) {
   if (!post) return notFound(res);
 
   await Post.updateOne({ _id: post._id }, { $push: { comments: { user: req.user._id, text, createdAt: new Date() } } });
+  await notify({ recipient: post.author._id, actor: req.user._id, type: 'comment', post: post._id });
   await sendPost(res, post._id, req.user._id);
 }
 
