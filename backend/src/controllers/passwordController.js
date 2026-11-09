@@ -12,6 +12,7 @@ import {
   verifyOtp,
 } from '../utils/otp.js';
 import { sendEmail } from '../utils/sendEmail.js';
+import { revokeAllAccess } from '../utils/sessions.js';
 import { sendSms } from '../utils/sendSms.js';
 import { EMAIL_REGEX, PHONE_REGEX, toText } from '../utils/validators.js';
 
@@ -96,8 +97,11 @@ export async function resetPassword(req, res) {
   user.lastPasswordResetAt = new Date();
   await user.save();
 
+  // Module 6: a new password signs out every device and removes every trusted device.
+  await revokeAllAccess(user._id);
+
   // The password is also shown on screen, so a failed delivery does not undo the reset.
-  const text = `Your new InternConnect password is ${password}. Log in with it and keep it somewhere safe.`;
+  const text = `Your new InternConnect password is ${password}. Log in with it and keep it somewhere safe. For your security, every device signed in to your account has been signed out.`;
   try {
     if (byEmail) await sendEmail({ to: user.email, subject: 'Your new InternConnect password', text });
     else await sendSms({ to: user.phone, text });
@@ -105,5 +109,5 @@ export async function resetPassword(req, res) {
     console.error('The new password could not be sent:', error.message);
   }
 
-  res.json({ message: 'Your password has been reset.', password, sentTo: destinationOf(user, byEmail) });
+  res.json({ message: 'Your password has been reset.', password, sentTo: destinationOf(user, byEmail), signedOutEverywhere: true });
 }
