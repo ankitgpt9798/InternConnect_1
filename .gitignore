@@ -23,5 +23,6 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# MaxMind GeoLite2 database (downloaded separately, see README)
+# MaxMind GeoLite2 database (downloaded separately, see README; its licence does not allow sharing it in the repo)
 backend/data/
+*.mmdb
