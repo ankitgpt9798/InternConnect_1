@@ -10,7 +10,8 @@
     "dev:frontend": "npm run dev --prefix frontend",
     "build": "npm run build --prefix frontend",
     "seed:internships": "npm run seed:internships --prefix backend",
-    "lint": "npm run lint --prefix frontend"
+    "lint": "npm run lint --prefix frontend",
+    "test": "npm test --prefix backend"
   },
   "devDependencies": {
     "concurrently": "^10.0.6"
