@@ -98,8 +98,10 @@ export default function ResumeBuilderPage() {
 
   const { personal } = resume;
 
+  // The premium PDF panel has its own form (the email code), so it stays outside the resume form: a form inside a
+  // form makes "Confirm and pay" reload the page instead of opening Razorpay.
   return (
-    <form onSubmit={handleSave} noValidate className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Resume Builder</h1>
         <p className="mt-1 text-slate-600">
@@ -166,74 +168,76 @@ export default function ResumeBuilderPage() {
         </section>
       )}
 
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Personal details</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <FormField label="Full name" id="fullName" value={personal.fullName} onChange={(e) => setPersonal('fullName', e.target.value)} />
-          <FormField label="Email" id="resumeEmail" type="email" value={personal.email} onChange={(e) => setPersonal('email', e.target.value)} />
-          <FormField label="Phone" id="resumePhone" value={personal.phone} onChange={(e) => setPersonal('phone', e.target.value)} />
-          <FormField label="City (optional)" id="location" value={personal.location} onChange={(e) => setPersonal('location', e.target.value)} />
-          <div className="sm:col-span-2">
-            <FormField
-              label="LinkedIn or portfolio link (optional)"
-              id="link"
-              placeholder="https://linkedin.com/in/…"
-              value={personal.link}
-              onChange={(e) => setPersonal('link', e.target.value)}
-            />
+      <form onSubmit={handleSave} noValidate className="space-y-6">
+        <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900">Personal details</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <FormField label="Full name" id="fullName" value={personal.fullName} onChange={(e) => setPersonal('fullName', e.target.value)} />
+            <FormField label="Email" id="resumeEmail" type="email" value={personal.email} onChange={(e) => setPersonal('email', e.target.value)} />
+            <FormField label="Phone" id="resumePhone" value={personal.phone} onChange={(e) => setPersonal('phone', e.target.value)} />
+            <FormField label="City (optional)" id="location" value={personal.location} onChange={(e) => setPersonal('location', e.target.value)} />
+            <div className="sm:col-span-2">
+              <FormField
+                label="LinkedIn or portfolio link (optional)"
+                id="link"
+                placeholder="https://linkedin.com/in/…"
+                value={personal.link}
+                onChange={(e) => setPersonal('link', e.target.value)}
+              />
+            </div>
           </div>
+        </section>
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <TextArea
+            label="Career summary"
+            id="summary"
+            rows={4}
+            maxLength={600}
+            value={resume.summary}
+            onChange={(e) => setPart('summary', e.target.value)}
+            hint={`${resume.summary.length}/600 characters (at least 30). Write it in English: the PDF prints Latin letters only.`}
+          />
+        </section>
+
+        <EntryList name="education" title="Education" singular="Education" items={resume.education} fields={EDUCATION_FIELDS} max={5} onChange={(items) => setPart('education', items)} />
+        <EntryList name="experience" title="Experience and internships" singular="Experience" items={resume.experience} fields={EXPERIENCE_FIELDS} max={5} onChange={(items) => setPart('experience', items)} />
+        <EntryList name="projects" title="Projects" singular="Project" items={resume.projects} fields={PROJECT_FIELDS} max={5} onChange={(items) => setPart('projects', items)} />
+
+        <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900">Skills and certifications</h2>
+          <FormField
+            label="Skills"
+            id="skills"
+            placeholder="React, Node.js, MongoDB"
+            value={skillsText}
+            onChange={(e) => {
+              setSkillsText(e.target.value);
+              setUnsaved(true);
+            }}
+            hint="Separate skills with commas (up to 30)."
+          />
+          <TextArea
+            label="Certifications (optional)"
+            id="certifications"
+            value={certificationsText}
+            onChange={(e) => {
+              setCertificationsText(e.target.value);
+              setUnsaved(true);
+            }}
+            hint="One per line (up to 10)."
+          />
+        </section>
+
+        <div className="sticky bottom-0 -mx-4 border-t border-slate-200 bg-slate-50/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:border">
+          <Button type="submit" loading={saving}>
+            Save draft
+          </Button>
+          {resume.updatedAt && (
+            <span className="ml-3 text-xs text-slate-500">Last saved {new Date(resume.updatedAt).toLocaleString('en-IN')}</span>
+          )}
         </div>
-      </section>
-
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <TextArea
-          label="Career summary"
-          id="summary"
-          rows={4}
-          maxLength={600}
-          value={resume.summary}
-          onChange={(e) => setPart('summary', e.target.value)}
-          hint={`${resume.summary.length}/600 characters (at least 30). Write it in English: the PDF prints Latin letters only.`}
-        />
-      </section>
-
-      <EntryList name="education" title="Education" singular="Education" items={resume.education} fields={EDUCATION_FIELDS} max={5} onChange={(items) => setPart('education', items)} />
-      <EntryList name="experience" title="Experience and internships" singular="Experience" items={resume.experience} fields={EXPERIENCE_FIELDS} max={5} onChange={(items) => setPart('experience', items)} />
-      <EntryList name="projects" title="Projects" singular="Project" items={resume.projects} fields={PROJECT_FIELDS} max={5} onChange={(items) => setPart('projects', items)} />
-
-      <section className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Skills and certifications</h2>
-        <FormField
-          label="Skills"
-          id="skills"
-          placeholder="React, Node.js, MongoDB"
-          value={skillsText}
-          onChange={(e) => {
-            setSkillsText(e.target.value);
-            setUnsaved(true);
-          }}
-          hint="Separate skills with commas (up to 30)."
-        />
-        <TextArea
-          label="Certifications (optional)"
-          id="certifications"
-          value={certificationsText}
-          onChange={(e) => {
-            setCertificationsText(e.target.value);
-            setUnsaved(true);
-          }}
-          hint="One per line (up to 10)."
-        />
-      </section>
-
-      <div className="sticky bottom-0 -mx-4 border-t border-slate-200 bg-slate-50/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:border">
-        <Button type="submit" loading={saving}>
-          Save draft
-        </Button>
-        {resume.updatedAt && (
-          <span className="ml-3 text-xs text-slate-500">Last saved {new Date(resume.updatedAt).toLocaleString('en-IN')}</span>
-        )}
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
