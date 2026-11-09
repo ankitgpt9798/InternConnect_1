@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { getGeneratedResumes, resumePdfUrl } from '../api/resumes.js';
 import LanguageHistoryPanel from '../components/language/LanguageHistoryPanel.jsx';
+import SecuritySection from '../components/security/SecuritySection.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { LANGUAGES } from '../i18n/languages.js';
 
@@ -80,6 +81,14 @@ export default function DashboardPage() {
                 )
               }
             />
+            <Detail
+              label={t('accountSecurity.title')}
+              value={
+                <a href="#security" className="font-semibold text-brand-700 hover:underline">
+                  {t('accountSecurity.link')}
+                </a>
+              }
+            />
           </dl>
         </section>
 
@@ -103,6 +112,8 @@ export default function DashboardPage() {
           </Link>
         ))}
       </section>
+
+      <SecuritySection />
     </div>
   );
 }

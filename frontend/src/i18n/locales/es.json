@@ -1749,5 +1749,225 @@
   "demo": {
     "badge": "Demo · simulado",
     "tooltip": "Registro de demostración simulado: no es una transacción real y no se cobró dinero."
+  },
+  "authPages": {
+    "pleaseWait": "Espera un momento…",
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Te damos la bienvenida de nuevo a InternConnect.",
+      "submit": "Iniciar sesión",
+      "noAccount": "¿Eres nuevo en InternConnect?",
+      "createAccount": "Crea una cuenta",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "securityNote": "Los teléfonos y tabletas pueden iniciar sesión entre las 10:00 a. m. y la 1:00 p. m. (IST). Google Chrome y los dispositivos nuevos necesitan un código enviado a tu correo."
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Únete a InternConnect para postularte a prácticas y conectar con otros estudiantes.",
+      "submit": "Crear cuenta",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "logIn": "Inicia sesión",
+      "emailHint": "Te enviaremos un código de 6 dígitos a esta dirección para confirmarla.",
+      "phoneHint": "Número móvil indio de 10 dígitos",
+      "passwordHint": "De 8 a 64 caracteres",
+      "createdTitle": "Cuenta creada",
+      "createdBody": "Tu cuenta está lista. Los teléfonos y tabletas solo pueden iniciar sesión entre las 10:00 a. m. y la 1:00 p. m. (IST), así que inicia sesión a partir de las {{time}} (IST).",
+      "goToLogin": "Ir a iniciar sesión"
+    },
+    "fields": {
+      "identifier": "Correo electrónico o número móvil",
+      "password": "Contraseña",
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "phone": "Número móvil"
+    },
+    "validation": {
+      "identifierRequired": "Introduce tu correo electrónico o número de teléfono.",
+      "passwordRequired": "Introduce tu contraseña.",
+      "nameLength": "El nombre debe tener entre 2 y 50 caracteres.",
+      "emailInvalid": "Introduce un correo electrónico válido.",
+      "phoneInvalid": "Introduce un número móvil indio válido de 10 dígitos.",
+      "passwordLength": "La contraseña debe tener entre 8 y 64 caracteres."
+    },
+    "fieldErrors": {
+      "EMAIL_TAKEN": "Este correo electrónico ya está registrado.",
+      "PHONE_TAKEN": "Este número de teléfono ya está registrado.",
+      "NAME_LENGTH": "El nombre debe tener entre 2 y 50 caracteres.",
+      "EMAIL_INVALID": "Introduce un correo electrónico válido.",
+      "PHONE_INVALID": "Introduce un número móvil indio válido de 10 dígitos.",
+      "PASSWORD_LENGTH": "La contraseña debe tener entre 8 y 64 caracteres."
+    },
+    "errors": {
+      "network": "No se puede conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.",
+      "generic": "Algo salió mal. Inténtalo de nuevo.",
+      "missingFields": "Introduce tu correo electrónico o número de teléfono y tu contraseña.",
+      "fixFields": "Corrige los campos marcados.",
+      "invalidCredentials": "Correo electrónico/teléfono o contraseña incorrectos.",
+      "mobileWindow": "Los teléfonos y tabletas solo pueden iniciar sesión entre las 10:00 a. m. y la 1:00 p. m. (IST). Podrás volver a iniciar sesión a las {{time}} (IST).",
+      "cooldown": "Demasiados intentos fallidos. Inténtalo de nuevo en {{wait}}.",
+      "busy": "Demasiados intentos de inicio de sesión a la vez. Inténtalo de nuevo en un momento.",
+      "hourlyLimit": "Se han enviado demasiados códigos a esta cuenta. Inténtalo de nuevo en {{wait}}.",
+      "resendCooldown": "Espera {{wait}} antes de pedir un código nuevo.",
+      "resendLimit": "No se pueden enviar más códigos para este inicio de sesión. Vuelve a iniciar sesión más tarde.",
+      "deliveryFailed": "No se pudo enviar el código. Inténtalo de nuevo.",
+      "deliveryFailedAccountCreated": "Tu cuenta se creó, pero no se pudo enviar el código. Inicia sesión para recibir un código nuevo.",
+      "otpFormat": "Introduce el código de 6 dígitos.",
+      "otpInvalid_one": "Código incorrecto. Te queda {{count}} intento.",
+      "otpInvalid_many": "Código incorrecto. Te quedan {{count}} intentos.",
+      "otpInvalid_other": "Código incorrecto. Te quedan {{count}} intentos.",
+      "otpExpired": "Este código ha caducado. Pide un código nuevo.",
+      "otpLocked": "Demasiados códigos incorrectos. Vuelve a iniciar sesión para recibir un código nuevo.",
+      "challengeEnded": "Este inicio de sesión ha terminado. Vuelve a iniciar sesión.",
+      "accountExists": "Ya existe una cuenta con estos datos.",
+      "passwordRequired": "Introduce tu contraseña para confirmar.",
+      "passwordIncorrect": "Contraseña incorrecta.",
+      "notFound": "Ya se había cerrado o eliminado."
+    },
+    "wait": {
+      "seconds_one": "{{count}} segundo",
+      "seconds_many": "{{count}} segundos",
+      "seconds_other": "{{count}} segundos",
+      "minutes_one": "{{count}} minuto",
+      "minutes_many": "{{count}} minutos",
+      "minutes_other": "{{count}} minutos"
+    }
+  },
+  "otp": {
+    "title": "Revisa tu correo",
+    "titleRegister": "Confirma tu correo electrónico",
+    "sentTo": "Enviamos un código de 6 dígitos a {{destination}}. Caduca en 10 minutos.",
+    "codeLabel": "Código de 6 dígitos",
+    "verify": "Verificar e iniciar sesión",
+    "verifyRegister": "Verificar y terminar",
+    "resend": "Enviar un código nuevo",
+    "resendIn_one": "Enviar un código nuevo en {{count}} segundo",
+    "resendIn_many": "Enviar un código nuevo en {{count}} segundos",
+    "resendIn_other": "Enviar un código nuevo en {{count}} segundos",
+    "resent": "Se ha enviado un código nuevo.",
+    "noResends": "No se pueden enviar más códigos para este inicio de sesión.",
+    "codeExpired": "Este código ha caducado. Envía un código nuevo para continuar.",
+    "useDifferentAccount": "Usar otra cuenta",
+    "startAgain": "Empezar de nuevo",
+    "reasons": {
+      "chrome": "Los inicios de sesión desde Google Chrome siempre necesitan un código.",
+      "newDevice": "Este navegador aún no se ha verificado en tu cuenta.",
+      "unusual": "Este inicio de sesión es diferente de los habituales.",
+      "newAccount": "Introduce el código para confirmar tu correo y terminar de crear tu cuenta."
+    }
+  },
+  "sessionNotice": {
+    "mobileEnded": "El acceso desde teléfonos y tabletas termina a la 1:00 p. m. (IST). Puedes volver a iniciar sesión a partir de las 10:00 a. m. (IST).",
+    "revoked": "Se cerró la sesión en este dispositivo.",
+    "contextChanged": "Tu navegador o dispositivo cambió, así que cerramos la sesión para proteger tu cuenta.",
+    "expired": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
+    "dismiss": "Cerrar"
+  },
+  "accountSecurity": {
+    "title": "Seguridad e inicios de sesión",
+    "subtitle": "Dónde está abierta tu cuenta, los dispositivos de confianza y cada intento de inicio de sesión. Las horas están en IST.",
+    "link": "Ver sesiones e historial de inicios de sesión",
+    "refresh": "Actualizar",
+    "loading": "Cargando…",
+    "loadError": "No se pudo cargar esta lista.",
+    "retry": "Reintentar",
+    "showMore": "Mostrar más",
+    "unknown": "Desconocido",
+    "deviceLabel": "{{browser}} en {{os}}",
+    "deviceTypes": {
+      "desktop": "Ordenador",
+      "mobile": "Teléfono",
+      "tablet": "Tableta",
+      "unknown": "Dispositivo desconocido"
+    },
+    "location": {
+      "approximate": "Cerca de {{place}} (aproximado)",
+      "local": "Red local",
+      "unknown": "Ubicación desconocida"
+    },
+    "ip": "IP {{ip}}",
+    "time": "{{time}} IST",
+    "thisDevice": "Este dispositivo",
+    "confirm": {
+      "password": "Contraseña",
+      "cancel": "Cancelar",
+      "description": "Introduce tu contraseña para confirmar."
+    },
+    "sessions": {
+      "title": "Sesiones activas",
+      "description": "Navegadores en los que tu cuenta tiene la sesión iniciada ahora. Las sesiones en teléfonos y tabletas terminan a la 1:00 p. m. (IST).",
+      "empty": "No hay sesiones activas.",
+      "started": "Inició sesión {{time}}",
+      "lastActive": "última actividad {{time}}",
+      "endsAt": "Termina a las {{time}} IST",
+      "trusted": "Dispositivo de confianza",
+      "signOut": "Cerrar sesión",
+      "signOutLabel": "Cerrar sesión en {{name}}",
+      "signOutOthers": "Cerrar sesión en todos los demás dispositivos",
+      "confirmOneTitle": "¿Cerrar esta sesión?",
+      "confirmOthersTitle": "¿Cerrar sesión en todos los demás dispositivos?",
+      "signedOut": "Se ha cerrado esa sesión.",
+      "signedOutOthers_one": "Se ha cerrado {{count}} sesión más.",
+      "signedOutOthers_many": "Se han cerrado {{count}} sesiones más.",
+      "signedOutOthers_other": "Se han cerrado {{count}} sesiones más.",
+      "noOthers": "No había otras sesiones que cerrar."
+    },
+    "devices": {
+      "title": "Dispositivos",
+      "description": "Navegadores desde los que se ha usado tu cuenta. Un navegador es de confianza durante 30 días después de introducir en él un código del correo; Google Chrome siempre necesita un código.",
+      "empty": "Aún no hay dispositivos.",
+      "trustedUntil": "De confianza hasta el {{date}}",
+      "notTrusted": "No es de confianza",
+      "firstSeen": "Usado por primera vez {{time}}",
+      "lastSeen": "último uso {{time}}",
+      "remove": "Quitar",
+      "removeLabel": "Quitar {{name}}",
+      "confirmTitle": "¿Quitar este dispositivo?",
+      "confirmDescription": "Se cerrará su sesión y su próximo inicio de sesión necesitará un código del correo. Introduce tu contraseña para confirmar.",
+      "removed": "Se ha quitado el dispositivo.",
+      "removedWithSessions_one": "Se ha quitado el dispositivo y se ha cerrado {{count}} sesión.",
+      "removedWithSessions_many": "Se ha quitado el dispositivo y se han cerrado {{count}} sesiones.",
+      "removedWithSessions_other": "Se ha quitado el dispositivo y se han cerrado {{count}} sesiones."
+    },
+    "history": {
+      "title": "Historial de inicios de sesión",
+      "description": "Cada intento de inicio de sesión en tu cuenta, del más reciente al más antiguo. Las ubicaciones son aproximadas y se basan en la dirección IP.",
+      "empty": "Aún no hay inicios de sesión registrados.",
+      "thisSession": "Esta sesión",
+      "geoAttribution": "Este producto incluye datos de GeoLite2 creados por MaxMind, disponibles en https://www.maxmind.com.",
+      "verifiedByEmail": "Verificado con un código del correo",
+      "codesSent_one": "{{count}} código enviado",
+      "codesSent_many": "{{count}} códigos enviados",
+      "codesSent_other": "{{count}} códigos enviados",
+      "events": {
+        "register": "Cuenta creada",
+        "login": "Inicio de sesión"
+      },
+      "status": {
+        "success": "Sesión iniciada",
+        "failed": "Fallido",
+        "blocked": "Bloqueado",
+        "rate_limited": "En pausa",
+        "otp_pending": "Esperando el código"
+      },
+      "flags": {
+        "newDevice": "Dispositivo nuevo",
+        "newBrowser": "Navegador nuevo",
+        "newIp": "Dirección IP nueva"
+      },
+      "reasons": {
+        "wrong_password": "Contraseña incorrecta",
+        "unknown_account": "Cuenta desconocida",
+        "outside_mobile_window": "Teléfono o tableta fuera del horario de 10:00 a. m. a 1:00 p. m. (IST)",
+        "cooldown_account_ip": "En pausa tras demasiados intentos fallidos desde esta red",
+        "cooldown_ip": "En pausa tras demasiados intentos fallidos desde esta red",
+        "otp_hourly_limit": "Se pidieron demasiados códigos",
+        "otp_expired": "El código no se introdujo a tiempo",
+        "otp_locked": "Demasiados códigos incorrectos",
+        "otp_delivery_failed": "No se pudo enviar el correo con el código",
+        "otp_cancelled": "Cancelado",
+        "otp_superseded": "Sustituido por un inicio de sesión más reciente",
+        "window_closed_at_verify": "El horario para teléfonos terminó antes de introducir el código"
+      }
+    }
   }
 }
