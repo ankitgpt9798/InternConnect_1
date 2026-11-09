@@ -1,19 +1,11 @@
 import { Bell, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { getUnreadCount } from '../../api/notifications.js';
 import { useAuth } from '../../context/AuthContext.jsx';
+import LanguageSelector from '../language/LanguageSelector.jsx';
 import { buttonClasses } from '../ui/buttonStyles.js';
-
-// Pages linked in the navbar for logged-in users.
-const LINKS = [
-  { to: '/dashboard', label: 'Dashboard' },
-  { to: '/internships', label: 'Internships' },
-  { to: '/resume', label: 'Resume' },
-  { to: '/public-space', label: 'Public Space' },
-  { to: '/friends', label: 'Friends' },
-  { to: '/plans', label: 'Plans' },
-];
 
 const linkClasses = ({ isActive }) =>
   `rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors ${
@@ -21,11 +13,21 @@ const linkClasses = ({ isActive }) =>
   }`;
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false); // the menu on small screens
   const [unread, setUnread] = useState(0);
+
+  const links = [
+    { to: '/dashboard', label: t('nav.dashboard', 'Dashboard') },
+    { to: '/internships', label: t('nav.internships', 'Internships') },
+    { to: '/resume', label: t('nav.resumeBuilder', 'Resume') },
+    { to: '/public-space', label: t('nav.community', 'Public Space') },
+    { to: '/friends', label: t('nav.people', 'Friends') },
+    { to: '/plans', label: t('nav.plans', 'Plans') },
+  ];
 
   // The unread count is fetched again on every page change (no live connection is kept open).
   useEffect(() => {
@@ -61,20 +63,22 @@ export default function Navbar() {
         {/* Nothing is shown until we know whether someone is logged in, so the buttons do not flicker. */}
         {!loading &&
           (user ? (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               <div className="hidden items-center gap-1 lg:flex">
-                {LINKS.map((link) => (
+                {links.map((link) => (
                   <NavLink key={link.to} to={link.to} className={linkClasses}>
                     {link.label}
                   </NavLink>
                 ))}
               </div>
 
+              <LanguageSelector className="hidden sm:block lg:ml-2" />
+
               <Link
                 to="/notifications"
                 onClick={() => setMenuOpen(false)}
                 aria-label={badge > 0 ? `Notifications, ${badge} unread` : 'Notifications'}
-                className="relative rounded-lg p-2 text-slate-700 hover:bg-slate-100 lg:ml-1"
+                className="relative rounded-lg p-2 text-slate-700 hover:bg-slate-100"
               >
                 <Bell className="size-5" />
                 {badge > 0 && (
@@ -87,7 +91,7 @@ export default function Navbar() {
               <div className="hidden items-center lg:flex">
                 <span className="ml-2 text-sm text-slate-600">Hi, {user.name.split(' ')[0]}</span>
                 <button type="button" onClick={handleLogout} className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'ml-3' })}>
-                  Log out
+                  {t('nav.logout', 'Log out')}
                 </button>
               </div>
 
@@ -104,20 +108,24 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-2">
+              <LanguageSelector />
               <Link to="/login" className={buttonClasses({ variant: 'ghost', size: 'sm' })}>
-                Log in
+                {t('nav.login', 'Log in')}
               </Link>
               <Link to="/register" className={buttonClasses({ size: 'sm' })}>
-                Register
+                {t('nav.register', 'Register')}
               </Link>
             </div>
           ))}
       </nav>
 
       {user && menuOpen && (
-        <div id="mobile-menu" className="space-y-1 border-t border-slate-200 px-4 py-3 lg:hidden">
-          <p className="px-3 pb-1 text-sm text-slate-500">Logged in as {user.name}</p>
-          {LINKS.map((link) => (
+        <div id="mobile-menu" className="space-y-2 border-t border-slate-200 px-4 py-3 lg:hidden">
+          <div className="flex items-center justify-between px-3 pb-1">
+            <p className="text-sm text-slate-500">Logged in as {user.name}</p>
+            <LanguageSelector className="sm:hidden" />
+          </div>
+          {links.map((link) => (
             <NavLink key={link.to} to={link.to} onClick={() => setMenuOpen(false)} className={(state) => `block ${linkClasses(state)}`}>
               {link.label}
             </NavLink>
@@ -127,7 +135,7 @@ export default function Navbar() {
             onClick={handleLogout}
             className="block w-full rounded-lg px-3 py-1.5 text-left text-sm font-semibold text-red-600 hover:bg-red-50"
           >
-            Log out
+            {t('nav.logout', 'Log out')}
           </button>
         </div>
       )}

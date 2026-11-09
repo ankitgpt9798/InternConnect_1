@@ -10,7 +10,9 @@ connect with other students in a shared Public Space.
 > generated letters-only password (Module 2 complete); internship listings, applications with plan quotas and plans
 > bought with Razorpay Test Mode within 5:00-11:45 AM IST, verified on the server, with emailed invoices (Module 3
 > complete); the Resume Builder with saved drafts and a premium ATS-friendly PDF after an email code and a ₹50
-> Razorpay payment (Module 4 complete). The rest of the six modules follow.
+> Razorpay payment (Module 4 complete); six languages (English, Spanish, Hindi, Portuguese, Chinese, French) with
+> direct switching, email OTP verification required for French, persistent account language preferences and language
+> change history (Module 5 complete). Module 6 follows.
 
 ## Modules
 
@@ -20,14 +22,14 @@ connect with other students in a shared Public Space.
 | 2 | Forgot password with OTP verification | Done |
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Done |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Done |
-| 5 | Six languages, with OTP verification for French | Planned |
+| 5 | Six languages, with OTP verification for French | Done |
 | 6 | Login activity tracking and device security | Planned |
 
 ## Tech stack
 
 | Layer    | Technology                                   |
 | -------- | -------------------------------------------- |
-| Frontend | React 19, Vite, Tailwind CSS 4, React Router, Axios, Context API |
+| Frontend | React 19, Vite, Tailwind CSS 4, React Router, Axios, Context API, i18next, react-i18next |
 | Backend  | Node.js, Express 5, Mongoose, JWT (jsonwebtoken), bcryptjs, cookie-parser, Multer, Cloudinary, Nodemailer, Razorpay, PDFKit |
 | Database | MongoDB Atlas                                |
 
@@ -127,6 +129,29 @@ or emoji.
 4. The PDF uses one **ATS-friendly template**: a single column of real, selectable text (name, contact line, Summary,
    Education, Experience, Projects, Skills, Certifications) drawn with PDFKit. Downloading it again is free, and only
    its owner can download it. Editing the resume later does not change a paid PDF; a new PDF needs a new payment.
+
+## Six languages and French verification
+
+InternConnect is fully accessible in six languages: English (`en`, default), Spanish (`es`), Hindi (`hi`),
+Portuguese (`pt`), Simplified Chinese (`zh`) and French (`fr`).
+
+- **Language Selector:** A language menu is available in the navigation bar on desktop and mobile. Every language is
+  shown in its native script (e.g. `हिन्दी`, `Português`, `中文（简体）`, `Français`).
+- **Direct Switching:** English, Spanish, Hindi, Portuguese and Chinese can be switched directly at any time by students
+  and guests. For guests, the choice is saved to browser storage (`localStorage`). For logged-in students, it is also
+  saved to `user.preferredLanguage` in the database, keeping their preferred language active across sessions and devices.
+- **French OTP Verification:** French is restricted and cannot be selected directly (direct API requests return HTTP 403).
+  To switch to French:
+  1. The student must be logged in. A 6-digit code is emailed to their registered address (Mailtrap Sandbox).
+  2. The code is valid for 10 minutes, with up to 5 attempts and a 60-second cooldown between requests.
+  3. Upon entering the correct code, the server verifies it, updates the student's `preferredLanguage` to French,
+     and switches the interface.
+- **On-Demand Bundle Loading:** English is bundled with the initial app load, while Spanish, Hindi, Portuguese,
+  Chinese and French translation packages are dynamically loaded on demand, ensuring zero performance overhead.
+  The `<html lang="...">` attribute is updated automatically to match each language.
+- **Language Change Audit History:** Every interface language change is saved in the `LanguageChange` model
+  (previous language, new language, verification method `none` or `email_otp`, masked email destination and timestamp).
+  Students can review their complete change history in the **Language History** panel on the Dashboard.
 
 ## Public Space posting limit
 

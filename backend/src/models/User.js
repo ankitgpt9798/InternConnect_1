@@ -2,6 +2,9 @@ import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import { PLAN_IDS } from '../utils/plans.js';
 
+export const SUPPORTED_LANGUAGES = ['en', 'es', 'hi', 'pt', 'zh', 'fr'];
+export const DIRECT_LANGUAGES = ['en', 'es', 'hi', 'pt', 'zh'];
+
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true, minlength: 2, maxlength: 50 },
@@ -23,6 +26,12 @@ const userSchema = new mongoose.Schema(
       plan: { type: String, enum: PLAN_IDS, default: 'free' },
       startedAt: { type: Date, default: null },
       expiresAt: { type: Date, default: null },
+    },
+    // Interface language chosen by the student (Module 5).
+    preferredLanguage: {
+      type: String,
+      enum: SUPPORTED_LANGUAGES,
+      default: 'en',
     },
   },
   { timestamps: true },

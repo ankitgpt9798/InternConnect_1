@@ -1,0 +1,1753 @@
+{
+  "common": {
+    "appName": "InternConnect",
+    "skipToContent": "Aller au contenu principal",
+    "backHome": "Retour à l'accueil",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "loading": "Chargement…",
+    "save": "Enregistrer les modifications",
+    "cancel": "Annuler",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "nav": {
+    "primary": "Principale",
+    "mobile": "Mobile",
+    "internships": "Stages",
+    "community": "Espace public",
+    "resumeBuilder": "Créateur de CV",
+    "plans": "Forfaits",
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "profile": "Mon profil",
+    "changePassword": "Changer de mot de passe",
+    "logout": "Se déconnecter",
+    "accountMenu": "Menu du compte de {{name}}",
+    "notifications": "Notifications",
+    "notificationsUnread_one": "Notifications, {{count}} non lue",
+    "notificationsUnread_other": "Notifications, {{count}} non lues",
+    "notificationsUnread_many": "Notifications, {{count}} non lues",
+    "people": "Amis et personnes",
+    "applications": "Mes candidatures",
+    "billing": "Facturation et factures",
+    "security": "Sécurité"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Stages, communauté et carrière au même endroit",
+      "title": "Trouvez le stage qui lance votre carrière",
+      "subtitle": "Découvrez des stages, postulez en quelques clics, créez un CV qui se démarque et apprenez aux côtés d'étudiants qui suivent le même chemin.",
+      "primaryCta": "Parcourir les stages",
+      "secondaryCta": "Rejoindre la communauté"
+    },
+    "features": {
+      "title": "Tout ce qu'il faut pour être recruté",
+      "subtitle": "Un seul compte vous donne des offres, des candidatures, une communauté d'étudiants et des outils pour votre carrière.",
+      "items": {
+        "internships": {
+          "title": "Candidatures aux stages",
+          "description": "Recherchez des offres, lisez les détails qui comptent et suivez chaque candidature envoyée."
+        },
+        "community": {
+          "title": "Espace public",
+          "description": "Partagez des nouvelles, des photos et des vidéos, échangez avec vos amis et suivez les personnes qui vous inspirent."
+        },
+        "resume": {
+          "title": "Créateur de CV Premium",
+          "description": "Créez des CV compatibles ATS à partir de modèles modernes et joignez-les à vos candidatures."
+        },
+        "plans": {
+          "title": "Forfaits flexibles",
+          "description": "Commencez gratuitement et passez à un forfait supérieur quand vous avez besoin de plus de candidatures par mois."
+        },
+        "security": {
+          "title": "Sécurisé dès la conception",
+          "description": "Le suivi des connexions, les appareils de confiance et les codes à usage unique protègent votre compte."
+        },
+        "languages": {
+          "title": "Six langues",
+          "description": "Utilisez InternConnect en anglais, espagnol, hindi, portugais, chinois ou français."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à passer à l'étape suivante ?",
+      "description": "Créez un compte gratuit et envoyez votre première candidature dès aujourd'hui.",
+      "button": "Créer votre compte gratuit"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée."
+  },
+  "error": {
+    "title": "Un problème est survenu",
+    "description": "Une erreur inattendue s'est produite. Rechargez la page ou réessayez plus tard.",
+    "reload": "Recharger la page"
+  },
+  "footer": {
+    "tagline": "Stages, candidatures et une communauté d'étudiants, au même endroit.",
+    "explore": "Explorer",
+    "account": "Compte",
+    "rights": "© {{year}} InternConnect. Tous droits réservés."
+  },
+  "status": {
+    "label": "État du service",
+    "idle": "Non vérifié",
+    "checking": "Vérification…",
+    "online": "En ligne",
+    "degraded": "Perturbé",
+    "offline": "Hors ligne",
+    "lastChecked": "Dernière vérification à {{time}}"
+  },
+  "language": {
+    "label": "Langue",
+    "menu": "Langue : {{language}}",
+    "needsCode": "code par e-mail requis",
+    "loginForFrench": "connectez-vous pour l'utiliser",
+    "names": {
+      "en": "anglais",
+      "es": "espagnol",
+      "hi": "hindi",
+      "pt": "portugais",
+      "zh": "chinois",
+      "fr": "français"
+    },
+    "settings": {
+      "title": "Langue",
+      "description": "InternConnect s'affiche dans cette langue. Elle est enregistrée dans votre profil et donc utilisée aussi sur tous les autres appareils où vous vous connectez.",
+      "frenchNote": "Le français n'est appliqué qu'après la saisie d'un code que nous envoyons à votre adresse e-mail. D'ici là, votre langue ne change pas.",
+      "saving": "Changement de langue…",
+      "saved": "InternConnect est maintenant en {{language}}."
+    },
+    "french": {
+      "title": "Passer au français",
+      "codeSent": "Nous avons envoyé un code à 6 chiffres à {{destination}}.",
+      "description": "Saisissez-le pour afficher InternConnect en français. Il expire dans {{minutes}} minutes. D'ici là, l'application reste en {{language}}.",
+      "verify": "Vérifier et passer au français",
+      "close": "Fermer",
+      "unchanged": "L'application est toujours en {{language}}.",
+      "restart": "Envoyer un nouveau code"
+    },
+    "error": "La langue n'a pas été changée. {{reason}}",
+    "loadFailed": "Impossible de télécharger cette langue. Vérifiez votre connexion et réessayez.",
+    "dismiss": "Fermer"
+  },
+  "auth": {
+    "fields": {
+      "identifier": "E-mail ou numéro de mobile",
+      "password": "Mot de passe",
+      "fullName": "Nom complet",
+      "username": "Nom d'utilisateur",
+      "email": "Adresse e-mail",
+      "mobile": "Numéro de mobile",
+      "confirmPassword": "Confirmer le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe"
+    },
+    "login": {
+      "title": "Bon retour parmi nous",
+      "subtitle": "Connectez-vous pour poursuivre votre recherche de stage.",
+      "submit": "Se connecter",
+      "noAccount": "Nouveau sur InternConnect ?",
+      "forgotPassword": "Mot de passe oublié ?"
+    },
+    "register": {
+      "title": "Créez votre compte",
+      "subtitle": "Rejoignez InternConnect pour postuler à des stages et échanger avec d'autres étudiants.",
+      "submit": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "usernameHint": "De 3 à 30 caractères : lettres, chiffres, points ou tirets bas. Les autres peuvent vous mentionner avec @ grâce à lui.",
+      "mobileHint": "Les numéros indiens peuvent être saisis sans +91.",
+      "passwordHint": "Au moins 8 caractères, dont au moins une lettre et un chiffre."
+    },
+    "changePassword": {
+      "title": "Changer de mot de passe",
+      "subtitle": "Choisissez un mot de passe solide que vous n'utilisez nulle part ailleurs.",
+      "submit": "Mettre à jour le mot de passe",
+      "required": "Pour votre sécurité, choisissez un nouveau mot de passe avant de continuer.",
+      "backToProfile": "Retour à mon profil",
+      "success_zero": "Votre mot de passe a été changé.",
+      "success_one": "Votre mot de passe a été changé. 1 autre appareil a été déconnecté.",
+      "success_other": "Votre mot de passe a été changé. {{count}} autres appareils ont été déconnectés.",
+      "success_many": "Votre mot de passe a été changé. {{count}} autres appareils ont été déconnectés."
+    },
+    "otp": {
+      "title": "Consultez vos e-mails",
+      "chromeNote": "Pour votre sécurité, les connexions depuis Google Chrome nécessitent un code à usage unique.",
+      "description": "Nous avons envoyé un code à 6 chiffres à {{destination}}. Saisissez-le ci-dessous pour terminer la connexion.",
+      "codeLabel": "Code à 6 chiffres",
+      "verify": "Vérifier et se connecter",
+      "resend": "Envoyer un nouveau code",
+      "resendIn": "Envoyer un nouveau code dans {{seconds}} s",
+      "noResends": "Plus aucun code ne peut être envoyé pour cette demande",
+      "resent": "Un nouveau code a été envoyé.",
+      "back": "Utiliser un autre compte",
+      "invalidFormat": "Saisissez le code à 6 chiffres."
+    },
+    "forgot": {
+      "title": "Mot de passe oublié ?",
+      "subtitle": "Nous enverrons un code à usage unique à votre adresse e-mail ou à votre numéro de mobile enregistré.",
+      "methodLegend": "Envoyer le code à mon",
+      "methodEmail": "E-mail",
+      "methodMobile": "Mobile (SMS)",
+      "oncePerDay": "Vous pouvez réinitialiser votre mot de passe une fois par jour.",
+      "submit": "Envoyer le code",
+      "remembered": "Vous vous souvenez de votre mot de passe ?",
+      "verifyTitle": "Saisissez votre code",
+      "verifyDescription": "Nous avons envoyé un code à 6 chiffres à {{destination}}. Il expire dans 10 minutes.",
+      "verifySubmit": "Réinitialiser le mot de passe",
+      "changeContact": "Utiliser une autre adresse e-mail ou un autre numéro",
+      "doneTitle": "Nouveau mot de passe envoyé",
+      "doneEmail": "Nous avons envoyé un nouveau mot de passe temporaire par e-mail à {{destination}}.",
+      "doneMobile": "Nous avons envoyé un nouveau mot de passe temporaire par SMS au {{destination}}.",
+      "doneNext": "Connectez-vous avec celui-ci. Vous devrez ensuite choisir votre propre mot de passe.",
+      "backToLogin": "Aller à la connexion"
+    }
+  },
+  "profile": {
+    "edit": "Modifier le profil",
+    "about": "À propos",
+    "saved": "Votre profil a été mis à jour.",
+    "fields": {
+      "headline": "Titre",
+      "bio": "Bio",
+      "location": "Ville",
+      "college": "Établissement",
+      "degree": "Diplôme",
+      "graduationYear": "Année d'obtention du diplôme",
+      "skills": "Compétences"
+    },
+    "placeholders": {
+      "headline": "ex. : étudiant en informatique"
+    },
+    "hints": {
+      "bio": "Jusqu'à 1000 caractères.",
+      "skills": "Séparez les compétences par des virgules, ex. : React, Python, Prise de parole."
+    },
+    "empty": {
+      "bio": "Vous n'avez pas encore écrit de bio. Utilisez Modifier le profil pour vous présenter aux recruteurs.",
+      "skills": "Aucune compétence ajoutée pour l'instant."
+    },
+    "resume": {
+      "title": "CV",
+      "defaultLabel": "CV par défaut",
+      "none": "Pas encore de CV par défaut. Générez un CV en PDF dans le Créateur de CV et il apparaîtra ici.",
+      "generated": "Généré le {{date}}",
+      "download": "Télécharger le PDF",
+      "manage": "Gérer les CV"
+    }
+  },
+  "publicSpace": {
+    "title": "Espace public",
+    "subtitle": "Partagez des nouvelles, des photos et des vidéos avec d'autres étudiants.",
+    "composer": {
+      "title": "Créer une publication",
+      "label": "Partager une nouvelle",
+      "placeholder": "Que souhaitez-vous partager, {{name}} ?",
+      "characters": "{{count}} / {{max}} caractères",
+      "addMedia": "Ajouter des photos ou une vidéo",
+      "mediaHint": "Jusqu'à {{max}} fichiers : photos jusqu'à {{imageMb}} Mo (JPEG, PNG, GIF, WebP) et une vidéo MP4 ou WebM jusqu'à {{videoMb}} Mo.",
+      "selectedFiles": "Fichiers à envoyer",
+      "removeFile": "Retirer {{name}}",
+      "submit": "Publier",
+      "uploading": "Envoi… {{percent}} %",
+      "uploadingUnknown": "Envoi…",
+      "published": "Votre publication a été publiée.",
+      "needsFriends": "Ajoutez au moins un ami pour commencer à publier. Vos publications quotidiennes augmentent avec vos amis.",
+      "unlimited": "Pas de limite quotidienne : vous avez plus de 10 amis.",
+      "tiers": "Publications par jour : 1 ami : 1 · 2 à 5 amis : 2 · 6 à 10 amis : 5 · plus de 10 : illimité.",
+      "limitReached_one": "Vous avez utilisé la publication du jour. Ajoutez des amis pour publier plus souvent, ou revenez après minuit (IST).",
+      "limitReached_other": "Vous avez utilisé les {{count}} publications du jour. Ajoutez des amis pour publier plus souvent, ou revenez après minuit (IST).",
+      "limitReached_many": "Vous avez utilisé les {{count}} publications du jour. Ajoutez des amis pour publier plus souvent, ou revenez après minuit (IST).",
+      "remaining_one": "Il vous reste {{count}} publication aujourd'hui.",
+      "remaining_other": "Il vous reste {{count}} publications aujourd'hui.",
+      "remaining_many": "Il vous reste {{count}} publications aujourd'hui.",
+      "limitByFriends_one": "Votre limite est de {{limit}} par jour avec {{count}} ami.",
+      "limitByFriends_other": "Votre limite est de {{limit}} par jour avec {{count}} amis.",
+      "limitByFriends_many": "Votre limite est de {{limit}} par jour avec {{count}} amis."
+    },
+    "privacy": {
+      "label": "Qui peut voir ceci",
+      "public": "Public",
+      "friends": "Amis",
+      "only_me": "Moi uniquement",
+      "hints": {
+        "public": "Tous les étudiants connectés peuvent voir cette publication.",
+        "friends": "Seuls vous et vos amis pouvez voir cette publication.",
+        "only_me": "Vous seul pouvez voir cette publication."
+      }
+    },
+    "filters": {
+      "label": "Afficher les publications",
+      "for_you": "Pour vous",
+      "following": "Abonnements",
+      "saved": "Enregistrées",
+      "mine": "Mes publications"
+    },
+    "feed": {
+      "label": "Publications",
+      "empty": "Aucune publication pour l'instant. Partagez la première nouvelle !",
+      "emptyMine": "Vous n'avez encore rien publié.",
+      "error": "Impossible de charger les publications.",
+      "retry": "Réessayer",
+      "loadMore": "Charger plus de publications",
+      "end": "Vous êtes à jour.",
+      "emptyFollowing": "Les publications des étudiants que vous suivez apparaissent ici. Trouvez des étudiants à suivre.",
+      "emptySaved": "Les publications que vous enregistrez apparaissent ici.",
+      "emptyHashtag": "Aucune publication avec #{{tag}} pour l'instant.",
+      "emptyAuthor": "Aucune publication visible pour l'instant.",
+      "trending": "Tendance",
+      "emptyTitle": "Votre fil est calme",
+      "emptyFollowingTitle": "Vous ne suivez encore personne",
+      "emptySavedTitle": "Aucune publication enregistrée",
+      "emptyMineTitle": "Rien de publié pour l'instant"
+    },
+    "post": {
+      "label": "Publication de {{name}}",
+      "unknownAuthor": "Étudiant inconnu",
+      "open": "Ouvrir la publication de {{time}}",
+      "edited": "Modifiée",
+      "edit": "Modifier la publication",
+      "editTitle": "Modifier la publication",
+      "textLabel": "Texte",
+      "editUntil": "Vous pouvez modifier le texte et les médias jusqu'à {{time}}.",
+      "editWindowClosed": "Le délai de modification de cette publication est dépassé. Vous pouvez toujours changer qui peut la voir.",
+      "currentMedia": "Photos et vidéos",
+      "removeMedia": "Retirer {{index}}",
+      "delete": "Supprimer la publication",
+      "confirmDelete": "Supprimer cette publication ? Cette action est irréversible.",
+      "confirmDeleteButton": "Supprimer",
+      "deleted": "Votre publication a été supprimée.",
+      "back": "Retour à l'Espace public",
+      "detailTitle": "Publication",
+      "notFound": "Cette publication n'existe pas ou vous n'êtes pas autorisé à la voir.",
+      "stats": {
+        "likes_one": "{{count}} j'aime",
+        "likes_other": "{{count}} j'aime",
+        "likes_many": "{{count}} j'aime",
+        "comments_one": "{{count}} commentaire",
+        "comments_other": "{{count}} commentaires",
+        "comments_many": "{{count}} commentaires",
+        "shares_one": "{{count}} partage",
+        "shares_other": "{{count}} partages",
+        "shares_many": "{{count}} partages",
+        "views_one": "{{count}} vue",
+        "views_other": "{{count}} vues",
+        "views_many": "{{count}} vues"
+      },
+      "hidden": "Masquée après des signalements d'autres étudiants. Vous seul pouvez la voir jusqu'à son examen.",
+      "sharedLabel": "a partagé une publication"
+    },
+    "media": {
+      "photo": "Photo {{index}} sur {{count}} partagée par {{name}}",
+      "video": "Vidéo partagée par {{name}}",
+      "unavailable": "Ce fichier n'est pas disponible."
+    },
+    "errors": {
+      "empty": "Écrivez quelque chose ou ajoutez une photo ou une vidéo.",
+      "tooLong": "Les publications peuvent contenir au maximum {{max}} caractères.",
+      "fileType": "{{name}} n'est pas une photo ou une vidéo prise en charge.",
+      "photoTooLarge": "{{name}} est trop volumineux. Les photos peuvent faire au maximum {{mb}} Mo.",
+      "videoTooLarge": "{{name}} est trop volumineux. Les vidéos peuvent faire au maximum {{mb}} Mo.",
+      "duplicateFile": "{{name}} a déjà été ajouté.",
+      "tooManyFiles": "Ajoutez au maximum {{max}} photos ou vidéos.",
+      "tooManyVideos": "Ajoutez au maximum {{max}} vidéo."
+    },
+    "findStudents": "Trouver des étudiants",
+    "actions": {
+      "label": "Actions sur la publication",
+      "like": "J'aime",
+      "comment": "Commenter",
+      "share": "Partager",
+      "shared": "Partagée",
+      "save": "Enregistrer",
+      "report": "Signaler",
+      "reported": "Signalée"
+    },
+    "comments": {
+      "label": "Commentaires",
+      "loading": "Chargement des commentaires…",
+      "error": "Impossible de charger les commentaires.",
+      "empty": "Aucun commentaire pour l'instant. Soyez le premier à commenter.",
+      "loadMore": "Afficher plus de commentaires",
+      "fieldLabel": "Écrire un commentaire",
+      "submit": "Publier le commentaire",
+      "edit": "Modifier le commentaire",
+      "delete": "Supprimer le commentaire",
+      "confirmDelete": "Supprimer ce commentaire ?",
+      "editLabel": "Modifier votre commentaire",
+      "edited": "Modifié",
+      "emptyText": "Écrivez d'abord un commentaire."
+    },
+    "share": {
+      "title": "Partager cette publication",
+      "textLabel": "Ajoutez votre avis (facultatif)",
+      "submit": "Partager maintenant",
+      "done": "Partagée. Elle apparaît maintenant dans vos publications.",
+      "original": "Publication originale de {{name}}",
+      "unavailable": "La publication originale de {{name}} n'est plus disponible."
+    },
+    "report": {
+      "title": "Signaler cette publication",
+      "reasonLabel": "Motif",
+      "detailsLabel": "Détails (facultatif)",
+      "submit": "Envoyer le signalement",
+      "done": "Merci. Votre signalement a été envoyé.",
+      "hiddenDone": "Merci. La publication est masquée pendant son examen.",
+      "reasons": {
+        "spam": "Spam",
+        "harassment": "Harcèlement ou intimidation",
+        "hate": "Discours haineux",
+        "violence": "Violence ou menaces",
+        "nudity": "Nudité ou contenu sexuel",
+        "misinformation": "Fausses informations",
+        "other": "Autre chose"
+      }
+    },
+    "hashtag": {
+      "subtitle": "Les publications avec ce hashtag que vous pouvez voir."
+    },
+    "trending": {
+      "title": "Hashtags tendance",
+      "empty": "Pas encore de hashtags cette semaine.",
+      "posts_one": "{{count}} publication",
+      "posts_other": "{{count}} publications",
+      "posts_many": "{{count}} publications"
+    },
+    "sidebar": "Votre Espace public",
+    "allowance": {
+      "pausedTitle": "Vous pourrez publier dès votre premier ami",
+      "usedTitle": "Limite quotidienne de publications atteinte"
+    },
+    "limits": {
+      "title": "Limites quotidiennes de publication",
+      "friendsLabel": "Amis",
+      "todayLabel": "Publications aujourd'hui",
+      "none": "Aucune publication",
+      "perDay_one": "{{count}} publication par jour",
+      "perDay_other": "{{count}} publications par jour",
+      "perDay_many": "{{count}} publications par jour",
+      "unlimited": "Illimitées",
+      "friends_one": "{{count}} ami",
+      "friends_other": "{{count}} amis",
+      "friends_many": "{{count}} amis",
+      "friendsRange": "{{min}}–{{max}} amis",
+      "friendsOrMore_one": "{{count}}+ ami",
+      "friendsOrMore_other": "{{count}}+ amis",
+      "friendsOrMore_many": "{{count}}+ amis",
+      "resets": "Le compteur du jour repart de zéro à minuit (IST)."
+    },
+    "discover": {
+      "title": "Développez votre réseau",
+      "description": "Ajoutez des amis pour publier davantage chaque jour, et suivez les étudiants dont vous voulez voir les publications.",
+      "notifications": "Notifications",
+      "unread_one": "{{count}} nouvelle",
+      "unread_other": "{{count}} nouvelles",
+      "unread_many": "{{count}} nouvelles"
+    }
+  },
+  "internships": {
+    "title": "Stages",
+    "subtitle": "Trouvez des stages qui correspondent à vos compétences et postulez en quelques minutes.",
+    "searchLabel": "Rechercher des stages",
+    "searchPlaceholder": "Intitulé, entreprise ou compétence",
+    "results": "Résultats des stages",
+    "filters": {
+      "title": "Filtres",
+      "show": "Afficher les filtres",
+      "hide": "Masquer les filtres",
+      "category": "Catégorie",
+      "workMode": "Mode de travail",
+      "engagement": "Type",
+      "location": "Ville",
+      "minStipend": "Gratification mensuelle",
+      "maxDuration": "Durée",
+      "any": "Tous",
+      "anyCategory": "Toutes les catégories",
+      "anyCity": "Toutes les villes",
+      "stipendAtLeast": "Au moins {{amount}}",
+      "durationUpTo_one": "Jusqu'à {{count}} mois",
+      "durationUpTo_other": "Jusqu'à {{count}} mois",
+      "durationUpTo_many": "Jusqu'à {{count}} mois",
+      "clear": "Effacer les filtres"
+    },
+    "sort": {
+      "label": "Trier par",
+      "newest": "Plus récents",
+      "stipend": "Gratification la plus élevée",
+      "deadline": "Clôture proche"
+    },
+    "categories": {
+      "software_development": "Développement logiciel",
+      "web_development": "Développement web",
+      "data_science": "Science et analyse des données",
+      "design": "Design",
+      "marketing": "Marketing",
+      "content_writing": "Rédaction de contenu",
+      "finance": "Finance et comptabilité",
+      "human_resources": "Ressources humaines"
+    },
+    "workModes": {
+      "remote": "Télétravail",
+      "office": "Au bureau",
+      "hybrid": "Hybride"
+    },
+    "engagements": {
+      "full_time": "Temps plein",
+      "part_time": "Temps partiel"
+    },
+    "hybridIn": "{{cities}} (hybride)",
+    "facts": {
+      "startDate": "Date de début",
+      "duration": "Durée",
+      "stipend": "Gratification",
+      "deadline": "Postuler avant le"
+    },
+    "startsImmediately": "Immédiatement",
+    "durationMonths_one": "{{count}} mois",
+    "durationMonths_other": "{{count}} mois",
+    "durationMonths_many": "{{count}} mois",
+    "stipendRange": "{{min}} – {{max}} /mois",
+    "stipendFixed": "{{amount}} /mois",
+    "unpaid": "Non rémunéré",
+    "posted": "Publié {{time}}",
+    "applicants_one": "{{count}} candidat",
+    "applicants_other": "{{count}} candidats",
+    "applicants_many": "{{count}} candidats",
+    "openings_one": "{{count}} poste",
+    "openings_other": "{{count}} postes",
+    "openings_many": "{{count}} postes",
+    "moreSkills": "+{{count}} de plus",
+    "loadMore": "Afficher plus de stages",
+    "empty": "Aucun stage ne correspond à votre recherche. Essayez d'autres mots ou moins de filtres.",
+    "error": "Impossible de charger les stages.",
+    "detail": {
+      "back": "Tous les stages",
+      "about": "À propos du stage",
+      "responsibilities": "Missions au quotidien",
+      "skills": "Compétences requises",
+      "requirements": "Qui peut postuler",
+      "perks": "Avantages",
+      "aboutCompany": "À propos de {{company}}",
+      "applyNow": "Postuler maintenant",
+      "loginToApply": "Se connecter pour postuler",
+      "applied": "Vous avez postulé le {{date}}.",
+      "withdrawn": "Vous avez postulé le {{date}}, puis retiré votre candidature.",
+      "viewApplication": "Voir votre candidature",
+      "closed": "Ce stage a été clôturé et n'accepte plus de candidatures.",
+      "deadlinePassed": "La date limite de ce stage est dépassée : il n'accepte plus de candidatures.",
+      "notFound": "Ce stage n'existe pas.",
+      "applyTitle": "Postuler à ce stage",
+      "applyBy": "Les candidatures ferment le {{date}}",
+      "quotaNote": "Chaque candidature utilise une unité du quota mensuel de votre forfait.",
+      "seePlans": "Voir les forfaits",
+      "closedBadge": "N'accepte plus de candidatures",
+      "loadError": "Ce stage n'a pas pu être chargé."
+    },
+    "sampleNotice": "Toutes les offres sont des données d'exemple d'entreprises fictives, pour la démonstration.",
+    "showing_one": "{{count}} stage affiché",
+    "showing_other": "{{count}} stages affichés",
+    "showing_many": "{{count}} stages affichés",
+    "showingMore_one": "Le premier stage affiché ({{count}})",
+    "showingMore_other": "Les {{count}} premiers stages affichés",
+    "showingMore_many": "Les {{count}} premiers stages affichés",
+    "emptyTitle": "Aucun stage ne correspond",
+    "closesToday": "Ferme aujourd'hui",
+    "closesIn_one": "Ferme dans {{count}} jour",
+    "closesIn_other": "Ferme dans {{count}} jours",
+    "closesIn_many": "Ferme dans {{count}} jours",
+    "chips": {
+      "label": "Filtres utilisés",
+      "remove": "Retirer le filtre : {{filter}}",
+      "clearAll": "Tout effacer"
+    }
+  },
+  "applications": {
+    "title": "Mes candidatures",
+    "subtitle": "Tous les stages auxquels vous avez postulé, avec leur statut et leur historique.",
+    "filtersLabel": "Afficher les candidatures",
+    "filters": {
+      "all": "Toutes ({{count}})",
+      "submitted": "Envoyées ({{count}})",
+      "withdrawn": "Retirées ({{count}})"
+    },
+    "status": {
+      "submitted": "Envoyée",
+      "withdrawn": "Retirée"
+    },
+    "appliedOn": "Envoyée le {{date}}",
+    "withdrawnOn": "Retirée le {{date}}",
+    "listingClosed": "N'accepte plus de candidatures",
+    "viewListing": "Voir le stage",
+    "viewDetails": "Voir la candidature",
+    "empty": "Vous n'avez encore postulé à aucun stage.",
+    "emptyFiltered": "Aucune candidature avec ce statut.",
+    "browse": "Parcourir les stages",
+    "loadMore": "Afficher plus",
+    "error": "Impossible de charger vos candidatures.",
+    "form": {
+      "title": "Postuler à {{title}}",
+      "back": "Retour au stage",
+      "coverLetter": "Pourquoi devriez-vous être retenu pour ce poste ?",
+      "coverLetterHint": "Au moins {{min}} caractères. Mentionnez les compétences, projets ou expériences qui correspondent à ce stage.",
+      "characters": "{{count}} / {{max}} caractères.",
+      "availability": "Pouvez-vous commencer immédiatement ?",
+      "availableNow": "Oui, je peux commencer immédiatement",
+      "availableLater": "Non, je peux commencer plus tard",
+      "availabilityDetails": "Quand pouvez-vous commencer ?",
+      "availabilityDetailsHint": "Par exemple : après la fin de mes examens, le 15 novembre.",
+      "questions": "Questions de {{company}}",
+      "optional": "(facultatif)",
+      "submit": "Envoyer la candidature",
+      "submitting": "Envoi…",
+      "errors": {
+        "coverLetterShort": "Écrivez au moins {{min}} caractères sur les raisons pour lesquelles vous correspondez à ce poste.",
+        "availabilityDetails": "Indiquez à l'entreprise quand vous pouvez commencer.",
+        "answerRequired": "Répondez à cette question."
+      },
+      "alreadyApplied": "Vous avez déjà postulé à ce stage.",
+      "notAccepting": "Ce stage n'accepte plus de candidatures.",
+      "resume": "CV",
+      "resumeNone": "Ne pas joindre de CV",
+      "resumeDefault": "{{title}} (par défaut)",
+      "resumeHint": "L'un de vos CV en PDF, envoyé avec la candidature.",
+      "resumeEmpty": "Vous n'avez pas encore de CV en PDF. Vous pouvez en générer un dans le Créateur de CV."
+    },
+    "detail": {
+      "back": "Mes candidatures",
+      "submitted": "Votre candidature a été envoyée.",
+      "withdrawnNotice": "Votre candidature a été retirée.",
+      "timeline": "Historique",
+      "events": {
+        "submitted": "Envoyée",
+        "withdrawn": "Retirée"
+      },
+      "yourApplication": "Votre candidature",
+      "coverLetter": "Pourquoi vous devriez être retenu",
+      "availability": "Disponibilité",
+      "availableNow": "Peut commencer immédiatement",
+      "withdraw": "Retirer la candidature",
+      "withdrawConfirm": "Retirer cette candidature ? Vous ne pourrez plus postuler à ce stage.",
+      "withdrawYes": "Oui, retirer",
+      "keep": "Garder ma candidature",
+      "notFound": "Cette candidature n'existe pas.",
+      "resume": "CV",
+      "resumeDownload": "Télécharger {{file}}",
+      "resumeNone": "Aucun CV n'a été joint."
+    }
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire.",
+    "fullName": "Saisissez votre nom complet (au moins 2 caractères).",
+    "username": "Utilisez de 3 à 30 lettres, chiffres, points ou tirets bas.",
+    "email": "Saisissez une adresse e-mail valide.",
+    "mobile": "Saisissez un numéro de mobile valide.",
+    "passwordLength": "Le mot de passe doit contenir au moins 8 caractères.",
+    "passwordTooLong": "Le mot de passe peut contenir au maximum 128 caractères.",
+    "passwordLetterNumber": "Le mot de passe doit contenir au moins une lettre et un chiffre.",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "passwordSame": "Le nouveau mot de passe doit être différent du mot de passe actuel.",
+    "maxLength": "Doit contenir au maximum {{max}} caractères.",
+    "graduationYear": "Saisissez une année entre 1950 et 2100.",
+    "skills": "Ajoutez au maximum 30 compétences, de 40 caractères chacune au plus."
+  },
+  "fieldErrors": {
+    "required": "Ce champ est obligatoire.",
+    "tooShort": "Utilisez au moins {{min}} caractères.",
+    "tooLong": "Utilisez au maximum {{max}} caractères.",
+    "tooFew": "Ajoutez-en au moins {{min}}.",
+    "tooMany": "Ajoutez-en au maximum {{max}}.",
+    "tooSmall": "Saisissez {{min}} ou plus.",
+    "tooBig": "Saisissez {{max}} ou moins.",
+    "email": "Saisissez une adresse e-mail valide.",
+    "url": "Saisissez un lien complet commençant par https://",
+    "format": "Le format n'est pas correct.",
+    "choice": "Choisissez l'une des options.",
+    "mobile": "Saisissez un numéro de mobile valide, ex. : 9876543210 ou +14155550123.",
+    "phone": "Saisissez un numéro de téléphone valide, ex. : +91 98765 43210.",
+    "emailTaken": "Cette adresse e-mail est déjà enregistrée.",
+    "mobileTaken": "Ce numéro de mobile est déjà enregistré.",
+    "usernameTaken": "Ce nom d'utilisateur est déjà pris.",
+    "currentPasswordIncorrect": "Le mot de passe actuel est incorrect.",
+    "passwordSame": "Le nouveau mot de passe doit être différent du mot de passe actuel.",
+    "availabilityDetails": "Indiquez à l'entreprise quand vous pouvez commencer.",
+    "answerRequired": "Répondez à cette question.",
+    "answerDuplicate": "Répondez à chaque question une seule fois.",
+    "questionUnknown": "Cette question ne fait pas partie du formulaire de candidature.",
+    "resumeChoice": "Choisissez l'un de vos CV en PDF.",
+    "endBeforeStart": "La fin ne peut pas précéder le début."
+  },
+  "errors": {
+    "INVALID_CREDENTIALS": "E-mail/numéro de mobile ou mot de passe incorrect.",
+    "ACCOUNT_LOCKED": "Trop de tentatives échouées. Réessayez dans {{minutes}} minute(s).",
+    "ACCOUNT_EXISTS": "Un compte avec ces informations existe déjà.",
+    "VALIDATION_ERROR": "Corrigez les champs signalés.",
+    "RATE_LIMITED": "Trop de tentatives. Patientez quelques minutes, puis réessayez.",
+    "SESSION_EXPIRED": "Votre session a expiré. Reconnectez-vous.",
+    "NETWORK_ERROR": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+    "TIMEOUT": "Le serveur a mis trop de temps à répondre. Réessayez.",
+    "UNKNOWN_ERROR": "Un problème est survenu. Réessayez.",
+    "PASSWORD_RESET_DAILY_LIMIT": "Vous ne pouvez utiliser cette option qu'une fois par jour.",
+    "ACCOUNT_NOT_FOUND": "Aucun compte n'est enregistré avec ces informations.",
+    "MOBILE_LOGIN_WINDOW": "La connexion depuis un mobile n'est autorisée qu'entre 10 h et 13 h (IST).",
+    "OTP_INVALID": "Le code est incorrect.",
+    "OTP_INVALID_one": "Le code est incorrect. Il vous reste {{count}} tentative.",
+    "OTP_INVALID_other": "Le code est incorrect. Il vous reste {{count}} tentatives.",
+    "OTP_INVALID_many": "Le code est incorrect. Il vous reste {{count}} tentatives.",
+    "OTP_EXPIRED": "Ce code a expiré. Demandez un nouveau code.",
+    "OTP_ATTEMPTS_EXCEEDED": "Trop de codes incorrects. Recommencez.",
+    "OTP_ALREADY_USED": "Ce code a déjà été utilisé. Recommencez.",
+    "OTP_RESEND_COOLDOWN": "Patientez {{seconds}} secondes avant de demander un nouveau code.",
+    "OTP_RESEND_LIMIT": "Plus aucun code ne peut être envoyé pour cette demande. Recommencez.",
+    "CHALLENGE_NOT_FOUND": "Cette demande de vérification a expiré. Recommencez.",
+    "MESSAGE_DELIVERY_FAILED": "Nous n'avons pas pu envoyer le message pour le moment. Réessayez dans quelques minutes.",
+    "PASSWORD_CHANGE_REQUIRED": "Changez votre mot de passe pour continuer.",
+    "EMPTY_POST": "Écrivez quelque chose ou ajoutez une photo ou une vidéo.",
+    "MEDIA_TYPE_NOT_ALLOWED": "Seules les photos JPEG, PNG, GIF ou WebP et les vidéos MP4 ou WebM peuvent être envoyées.",
+    "MEDIA_TOO_LARGE": "La photo ou la vidéo est trop volumineuse.",
+    "TOO_MANY_MEDIA": "Ajoutez au maximum {{max}} photos ou vidéos.",
+    "TOO_MANY_VIDEOS": "Ajoutez au maximum {{max}} vidéo à une publication.",
+    "DUPLICATE_MEDIA_IN_POST": "Le même fichier a été ajouté plusieurs fois.",
+    "DUPLICATE_POST": "Vous avez déjà publié ceci au cours des {{hours}} dernières heures.",
+    "DUPLICATE_MEDIA": "Vous avez déjà publié cette photo ou cette vidéo.",
+    "INVALID_UPLOAD": "L'envoi n'a pas pu être lu. Réessayez.",
+    "MEDIA_UPLOAD_FAILED": "Votre photo ou vidéo n'a pas pu être envoyée. Réessayez.",
+    "MEDIA_NOT_FOUND": "Certains médias à retirer ne font plus partie de cette publication. Rechargez et réessayez.",
+    "POST_NOT_FOUND": "Cette publication n'existe pas ou vous n'êtes pas autorisé à la voir.",
+    "NOT_POST_OWNER": "Vous ne pouvez modifier que vos propres publications.",
+    "NOTHING_TO_UPDATE": "Rien n'a été modifié.",
+    "EDIT_WINDOW_EXPIRED": "Les publications ne peuvent être modifiées que dans les {{minutes}} minutes suivant leur publication. Vous pouvez toujours changer qui peut les voir.",
+    "DELETE_WINDOW_EXPIRED": "Les publications ne peuvent être supprimées que dans les {{minutes}} minutes suivant leur publication. Vous pouvez toujours changer qui peut les voir.",
+    "EDIT_CONFLICT": "Cette publication a été modifiée ailleurs. Rechargez la page et réessayez.",
+    "POSTING_NEEDS_FRIENDS": "Ajoutez au moins un ami pour commencer à publier dans l'Espace public.",
+    "DAILY_POST_LIMIT": "Vous avez atteint la limite de publications du jour ({{limit}}). Ajoutez des amis pour publier plus souvent, ou réessayez après minuit (IST).",
+    "ALREADY_SHARED": "Vous avez déjà partagé cette publication.",
+    "CANNOT_SHARE_OWN_POST": "Vous ne pouvez pas partager votre propre publication.",
+    "SHARE_NOT_ALLOWED": "Seules les publications publiques peuvent être partagées.",
+    "ALREADY_REPORTED": "Vous avez déjà signalé cette publication. Merci.",
+    "CANNOT_REPORT_OWN_POST": "Vous ne pouvez pas signaler votre propre publication.",
+    "COMMENT_NOT_FOUND": "Ce commentaire n'existe plus.",
+    "NOT_COMMENT_OWNER": "Vous ne pouvez modifier que vos propres commentaires.",
+    "CANNOT_FRIEND_SELF": "Vous ne pouvez pas vous envoyer une demande d'ami.",
+    "ALREADY_FRIENDS": "Vous êtes déjà amis.",
+    "FRIEND_REQUEST_EXISTS": "Vous avez déjà envoyé une demande d'ami à cet étudiant.",
+    "INCOMING_FRIEND_REQUEST": "Cet étudiant vous a déjà envoyé une demande d'ami. Acceptez-la plutôt.",
+    "FRIEND_REQUEST_NOT_FOUND": "Cette demande d'ami n'existe plus.",
+    "FRIEND_REQUEST_CONFLICT": "La demande d'ami a changé pendant l'envoi de la vôtre. Réessayez.",
+    "TOO_MANY_PENDING_REQUESTS": "Trop de vos demandes d'ami sont sans réponse. Annulez-en quelques-unes ou attendez des réponses.",
+    "NOT_FRIENDS": "Vous n'êtes pas ami avec cet étudiant.",
+    "CANNOT_FOLLOW_SELF": "Vous ne pouvez pas vous suivre vous-même.",
+    "NOTIFICATION_NOT_FOUND": "Cette notification n'existe plus.",
+    "INVALID_CURSOR": "Cette page n'est plus disponible. Rechargez et réessayez.",
+    "INTERNSHIP_NOT_FOUND": "Ce stage n'existe pas.",
+    "APPLICATIONS_CLOSED": "Ce stage n'accepte plus de candidatures.",
+    "ALREADY_APPLIED": "Vous avez déjà postulé à ce stage.",
+    "APPLICATION_NOT_FOUND": "Cette candidature n'existe pas.",
+    "APPLICATION_ALREADY_WITHDRAWN": "Vous avez déjà retiré cette candidature.",
+    "PAYMENTS_NOT_CONFIGURED": "Les paiements en ligne ne sont pas encore configurés sur ce serveur.",
+    "PAYMENT_WINDOW_CLOSED": "Les paiements ne sont possibles qu'entre 5 h et 11 h 45, heure de l'Inde.",
+    "CHECKOUT_IN_PROGRESS": "Un autre paiement est en cours. Terminez-le ou fermez-le, puis réessayez.",
+    "PAYMENT_NOT_FOUND": "Ce paiement n'existe pas.",
+    "PAYMENT_VERIFICATION_FAILED": "Ce paiement n'a pas pu être vérifié : votre forfait n'a donc pas changé.",
+    "PAYMENT_NOT_COMPLETED": "Ce paiement n'a pas été finalisé : votre forfait n'a donc pas changé.",
+    "PAYMENT_MISMATCH": "Ce paiement ne correspond pas à votre commande : votre forfait n'a donc pas changé.",
+    "ORDER_ALREADY_PAID": "Cette commande a déjà été payée.",
+    "PAYMENT_ALREADY_USED": "Ce paiement a déjà été utilisé pour une autre commande.",
+    "PAYMENT_GATEWAY_REJECTED": "Le service de paiement n'a pas accepté ce paiement.",
+    "PAYMENT_GATEWAY_ERROR": "Le service de paiement ne répond pas. Réessayez dans un instant.",
+    "CHECKOUT_UNAVAILABLE": "La fenêtre de paiement Razorpay n'a pas pu s'ouvrir. Vérifiez votre connexion et réessayez.",
+    "APPLICATION_QUOTA_EXHAUSTED": "Vous avez utilisé toutes les candidatures de votre forfait pour ce cycle de facturation. Passez à un forfait supérieur pour postuler maintenant, ou attendez que votre quota soit renouvelé.",
+    "NEXT_CYCLE_ALREADY_PAID": "Votre prochain cycle de facturation est déjà payé. Pour choisir un autre forfait pour ce cycle, résiliez d'abord votre abonnement (le paiement anticipé est remboursé).",
+    "SUBSCRIPTION_CHANGED": "Votre forfait vient de changer car un paiement précédent a abouti. Vérifiez votre forfait, puis choisissez à nouveau.",
+    "NO_ACTIVE_PLAN": "Vous n'avez pas de forfait payant à résilier.",
+    "INVOICE_NOT_FOUND": "Cette facture n'existe pas.",
+    "PREMIUM_REQUIRED": "Le Créateur de CV fait partie des forfaits payants (Bronze, Silver ou Gold).",
+    "RESUME_NOT_FOUND": "Ce CV n'existe pas.",
+    "RESUME_CONFLICT": "Ce CV a été modifié dans un autre onglet ou sur un autre appareil.",
+    "RESUME_LIMIT": "Vous pouvez conserver au maximum {{max}} CV. Supprimez-en un pour en créer un autre.",
+    "VERSION_UNCHANGED": "Rien n'a changé depuis la version {{number}}.",
+    "VERSION_LIMIT": "Un CV conserve au maximum {{max}} versions. Supprimez d'abord une ancienne version.",
+    "VERSION_NOT_FOUND": "Cette version n'existe pas.",
+    "PHOTO_TYPE_NOT_ALLOWED": "La photo doit être une image JPEG ou PNG.",
+    "PHOTO_REQUIRED": "Choisissez une photo à envoyer.",
+    "PHOTO_NOT_FOUND": "Vous n'avez pas ajouté de photo de CV.",
+    "RESUME_NOT_READY": "Complétez votre CV avant de générer le PDF (voir la liste de contrôle).",
+    "ALREADY_GENERATED": "Vous avez déjà un PDF de ce CV dans son état actuel. Téléchargez-le depuis vos CV en PDF ou modifiez d'abord le CV.",
+    "OTP_NOT_EXPECTED": "Ce PDF n'attend plus de code. Fermez cette fenêtre et recommencez.",
+    "OTP_REQUIRED": "Vérifiez le code envoyé à votre adresse e-mail avant de payer.",
+    "GENERATION_EXPIRED": "Le délai pour payer ce PDF est dépassé. Recommencez pour recevoir un nouveau code.",
+    "RESUME_ALREADY_PAID": "Ce CV en PDF a déjà été payé.",
+    "GENERATION_IN_PROGRESS": "Un autre CV en PDF est en cours de génération. Terminez-le ou annulez-le d'abord.",
+    "GENERATION_NOT_FOUND": "Ce CV en PDF n'existe pas.",
+    "PDF_NOT_READY": "Ce CV en PDF n'a pas encore été généré.",
+    "UNAUTHENTICATED": "Connectez-vous pour continuer.",
+    "BAD_REQUEST": "Cette demande n'a pas pu être traitée.",
+    "NOT_FOUND": "Ce que vous cherchiez est introuvable.",
+    "INVALID_ID": "Ce lien n'est pas valide.",
+    "INVALID_JSON": "La demande n'a pas pu être lue. Réessayez.",
+    "PAYLOAD_TOO_LARGE": "Ce que vous avez envoyé est trop volumineux.",
+    "UNSAFE_INPUT": "La demande contenait des données non autorisées.",
+    "DUPLICATE_RESOURCE": "Cet élément existe déjà.",
+    "ORIGIN_NOT_ALLOWED": "Cette demande a été bloquée pour votre sécurité.",
+    "INTERNAL_ERROR": "Un problème est survenu de notre côté. Réessayez plus tard.",
+    "FRENCH_VERIFICATION_REQUIRED": "Le français ne peut être choisi qu'après la vérification d'un code envoyé à votre adresse e-mail.",
+    "LANGUAGE_ALREADY_ACTIVE": "Le français est déjà votre langue.",
+    "FRENCH_REQUEST_LIMIT": "Vous avez demandé trop de codes pour le français. Réessayez dans {{minutes}} minute(s).",
+    "FRENCH_REQUEST_IN_PROGRESS": "Un code pour le français est déjà en cours d'envoi. Consultez vos e-mails dans un instant.",
+    "SIMULATED_PAYMENT": "Ceci est un enregistrement de démonstration simulé. Il ne peut être ni payé ni vérifié, et aucun argent n'a été débité."
+  },
+  "social": {
+    "people": {
+      "title": "Amis et personnes",
+      "subtitle": "Trouvez des étudiants, répondez aux demandes d'ami et voyez qui vous suivez.",
+      "tabsLabel": "Personnes",
+      "tabs": {
+        "discover": "Trouver des étudiants",
+        "requests": "Demandes",
+        "friends": "Amis",
+        "following": "Abonnements",
+        "followers": "Abonnés"
+      },
+      "searchLabel": "Rechercher des étudiants",
+      "searchPlaceholder": "Nom ou nom d'utilisateur",
+      "suggestions": "Étudiants suggérés",
+      "results": "Résultats de la recherche",
+      "noResults": "Aucun étudiant ne correspond à votre recherche.",
+      "noSuggestions": "Aucune suggestion pour le moment.",
+      "incoming": "Demandes reçues",
+      "outgoing": "Demandes envoyées",
+      "noIncoming": "Aucune demande d'ami en attente.",
+      "noOutgoing": "Vous n'avez aucune demande en attente.",
+      "noFriends": "Pas encore d'amis. Trouvez des étudiants et envoyez-leur des demandes d'ami.",
+      "noFollowing": "Vous ne suivez encore personne.",
+      "noFollowers": "Personne ne vous suit encore.",
+      "error": "Impossible de charger cette liste.",
+      "loadMore": "Charger plus"
+    },
+    "actions": {
+      "addFriend": "Ajouter en ami",
+      "cancelRequest": "Annuler la demande",
+      "accept": "Accepter",
+      "decline": "Refuser",
+      "friends": "Amis",
+      "unfriend": "Retirer des amis",
+      "confirmUnfriend": "Retirer {{name}} de vos amis ?",
+      "follow": "Suivre"
+    },
+    "followsYou": "Vous suit",
+    "counts": {
+      "friends_one": "{{count}} ami",
+      "friends_other": "{{count}} amis",
+      "friends_many": "{{count}} amis",
+      "followers_one": "{{count}} abonné",
+      "followers_other": "{{count}} abonnés",
+      "followers_many": "{{count}} abonnés",
+      "following": "{{count}} abonnements"
+    },
+    "profile": {
+      "notFound": "Aucun étudiant avec ce nom d'utilisateur.",
+      "thisIsYou": "Voici comment les autres étudiants voient votre profil.",
+      "editProfile": "Modifier mon profil",
+      "posts": "Publications"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "J'aime, commentaires, partages, mentions et demandes d'ami.",
+    "filtersLabel": "Afficher les notifications",
+    "all": "Toutes",
+    "unread": "Non lues",
+    "markAllRead": "Tout marquer comme lu",
+    "markRead": "Marquer comme lue",
+    "markUnread": "Marquer comme non lue",
+    "empty": "Vous êtes à jour. Rien de nouveau ici.",
+    "emptyUnread": "Aucune notification non lue.",
+    "error": "Impossible de charger les notifications.",
+    "loadMore": "Charger plus",
+    "unreadLabel": "Non lue",
+    "types": {
+      "like": "{{name}} a aimé votre publication",
+      "comment": "{{name}} a commenté votre publication",
+      "share": "{{name}} a partagé votre publication",
+      "mention": "{{name}} vous a mentionné dans une publication",
+      "mentionComment": "{{name}} vous a mentionné dans un commentaire",
+      "friend_request": "{{name}} vous a envoyé une demande d'ami",
+      "friend_accept": "{{name}} a accepté votre demande d'ami"
+    }
+  },
+  "plans": {
+    "title": "Forfaits et tarifs",
+    "subtitle": "Choisissez à combien de stages vous pouvez postuler chaque mois. Chaque forfait payant dure un mois.",
+    "testMode": "Les paiements utilisent le mode test de Razorpay : aucun argent réel n'est débité.",
+    "perMonth": "/mois",
+    "free": "Free",
+    "applications_one": "{{count}} candidature à un stage par mois",
+    "applications_other": "{{count}} candidatures à des stages par mois",
+    "applications_many": "{{count}} candidatures à des stages par mois",
+    "unlimited": "Candidatures illimitées aux stages",
+    "validity": "Valable un mois à compter du paiement",
+    "choose": "Choisir {{plan}}",
+    "starting": "Ouverture du paiement…",
+    "verifying": "Confirmation du paiement…",
+    "loginToChoose": "Se connecter pour choisir",
+    "yourPlan": "Votre forfait",
+    "activeUntil": "Actif jusqu'au {{date}} IST",
+    "current": {
+      "heading": "Votre forfait actuel",
+      "free": "{{plan}} : {{applications}}.",
+      "active": "{{plan}} : {{applications}}, actif jusqu'au {{date}} IST.",
+      "expired": "Votre forfait {{lastPlan}} a pris fin le {{date}} IST : vous êtes donc sur le forfait Free.",
+      "status": {
+        "active": "Actif",
+        "cancelled": "Résilié"
+      },
+      "cycle": "Cycle de facturation : du {{start}} au {{end}} IST.",
+      "renewal": "Date de renouvellement : {{date}} IST. Pour continuer, renouvelez ici avant cette date (paiements de 5 h à 11 h 45 IST).",
+      "cancelledNote": "Résilié : votre forfait {{plan}} reste actif jusqu'au {{date}} IST, puis vous passez au forfait Free.",
+      "nextCycle": "Prochain cycle de facturation déjà payé : {{plan}}, du {{start}} au {{end}} IST.",
+      "billingLink": "Historique de facturation et factures",
+      "daysLeft_one": "Il reste {{count}} jour dans ce cycle de facturation",
+      "daysLeft_other": "Il reste {{count}} jours dans ce cycle de facturation",
+      "daysLeft_many": "Il reste {{count}} jours dans ce cycle de facturation",
+      "cycleShort": "{{start}} – {{end}}",
+      "demoNote": "Abonnement de démonstration : ce forfait a été créé par le script de démonstration avec des paiements simulés. Ce n'est pas un achat réel, et aucun argent n'a été débité."
+    },
+    "window": {
+      "open": "Les paiements sont ouverts jusqu'à 11 h 45 aujourd'hui, heure de l'Inde.",
+      "openAlways": "Les paiements sont ouverts.",
+      "closed": "Les paiements ne sont possibles qu'entre 5 h et 11 h 45, heure de l'Inde. Ils rouvrent le {{date}} IST.",
+      "disabled": "Les paiements en ligne ne sont pas encore configurés sur ce serveur : les forfaits payants ne peuvent donc pas être achetés pour le moment."
+    },
+    "result": {
+      "paid": "Paiement réussi. Votre forfait {{plan}} est actif jusqu'au {{date}} IST.",
+      "transaction": "ID de transaction : {{id}}. Une confirmation a été envoyée à votre adresse e-mail.",
+      "cancelled": "Paiement annulé. Vous n'avez pas été débité.",
+      "failed": "Le paiement n'a pas abouti. Vous n'avez pas été débité.",
+      "failedReason": "Motif : {{reason}}",
+      "attemptFailed": "Cette tentative a échoué. Vous pouvez réessayer dans la fenêtre de paiement.",
+      "dismiss": "Fermer",
+      "upgraded": "Paiement réussi. Vous êtes maintenant sur le forfait {{plan}} jusqu'au {{date}} IST ; votre date de renouvellement n'a pas changé.",
+      "renewed": "Paiement réussi. Votre forfait {{plan}} est renouvelé pour le prochain cycle de facturation, du {{start}} au {{end}} IST.",
+      "downgraded": "Paiement réussi. Votre forfait passe à {{plan}} le {{date}} IST.",
+      "refunded": "Votre forfait avait déjà changé à l'arrivée de ce paiement : il n'a donc pas été utilisé. {{amount}} a été remboursé.",
+      "refundRequested": "Votre forfait avait déjà changé à l'arrivée de ce paiement : il n'a donc pas été utilisé. Un remboursement de {{amount}} a été demandé.",
+      "transactionOnly": "ID de transaction : {{id}}.",
+      "invoice": "Télécharger la facture {{number}}"
+    },
+    "error": "Impossible de charger les forfaits.",
+    "quota": {
+      "label": "Candidatures aux stages",
+      "usedMonth": "{{used}} sur {{limit}} utilisées ce mois-ci",
+      "usedCycle": "{{used}} sur {{limit}} utilisées pendant ce cycle de facturation",
+      "unlimited_one": "Illimité · {{count}} envoyée pendant ce cycle de facturation",
+      "unlimited_other": "Illimité · {{count}} envoyées pendant ce cycle de facturation",
+      "unlimited_many": "Illimité · {{count}} envoyées pendant ce cycle de facturation",
+      "remaining_one": "Il reste {{count}} candidature",
+      "remaining_other": "Il reste {{count}} candidatures",
+      "remaining_many": "Il reste {{count}} candidatures",
+      "none": "Plus aucune",
+      "resets": "Renouvelé le {{date}} IST",
+      "exhausted": "Vous avez utilisé pour l'instant toutes les candidatures de votre forfait {{plan}}. Passez à un forfait supérieur pour postuler maintenant, ou attendez le {{date}} IST.",
+      "seePlans": "Voir les forfaits"
+    },
+    "actions": {
+      "upgrade": "Passer à ce forfait · {{amount}}",
+      "renewal": "Renouveler pour le mois prochain · {{amount}}",
+      "downgrade": "Changer le {{date}} · {{amount}}"
+    },
+    "notes": {
+      "upgrade_one": "Vous ne payez que la différence pour le {{count}} jour restant de ce cycle de facturation ({{difference}} de plus par mois). Votre date de renouvellement ne change pas.",
+      "upgrade_other": "Vous ne payez que la différence pour les {{count}} jours restants de ce cycle de facturation ({{difference}} de plus par mois). Votre date de renouvellement ne change pas.",
+      "upgrade_many": "Vous ne payez que la différence pour les {{count}} jours restants de ce cycle de facturation ({{difference}} de plus par mois). Votre date de renouvellement ne change pas.",
+      "renewal": "Payé d'avance pour la période du {{start}} au {{end}} IST.",
+      "downgrade": "Votre forfait {{current}} continue jusqu'au {{date}} IST ; {{plan}} commence ensuite.",
+      "NEXT_CYCLE_ALREADY_PAID": "Votre prochain cycle de facturation est déjà payé."
+    },
+    "cancel": {
+      "button": "Résilier l'abonnement",
+      "title": "Résilier votre abonnement ?",
+      "keepsCycle": "Votre forfait {{plan}} reste actif jusqu'au {{date}} IST. Le cycle de facturation en cours n'est pas remboursé, car ses candidatures ont peut-être déjà été utilisées.",
+      "refundsNext": "Les {{amount}} payés d'avance pour le prochain cycle de facturation ({{plan}}) seront remboursés.",
+      "confirm": "Oui, résilier",
+      "keep": "Garder mon forfait",
+      "cancelling": "Résiliation…",
+      "done": "Votre abonnement a été résilié. Votre forfait {{plan}} reste actif jusqu'au {{date}} IST.",
+      "refunded": "{{amount}} pour le prochain cycle de facturation a été remboursé (ID de remboursement {{id}}).",
+      "refundPending": "Un remboursement de {{amount}} pour le prochain cycle de facturation a été demandé. Vous recevrez un e-mail une fois qu'il sera effectué."
+    },
+    "bestValue": "Meilleur rapport",
+    "taglines": {
+      "free": "Pour commencer",
+      "bronze": "Pour une recherche ciblée",
+      "silver": "Pour une recherche active",
+      "gold": "Pour postuler sans limite"
+    },
+    "features": {
+      "resumeBuilder": "Créateur de CV, avec des PDF à ₹50 chacun",
+      "community": "Espace public et recherche de stages"
+    }
+  },
+  "payments": {
+    "history": {
+      "title": "Historique des paiements",
+      "empty": "Vous n'avez encore effectué aucun paiement.",
+      "error": "Impossible de charger vos paiements.",
+      "plan": "Forfait {{plan}}",
+      "started": "Commencé le {{date}}",
+      "paid": "Payé le {{date}}",
+      "transaction": "ID de transaction : {{id}}",
+      "validity": "Valable du {{start}} au {{end}}",
+      "loadMore": "Afficher plus",
+      "refund": {
+        "processed": "{{amount}} remboursé le {{date}}",
+        "pending": "Remboursement de {{amount}} demandé",
+        "failed": "Le remboursement de {{amount}} a échoué. Contactez l'assistance."
+      },
+      "invoice": "Facture {{number}}",
+      "resume": "CV en PDF",
+      "description": "Chaque paiement que vous avez commencé, avec son résultat."
+    },
+    "status": {
+      "created": "En attente de paiement",
+      "paid": "Payé",
+      "cancelled": "Annulé",
+      "failed": "Échoué",
+      "expired": "Expiré",
+      "refunded": "Remboursé"
+    },
+    "testCheckout": {
+      "title": "Paiement de test",
+      "description": "Ce serveur utilise une passerelle de paiement de test au lieu de Razorpay. Choisissez ce qu'il advient de ce paiement.",
+      "pay": "Payer {{amount}}",
+      "decline": "Refuser le paiement",
+      "declined": "Paiement refusé. Vous pouvez réessayer ou fermer cette fenêtre.",
+      "close": "Fermer"
+    }
+  },
+  "billing": {
+    "title": "Facturation et factures",
+    "subtitle": "Vos factures, l'historique de votre forfait et tous vos paiements.",
+    "backToPlans": "Forfaits et tarifs",
+    "items": {
+      "new": "Forfait {{plan}}, 1 mois",
+      "renewal": "Renouvellement du forfait {{plan}}, 1 mois",
+      "upgrade": "Passage de {{fromPlan}} à {{plan}} pour le reste du cycle de facturation",
+      "downgrade": "Forfait {{plan}} à partir du prochain cycle de facturation, 1 mois",
+      "resume": "CV en PDF : {{title}}"
+    },
+    "invoices": {
+      "title": "Factures",
+      "empty": "Vous n'avez pas encore de factures. Une facture est émise pour chaque paiement réussi.",
+      "error": "Impossible de charger vos factures.",
+      "number": "Facture {{number}}",
+      "issued": "Émise le {{date}}",
+      "period": "Période de facturation du {{start}} au {{end}}",
+      "download": "Télécharger le PDF",
+      "downloadLabel": "Télécharger la facture {{number}} en PDF",
+      "loadMore": "Afficher plus",
+      "status": {
+        "paid": "Payée",
+        "refunded": "Remboursée"
+      },
+      "description": "Chaque paiement vérifié reçoit une facture numérotée.",
+      "view": "Voir",
+      "viewLabel": "Voir la facture {{number}}"
+    },
+    "history": {
+      "title": "Historique de l'abonnement",
+      "empty": "Pas encore de forfait payant. Vous êtes sur le forfait Free.",
+      "error": "Impossible de charger l'historique de votre abonnement.",
+      "events": {
+        "new": "Achat du forfait {{plan}}",
+        "renewal": "Renouvellement du forfait {{plan}} pour le prochain cycle de facturation",
+        "upgrade": "Passage de {{fromPlan}} à {{plan}}",
+        "downgrade": "Passage à {{plan}} pour le prochain cycle de facturation",
+        "cancelled": "Résiliation de l'abonnement"
+      },
+      "period": "Du {{start}} au {{end}}",
+      "cancelledDetail": "Le forfait {{plan}} reste actif jusqu'au {{date}} IST.",
+      "payment": "{{amount}} · ID de transaction {{id}}",
+      "invoice": "Facture {{number}}",
+      "status": {
+        "current": "En cours",
+        "upcoming": "Commence plus tard",
+        "ended": "Terminé",
+        "upgraded": "Remplacé par un forfait supérieur",
+        "cancelled": "Résilié et remboursé"
+      },
+      "description": "Achats de forfaits, renouvellements, montées et baisses de forfait, et résiliations."
+    },
+    "comparePlans": "Comparer les forfaits",
+    "demoNotice": "Compte de démonstration : le forfait, les factures et les paiements de cette page sont des enregistrements simulés créés pour les présentations. Aucun n'est une transaction réelle, et aucun argent n'a été débité.",
+    "overview": {
+      "label": "Aperçu du forfait",
+      "plan": "Forfait actuel",
+      "status": {
+        "active": "Actif",
+        "cancelled": "Résilié",
+        "expired": "Expiré",
+        "free": "Forfait gratuit"
+      },
+      "renewal": "Date de renouvellement",
+      "ends": "Fin du forfait",
+      "noRenewal": "Pas de renouvellement",
+      "applications": "Candidatures de ce cycle",
+      "unlimited": "Illimitées",
+      "used": "{{used}} sur {{limit}} utilisées",
+      "cycle": "Cycle de facturation",
+      "freeCycle": "Compté par mois civil"
+    },
+    "invoice": {
+      "preview": "Aperçu de la facture",
+      "print": "Imprimer",
+      "close": "Fermer la facture",
+      "demoBanner": "Facture de démonstration simulée : pas une transaction réelle. Aucun paiement n'a été effectué.",
+      "seller": "Stages, candidatures et une communauté d'étudiants",
+      "title": "Facture",
+      "date": "Date de la facture : {{date}}",
+      "billedTo": "Facturé à",
+      "description": "Description",
+      "amount": "Montant",
+      "total": "Total payé",
+      "totalSimulated": "Total (simulé)",
+      "paymentDetails": "Détails du paiement",
+      "status": "Statut",
+      "statusPaid": "Payée",
+      "statusSimulated": "Enregistrement de démonstration simulé (aucun argent débité)",
+      "paidOn": "Payé le",
+      "method": "Moyen de paiement",
+      "transaction": "ID de transaction",
+      "order": "ID de commande",
+      "receipt": "Numéro de reçu",
+      "methods": {
+        "card": "Carte",
+        "upi": "UPI",
+        "netbanking": "Banque en ligne",
+        "wallet": "Portefeuille",
+        "emi": "EMI",
+        "simulated": "Simulé (enregistrement de démonstration)",
+        "razorpay": "Razorpay"
+      },
+      "footer": "Payé avec Razorpay en mode test : aucun argent réel n'a été débité.",
+      "footerDemo": "Données de démonstration créées par le script d'InternConnect pour les présentations. Ce n'est ni un paiement Razorpay ni une vente réelle."
+    }
+  },
+  "resume": {
+    "choose": "Choisir…",
+    "list": {
+      "title": "Créateur de CV",
+      "subtitle": "Créez des CV compatibles ATS, gardez-en des versions et utilisez-les pour vos candidatures.",
+      "error": "Impossible de charger vos CV.",
+      "mine": "Mes CV ({{count}} sur {{max}})",
+      "empty": "Vous n'avez pas encore de CV.",
+      "noName": "Pas encore de nom",
+      "updated": "Modifié {{date}}",
+      "versions_one": "{{count}} version enregistrée",
+      "versions_other": "{{count}} versions enregistrées",
+      "versions_many": "{{count}} versions enregistrées",
+      "ready": "Prêt",
+      "missing_one": "{{count}} élément manquant",
+      "missing_other": "{{count}} éléments manquants",
+      "missing_many": "{{count}} éléments manquants",
+      "deleteConfirm": "Supprimer « {{title}} » et toutes ses versions ? Cette action est irréversible.",
+      "deleteYes": "Oui, supprimer",
+      "edit": "Modifier",
+      "open": "Ouvrir",
+      "duplicate": "Dupliquer",
+      "duplicateLabel": "Dupliquer {{title}}",
+      "delete": "Supprimer",
+      "deleteLabel": "Supprimer {{title}}"
+    },
+    "premium": {
+      "title": "Le Créateur de CV est une fonctionnalité Premium",
+      "description": "La création et la modification de CV sont incluses dans les forfaits Bronze, Silver et Gold.",
+      "keep": "Vos CV existants restent ici : vous pouvez toujours les ouvrir et les supprimer.",
+      "seePlans": "Voir les forfaits"
+    },
+    "create": {
+      "title": "Commencer un nouveau CV",
+      "name": "Nom du CV",
+      "nameHint": "Vous seul le voyez, ex. : « Postes frontend ».",
+      "start": "Partir de",
+      "profile": "Mon profil (nom, coordonnées, titre, établissement et compétences)",
+      "blank": "Un CV vide",
+      "submit": "Créer le CV",
+      "titleRequired": "Donnez un nom au CV.",
+      "limit": "Vous avez {{max}} CV, le maximum autorisé. Supprimez-en un pour en commencer un autre."
+    },
+    "editor": {
+      "back": "Tous les CV",
+      "heading": "Modifier le CV {{title}}",
+      "name": "Nom du CV",
+      "readOnly": "Votre forfait a pris fin : ce CV est donc en lecture seule. Choisissez un forfait payant pour le modifier à nouveau.",
+      "conflictLoss": "Le rechargement affiche le dernier brouillon enregistré ; les modifications faites ici depuis le dernier enregistrement seront perdues.",
+      "reload": "Recharger le CV",
+      "tools": "Outils du CV",
+      "notFound": "Ce CV n'existe pas.",
+      "views": "Vues du CV",
+      "view": {
+        "edit": "Modifier",
+        "preview": "Mise en page et aperçu"
+      }
+    },
+    "save": {
+      "saving": "Enregistrement…",
+      "dirty": "Modifications non enregistrées",
+      "invalid": "Corrigez les champs signalés pour enregistrer",
+      "error": "Non enregistré : {{reason}}",
+      "retry": "Réessayer",
+      "saved": "Toutes les modifications sont enregistrées",
+      "savedAt": "Enregistré à {{time}}"
+    },
+    "errors": {
+      "email": "Saisissez une adresse e-mail valide.",
+      "phone": "Saisissez un numéro de téléphone valide, ex. : +91 98765 43210.",
+      "url": "Saisissez un lien complet commençant par https://",
+      "month": "Utilisez un mois au format 2026-06.",
+      "endBeforeStart": "La fin ne peut pas précéder le début."
+    },
+    "tags": {
+      "placeholder": "Saisissez puis appuyez sur Entrée",
+      "hint": "{{count}} sur {{max}} ajoutés. Appuyez sur Entrée ou tapez une virgule après chacun.",
+      "full": "Vous en avez ajouté {{max}}",
+      "remove": "Retirer {{value}}"
+    },
+    "entry": {
+      "moveUp": "Monter {{entry}}",
+      "moveDown": "Descendre {{entry}}",
+      "remove": "Retirer {{entry}}",
+      "full": "{{max}} au maximum",
+      "count_one": "{{count}} entrée",
+      "count_other": "{{count}} entrées",
+      "count_many": "{{count}} entrées"
+    },
+    "readiness": {
+      "title": "Prêt à générer ?",
+      "ready": "Tout ce dont un CV compatible ATS a besoin est renseigné.",
+      "missing_one": "{{count}} élément à compléter :",
+      "missing_other": "{{count}} éléments à compléter :",
+      "missing_many": "{{count}} éléments à compléter :"
+    },
+    "problems": {
+      "fullName": "Ajoutez votre nom complet",
+      "email": "Ajoutez une adresse e-mail",
+      "phone": "Ajoutez un numéro de téléphone",
+      "objective": "Rédigez un objectif professionnel d'au moins {{min}} caractères",
+      "education": "Ajoutez au moins une formation",
+      "skills": "Ajoutez au moins {{min}} compétences",
+      "institution": "Ajoutez l'établissement",
+      "degree": "Ajoutez le diplôme",
+      "startDate": "Ajoutez le mois de début",
+      "endDate": "Ajoutez le mois de fin ou indiquez qu'il est en cours",
+      "title": "Ajoutez l'intitulé",
+      "organization": "Ajoutez l'organisation",
+      "projectName": "Ajoutez le nom du projet",
+      "projectDescription": "Décrivez le projet",
+      "certificateName": "Ajoutez le nom du certificat",
+      "issuer": "Ajoutez qui l'a délivré",
+      "achievement": "Décrivez la réussite",
+      "language": "Ajoutez la langue",
+      "proficiency": "Choisissez votre niveau",
+      "link": "Ajoutez le lien",
+      "referenceName": "Ajoutez le nom",
+      "referenceContact": "Ajoutez une adresse e-mail ou un numéro de téléphone",
+      "latinOnly": "Utilisez uniquement des lettres latines : le PDF ne peut pas imprimer {{characters}}",
+      "photoFormat": "Renvoyez votre photo en JPEG ou PNG (le PDF ne peut pas afficher les images WebP), ou masquez-la"
+    },
+    "personal": {
+      "title": "Nom et coordonnées",
+      "description": "Comment les employeurs peuvent vous joindre.",
+      "fields": {
+        "fullName": "Nom complet",
+        "headline": "Titre",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "location": "Ville"
+      }
+    },
+    "objective": {
+      "title": "Objectif professionnel",
+      "description": "Deux ou trois phrases sur ce que vous voulez faire et ce que vous apportez.",
+      "label": "Votre objectif professionnel",
+      "hint": "{{count}} sur {{max}} caractères (au moins 50)."
+    },
+    "skills": {
+      "title": "Compétences",
+      "description": "Ajoutez-en au moins trois. Utilisez les mots qui figurent dans les stages qui vous intéressent.",
+      "label": "Compétences"
+    },
+    "sections": {
+      "education": {
+        "title": "Formation",
+        "description": "Écoles, établissements et cours, du plus récent au plus ancien.",
+        "empty": "Aucune formation ajoutée pour l'instant.",
+        "entry": "Formation {{number}}",
+        "add": "Ajouter une formation",
+        "fields": {
+          "institution": "Établissement",
+          "degree": "Diplôme ou cursus",
+          "fieldOfStudy": "Domaine d'études",
+          "grade": "Note ou CGPA",
+          "startDate": "Mois de début",
+          "endDate": "Mois de fin",
+          "current": "J'y étudie actuellement",
+          "description": "Détails (facultatif)"
+        }
+      },
+      "experience": {
+        "title": "Expérience professionnelle",
+        "description": "Emplois, temps partiels et missions en freelance.",
+        "empty": "Aucune expérience professionnelle ajoutée pour l'instant.",
+        "entry": "Emploi {{number}}",
+        "add": "Ajouter un emploi",
+        "fields": {
+          "title": "Intitulé du poste",
+          "organization": "Entreprise ou organisation",
+          "location": "Lieu",
+          "startDate": "Mois de début",
+          "endDate": "Mois de fin",
+          "current": "J'y travaille actuellement",
+          "description": "Ce que vous avez fait"
+        }
+      },
+      "internships": {
+        "title": "Stages",
+        "description": "Les stages que vous avez faits ou que vous faites.",
+        "empty": "Aucun stage ajouté pour l'instant.",
+        "entry": "Stage {{number}}",
+        "add": "Ajouter un stage",
+        "fields": {
+          "title": "Poste",
+          "organization": "Entreprise",
+          "location": "Lieu",
+          "startDate": "Mois de début",
+          "endDate": "Mois de fin",
+          "current": "Je fais ce stage actuellement",
+          "description": "Ce que vous avez fait"
+        }
+      },
+      "projects": {
+        "title": "Projets",
+        "description": "Projets universitaires, personnels ou open source.",
+        "empty": "Aucun projet ajouté pour l'instant.",
+        "entry": "Projet {{number}}",
+        "add": "Ajouter un projet",
+        "fields": {
+          "name": "Nom du projet",
+          "role": "Votre rôle",
+          "link": "Lien (facultatif)",
+          "startDate": "Mois de début",
+          "endDate": "Mois de fin",
+          "current": "J'y travaille encore",
+          "technologies": "Technologies utilisées",
+          "description": "Ce qu'il fait et ce que vous avez réalisé"
+        }
+      },
+      "certifications": {
+        "title": "Certifications",
+        "description": "Formations et certificats.",
+        "empty": "Aucune certification ajoutée pour l'instant.",
+        "entry": "Certification {{number}}",
+        "add": "Ajouter une certification",
+        "fields": {
+          "name": "Certificat",
+          "issuer": "Délivré par",
+          "issueDate": "Mois de délivrance",
+          "credentialUrl": "Lien de l'attestation (facultatif)"
+        }
+      },
+      "achievements": {
+        "title": "Réussites",
+        "description": "Prix, concours et bourses.",
+        "empty": "Aucune réussite ajoutée pour l'instant.",
+        "entry": "Réussite {{number}}",
+        "add": "Ajouter une réussite",
+        "fields": {
+          "title": "Réussite",
+          "date": "Mois",
+          "description": "Détails (facultatif)"
+        }
+      },
+      "languages": {
+        "title": "Langues",
+        "description": "Les langues que vous parlez, et votre niveau.",
+        "empty": "Aucune langue ajoutée pour l'instant.",
+        "entry": "Langue {{number}}",
+        "add": "Ajouter une langue",
+        "fields": {
+          "language": "Langue",
+          "proficiency": "Niveau"
+        }
+      },
+      "links": {
+        "title": "Réseaux et liens",
+        "description": "LinkedIn, GitHub, un portfolio ou un site web.",
+        "empty": "Aucun lien ajouté pour l'instant.",
+        "entry": "Lien {{number}}",
+        "add": "Ajouter un lien",
+        "fields": {
+          "kind": "Type",
+          "url": "Lien"
+        }
+      },
+      "references": {
+        "title": "Références",
+        "description": "Des personnes qui peuvent vous recommander (facultatif).",
+        "empty": "Aucune référence ajoutée pour l'instant.",
+        "entry": "Référence {{number}}",
+        "add": "Ajouter une référence",
+        "fields": {
+          "name": "Nom",
+          "designation": "Fonction",
+          "organization": "Organisation",
+          "email": "E-mail",
+          "phone": "Téléphone"
+        }
+      }
+    },
+    "options": {
+      "proficiency": {
+        "basic": "Notions",
+        "conversational": "Conversationnel",
+        "professional": "Professionnel",
+        "fluent": "Courant",
+        "native": "Langue maternelle"
+      },
+      "kind": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "portfolio": "Portfolio",
+        "website": "Site web",
+        "twitter": "X (Twitter)",
+        "other": "Autre"
+      }
+    },
+    "photo": {
+      "title": "Photo",
+      "alt": "Votre photo de CV",
+      "choose": "Choisir une photo",
+      "upload": "Envoyer une photo",
+      "change": "Changer la photo",
+      "remove": "Retirer la photo",
+      "hint": "Une seule photo pour tous vos CV : JPEG ou PNG (ce que le PDF peut afficher), jusqu'à {{max}} Mo.",
+      "type": "Choisissez une image JPEG ou PNG.",
+      "size": "La photo peut faire au maximum {{max}} Mo.",
+      "include": "Afficher ma photo sur ce CV"
+    },
+    "versions": {
+      "title": "Versions",
+      "description": "Enregistrez le CV tel qu'il est maintenant pour y revenir plus tard (jusqu'à {{max}}).",
+      "label": "Libellé (facultatif)",
+      "labelPlaceholder": "ex. : Envoyé à Nimbus Labs",
+      "save": "Enregistrer comme version",
+      "saveFirst": "Corrigez d'abord les champs signalés pour que le brouillon puisse être enregistré.",
+      "saved": "Enregistré comme version {{number}}.",
+      "restored": "La version {{number}} est maintenant votre brouillon.",
+      "empty": "Aucune version enregistrée pour l'instant.",
+      "number": "Version {{number}}",
+      "restoreConfirm": "Remplacer votre brouillon par la version {{number}} ? Enregistrez d'abord le brouillon comme version si vous voulez le garder.",
+      "deleteConfirm": "Supprimer la version {{number}} ? Cette action est irréversible.",
+      "restoreYes": "Oui, restaurer",
+      "deleteYes": "Oui, supprimer",
+      "view": "Voir",
+      "restore": "Restaurer",
+      "delete": "Supprimer",
+      "deleteLabel": "Supprimer la version {{number}}",
+      "dialogTitle": "Version {{number}}",
+      "close": "Fermer",
+      "noName": "Sans nom",
+      "current": "maintenant",
+      "restoreThis": "Restaurer cette version"
+    },
+    "preview": {
+      "description": "Un aperçu en direct de votre PDF : il change pendant que vous écrivez. Le PDF est créé à partir du CV enregistré.",
+      "pageLabel": "Aperçu du CV",
+      "noName": "Votre nom",
+      "photo": "Votre photo",
+      "live": "Aperçu en direct"
+    },
+    "design": {
+      "title": "Mise en page",
+      "description": "Tous les modèles ont une seule colonne et des titres standard, pour que les logiciels de recrutement (ATS) puissent les lire.",
+      "template": "Modèle",
+      "templates": {
+        "classic": {
+          "name": "Classique",
+          "description": "Nom centré, titres foncés au-dessus d'une ligne de couleur."
+        },
+        "modern": {
+          "name": "Moderne",
+          "description": "Une barre de couleur en haut, avec le nom et les titres en couleur."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Texte et espacements plus petits, pour en mettre plus sur une page."
+        }
+      },
+      "color": "Couleur d'accent",
+      "colors": {
+        "blue": "Bleu",
+        "teal": "Bleu canard",
+        "green": "Vert",
+        "maroon": "Bordeaux",
+        "purple": "Violet",
+        "charcoal": "Anthracite"
+      },
+      "font": "Police",
+      "fonts": {
+        "sans": "Sans empattement (Helvetica)",
+        "serif": "Avec empattement (Times)"
+      },
+      "atsNote": "Tous les modèles sont sur une seule colonne et compatibles ATS, pour que les logiciels de recrutement puissent les lire."
+    },
+    "generate": {
+      "title": "CV en PDF",
+      "description": "{{price}} par PDF, payé avec Razorpay. Téléchargez-le à nouveau gratuitement quand vous voulez.",
+      "notReady": "Complétez la liste de contrôle avant de générer le PDF.",
+      "makeDefault": "En faire mon CV par défaut",
+      "start": "Générer le PDF ({{price}})",
+      "steps": "Nous vous envoyons un code par e-mail, puis vous payez. Le PDF n'est créé qu'une fois le paiement vérifié.",
+      "saveFirst": "Corrigez d'abord les champs signalés pour que le brouillon puisse être enregistré.",
+      "dialogTitle": "Générer votre CV en PDF",
+      "close": "Fermer",
+      "codeSent": "Nous avons envoyé un code à 6 chiffres à {{destination}}.",
+      "codeDescription": "Saisissez-le pour débloquer le paiement. Il expire dans {{minutes}} minutes.",
+      "verifyCode": "Vérifier le code",
+      "verified": "Code vérifié.",
+      "payDescription": "Payez {{amount}} pour générer le PDF de « {{title}} ». Lancez le paiement avant {{time}}.",
+      "pay": "Payer {{amount}}",
+      "paying": "En attente du paiement…",
+      "verifying": "Vérification du paiement…",
+      "payCancelled": "Le paiement a été annulé. Vous pouvez réessayer.",
+      "payFailed": "Le paiement a échoué. Vous pouvez réessayer, par exemple avec un autre moyen de paiement.",
+      "attemptFailed": "Le paiement n'a pas abouti : {{reason}}. Vous pouvez réessayer dans la même fenêtre.",
+      "testMode": "Mode test de Razorpay : aucun argent réel n'est débité.",
+      "generating": "Votre paiement a abouti et le PDF est en cours de création. Il apparaîtra dans vos CV en PDF d'ici une minute.",
+      "ready": "Votre CV en PDF est prêt.",
+      "emailed": "Nous vous l'avons aussi envoyé par e-mail avec la facture.",
+      "refunded": "Ce PDF avait déjà été payé : le second paiement est donc remboursé.",
+      "download": "Télécharger {{file}}",
+      "expired": "Cette demande est terminée. Fermez cette fenêtre et générez à nouveau le PDF.",
+      "perPdf": "{{price}} par PDF",
+      "progress": "Étapes pour obtenir le PDF",
+      "step": {
+        "code": "Code par e-mail",
+        "pay": "Payer {{amount}}",
+        "download": "Télécharger"
+      },
+      "stepDone": "fait",
+      "premiumRequired": "Générer des PDF nécessite un forfait payant (Bronze, Silver ou Gold)."
+    },
+    "pdfs": {
+      "title": "Mes CV en PDF",
+      "description": "Tous les PDF que vous avez payés. Téléchargez-les à nouveau quand vous voulez ; celui par défaut s'affiche sur votre profil et est proposé quand vous postulez.",
+      "empty": "Pas encore de PDF. Ouvrez un CV, complétez la liste de contrôle et générez son PDF.",
+      "error": "Impossible de charger vos CV en PDF.",
+      "generated": "Généré le {{date}}",
+      "download": "Télécharger",
+      "downloadLabel": "Télécharger le PDF de {{title}}",
+      "default": "Par défaut",
+      "makeDefault": "Définir par défaut",
+      "makeDefaultLabel": "Faire du PDF de {{title}} mon CV par défaut",
+      "clearDefault": "Ne plus utiliser par défaut",
+      "loadMore": "Afficher plus",
+      "template": "Modèle {{name}}",
+      "pages_one": "{{count}} page",
+      "pages_other": "{{count}} pages",
+      "pages_many": "{{count}} pages",
+      "downloads_one": "téléchargé une fois",
+      "downloads_other": "téléchargé {{count}} fois",
+      "downloads_many": "téléchargé {{count}} fois",
+      "paid": "Payé {{amount}} · ID de transaction {{id}}",
+      "paidNoId": "Payé {{amount}}",
+      "invoice": "Facture {{number}}"
+    },
+    "downloads": {
+      "title": "Historique des téléchargements",
+      "empty": "Vos CV en PDF n'ont pas encore été téléchargés.",
+      "error": "Impossible de charger l'historique des téléchargements.",
+      "from": "{{browser}} sur {{os}} · IP {{ip}}",
+      "loadMore": "Afficher plus"
+    },
+    "completion": {
+      "title": "Solidité du CV",
+      "percent": "{{percent}} % complété",
+      "next": "À ajouter ensuite",
+      "levels": {
+        "starting": "Vous commencez : ajoutez l'essentiel ci-dessous.",
+        "shaping": "Il prend forme : quelques sections de plus le feront ressortir.",
+        "almost": "Presque terminé : ajoutez les derniers détails.",
+        "complete": "Complet : toutes les sections recommandées sont remplies."
+      },
+      "items": {
+        "fullName": "Ajoutez votre nom complet",
+        "contact": "Ajoutez votre e-mail et votre téléphone",
+        "headline": "Ajoutez un titre, par ex. Développeur frontend",
+        "location": "Ajoutez votre ville",
+        "objective": "Rédigez un objectif professionnel d'au moins 50 caractères",
+        "education": "Ajoutez votre formation",
+        "skills": "Ajoutez au moins 3 compétences",
+        "experience": "Ajoutez un stage ou un emploi",
+        "projects": "Ajoutez un projet",
+        "links": "Ajoutez votre lien LinkedIn, GitHub ou portfolio",
+        "certifications": "Ajoutez une certification",
+        "achievements": "Ajoutez une réussite",
+        "languages": "Ajoutez les langues que vous parlez"
+      }
+    },
+    "nav": {
+      "label": "Sections du CV",
+      "state": {
+        "done": "remplie",
+        "attention": "à corriger",
+        "empty": "pas commencée"
+      }
+    }
+  },
+  "security": {
+    "title": "Sécurité et connexions",
+    "subtitle": "Où votre compte est connecté, les appareils qu'il connaît et l'historique des connexions, des réinitialisations de mot de passe et des changements de langue.",
+    "tabsLabel": "Rubriques de sécurité",
+    "tabs": {
+      "sessions": "Sessions",
+      "devices": "Appareils",
+      "logins": "Historique des connexions",
+      "resets": "Réinitialisations du mot de passe",
+      "languages": "Historique des langues"
+    },
+    "time": "{{time}} IST",
+    "on": "{{browser}} sur {{os}}",
+    "ip": "IP {{ip}}",
+    "location": "Près de {{location}}",
+    "unknown": "Inconnu",
+    "deviceTypes": {
+      "desktop": "Ordinateur",
+      "mobile": "Téléphone",
+      "tablet": "Tablette",
+      "tv": "Télévision",
+      "unknown": "Appareil inconnu"
+    },
+    "thisDevice": "Cet appareil",
+    "cancel": "Annuler",
+    "loadMore": "Afficher plus",
+    "error": "Impossible de charger cette liste.",
+    "retry": "Réessayer",
+    "sessions": {
+      "description": "Les navigateurs où votre compte est connecté en ce moment. Déconnecter une session y met fin immédiatement.",
+      "started": "Connecté le {{time}}",
+      "lastActive": "dernière activité le {{time}}",
+      "signOut": "Déconnecter",
+      "signOutLabel": "Déconnecter la session {{name}}",
+      "signOutOthers": "Déconnecter toutes les autres sessions",
+      "confirmOthers": "Se déconnecter partout sauf dans ce navigateur ?",
+      "confirmYes": "Oui, déconnecter",
+      "signedOut": "Cette session a été déconnectée.",
+      "signedOutOthers_zero": "Il n'y avait aucune autre session à déconnecter.",
+      "signedOutOthers_one": "{{count}} autre session a été déconnectée.",
+      "signedOutOthers_other": "{{count}} autres sessions ont été déconnectées.",
+      "signedOutOthers_many": "{{count}} autres sessions ont été déconnectées.",
+      "onlyThis": "Aucune session à afficher."
+    },
+    "devices": {
+      "description": "Les navigateurs depuis lesquels votre compte a été utilisé. Un appareil devient de confiance quand un code envoyé par e-mail y est confirmé. Retirer un appareil le déconnecte, et sa prochaine connexion compte comme un nouvel appareil.",
+      "trusted": "De confiance",
+      "trustedSince": "De confiance depuis le {{time}}",
+      "notTrusted": "Pas de confiance",
+      "firstSeen": "Première utilisation le {{time}}",
+      "lastSeen": "dernière utilisation le {{time}}",
+      "remove": "Retirer",
+      "removeLabel": "Retirer l'appareil {{name}}",
+      "confirmRemove": "Retirer cet appareil ? Il sera déconnecté.",
+      "confirmYes": "Oui, retirer",
+      "removed_zero": "L'appareil a été retiré.",
+      "removed_one": "L'appareil a été retiré et {{count}} session a été déconnectée.",
+      "removed_other": "L'appareil a été retiré et {{count}} sessions ont été déconnectées.",
+      "removed_many": "L'appareil a été retiré et {{count}} sessions ont été déconnectées.",
+      "empty": "Aucun appareil pour l'instant."
+    },
+    "logins": {
+      "description": "Toutes les tentatives de connexion à votre compte, réussies ou non, de la plus récente à la plus ancienne.",
+      "empty": "Aucune connexion enregistrée pour l'instant.",
+      "events": {
+        "register": "Compte créé",
+        "login": "Connexion",
+        "otp_verification": "Vérification du code par e-mail"
+      },
+      "results": {
+        "success": "Réussie",
+        "failure": "Échouée",
+        "otp_required": "Code envoyé"
+      },
+      "reasons": {
+        "invalid_password": "Mot de passe incorrect",
+        "account_locked": "Compte temporairement bloqué",
+        "outside_mobile_window": "Connexion depuis un mobile en dehors de 10 h – 13 h (IST)",
+        "otp_delivery_failed": "L'e-mail avec le code n'a pas pu être envoyé",
+        "chrome_email_otp": "Google Chrome nécessite un code par e-mail",
+        "otp_invalid": "Code incorrect",
+        "otp_expired": "Le code avait expiré",
+        "otp_attempts_exceeded": "Trop de codes incorrects"
+      },
+      "verifiedByEmail": "Vérifiée avec un code par e-mail",
+      "new": {
+        "device": "Nouvel appareil",
+        "browser": "Nouveau navigateur",
+        "ip": "Nouvelle adresse IP"
+      }
+    },
+    "resets": {
+      "description": "Les demandes de mot de passe oublié de votre compte, de la plus récente à la plus ancienne.",
+      "empty": "Aucune demande de réinitialisation du mot de passe.",
+      "method": {
+        "email": "Code par e-mail à {{destination}}",
+        "mobile": "Code par SMS au {{destination}}"
+      },
+      "status": {
+        "pending": "Code envoyé, pas encore saisi",
+        "verified": "Code vérifié",
+        "expired": "Code expiré",
+        "locked": "Trop de codes incorrects",
+        "rejected": "Demande refusée",
+        "not_sent": "Code non envoyé"
+      },
+      "outcome": {
+        "in_progress": "En cours",
+        "completed": "Nouveau mot de passe envoyé",
+        "failed": "Échouée"
+      },
+      "failure": {
+        "daily_limit": "une seule demande par jour",
+        "delivery_failed": "le message n'a pas pu être envoyé",
+        "otp_attempts_exceeded": "trop de codes incorrects"
+      }
+    },
+    "languages": {
+      "description": "Tous les changements de langue de l'interface, du plus récent au plus ancien. Le français n'est appliqué qu'après un code par e-mail.",
+      "empty": "Vous n'avez pas encore changé de langue.",
+      "change": "{{from}} → {{to}}",
+      "verification": {
+        "none": "Aucun code nécessaire",
+        "email_otp": "Code envoyé par e-mail à {{destination}}"
+      },
+      "results": {
+        "not_required": "Appliqué",
+        "pending": "En attente du code",
+        "verified": "Code vérifié, appliqué",
+        "expired": "Code expiré, non appliqué",
+        "attempts_exceeded": "Trop de codes incorrects, non appliqué",
+        "not_sent": "E-mail non envoyé, non appliqué",
+        "cancelled": "Remplacé par une demande plus récente"
+      },
+      "attempts_one": "{{count}} code saisi",
+      "attempts_other": "{{count}} codes saisis",
+      "attempts_many": "{{count}} codes saisis"
+    }
+  },
+  "demo": {
+    "badge": "Démo · simulé",
+    "tooltip": "Enregistrement de démonstration simulé : pas une transaction réelle, et aucun argent n'a été débité."
+  }
+}

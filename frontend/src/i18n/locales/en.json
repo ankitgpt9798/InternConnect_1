@@ -1,0 +1,1715 @@
+{
+  "common": {
+    "appName": "InternConnect",
+    "skipToContent": "Skip to main content",
+    "backHome": "Back to home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "loading": "Loading…",
+    "save": "Save changes",
+    "cancel": "Cancel",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "nav": {
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "internships": "Internships",
+    "community": "Public Space",
+    "resumeBuilder": "Resume Builder",
+    "plans": "Plans",
+    "login": "Log in",
+    "register": "Sign up",
+    "profile": "My profile",
+    "changePassword": "Change password",
+    "logout": "Log out",
+    "accountMenu": "Account menu for {{name}}",
+    "notifications": "Notifications",
+    "notificationsUnread_one": "Notifications, {{count}} unread",
+    "notificationsUnread_other": "Notifications, {{count}} unread",
+    "people": "Friends and people",
+    "applications": "My applications",
+    "billing": "Billing and invoices",
+    "security": "Security"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Internships, community and careers in one place",
+      "title": "Find the internship that starts your career",
+      "subtitle": "Discover internships, apply in a few clicks, build a standout resume and learn alongside students who are on the same journey.",
+      "primaryCta": "Browse internships",
+      "secondaryCta": "Join the community"
+    },
+    "features": {
+      "title": "Everything you need to get hired",
+      "subtitle": "One account gives you listings, applications, a student community and career tools.",
+      "items": {
+        "internships": {
+          "title": "Internship applications",
+          "description": "Search listings, read the details that matter and track every application you send."
+        },
+        "community": {
+          "title": "Public Space",
+          "description": "Share updates, photos and videos, connect with friends and follow people you learn from."
+        },
+        "resume": {
+          "title": "Premium resume builder",
+          "description": "Create ATS-friendly resumes from modern templates and attach them to your applications."
+        },
+        "plans": {
+          "title": "Flexible plans",
+          "description": "Start free and upgrade when you need more applications each month."
+        },
+        "security": {
+          "title": "Secure by design",
+          "description": "Login monitoring, trusted devices and one-time passwords keep your account protected."
+        },
+        "languages": {
+          "title": "Six languages",
+          "description": "Use InternConnect in English, Spanish, Hindi, Portuguese, Chinese or French."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to take the next step?",
+      "description": "Create a free account and send your first application today.",
+      "button": "Create your free account"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Reload the page or try again later.",
+    "reload": "Reload page"
+  },
+  "footer": {
+    "tagline": "Internships, applications and a student community, all in one place.",
+    "explore": "Explore",
+    "account": "Account",
+    "rights": "© {{year}} InternConnect. All rights reserved."
+  },
+  "status": {
+    "label": "Service status",
+    "idle": "Not checked",
+    "checking": "Checking…",
+    "online": "Online",
+    "degraded": "Degraded",
+    "offline": "Offline",
+    "lastChecked": "Last checked at {{time}}"
+  },
+  "language": {
+    "label": "Language",
+    "menu": "Language: {{language}}",
+    "needsCode": "needs an email code",
+    "loginForFrench": "log in to use it",
+    "names": {
+      "en": "English",
+      "es": "Spanish",
+      "hi": "Hindi",
+      "pt": "Portuguese",
+      "zh": "Chinese",
+      "fr": "French"
+    },
+    "settings": {
+      "title": "Language",
+      "description": "InternConnect is shown in this language. It is saved to your profile, so it is also used on every other device where you log in.",
+      "frenchNote": "French is applied only after you enter a code that we send to your email. Until then your language stays as it is.",
+      "saving": "Changing the language…",
+      "saved": "InternConnect is now in {{language}}."
+    },
+    "french": {
+      "title": "Switch to French",
+      "codeSent": "We sent a 6-digit code to {{destination}}.",
+      "description": "Enter it to switch InternConnect to French. It expires in {{minutes}} minutes. Until then the app stays in {{language}}.",
+      "verify": "Verify and switch to French",
+      "close": "Close",
+      "unchanged": "The app is still in {{language}}.",
+      "restart": "Send a new code"
+    },
+    "error": "The language was not changed. {{reason}}",
+    "loadFailed": "This language could not be downloaded. Check your connection and try again.",
+    "dismiss": "Dismiss"
+  },
+  "auth": {
+    "fields": {
+      "identifier": "Email or mobile number",
+      "password": "Password",
+      "fullName": "Full name",
+      "username": "Username",
+      "email": "Email address",
+      "mobile": "Mobile number",
+      "confirmPassword": "Confirm password",
+      "currentPassword": "Current password",
+      "newPassword": "New password"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Log in to continue your internship journey.",
+      "submit": "Log in",
+      "noAccount": "New to InternConnect?",
+      "forgotPassword": "Forgot password?"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join InternConnect to apply for internships and connect with students.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "usernameHint": "3–30 characters: letters, numbers, dots or underscores. Others can @mention you with it.",
+      "mobileHint": "Indian numbers can be entered without +91.",
+      "passwordHint": "At least 8 characters, with at least one letter and one number."
+    },
+    "changePassword": {
+      "title": "Change password",
+      "subtitle": "Choose a strong password you don't use anywhere else.",
+      "submit": "Update password",
+      "required": "For your security, please choose a new password before continuing.",
+      "backToProfile": "Back to my profile",
+      "success_zero": "Your password has been changed.",
+      "success_one": "Your password has been changed. 1 other device was signed out.",
+      "success_other": "Your password has been changed. {{count}} other devices were signed out."
+    },
+    "otp": {
+      "title": "Check your email",
+      "chromeNote": "For your security, logins from Google Chrome need a one-time code.",
+      "description": "We sent a 6-digit code to {{destination}}. Enter it below to finish logging in.",
+      "codeLabel": "6-digit code",
+      "verify": "Verify and log in",
+      "resend": "Send a new code",
+      "resendIn": "Send a new code in {{seconds}}s",
+      "noResends": "No more codes can be sent for this request",
+      "resent": "A new code has been sent.",
+      "back": "Use a different account",
+      "invalidFormat": "Enter the 6-digit code."
+    },
+    "forgot": {
+      "title": "Forgot your password?",
+      "subtitle": "We'll send a one-time code to your registered email or mobile number.",
+      "methodLegend": "Send the code to my",
+      "methodEmail": "Email",
+      "methodMobile": "Mobile (SMS)",
+      "oncePerDay": "You can reset your password once per day.",
+      "submit": "Send code",
+      "remembered": "Remembered your password?",
+      "verifyTitle": "Enter your code",
+      "verifyDescription": "We sent a 6-digit code to {{destination}}. It expires in 10 minutes.",
+      "verifySubmit": "Reset password",
+      "changeContact": "Use a different email or mobile number",
+      "doneTitle": "New password sent",
+      "doneEmail": "We emailed a new temporary password to {{destination}}.",
+      "doneMobile": "We sent a new temporary password by SMS to {{destination}}.",
+      "doneNext": "Log in with it. You will then be asked to choose your own password.",
+      "backToLogin": "Go to login"
+    }
+  },
+  "profile": {
+    "edit": "Edit profile",
+    "about": "About",
+    "saved": "Your profile has been updated.",
+    "fields": {
+      "headline": "Headline",
+      "bio": "Bio",
+      "location": "City",
+      "college": "College",
+      "degree": "Degree",
+      "graduationYear": "Graduation year",
+      "skills": "Skills"
+    },
+    "placeholders": {
+      "headline": "e.g. Computer Science student"
+    },
+    "hints": {
+      "bio": "Up to 1000 characters.",
+      "skills": "Separate skills with commas, e.g. React, Python, Public speaking."
+    },
+    "empty": {
+      "bio": "You haven't written a bio yet. Use Edit profile to tell recruiters about yourself.",
+      "skills": "No skills added yet."
+    },
+    "resume": {
+      "title": "Resume",
+      "defaultLabel": "Default resume",
+      "none": "No default resume yet. Generate a resume PDF in the Resume Builder and it appears here.",
+      "generated": "Generated {{date}}",
+      "download": "Download PDF",
+      "manage": "Manage resumes"
+    }
+  },
+  "publicSpace": {
+    "title": "Public Space",
+    "subtitle": "Share updates, photos and videos with other students.",
+    "composer": {
+      "title": "Create a post",
+      "label": "Share an update",
+      "placeholder": "What would you like to share, {{name}}?",
+      "characters": "{{count}} / {{max}} characters",
+      "addMedia": "Add photos or a video",
+      "mediaHint": "Up to {{max}} files: photos up to {{imageMb}} MB (JPEG, PNG, GIF, WebP) and one MP4 or WebM video up to {{videoMb}} MB.",
+      "selectedFiles": "Files to upload",
+      "removeFile": "Remove {{name}}",
+      "submit": "Post",
+      "uploading": "Uploading… {{percent}}%",
+      "uploadingUnknown": "Uploading…",
+      "published": "Your post has been published.",
+      "needsFriends": "Add at least one friend to start posting. Your daily posts grow with your friends.",
+      "unlimited": "No daily limit: you have more than 10 friends.",
+      "tiers": "Posts per day: 1 friend: 1 · 2–5 friends: 2 · 6–10 friends: 5 · more than 10: unlimited.",
+      "limitReached_one": "You have used today's post. Add more friends to post more often, or come back after midnight (IST).",
+      "limitReached_other": "You have used all {{count}} of today's posts. Add more friends to post more often, or come back after midnight (IST).",
+      "remaining_one": "{{count}} post left today.",
+      "remaining_other": "{{count}} posts left today.",
+      "limitByFriends_one": "Your limit is {{limit}} a day with {{count}} friend.",
+      "limitByFriends_other": "Your limit is {{limit}} a day with {{count}} friends."
+    },
+    "privacy": {
+      "label": "Who can see this",
+      "public": "Public",
+      "friends": "Friends",
+      "only_me": "Only me",
+      "hints": {
+        "public": "Every signed-in student can see this post.",
+        "friends": "Only you and your friends can see this post.",
+        "only_me": "Only you can see this post."
+      }
+    },
+    "filters": {
+      "label": "Show posts",
+      "for_you": "For you",
+      "following": "Following",
+      "saved": "Saved",
+      "mine": "My posts"
+    },
+    "feed": {
+      "label": "Posts",
+      "empty": "No posts yet. Share the first update!",
+      "emptyMine": "You haven't posted anything yet.",
+      "error": "Posts could not be loaded.",
+      "retry": "Try again",
+      "loadMore": "Load more posts",
+      "end": "You're all caught up.",
+      "emptyFollowing": "Posts from students you follow appear here. Find students to follow.",
+      "emptySaved": "Posts you save appear here.",
+      "emptyHashtag": "No posts with #{{tag}} yet.",
+      "emptyAuthor": "No posts you can see yet.",
+      "trending": "Trending",
+      "emptyTitle": "Your feed is quiet",
+      "emptyFollowingTitle": "You are not following anyone yet",
+      "emptySavedTitle": "No saved posts",
+      "emptyMineTitle": "Nothing posted yet"
+    },
+    "post": {
+      "label": "Post by {{name}}",
+      "unknownAuthor": "Unknown student",
+      "open": "Open post from {{time}}",
+      "edited": "Edited",
+      "edit": "Edit post",
+      "editTitle": "Edit post",
+      "textLabel": "Text",
+      "editUntil": "You can change the text and media until {{time}}.",
+      "editWindowClosed": "The time for editing this post has passed. You can still change who can see it.",
+      "currentMedia": "Photos and videos",
+      "removeMedia": "Remove {{index}}",
+      "delete": "Delete post",
+      "confirmDelete": "Delete this post? This cannot be undone.",
+      "confirmDeleteButton": "Delete",
+      "deleted": "Your post has been deleted.",
+      "back": "Back to Public Space",
+      "detailTitle": "Post",
+      "notFound": "This post does not exist, or you are not allowed to see it.",
+      "stats": {
+        "likes_one": "{{count}} like",
+        "likes_other": "{{count}} likes",
+        "comments_one": "{{count}} comment",
+        "comments_other": "{{count}} comments",
+        "shares_one": "{{count}} share",
+        "shares_other": "{{count}} shares",
+        "views_one": "{{count}} view",
+        "views_other": "{{count}} views"
+      },
+      "hidden": "Hidden after reports from other students. Only you can see this post until it is reviewed.",
+      "sharedLabel": "shared a post"
+    },
+    "media": {
+      "photo": "Photo {{index}} of {{count}} shared by {{name}}",
+      "video": "Video shared by {{name}}",
+      "unavailable": "This file is not available."
+    },
+    "errors": {
+      "empty": "Write something or add a photo or video.",
+      "tooLong": "Posts can be at most {{max}} characters.",
+      "fileType": "{{name}} is not a supported photo or video.",
+      "photoTooLarge": "{{name}} is too large. Photos can be at most {{mb}} MB.",
+      "videoTooLarge": "{{name}} is too large. Videos can be at most {{mb}} MB.",
+      "duplicateFile": "{{name}} has already been added.",
+      "tooManyFiles": "Add at most {{max}} photos or videos.",
+      "tooManyVideos": "Add at most {{max}} video."
+    },
+    "findStudents": "Find students",
+    "actions": {
+      "label": "Post actions",
+      "like": "Like",
+      "comment": "Comment",
+      "share": "Share",
+      "shared": "Shared",
+      "save": "Save",
+      "report": "Report",
+      "reported": "Reported"
+    },
+    "comments": {
+      "label": "Comments",
+      "loading": "Loading comments…",
+      "error": "Comments could not be loaded.",
+      "empty": "No comments yet. Be the first to comment.",
+      "loadMore": "Show more comments",
+      "fieldLabel": "Write a comment",
+      "submit": "Post comment",
+      "edit": "Edit comment",
+      "delete": "Delete comment",
+      "confirmDelete": "Delete this comment?",
+      "editLabel": "Edit your comment",
+      "edited": "Edited",
+      "emptyText": "Write a comment first."
+    },
+    "share": {
+      "title": "Share this post",
+      "textLabel": "Add your thoughts (optional)",
+      "submit": "Share now",
+      "done": "Shared. It now appears in your posts.",
+      "original": "Original post by {{name}}",
+      "unavailable": "The original post by {{name}} is no longer available."
+    },
+    "report": {
+      "title": "Report this post",
+      "reasonLabel": "Reason",
+      "detailsLabel": "Details (optional)",
+      "submit": "Send report",
+      "done": "Thank you. Your report has been sent.",
+      "hiddenDone": "Thank you. The post is now hidden while it is reviewed.",
+      "reasons": {
+        "spam": "Spam",
+        "harassment": "Harassment or bullying",
+        "hate": "Hate speech",
+        "violence": "Violence or threats",
+        "nudity": "Nudity or sexual content",
+        "misinformation": "False information",
+        "other": "Something else"
+      }
+    },
+    "hashtag": {
+      "subtitle": "Posts with this hashtag that you can see."
+    },
+    "trending": {
+      "title": "Trending hashtags",
+      "empty": "No hashtags this week yet.",
+      "posts_one": "{{count}} post",
+      "posts_other": "{{count}} posts"
+    },
+    "sidebar": "Your Public Space",
+    "allowance": {
+      "pausedTitle": "Posting starts with your first friend",
+      "usedTitle": "Daily posting limit reached"
+    },
+    "limits": {
+      "title": "Daily posting limits",
+      "friendsLabel": "Friends",
+      "todayLabel": "Posts today",
+      "none": "No posts",
+      "perDay_one": "{{count}} post a day",
+      "perDay_other": "{{count}} posts a day",
+      "unlimited": "Unlimited",
+      "friends_one": "{{count}} friend",
+      "friends_other": "{{count}} friends",
+      "friendsRange": "{{min}}–{{max}} friends",
+      "friendsOrMore_one": "{{count}}+ friend",
+      "friendsOrMore_other": "{{count}}+ friends",
+      "resets": "Today's count starts again at midnight (IST)."
+    },
+    "discover": {
+      "title": "Grow your network",
+      "description": "Add friends to post more each day, and follow students whose posts you want to see.",
+      "notifications": "Notifications",
+      "unread_one": "{{count}} new",
+      "unread_other": "{{count}} new"
+    }
+  },
+  "internships": {
+    "title": "Internships",
+    "subtitle": "Find internships that match your skills and apply in a few minutes.",
+    "searchLabel": "Search internships",
+    "searchPlaceholder": "Title, company or skill",
+    "results": "Internship results",
+    "filters": {
+      "title": "Filters",
+      "show": "Show filters",
+      "hide": "Hide filters",
+      "category": "Category",
+      "workMode": "Work mode",
+      "engagement": "Type",
+      "location": "City",
+      "minStipend": "Monthly stipend",
+      "maxDuration": "Duration",
+      "any": "Any",
+      "anyCategory": "All categories",
+      "anyCity": "Any city",
+      "stipendAtLeast": "At least {{amount}}",
+      "durationUpTo_one": "Up to {{count}} month",
+      "durationUpTo_other": "Up to {{count}} months",
+      "clear": "Clear filters"
+    },
+    "sort": {
+      "label": "Sort by",
+      "newest": "Newest first",
+      "stipend": "Highest stipend",
+      "deadline": "Closing soon"
+    },
+    "categories": {
+      "software_development": "Software development",
+      "web_development": "Web development",
+      "data_science": "Data science and analytics",
+      "design": "Design",
+      "marketing": "Marketing",
+      "content_writing": "Content writing",
+      "finance": "Finance and accounts",
+      "human_resources": "Human resources"
+    },
+    "workModes": {
+      "remote": "Work from home",
+      "office": "In office",
+      "hybrid": "Hybrid"
+    },
+    "engagements": {
+      "full_time": "Full time",
+      "part_time": "Part time"
+    },
+    "hybridIn": "{{cities}} (hybrid)",
+    "facts": {
+      "startDate": "Start date",
+      "duration": "Duration",
+      "stipend": "Stipend",
+      "deadline": "Apply by"
+    },
+    "startsImmediately": "Immediately",
+    "durationMonths_one": "{{count}} month",
+    "durationMonths_other": "{{count}} months",
+    "stipendRange": "{{min}} – {{max}} /month",
+    "stipendFixed": "{{amount}} /month",
+    "unpaid": "Unpaid",
+    "posted": "Posted {{time}}",
+    "applicants_one": "{{count}} applicant",
+    "applicants_other": "{{count}} applicants",
+    "openings_one": "{{count}} opening",
+    "openings_other": "{{count}} openings",
+    "moreSkills": "+{{count}} more",
+    "loadMore": "Show more internships",
+    "empty": "No internships match your search. Try other words or fewer filters.",
+    "error": "Internships could not be loaded.",
+    "detail": {
+      "back": "All internships",
+      "about": "About the internship",
+      "responsibilities": "Day-to-day responsibilities",
+      "skills": "Skills required",
+      "requirements": "Who can apply",
+      "perks": "Perks",
+      "aboutCompany": "About {{company}}",
+      "applyNow": "Apply now",
+      "loginToApply": "Log in to apply",
+      "applied": "You applied on {{date}}.",
+      "withdrawn": "You applied on {{date}} and later withdrew your application.",
+      "viewApplication": "View your application",
+      "closed": "This internship has been closed and no longer accepts applications.",
+      "deadlinePassed": "The deadline for this internship has passed, so it no longer accepts applications.",
+      "notFound": "This internship does not exist.",
+      "applyTitle": "Apply for this internship",
+      "applyBy": "Applications close on {{date}}",
+      "quotaNote": "Each application uses one from your plan's monthly quota.",
+      "seePlans": "See plans",
+      "closedBadge": "Not accepting applications",
+      "loadError": "This internship could not be loaded."
+    },
+    "sampleNotice": "All listings are sample data from fictional companies, for demonstration.",
+    "showing_one": "Showing {{count}} internship",
+    "showing_other": "Showing {{count}} internships",
+    "showingMore_one": "Showing the first {{count}} internship",
+    "showingMore_other": "Showing the first {{count}} internships",
+    "emptyTitle": "No matching internships",
+    "closesToday": "Closes today",
+    "closesIn_one": "Closes in {{count}} day",
+    "closesIn_other": "Closes in {{count}} days",
+    "chips": {
+      "label": "Filters in use",
+      "remove": "Remove filter: {{filter}}",
+      "clearAll": "Clear all"
+    }
+  },
+  "applications": {
+    "title": "My applications",
+    "subtitle": "Every internship you applied to, with its status and history.",
+    "filtersLabel": "Show applications",
+    "filters": {
+      "all": "All ({{count}})",
+      "submitted": "Applied ({{count}})",
+      "withdrawn": "Withdrawn ({{count}})"
+    },
+    "status": {
+      "submitted": "Applied",
+      "withdrawn": "Withdrawn"
+    },
+    "appliedOn": "Applied on {{date}}",
+    "withdrawnOn": "Withdrawn on {{date}}",
+    "listingClosed": "No longer accepting applications",
+    "viewListing": "View internship",
+    "viewDetails": "View application",
+    "empty": "You have not applied to any internships yet.",
+    "emptyFiltered": "No applications with this status.",
+    "browse": "Browse internships",
+    "loadMore": "Show more",
+    "error": "Your applications could not be loaded.",
+    "form": {
+      "title": "Apply to {{title}}",
+      "back": "Back to the internship",
+      "coverLetter": "Why should you be hired for this role?",
+      "coverLetterHint": "At least {{min}} characters. Mention the skills, projects or experience that fit this internship.",
+      "characters": "{{count}} / {{max}} characters.",
+      "availability": "Can you start immediately?",
+      "availableNow": "Yes, I can start immediately",
+      "availableLater": "No, I can start later",
+      "availabilityDetails": "When can you start?",
+      "availabilityDetailsHint": "For example: after my exams end on 15 November.",
+      "questions": "Questions from {{company}}",
+      "optional": "(optional)",
+      "submit": "Submit application",
+      "submitting": "Submitting…",
+      "errors": {
+        "coverLetterShort": "Write at least {{min}} characters about why you fit this role.",
+        "availabilityDetails": "Tell the company when you can start.",
+        "answerRequired": "Answer this question."
+      },
+      "alreadyApplied": "You have already applied to this internship.",
+      "notAccepting": "This internship no longer accepts applications.",
+      "resume": "Resume",
+      "resumeNone": "Do not attach a resume",
+      "resumeDefault": "{{title}} (default)",
+      "resumeHint": "One of your resume PDFs, sent with the application.",
+      "resumeEmpty": "You have no resume PDFs yet. You can generate one in the Resume Builder."
+    },
+    "detail": {
+      "back": "My applications",
+      "submitted": "Your application has been submitted.",
+      "withdrawnNotice": "Your application has been withdrawn.",
+      "timeline": "History",
+      "events": {
+        "submitted": "Applied",
+        "withdrawn": "Withdrawn"
+      },
+      "yourApplication": "Your application",
+      "coverLetter": "Why you should be hired",
+      "availability": "Availability",
+      "availableNow": "Can start immediately",
+      "withdraw": "Withdraw application",
+      "withdrawConfirm": "Withdraw this application? You will not be able to apply to this internship again.",
+      "withdrawYes": "Yes, withdraw",
+      "keep": "Keep my application",
+      "notFound": "This application does not exist.",
+      "resume": "Resume",
+      "resumeDownload": "Download {{file}}",
+      "resumeNone": "No resume was attached."
+    }
+  },
+  "validation": {
+    "required": "This field is required.",
+    "fullName": "Enter your full name (at least 2 characters).",
+    "username": "Use 3–30 letters, numbers, dots or underscores.",
+    "email": "Enter a valid email address.",
+    "mobile": "Enter a valid mobile number.",
+    "passwordLength": "Password must be at least 8 characters.",
+    "passwordTooLong": "Password must be at most 128 characters.",
+    "passwordLetterNumber": "Password must contain at least one letter and one number.",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordSame": "New password must be different from the current password.",
+    "maxLength": "Must be at most {{max}} characters.",
+    "graduationYear": "Enter a year between 1950 and 2100.",
+    "skills": "Add at most 30 skills, each up to 40 characters."
+  },
+  "fieldErrors": {
+    "required": "This field is required.",
+    "tooShort": "Use at least {{min}} characters.",
+    "tooLong": "Use at most {{max}} characters.",
+    "tooFew": "Add at least {{min}}.",
+    "tooMany": "Add at most {{max}}.",
+    "tooSmall": "Enter {{min}} or more.",
+    "tooBig": "Enter {{max}} or less.",
+    "email": "Enter a valid email address.",
+    "url": "Enter a full link starting with https://",
+    "format": "This is not in the right format.",
+    "choice": "Choose one of the options.",
+    "mobile": "Enter a valid mobile number, e.g. 9876543210 or +14155550123.",
+    "phone": "Enter a valid phone number, e.g. +91 98765 43210.",
+    "emailTaken": "This email address is already registered.",
+    "mobileTaken": "This mobile number is already registered.",
+    "usernameTaken": "This username is already taken.",
+    "currentPasswordIncorrect": "Current password is incorrect.",
+    "passwordSame": "New password must be different from the current password.",
+    "availabilityDetails": "Tell the company when you can start.",
+    "answerRequired": "Answer this question.",
+    "answerDuplicate": "Answer each question once.",
+    "questionUnknown": "This question is not part of the application form.",
+    "resumeChoice": "Choose one of your resume PDFs.",
+    "endBeforeStart": "The end cannot be before the start."
+  },
+  "errors": {
+    "INVALID_CREDENTIALS": "Incorrect email/mobile number or password.",
+    "ACCOUNT_LOCKED": "Too many failed attempts. Try again in {{minutes}} minute(s).",
+    "ACCOUNT_EXISTS": "An account with these details already exists.",
+    "VALIDATION_ERROR": "Please correct the highlighted fields.",
+    "RATE_LIMITED": "Too many attempts. Please wait a few minutes and try again.",
+    "SESSION_EXPIRED": "Your session has expired. Please log in again.",
+    "NETWORK_ERROR": "Unable to reach the server. Check your connection and try again.",
+    "TIMEOUT": "The server took too long to respond. Please try again.",
+    "UNKNOWN_ERROR": "Something went wrong. Please try again.",
+    "PASSWORD_RESET_DAILY_LIMIT": "You can use this option only once per day.",
+    "ACCOUNT_NOT_FOUND": "No account is registered with these details.",
+    "MOBILE_LOGIN_WINDOW": "Mobile login is allowed only between 10:00 AM and 1:00 PM IST.",
+    "OTP_INVALID": "The code is incorrect.",
+    "OTP_INVALID_one": "The code is incorrect. {{count}} attempt left.",
+    "OTP_INVALID_other": "The code is incorrect. {{count}} attempts left.",
+    "OTP_EXPIRED": "This code has expired. Send a new code.",
+    "OTP_ATTEMPTS_EXCEEDED": "Too many incorrect codes. Please start again.",
+    "OTP_ALREADY_USED": "This code has already been used. Please start again.",
+    "OTP_RESEND_COOLDOWN": "Please wait {{seconds}} seconds before asking for a new code.",
+    "OTP_RESEND_LIMIT": "No more codes can be sent for this request. Please start again.",
+    "CHALLENGE_NOT_FOUND": "This verification request has expired. Please start again.",
+    "MESSAGE_DELIVERY_FAILED": "We couldn't send the message right now. Please try again in a few minutes.",
+    "PASSWORD_CHANGE_REQUIRED": "Please change your password to continue.",
+    "EMPTY_POST": "Write something or add a photo or video.",
+    "MEDIA_TYPE_NOT_ALLOWED": "Only JPEG, PNG, GIF or WebP photos and MP4 or WebM videos can be uploaded.",
+    "MEDIA_TOO_LARGE": "The photo or video is too large.",
+    "TOO_MANY_MEDIA": "Add at most {{max}} photos or videos.",
+    "TOO_MANY_VIDEOS": "Add at most {{max}} video to a post.",
+    "DUPLICATE_MEDIA_IN_POST": "The same file was added more than once.",
+    "DUPLICATE_POST": "You already posted this in the last {{hours}} hours.",
+    "DUPLICATE_MEDIA": "You have already posted this photo or video.",
+    "INVALID_UPLOAD": "The upload could not be read. Please try again.",
+    "MEDIA_UPLOAD_FAILED": "Your photo or video could not be uploaded. Please try again.",
+    "MEDIA_NOT_FOUND": "Some of the media to remove is no longer part of this post. Reload and try again.",
+    "POST_NOT_FOUND": "This post does not exist, or you are not allowed to see it.",
+    "NOT_POST_OWNER": "You can only change your own posts.",
+    "NOTHING_TO_UPDATE": "Nothing was changed.",
+    "EDIT_WINDOW_EXPIRED": "Posts can be edited only within {{minutes}} minutes of posting. You can still change who can see it.",
+    "DELETE_WINDOW_EXPIRED": "Posts can be deleted only within {{minutes}} minutes of posting. You can still change who can see it.",
+    "EDIT_CONFLICT": "This post was changed somewhere else. Reload the page and try again.",
+    "POSTING_NEEDS_FRIENDS": "Add at least one friend to start posting in Public Space.",
+    "DAILY_POST_LIMIT": "You have reached today's posting limit ({{limit}}). Add more friends to post more often, or try again after midnight (IST).",
+    "ALREADY_SHARED": "You have already shared this post.",
+    "CANNOT_SHARE_OWN_POST": "You cannot share your own post.",
+    "SHARE_NOT_ALLOWED": "Only public posts can be shared.",
+    "ALREADY_REPORTED": "You have already reported this post. Thank you.",
+    "CANNOT_REPORT_OWN_POST": "You cannot report your own post.",
+    "COMMENT_NOT_FOUND": "This comment no longer exists.",
+    "NOT_COMMENT_OWNER": "You can only change your own comments.",
+    "CANNOT_FRIEND_SELF": "You cannot send a friend request to yourself.",
+    "ALREADY_FRIENDS": "You are already friends.",
+    "FRIEND_REQUEST_EXISTS": "You have already sent a friend request to this student.",
+    "INCOMING_FRIEND_REQUEST": "This student has already sent you a friend request. Accept it instead.",
+    "FRIEND_REQUEST_NOT_FOUND": "This friend request no longer exists.",
+    "FRIEND_REQUEST_CONFLICT": "The friend request changed while you sent yours. Please try again.",
+    "TOO_MANY_PENDING_REQUESTS": "Too many of your friend requests are still unanswered. Cancel some or wait for replies.",
+    "NOT_FRIENDS": "You are not friends with this student.",
+    "CANNOT_FOLLOW_SELF": "You cannot follow yourself.",
+    "NOTIFICATION_NOT_FOUND": "This notification no longer exists.",
+    "INVALID_CURSOR": "This page is no longer available. Reload and try again.",
+    "INTERNSHIP_NOT_FOUND": "This internship does not exist.",
+    "APPLICATIONS_CLOSED": "This internship no longer accepts applications.",
+    "ALREADY_APPLIED": "You have already applied to this internship.",
+    "APPLICATION_NOT_FOUND": "This application does not exist.",
+    "APPLICATION_ALREADY_WITHDRAWN": "You have already withdrawn this application.",
+    "PAYMENTS_NOT_CONFIGURED": "Online payments are not set up on this server yet.",
+    "PAYMENT_WINDOW_CLOSED": "Payments can be made only between 5:00 AM and 11:45 AM India time.",
+    "CHECKOUT_IN_PROGRESS": "Another payment is open. Finish or close it, then try again.",
+    "PAYMENT_NOT_FOUND": "This payment does not exist.",
+    "PAYMENT_VERIFICATION_FAILED": "This payment could not be verified, so your plan has not changed.",
+    "PAYMENT_NOT_COMPLETED": "This payment has not been completed, so your plan has not changed.",
+    "PAYMENT_MISMATCH": "This payment does not match your order, so your plan has not changed.",
+    "ORDER_ALREADY_PAID": "This order has already been paid.",
+    "PAYMENT_ALREADY_USED": "This payment has already been used for another order.",
+    "PAYMENT_GATEWAY_REJECTED": "The payment service did not accept this payment.",
+    "PAYMENT_GATEWAY_ERROR": "The payment service is not responding. Please try again in a moment.",
+    "CHECKOUT_UNAVAILABLE": "The Razorpay payment window could not be opened. Check your connection and try again.",
+    "APPLICATION_QUOTA_EXHAUSTED": "You have used all the internship applications of your plan for this billing cycle. Upgrade your plan to apply now, or wait until your quota resets.",
+    "NEXT_CYCLE_ALREADY_PAID": "Your next billing cycle is already paid. To choose another plan for it, cancel your subscription first (the advance payment is refunded).",
+    "SUBSCRIPTION_CHANGED": "Your plan has just changed because an earlier payment went through. Check your plan, then choose again.",
+    "NO_ACTIVE_PLAN": "You do not have a paid plan to cancel.",
+    "INVOICE_NOT_FOUND": "This invoice does not exist.",
+    "PREMIUM_REQUIRED": "The Resume Builder is part of the paid plans (Bronze, Silver or Gold).",
+    "RESUME_NOT_FOUND": "This resume does not exist.",
+    "RESUME_CONFLICT": "This resume was changed in another tab or on another device.",
+    "RESUME_LIMIT": "You can keep at most {{max}} resumes. Delete one to create another.",
+    "VERSION_UNCHANGED": "Nothing has changed since version {{number}}.",
+    "VERSION_LIMIT": "A resume keeps at most {{max}} versions. Delete an old one first.",
+    "VERSION_NOT_FOUND": "This version does not exist.",
+    "PHOTO_TYPE_NOT_ALLOWED": "The photo must be a JPEG or PNG image.",
+    "PHOTO_REQUIRED": "Choose a photo to upload.",
+    "PHOTO_NOT_FOUND": "You have not added a resume photo.",
+    "RESUME_NOT_READY": "Complete your resume before generating the PDF (see the checklist).",
+    "ALREADY_GENERATED": "You already have a PDF of this resume as it is now. Download it from your resume PDFs, or change the resume first.",
+    "OTP_NOT_EXPECTED": "This PDF is not waiting for a code any more. Close this window and start again.",
+    "OTP_REQUIRED": "Verify the code sent to your email before paying.",
+    "GENERATION_EXPIRED": "The time to pay for this PDF has run out. Start again to get a new code.",
+    "RESUME_ALREADY_PAID": "This resume PDF has already been paid for.",
+    "GENERATION_IN_PROGRESS": "Another resume PDF is being generated. Finish or cancel it first.",
+    "GENERATION_NOT_FOUND": "This resume PDF does not exist.",
+    "PDF_NOT_READY": "This resume PDF has not been generated yet.",
+    "UNAUTHENTICATED": "Please log in to continue.",
+    "BAD_REQUEST": "This request could not be processed.",
+    "NOT_FOUND": "What you were looking for was not found.",
+    "INVALID_ID": "This link is not valid.",
+    "INVALID_JSON": "The request could not be read. Please try again.",
+    "PAYLOAD_TOO_LARGE": "What you sent is too large.",
+    "UNSAFE_INPUT": "The request contained data that is not allowed.",
+    "DUPLICATE_RESOURCE": "This already exists.",
+    "ORIGIN_NOT_ALLOWED": "This request was blocked for your security.",
+    "INTERNAL_ERROR": "Something went wrong on our side. Please try again later.",
+    "FRENCH_VERIFICATION_REQUIRED": "French can be chosen only after a code sent to your email is verified.",
+    "LANGUAGE_ALREADY_ACTIVE": "French is already your language.",
+    "FRENCH_REQUEST_LIMIT": "You have asked for too many French codes. Try again in {{minutes}} minute(s).",
+    "FRENCH_REQUEST_IN_PROGRESS": "A French code is already being sent. Check your email in a moment.",
+    "SIMULATED_PAYMENT": "This is a simulated demo record. It cannot be paid or verified, and no money was charged."
+  },
+  "social": {
+    "people": {
+      "title": "Friends and people",
+      "subtitle": "Find students, answer friend requests and see who you follow.",
+      "tabsLabel": "People",
+      "tabs": {
+        "discover": "Find students",
+        "requests": "Requests",
+        "friends": "Friends",
+        "following": "Following",
+        "followers": "Followers"
+      },
+      "searchLabel": "Search students",
+      "searchPlaceholder": "Name or username",
+      "suggestions": "Suggested students",
+      "results": "Search results",
+      "noResults": "No students match your search.",
+      "noSuggestions": "No suggestions right now.",
+      "incoming": "Requests to you",
+      "outgoing": "Requests you sent",
+      "noIncoming": "No friend requests waiting for you.",
+      "noOutgoing": "You have no pending requests.",
+      "noFriends": "No friends yet. Find students and send friend requests.",
+      "noFollowing": "You are not following anyone yet.",
+      "noFollowers": "Nobody follows you yet.",
+      "error": "This list could not be loaded.",
+      "loadMore": "Load more"
+    },
+    "actions": {
+      "addFriend": "Add friend",
+      "cancelRequest": "Cancel request",
+      "accept": "Accept",
+      "decline": "Decline",
+      "friends": "Friends",
+      "unfriend": "Unfriend",
+      "confirmUnfriend": "Remove {{name}} from your friends?",
+      "follow": "Follow"
+    },
+    "followsYou": "Follows you",
+    "counts": {
+      "friends_one": "{{count}} friend",
+      "friends_other": "{{count}} friends",
+      "followers_one": "{{count}} follower",
+      "followers_other": "{{count}} followers",
+      "following": "{{count}} following"
+    },
+    "profile": {
+      "notFound": "No student with this username.",
+      "thisIsYou": "This is how other students see your profile.",
+      "editProfile": "Edit my profile",
+      "posts": "Posts"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Likes, comments, shares, mentions and friend requests.",
+    "filtersLabel": "Show notifications",
+    "all": "All",
+    "unread": "Unread",
+    "markAllRead": "Mark all as read",
+    "markRead": "Mark as read",
+    "markUnread": "Mark as unread",
+    "empty": "You're all caught up. Nothing new here.",
+    "emptyUnread": "No unread notifications.",
+    "error": "Notifications could not be loaded.",
+    "loadMore": "Load more",
+    "unreadLabel": "Unread",
+    "types": {
+      "like": "{{name}} liked your post",
+      "comment": "{{name}} commented on your post",
+      "share": "{{name}} shared your post",
+      "mention": "{{name}} mentioned you in a post",
+      "mentionComment": "{{name}} mentioned you in a comment",
+      "friend_request": "{{name}} sent you a friend request",
+      "friend_accept": "{{name}} accepted your friend request"
+    }
+  },
+  "plans": {
+    "title": "Plans and pricing",
+    "subtitle": "Choose how many internships you can apply to each month. Every paid plan lasts one month.",
+    "testMode": "Payments use Razorpay Test Mode: no real money is charged.",
+    "perMonth": "/month",
+    "free": "Free",
+    "applications_one": "{{count}} internship application a month",
+    "applications_other": "{{count}} internship applications a month",
+    "unlimited": "Unlimited internship applications",
+    "validity": "Valid for one month from payment",
+    "choose": "Choose {{plan}}",
+    "starting": "Opening checkout…",
+    "verifying": "Confirming payment…",
+    "loginToChoose": "Log in to choose",
+    "yourPlan": "Your plan",
+    "activeUntil": "Active until {{date}} IST",
+    "current": {
+      "heading": "Your current plan",
+      "free": "{{plan}}: {{applications}}.",
+      "active": "{{plan}}: {{applications}}, active until {{date}} IST.",
+      "expired": "Your {{lastPlan}} plan ended on {{date}} IST, so you are on the Free plan.",
+      "status": {
+        "active": "Active",
+        "cancelled": "Cancelled"
+      },
+      "cycle": "Billing cycle: {{start}} to {{end}} IST.",
+      "renewal": "Renewal date: {{date}} IST. To continue, renew here before then (payments 5:00–11:45 AM IST).",
+      "cancelledNote": "Cancelled: your {{plan}} plan stays active until {{date}} IST, then you move to the Free plan.",
+      "nextCycle": "Next billing cycle already paid: {{plan}}, {{start}} to {{end}} IST.",
+      "billingLink": "Billing history and invoices",
+      "daysLeft_one": "{{count}} day left in this billing cycle",
+      "daysLeft_other": "{{count}} days left in this billing cycle",
+      "cycleShort": "{{start}} – {{end}}",
+      "demoNote": "Demo subscription: this plan was set up by the demo seed script with simulated payments. It is not a real purchase, and no money was charged."
+    },
+    "window": {
+      "open": "Payments are open until 11:45 AM India time today.",
+      "openAlways": "Payments are open.",
+      "closed": "Payments can be made only between 5:00 AM and 11:45 AM India time. They open again on {{date}} IST.",
+      "disabled": "Online payments are not set up on this server yet, so paid plans cannot be bought right now."
+    },
+    "result": {
+      "paid": "Payment successful. Your {{plan}} plan is active until {{date}} IST.",
+      "transaction": "Transaction ID: {{id}}. A confirmation has been sent to your email.",
+      "cancelled": "Payment cancelled. You have not been charged.",
+      "failed": "The payment did not go through. You have not been charged.",
+      "failedReason": "Reason: {{reason}}",
+      "attemptFailed": "That attempt failed. You can try again in the payment window.",
+      "dismiss": "Dismiss",
+      "upgraded": "Payment successful. You are now on the {{plan}} plan until {{date}} IST; your renewal date has not changed.",
+      "renewed": "Payment successful. Your {{plan}} plan is renewed for the next billing cycle, {{start}} to {{end}} IST.",
+      "downgraded": "Payment successful. Your plan changes to {{plan}} on {{date}} IST.",
+      "refunded": "Your plan had already changed when this payment arrived, so it was not used. {{amount}} has been refunded.",
+      "refundRequested": "Your plan had already changed when this payment arrived, so it was not used. A refund of {{amount}} has been requested.",
+      "transactionOnly": "Transaction ID: {{id}}.",
+      "invoice": "Download invoice {{number}}"
+    },
+    "error": "The plans could not be loaded.",
+    "quota": {
+      "label": "Internship applications",
+      "usedMonth": "{{used}} of {{limit}} used this month",
+      "usedCycle": "{{used}} of {{limit}} used this billing cycle",
+      "unlimited_one": "Unlimited · {{count}} sent this billing cycle",
+      "unlimited_other": "Unlimited · {{count}} sent this billing cycle",
+      "remaining_one": "{{count}} application left",
+      "remaining_other": "{{count}} applications left",
+      "none": "None left",
+      "resets": "Resets on {{date}} IST",
+      "exhausted": "You have used all the internship applications of your {{plan}} plan for now. Upgrade your plan to apply now, or wait until {{date}} IST.",
+      "seePlans": "See plans"
+    },
+    "actions": {
+      "upgrade": "Upgrade now · {{amount}}",
+      "renewal": "Renew for next month · {{amount}}",
+      "downgrade": "Switch on {{date}} · {{amount}}"
+    },
+    "notes": {
+      "upgrade_one": "You pay only the difference for the {{count}} day left in this billing cycle ({{difference}} a month more). Your renewal date stays the same.",
+      "upgrade_other": "You pay only the difference for the {{count}} days left in this billing cycle ({{difference}} a month more). Your renewal date stays the same.",
+      "renewal": "Paid in advance for {{start}} to {{end}} IST.",
+      "downgrade": "Your {{current}} plan continues until {{date}} IST; {{plan}} starts then.",
+      "NEXT_CYCLE_ALREADY_PAID": "Your next billing cycle is already paid."
+    },
+    "cancel": {
+      "button": "Cancel subscription",
+      "title": "Cancel your subscription?",
+      "keepsCycle": "Your {{plan}} plan stays active until {{date}} IST. The billing cycle in progress is not refunded, because its applications may already have been used.",
+      "refundsNext": "The {{amount}} you paid in advance for the next billing cycle ({{plan}}) will be refunded.",
+      "confirm": "Yes, cancel",
+      "keep": "Keep my plan",
+      "cancelling": "Cancelling…",
+      "done": "Your subscription has been cancelled. Your {{plan}} plan stays active until {{date}} IST.",
+      "refunded": "{{amount}} for the next billing cycle has been refunded (refund ID {{id}}).",
+      "refundPending": "A refund of {{amount}} for the next billing cycle has been requested. You will get an email when it is complete."
+    },
+    "bestValue": "Best value",
+    "taglines": {
+      "free": "To get started",
+      "bronze": "For a focused search",
+      "silver": "For an active search",
+      "gold": "For applying without limits"
+    },
+    "features": {
+      "resumeBuilder": "Resume Builder, with PDFs at ₹50 each",
+      "community": "Public Space and internship search"
+    }
+  },
+  "payments": {
+    "history": {
+      "title": "Payment history",
+      "empty": "You have not made any payments yet.",
+      "error": "Your payments could not be loaded.",
+      "plan": "{{plan}} plan",
+      "started": "Started {{date}}",
+      "paid": "Paid {{date}}",
+      "transaction": "Transaction ID: {{id}}",
+      "validity": "Valid {{start}} – {{end}}",
+      "loadMore": "Show more",
+      "refund": {
+        "processed": "Refunded {{amount}} on {{date}}",
+        "pending": "Refund of {{amount}} requested",
+        "failed": "Refund of {{amount}} failed. Please contact support."
+      },
+      "invoice": "Invoice {{number}}",
+      "resume": "Resume PDF",
+      "description": "Every checkout you started, with its result."
+    },
+    "status": {
+      "created": "Waiting for payment",
+      "paid": "Paid",
+      "cancelled": "Cancelled",
+      "failed": "Failed",
+      "expired": "Expired",
+      "refunded": "Refunded"
+    },
+    "testCheckout": {
+      "title": "Test payment",
+      "description": "This server uses a test payment gateway instead of Razorpay. Choose what happens to this payment.",
+      "pay": "Pay {{amount}}",
+      "decline": "Decline payment",
+      "declined": "Payment declined. You can try again or close this window.",
+      "close": "Close"
+    }
+  },
+  "billing": {
+    "title": "Billing and invoices",
+    "subtitle": "Your invoices, the history of your plan and every payment.",
+    "backToPlans": "Plans and pricing",
+    "items": {
+      "new": "{{plan}} plan, 1 month",
+      "renewal": "{{plan}} plan renewal, 1 month",
+      "upgrade": "Upgrade from {{fromPlan}} to {{plan}} for the rest of the billing cycle",
+      "downgrade": "{{plan}} plan from the next billing cycle, 1 month",
+      "resume": "Resume PDF: {{title}}"
+    },
+    "invoices": {
+      "title": "Invoices",
+      "empty": "You have no invoices yet. An invoice is issued for every successful payment.",
+      "error": "Your invoices could not be loaded.",
+      "number": "Invoice {{number}}",
+      "issued": "Issued {{date}}",
+      "period": "Billing period {{start}} to {{end}}",
+      "download": "Download PDF",
+      "downloadLabel": "Download invoice {{number}} as a PDF",
+      "loadMore": "Show more",
+      "status": {
+        "paid": "Paid",
+        "refunded": "Refunded"
+      },
+      "description": "Every verified payment gets a numbered invoice.",
+      "view": "View",
+      "viewLabel": "View invoice {{number}}"
+    },
+    "history": {
+      "title": "Subscription history",
+      "empty": "No paid plans yet. You are on the Free plan.",
+      "error": "Your subscription history could not be loaded.",
+      "events": {
+        "new": "Bought the {{plan}} plan",
+        "renewal": "Renewed the {{plan}} plan for the next billing cycle",
+        "upgrade": "Upgraded from {{fromPlan}} to {{plan}}",
+        "downgrade": "Switched to {{plan}} for the next billing cycle",
+        "cancelled": "Cancelled the subscription"
+      },
+      "period": "{{start}} to {{end}}",
+      "cancelledDetail": "The {{plan}} plan stays active until {{date}} IST.",
+      "payment": "{{amount}} · Transaction ID {{id}}",
+      "invoice": "Invoice {{number}}",
+      "status": {
+        "current": "Current",
+        "upcoming": "Starts later",
+        "ended": "Ended",
+        "upgraded": "Upgraded",
+        "cancelled": "Cancelled and refunded"
+      },
+      "description": "Plan purchases, renewals, upgrades, downgrades and cancellations."
+    },
+    "comparePlans": "Compare plans",
+    "demoNotice": "Demo account: the plan, invoices and payments on this page are simulated records created for presentations. None of them is a real transaction, and no money was charged.",
+    "overview": {
+      "label": "Plan overview",
+      "plan": "Current plan",
+      "status": {
+        "active": "Active",
+        "cancelled": "Cancelled",
+        "expired": "Expired",
+        "free": "Free plan"
+      },
+      "renewal": "Renewal date",
+      "ends": "Plan ends",
+      "noRenewal": "No renewal",
+      "applications": "Applications this cycle",
+      "unlimited": "Unlimited",
+      "used": "{{used}} of {{limit}} used",
+      "cycle": "Billing cycle",
+      "freeCycle": "Counted per calendar month"
+    },
+    "invoice": {
+      "preview": "Invoice preview",
+      "print": "Print",
+      "close": "Close the invoice",
+      "demoBanner": "Simulated demo invoice: not a real transaction. No payment was made.",
+      "seller": "Internships, applications and a student community",
+      "title": "Invoice",
+      "date": "Invoice date: {{date}}",
+      "billedTo": "Billed to",
+      "description": "Description",
+      "amount": "Amount",
+      "total": "Total paid",
+      "totalSimulated": "Total (simulated)",
+      "paymentDetails": "Payment details",
+      "status": "Status",
+      "statusPaid": "Paid",
+      "statusSimulated": "Simulated demo record (no money was charged)",
+      "paidOn": "Paid on",
+      "method": "Payment method",
+      "transaction": "Transaction ID",
+      "order": "Order ID",
+      "receipt": "Receipt number",
+      "methods": {
+        "card": "Card",
+        "upi": "UPI",
+        "netbanking": "Netbanking",
+        "wallet": "Wallet",
+        "emi": "EMI",
+        "simulated": "Simulated (demo record)",
+        "razorpay": "Razorpay"
+      },
+      "footer": "Paid through Razorpay Test Mode: no real money was charged.",
+      "footerDemo": "Demo data created by the InternConnect seed script for presentations. It is not a Razorpay payment and not a real sale."
+    }
+  },
+  "resume": {
+    "choose": "Choose…",
+    "list": {
+      "title": "Resume Builder",
+      "subtitle": "Build ATS-friendly resumes, keep versions of them, and use them for your applications.",
+      "error": "Your resumes could not be loaded.",
+      "mine": "My resumes ({{count}} of {{max}})",
+      "empty": "You have no resumes yet.",
+      "noName": "No name yet",
+      "updated": "Edited {{date}}",
+      "versions_one": "{{count}} saved version",
+      "versions_other": "{{count}} saved versions",
+      "ready": "Ready",
+      "missing_one": "{{count}} thing missing",
+      "missing_other": "{{count}} things missing",
+      "deleteConfirm": "Delete “{{title}}” and all its versions? This cannot be undone.",
+      "deleteYes": "Yes, delete",
+      "edit": "Edit",
+      "open": "Open",
+      "duplicate": "Duplicate",
+      "duplicateLabel": "Duplicate {{title}}",
+      "delete": "Delete",
+      "deleteLabel": "Delete {{title}}"
+    },
+    "premium": {
+      "title": "The Resume Builder is a Premium feature",
+      "description": "Creating and editing resumes is included in the Bronze, Silver and Gold plans.",
+      "keep": "Your existing resumes stay here: you can still open and delete them.",
+      "seePlans": "See plans"
+    },
+    "create": {
+      "title": "Start a new resume",
+      "name": "Resume name",
+      "nameHint": "Only you see it, e.g. “Frontend roles”.",
+      "start": "Start from",
+      "profile": "My profile (name, contact details, headline, college and skills)",
+      "blank": "An empty resume",
+      "submit": "Create resume",
+      "titleRequired": "Give the resume a name.",
+      "limit": "You have {{max}} resumes, the most you can keep. Delete one to start another."
+    },
+    "editor": {
+      "back": "All resumes",
+      "heading": "Edit resume {{title}}",
+      "name": "Resume name",
+      "readOnly": "Your plan has ended, so this resume is read-only. Choose a paid plan to edit it again.",
+      "conflictLoss": "Reloading shows the latest saved draft; changes made here since the last save are lost.",
+      "reload": "Reload the resume",
+      "tools": "Resume tools",
+      "notFound": "This resume does not exist.",
+      "views": "Resume views",
+      "view": {
+        "edit": "Edit",
+        "preview": "Design and preview"
+      }
+    },
+    "save": {
+      "saving": "Saving…",
+      "dirty": "Unsaved changes",
+      "invalid": "Fix the highlighted fields to save",
+      "error": "Not saved: {{reason}}",
+      "retry": "Try again",
+      "saved": "All changes saved",
+      "savedAt": "Saved at {{time}}"
+    },
+    "errors": {
+      "email": "Enter a valid email address.",
+      "phone": "Enter a valid phone number, e.g. +91 98765 43210.",
+      "url": "Enter a full link starting with https://",
+      "month": "Use a month like 2026-06.",
+      "endBeforeStart": "The end cannot be before the start."
+    },
+    "tags": {
+      "placeholder": "Type and press Enter",
+      "hint": "{{count}} of {{max}} added. Press Enter or a comma after each one.",
+      "full": "You have added {{max}}",
+      "remove": "Remove {{value}}"
+    },
+    "entry": {
+      "moveUp": "Move {{entry}} up",
+      "moveDown": "Move {{entry}} down",
+      "remove": "Remove {{entry}}",
+      "full": "At most {{max}}",
+      "count_one": "{{count}} entry",
+      "count_other": "{{count}} entries"
+    },
+    "readiness": {
+      "title": "Ready to generate?",
+      "ready": "Everything an ATS-friendly resume needs is filled in.",
+      "missing_one": "{{count}} thing to complete:",
+      "missing_other": "{{count}} things to complete:"
+    },
+    "problems": {
+      "fullName": "Add your full name",
+      "email": "Add an email address",
+      "phone": "Add a phone number",
+      "objective": "Write a career objective of at least {{min}} characters",
+      "education": "Add at least one education entry",
+      "skills": "Add at least {{min}} skills",
+      "institution": "Add the institution",
+      "degree": "Add the degree",
+      "startDate": "Add the start month",
+      "endDate": "Add the end month, or mark it as current",
+      "title": "Add the title",
+      "organization": "Add the organization",
+      "projectName": "Add the project name",
+      "projectDescription": "Describe the project",
+      "certificateName": "Add the certificate name",
+      "issuer": "Add who issued it",
+      "achievement": "Describe the achievement",
+      "language": "Add the language",
+      "proficiency": "Choose your level",
+      "link": "Add the link",
+      "referenceName": "Add the name",
+      "referenceContact": "Add an email or a phone number",
+      "latinOnly": "Use Latin letters only: the PDF cannot print {{characters}}",
+      "photoFormat": "Upload your photo again as a JPEG or PNG (the PDF cannot show WebP images), or hide it"
+    },
+    "personal": {
+      "title": "Name and contact details",
+      "description": "How employers can reach you.",
+      "fields": {
+        "fullName": "Full name",
+        "headline": "Headline",
+        "email": "Email",
+        "phone": "Phone",
+        "location": "City"
+      }
+    },
+    "objective": {
+      "title": "Career objective",
+      "description": "Two or three sentences about what you want to do and what you bring.",
+      "label": "Your career objective",
+      "hint": "{{count}} of {{max}} characters (at least 50)."
+    },
+    "skills": {
+      "title": "Skills",
+      "description": "Add at least three. Use the words that appear in the internships you want.",
+      "label": "Skills"
+    },
+    "sections": {
+      "education": {
+        "title": "Education",
+        "description": "Schools, colleges and courses, most recent first.",
+        "empty": "No education added yet.",
+        "entry": "Education {{number}}",
+        "add": "Add education",
+        "fields": {
+          "institution": "Institution",
+          "degree": "Degree or course",
+          "fieldOfStudy": "Field of study",
+          "grade": "Grade or CGPA",
+          "startDate": "Start month",
+          "endDate": "End month",
+          "current": "I study here now",
+          "description": "Details (optional)"
+        }
+      },
+      "experience": {
+        "title": "Work experience",
+        "description": "Jobs, part-time work and freelancing.",
+        "empty": "No work experience added yet.",
+        "entry": "Job {{number}}",
+        "add": "Add a job",
+        "fields": {
+          "title": "Job title",
+          "organization": "Company or organization",
+          "location": "Location",
+          "startDate": "Start month",
+          "endDate": "End month",
+          "current": "I work here now",
+          "description": "What you did"
+        }
+      },
+      "internships": {
+        "title": "Internships",
+        "description": "Internships you have done or are doing.",
+        "empty": "No internships added yet.",
+        "entry": "Internship {{number}}",
+        "add": "Add an internship",
+        "fields": {
+          "title": "Role",
+          "organization": "Company",
+          "location": "Location",
+          "startDate": "Start month",
+          "endDate": "End month",
+          "current": "I am doing this internship now",
+          "description": "What you did"
+        }
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "College, personal or open-source projects.",
+        "empty": "No projects added yet.",
+        "entry": "Project {{number}}",
+        "add": "Add a project",
+        "fields": {
+          "name": "Project name",
+          "role": "Your role",
+          "link": "Link (optional)",
+          "startDate": "Start month",
+          "endDate": "End month",
+          "current": "Still working on it",
+          "technologies": "Technologies used",
+          "description": "What it does and what you built"
+        }
+      },
+      "certifications": {
+        "title": "Certifications",
+        "description": "Courses and certificates.",
+        "empty": "No certifications added yet.",
+        "entry": "Certification {{number}}",
+        "add": "Add a certification",
+        "fields": {
+          "name": "Certificate",
+          "issuer": "Issued by",
+          "issueDate": "Issue month",
+          "credentialUrl": "Credential link (optional)"
+        }
+      },
+      "achievements": {
+        "title": "Achievements",
+        "description": "Awards, competitions and scholarships.",
+        "empty": "No achievements added yet.",
+        "entry": "Achievement {{number}}",
+        "add": "Add an achievement",
+        "fields": {
+          "title": "Achievement",
+          "date": "Month",
+          "description": "Details (optional)"
+        }
+      },
+      "languages": {
+        "title": "Languages",
+        "description": "Languages you speak, and how well.",
+        "empty": "No languages added yet.",
+        "entry": "Language {{number}}",
+        "add": "Add a language",
+        "fields": {
+          "language": "Language",
+          "proficiency": "Level"
+        }
+      },
+      "links": {
+        "title": "Social links",
+        "description": "LinkedIn, GitHub, a portfolio or a website.",
+        "empty": "No links added yet.",
+        "entry": "Link {{number}}",
+        "add": "Add a link",
+        "fields": {
+          "kind": "Type",
+          "url": "Link"
+        }
+      },
+      "references": {
+        "title": "References",
+        "description": "People who can recommend you (optional).",
+        "empty": "No references added yet.",
+        "entry": "Reference {{number}}",
+        "add": "Add a reference",
+        "fields": {
+          "name": "Name",
+          "designation": "Designation",
+          "organization": "Organization",
+          "email": "Email",
+          "phone": "Phone"
+        }
+      }
+    },
+    "options": {
+      "proficiency": {
+        "basic": "Basic",
+        "conversational": "Conversational",
+        "professional": "Professional",
+        "fluent": "Fluent",
+        "native": "Native"
+      },
+      "kind": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "portfolio": "Portfolio",
+        "website": "Website",
+        "twitter": "X (Twitter)",
+        "other": "Other"
+      }
+    },
+    "photo": {
+      "title": "Photo",
+      "alt": "Your resume photo",
+      "choose": "Choose a photo",
+      "upload": "Upload a photo",
+      "change": "Change photo",
+      "remove": "Remove photo",
+      "hint": "One photo for all your resumes: JPEG or PNG (what the PDF can show), up to {{max}} MB.",
+      "type": "Choose a JPEG or PNG image.",
+      "size": "The photo can be at most {{max}} MB.",
+      "include": "Show my photo on this resume"
+    },
+    "versions": {
+      "title": "Versions",
+      "description": "Save the resume as it is now, to come back to it later (up to {{max}}).",
+      "label": "Label (optional)",
+      "labelPlaceholder": "e.g. Sent to Nimbus Labs",
+      "save": "Save as a version",
+      "saveFirst": "Fix the highlighted fields first, so the draft can be saved.",
+      "saved": "Saved as version {{number}}.",
+      "restored": "Version {{number}} is now your draft.",
+      "empty": "No versions saved yet.",
+      "number": "Version {{number}}",
+      "restoreConfirm": "Replace your draft with version {{number}}? Save the draft as a version first if you want to keep it.",
+      "deleteConfirm": "Delete version {{number}}? This cannot be undone.",
+      "restoreYes": "Yes, restore",
+      "deleteYes": "Yes, delete",
+      "view": "View",
+      "restore": "Restore",
+      "delete": "Delete",
+      "deleteLabel": "Delete version {{number}}",
+      "dialogTitle": "Version {{number}}",
+      "close": "Close",
+      "noName": "No name",
+      "current": "now",
+      "restoreThis": "Restore this version"
+    },
+    "preview": {
+      "description": "A live preview of your PDF: it changes as you type. The PDF is made from the saved resume.",
+      "pageLabel": "Resume preview",
+      "noName": "Your name",
+      "photo": "Your photo",
+      "live": "Live preview"
+    },
+    "design": {
+      "title": "Design",
+      "description": "All templates are single-column with standard headings, so applicant tracking systems (ATS) can read them.",
+      "template": "Template",
+      "templates": {
+        "classic": {
+          "name": "Classic",
+          "description": "Centred name, dark headings over a coloured line."
+        },
+        "modern": {
+          "name": "Modern",
+          "description": "A coloured bar at the top, name and headings in colour."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Smaller text and spacing, to fit more on a page."
+        }
+      },
+      "color": "Accent colour",
+      "colors": {
+        "blue": "Blue",
+        "teal": "Teal",
+        "green": "Green",
+        "maroon": "Maroon",
+        "purple": "Purple",
+        "charcoal": "Charcoal"
+      },
+      "font": "Font",
+      "fonts": {
+        "sans": "Sans-serif (Helvetica)",
+        "serif": "Serif (Times)"
+      },
+      "atsNote": "Every template is single-column and ATS-friendly, so applicant tracking systems can read it."
+    },
+    "generate": {
+      "title": "Resume PDF",
+      "description": "{{price}} for each PDF, paid with Razorpay. Download it again any time for free.",
+      "notReady": "Complete the checklist before generating the PDF.",
+      "makeDefault": "Make it my default resume",
+      "start": "Generate PDF ({{price}})",
+      "steps": "We email you a code, then you pay. The PDF is made only after the payment is verified.",
+      "saveFirst": "Fix the highlighted fields first, so the draft can be saved.",
+      "dialogTitle": "Generate your resume PDF",
+      "close": "Close",
+      "codeSent": "We sent a 6-digit code to {{destination}}.",
+      "codeDescription": "Enter it to unlock the payment. It expires in {{minutes}} minutes.",
+      "verifyCode": "Verify code",
+      "verified": "Code verified.",
+      "payDescription": "Pay {{amount}} to generate the PDF of “{{title}}”. Start the payment before {{time}}.",
+      "pay": "Pay {{amount}}",
+      "paying": "Waiting for the payment…",
+      "verifying": "Checking the payment…",
+      "payCancelled": "The payment was cancelled. You can try again.",
+      "payFailed": "The payment failed. You can try again, for example with another method.",
+      "attemptFailed": "The payment did not go through: {{reason}}. You can try again in the same window.",
+      "testMode": "Razorpay Test Mode: no real money is charged.",
+      "generating": "Your payment went through and the PDF is being made. It appears in your resume PDFs in a minute.",
+      "ready": "Your resume PDF is ready.",
+      "emailed": "We also emailed it to you with the invoice.",
+      "refunded": "This PDF had already been paid for, so the second payment is refunded.",
+      "download": "Download {{file}}",
+      "expired": "This request has ended. Close this window and generate the PDF again.",
+      "perPdf": "{{price}} per PDF",
+      "progress": "Steps to get the PDF",
+      "step": {
+        "code": "Email code",
+        "pay": "Pay {{amount}}",
+        "download": "Download"
+      },
+      "stepDone": "done",
+      "premiumRequired": "Generating PDFs needs a paid plan (Bronze, Silver or Gold)."
+    },
+    "pdfs": {
+      "title": "My resume PDFs",
+      "description": "Every PDF you have paid for. Download them again any time; the default one is shown on your profile and suggested when you apply.",
+      "empty": "No PDFs yet. Open a resume, complete the checklist and generate its PDF.",
+      "error": "Your resume PDFs could not be loaded.",
+      "generated": "Generated {{date}}",
+      "download": "Download",
+      "downloadLabel": "Download the PDF of {{title}}",
+      "default": "Default",
+      "makeDefault": "Make default",
+      "makeDefaultLabel": "Make the PDF of {{title}} my default resume",
+      "clearDefault": "Remove as default",
+      "loadMore": "Show more",
+      "template": "{{name}} template",
+      "pages_one": "{{count}} page",
+      "pages_other": "{{count}} pages",
+      "downloads_one": "downloaded once",
+      "downloads_other": "downloaded {{count}} times",
+      "paid": "Paid {{amount}} · Transaction ID {{id}}",
+      "paidNoId": "Paid {{amount}}",
+      "invoice": "Invoice {{number}}"
+    },
+    "downloads": {
+      "title": "Download history",
+      "empty": "Your resume PDFs have not been downloaded yet.",
+      "error": "The download history could not be loaded.",
+      "from": "{{browser}} on {{os}} · IP {{ip}}",
+      "loadMore": "Show more"
+    },
+    "completion": {
+      "title": "Resume strength",
+      "percent": "{{percent}}% complete",
+      "next": "Recommended next",
+      "levels": {
+        "starting": "Just getting started: add the basics below.",
+        "shaping": "Taking shape: a few more sections will make it stand out.",
+        "almost": "Almost there: add the last details.",
+        "complete": "Complete: every recommended section is filled in."
+      },
+      "items": {
+        "fullName": "Add your full name",
+        "contact": "Add your email and phone number",
+        "headline": "Add a headline, e.g. Frontend developer",
+        "location": "Add your city",
+        "objective": "Write a career objective of at least 50 characters",
+        "education": "Add your education",
+        "skills": "Add at least 3 skills",
+        "experience": "Add an internship or a job",
+        "projects": "Add a project",
+        "links": "Add your LinkedIn, GitHub or portfolio link",
+        "certifications": "Add a certification",
+        "achievements": "Add an achievement",
+        "languages": "Add the languages you speak"
+      }
+    },
+    "nav": {
+      "label": "Resume sections",
+      "state": {
+        "done": "filled in",
+        "attention": "needs attention",
+        "empty": "not started"
+      }
+    }
+  },
+  "security": {
+    "title": "Security and sign-ins",
+    "subtitle": "Where your account is signed in, the devices it knows, and the history of sign-ins, password resets and language changes.",
+    "tabsLabel": "Security sections",
+    "tabs": {
+      "sessions": "Sessions",
+      "devices": "Devices",
+      "logins": "Login history",
+      "resets": "Password resets",
+      "languages": "Language history"
+    },
+    "time": "{{time}} IST",
+    "on": "{{browser}} on {{os}}",
+    "ip": "IP {{ip}}",
+    "location": "Near {{location}}",
+    "unknown": "Unknown",
+    "deviceTypes": {
+      "desktop": "Computer",
+      "mobile": "Phone",
+      "tablet": "Tablet",
+      "tv": "TV",
+      "unknown": "Unknown device"
+    },
+    "thisDevice": "This device",
+    "cancel": "Cancel",
+    "loadMore": "Show more",
+    "error": "This list could not be loaded.",
+    "retry": "Try again",
+    "sessions": {
+      "description": "Browsers where your account is signed in now. Signing one out ends that session at once.",
+      "started": "Signed in {{time}}",
+      "lastActive": "last active {{time}}",
+      "signOut": "Sign out",
+      "signOutLabel": "Sign out the {{name}} session",
+      "signOutOthers": "Sign out of all other sessions",
+      "confirmOthers": "Sign out everywhere except this browser?",
+      "confirmYes": "Yes, sign out",
+      "signedOut": "That session has been signed out.",
+      "signedOutOthers_zero": "There were no other sessions to sign out.",
+      "signedOutOthers_one": "{{count}} other session has been signed out.",
+      "signedOutOthers_other": "{{count}} other sessions have been signed out.",
+      "onlyThis": "No sessions to show."
+    },
+    "devices": {
+      "description": "Browsers your account has been used from. A device becomes trusted when an email code is confirmed on it. Removing a device signs it out, and its next sign-in counts as a new device.",
+      "trusted": "Trusted",
+      "trustedSince": "Trusted since {{time}}",
+      "notTrusted": "Not trusted",
+      "firstSeen": "First used {{time}}",
+      "lastSeen": "last used {{time}}",
+      "remove": "Remove",
+      "removeLabel": "Remove the {{name}} device",
+      "confirmRemove": "Remove this device? It will be signed out.",
+      "confirmYes": "Yes, remove",
+      "removed_zero": "The device has been removed.",
+      "removed_one": "The device has been removed and {{count}} session signed out.",
+      "removed_other": "The device has been removed and {{count}} sessions signed out.",
+      "empty": "No devices yet."
+    },
+    "logins": {
+      "description": "Every sign-in attempt on your account, successful or not, newest first.",
+      "empty": "No sign-ins recorded yet.",
+      "events": {
+        "register": "Account created",
+        "login": "Login",
+        "otp_verification": "Email code check"
+      },
+      "results": {
+        "success": "Successful",
+        "failure": "Failed",
+        "otp_required": "Code sent"
+      },
+      "reasons": {
+        "invalid_password": "Wrong password",
+        "account_locked": "Account temporarily locked",
+        "outside_mobile_window": "Phone login outside 10:00 AM – 1:00 PM IST",
+        "otp_delivery_failed": "The code email could not be sent",
+        "chrome_email_otp": "Google Chrome needs an email code",
+        "otp_invalid": "Wrong code",
+        "otp_expired": "The code had expired",
+        "otp_attempts_exceeded": "Too many wrong codes"
+      },
+      "verifiedByEmail": "Verified with an email code",
+      "new": {
+        "device": "New device",
+        "browser": "New browser",
+        "ip": "New IP address"
+      }
+    },
+    "resets": {
+      "description": "Forgot-password requests for your account, newest first.",
+      "empty": "No password reset requests.",
+      "method": {
+        "email": "Code by email to {{destination}}",
+        "mobile": "Code by SMS to {{destination}}"
+      },
+      "status": {
+        "pending": "Code sent, not entered yet",
+        "verified": "Code verified",
+        "expired": "Code expired",
+        "locked": "Too many wrong codes",
+        "rejected": "Request refused",
+        "not_sent": "Code not sent"
+      },
+      "outcome": {
+        "in_progress": "In progress",
+        "completed": "New password sent",
+        "failed": "Failed"
+      },
+      "failure": {
+        "daily_limit": "only one request a day",
+        "delivery_failed": "the message could not be sent",
+        "otp_attempts_exceeded": "too many wrong codes"
+      }
+    },
+    "languages": {
+      "description": "Every change of the interface language, newest first. French is applied only after an email code.",
+      "empty": "You have not changed the language yet.",
+      "change": "{{from}} → {{to}}",
+      "verification": {
+        "none": "No code needed",
+        "email_otp": "Email code sent to {{destination}}"
+      },
+      "results": {
+        "not_required": "Applied",
+        "pending": "Waiting for the code",
+        "verified": "Code verified, applied",
+        "expired": "Code expired, not applied",
+        "attempts_exceeded": "Too many wrong codes, not applied",
+        "not_sent": "Email not sent, not applied",
+        "cancelled": "Replaced by a newer request"
+      },
+      "attempts_one": "{{count}} code entered",
+      "attempts_other": "{{count}} codes entered"
+    }
+  },
+  "demo": {
+    "badge": "Demo · simulated",
+    "tooltip": "Simulated demo record: not a real transaction, and no money was charged."
+  }
+}

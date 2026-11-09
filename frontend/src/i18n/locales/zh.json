@@ -1,0 +1,1715 @@
+{
+  "common": {
+    "appName": "InternConnect",
+    "skipToContent": "跳到主要内容",
+    "backHome": "返回首页",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "loading": "加载中…",
+    "save": "保存更改",
+    "cancel": "取消",
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码"
+  },
+  "nav": {
+    "primary": "主导航",
+    "mobile": "移动端导航",
+    "internships": "实习",
+    "community": "公共空间",
+    "resumeBuilder": "简历生成器",
+    "plans": "套餐",
+    "login": "登录",
+    "register": "注册",
+    "profile": "我的资料",
+    "changePassword": "修改密码",
+    "logout": "退出登录",
+    "accountMenu": "{{name}} 的账户菜单",
+    "notifications": "通知",
+    "notificationsUnread_one": "通知，{{count}} 条未读",
+    "notificationsUnread_other": "通知，{{count}} 条未读",
+    "people": "好友和用户",
+    "applications": "我的申请",
+    "billing": "账单和发票",
+    "security": "安全"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "实习、社区和职业发展，一站搞定",
+      "title": "找到开启你职业生涯的实习",
+      "subtitle": "发现实习机会，几次点击即可申请，打造出色的简历，并与同路的同学一起学习成长。",
+      "primaryCta": "浏览实习",
+      "secondaryCta": "加入社区"
+    },
+    "features": {
+      "title": "求职所需，一应俱全",
+      "subtitle": "一个账户即可使用职位列表、申请、学生社区和职业工具。",
+      "items": {
+        "internships": {
+          "title": "实习申请",
+          "description": "搜索职位，查看关键信息，并跟踪你发出的每一份申请。"
+        },
+        "community": {
+          "title": "公共空间",
+          "description": "分享动态、照片和视频，与好友互动，关注值得学习的人。"
+        },
+        "resume": {
+          "title": "高级简历生成器",
+          "description": "使用现代模板创建适配 ATS 的简历，并附加到你的申请中。"
+        },
+        "plans": {
+          "title": "灵活的套餐",
+          "description": "免费开始，每月需要更多申请次数时再升级。"
+        },
+        "security": {
+          "title": "安全为本",
+          "description": "登录监控、受信任设备和一次性密码保护你的账户。"
+        },
+        "languages": {
+          "title": "六种语言",
+          "description": "可使用英语、西班牙语、印地语、葡萄牙语、中文或法语使用 InternConnect。"
+        }
+      }
+    },
+    "cta": {
+      "title": "准备好迈出下一步了吗？",
+      "description": "创建免费账户，今天就发出你的第一份申请。",
+      "button": "创建免费账户"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "页面不存在",
+    "description": "你要找的页面不存在或已被移动。"
+  },
+  "error": {
+    "title": "出错了",
+    "description": "发生了意外错误。请刷新页面或稍后再试。",
+    "reload": "刷新页面"
+  },
+  "footer": {
+    "tagline": "实习、申请和学生社区，一站搞定。",
+    "explore": "探索",
+    "account": "账户",
+    "rights": "© {{year}} InternConnect。保留所有权利。"
+  },
+  "status": {
+    "label": "服务状态",
+    "idle": "未检查",
+    "checking": "检查中…",
+    "online": "在线",
+    "degraded": "性能下降",
+    "offline": "离线",
+    "lastChecked": "上次检查时间：{{time}}"
+  },
+  "language": {
+    "label": "语言",
+    "menu": "语言：{{language}}",
+    "needsCode": "需要邮箱验证码",
+    "loginForFrench": "登录后可用",
+    "names": {
+      "en": "英语",
+      "es": "西班牙语",
+      "hi": "印地语",
+      "pt": "葡萄牙语",
+      "zh": "中文",
+      "fr": "法语"
+    },
+    "settings": {
+      "title": "语言",
+      "description": "InternConnect 以此语言显示。该设置保存在你的个人资料中，因此你在其他任何设备上登录时也会使用这一语言。",
+      "frenchNote": "只有在你输入我们发送到你邮箱的验证码后，才会切换为法语。在此之前，你的语言保持不变。",
+      "saving": "正在切换语言…",
+      "saved": "InternConnect 现在显示为{{language}}。"
+    },
+    "french": {
+      "title": "切换为法语",
+      "codeSent": "我们已向 {{destination}} 发送了 6 位验证码。",
+      "description": "输入验证码即可将 InternConnect 切换为法语，{{minutes}} 分钟内有效。在此之前，应用仍使用{{language}}。",
+      "verify": "验证并切换为法语",
+      "close": "关闭",
+      "unchanged": "应用仍使用{{language}}。",
+      "restart": "发送新的验证码"
+    },
+    "error": "语言未更改。{{reason}}",
+    "loadFailed": "无法下载该语言。请检查网络连接后重试。",
+    "dismiss": "关闭"
+  },
+  "auth": {
+    "fields": {
+      "identifier": "邮箱或手机号",
+      "password": "密码",
+      "fullName": "姓名",
+      "username": "用户名",
+      "email": "邮箱地址",
+      "mobile": "手机号",
+      "confirmPassword": "确认密码",
+      "currentPassword": "当前密码",
+      "newPassword": "新密码"
+    },
+    "login": {
+      "title": "欢迎回来",
+      "subtitle": "登录以继续你的实习之旅。",
+      "submit": "登录",
+      "noAccount": "第一次使用 InternConnect？",
+      "forgotPassword": "忘记密码？"
+    },
+    "register": {
+      "title": "创建账户",
+      "subtitle": "加入 InternConnect，申请实习并结识其他同学。",
+      "submit": "创建账户",
+      "haveAccount": "已有账户？",
+      "usernameHint": "3–30 个字符：字母、数字、点或下划线。其他人可以用它 @提及你。",
+      "mobileHint": "印度号码可以不加 +91。",
+      "passwordHint": "至少 8 个字符，且至少包含一个字母和一个数字。"
+    },
+    "changePassword": {
+      "title": "修改密码",
+      "subtitle": "请选择一个未在其他地方使用过的强密码。",
+      "submit": "更新密码",
+      "required": "为了你的安全，请先设置新密码再继续。",
+      "backToProfile": "返回我的资料",
+      "success_zero": "你的密码已修改。",
+      "success_one": "你的密码已修改。另外 1 台设备已退出登录。",
+      "success_other": "你的密码已修改。另外 {{count}} 台设备已退出登录。"
+    },
+    "otp": {
+      "title": "请查看你的邮箱",
+      "chromeNote": "为了你的安全，通过 Google Chrome 登录需要输入一次性验证码。",
+      "description": "我们已向 {{destination}} 发送了 6 位验证码。请在下方输入以完成登录。",
+      "codeLabel": "6 位验证码",
+      "verify": "验证并登录",
+      "resend": "重新发送验证码",
+      "resendIn": "{{seconds}} 秒后可重新发送",
+      "noResends": "此请求无法再发送验证码",
+      "resent": "新的验证码已发送。",
+      "back": "使用其他账户",
+      "invalidFormat": "请输入 6 位验证码。"
+    },
+    "forgot": {
+      "title": "忘记密码？",
+      "subtitle": "我们会向你注册的邮箱或手机号发送一次性验证码。",
+      "methodLegend": "将验证码发送到我的",
+      "methodEmail": "邮箱",
+      "methodMobile": "手机（短信）",
+      "oncePerDay": "每天只能重置一次密码。",
+      "submit": "发送验证码",
+      "remembered": "想起密码了？",
+      "verifyTitle": "输入验证码",
+      "verifyDescription": "我们已向 {{destination}} 发送了 6 位验证码，10 分钟内有效。",
+      "verifySubmit": "重置密码",
+      "changeContact": "使用其他邮箱或手机号",
+      "doneTitle": "新密码已发送",
+      "doneEmail": "我们已通过邮件将新的临时密码发送至 {{destination}}。",
+      "doneMobile": "我们已通过短信将新的临时密码发送至 {{destination}}。",
+      "doneNext": "请用它登录，之后系统会要求你设置自己的密码。",
+      "backToLogin": "前往登录"
+    }
+  },
+  "profile": {
+    "edit": "编辑资料",
+    "about": "简介",
+    "saved": "你的资料已更新。",
+    "fields": {
+      "headline": "个人标题",
+      "bio": "个人简介",
+      "location": "城市",
+      "college": "学校",
+      "degree": "学位",
+      "graduationYear": "毕业年份",
+      "skills": "技能"
+    },
+    "placeholders": {
+      "headline": "例如：计算机科学专业学生"
+    },
+    "hints": {
+      "bio": "最多 1000 个字符。",
+      "skills": "用逗号分隔技能，例如：React、Python、公开演讲。"
+    },
+    "empty": {
+      "bio": "你还没有填写个人简介。点击“编辑资料”向招聘者介绍自己。",
+      "skills": "尚未添加技能。"
+    },
+    "resume": {
+      "title": "简历",
+      "defaultLabel": "默认简历",
+      "none": "还没有默认简历。在简历生成器中生成 PDF 简历后，它会显示在这里。",
+      "generated": "生成于 {{date}}",
+      "download": "下载 PDF",
+      "manage": "管理简历"
+    }
+  },
+  "publicSpace": {
+    "title": "公共空间",
+    "subtitle": "与其他同学分享动态、照片和视频。",
+    "composer": {
+      "title": "发布动态",
+      "label": "分享动态",
+      "placeholder": "{{name}}，你想分享什么？",
+      "characters": "{{count}} / {{max}} 个字符",
+      "addMedia": "添加照片或视频",
+      "mediaHint": "最多 {{max}} 个文件：每张照片不超过 {{imageMb}} MB（JPEG、PNG、GIF、WebP），以及一个不超过 {{videoMb}} MB 的 MP4 或 WebM 视频。",
+      "selectedFiles": "待上传的文件",
+      "removeFile": "移除 {{name}}",
+      "submit": "发布",
+      "uploading": "上传中… {{percent}}%",
+      "uploadingUnknown": "上传中…",
+      "published": "你的动态已发布。",
+      "needsFriends": "至少添加一位好友才能开始发布。好友越多，每天可发布的数量越多。",
+      "unlimited": "无每日限制：你有超过 10 位好友。",
+      "tiers": "每日可发布：1 位好友：1 条 · 2–5 位好友：2 条 · 6–10 位好友：5 条 · 超过 10 位：不限。",
+      "limitReached_one": "你今天的发布次数已用完。添加更多好友即可更频繁地发布，或在午夜（IST）之后再来。",
+      "limitReached_other": "你今天的 {{count}} 次发布已全部用完。添加更多好友即可更频繁地发布，或在午夜（IST）之后再来。",
+      "remaining_one": "今天还可发布 {{count}} 条。",
+      "remaining_other": "今天还可发布 {{count}} 条。",
+      "limitByFriends_one": "你有 {{count}} 位好友，每天上限为 {{limit}} 条。",
+      "limitByFriends_other": "你有 {{count}} 位好友，每天上限为 {{limit}} 条。"
+    },
+    "privacy": {
+      "label": "谁可以看到",
+      "public": "公开",
+      "friends": "好友",
+      "only_me": "仅自己",
+      "hints": {
+        "public": "所有已登录的同学都能看到这条动态。",
+        "friends": "只有你和你的好友能看到这条动态。",
+        "only_me": "只有你能看到这条动态。"
+      }
+    },
+    "filters": {
+      "label": "显示动态",
+      "for_you": "为你推荐",
+      "following": "关注",
+      "saved": "已收藏",
+      "mine": "我的动态"
+    },
+    "feed": {
+      "label": "动态",
+      "empty": "还没有动态。来分享第一条吧！",
+      "emptyMine": "你还没有发布任何内容。",
+      "error": "无法加载动态。",
+      "retry": "重试",
+      "loadMore": "加载更多动态",
+      "end": "已经全部看完了。",
+      "emptyFollowing": "你关注的同学发布的动态会显示在这里。去找些同学关注吧。",
+      "emptySaved": "你收藏的动态会显示在这里。",
+      "emptyHashtag": "还没有带 #{{tag}} 的动态。",
+      "emptyAuthor": "还没有你能看到的动态。",
+      "trending": "热门",
+      "emptyTitle": "你的动态还很安静",
+      "emptyFollowingTitle": "你还没有关注任何人",
+      "emptySavedTitle": "没有收藏的帖子",
+      "emptyMineTitle": "还没有发布任何内容"
+    },
+    "post": {
+      "label": "{{name}} 的动态",
+      "unknownAuthor": "未知同学",
+      "open": "打开 {{time}} 的动态",
+      "edited": "已编辑",
+      "edit": "编辑动态",
+      "editTitle": "编辑动态",
+      "textLabel": "文字",
+      "editUntil": "你可以在 {{time}} 之前修改文字和媒体。",
+      "editWindowClosed": "这条动态的编辑时间已过。你仍然可以更改谁能看到它。",
+      "currentMedia": "照片和视频",
+      "removeMedia": "移除 {{index}}",
+      "delete": "删除动态",
+      "confirmDelete": "确定删除这条动态吗？此操作无法撤销。",
+      "confirmDeleteButton": "删除",
+      "deleted": "你的动态已删除。",
+      "back": "返回公共空间",
+      "detailTitle": "动态",
+      "notFound": "这条动态不存在，或你无权查看。",
+      "stats": {
+        "likes_one": "{{count}} 个赞",
+        "likes_other": "{{count}} 个赞",
+        "comments_one": "{{count}} 条评论",
+        "comments_other": "{{count}} 条评论",
+        "shares_one": "{{count}} 次分享",
+        "shares_other": "{{count}} 次分享",
+        "views_one": "{{count}} 次浏览",
+        "views_other": "{{count}} 次浏览"
+      },
+      "hidden": "因其他同学举报已被隐藏。在审核完成前只有你能看到这条动态。",
+      "sharedLabel": "分享了一条动态"
+    },
+    "media": {
+      "photo": "{{name}} 分享的第 {{index}} 张照片（共 {{count}} 张）",
+      "video": "{{name}} 分享的视频",
+      "unavailable": "此文件不可用。"
+    },
+    "errors": {
+      "empty": "请写点什么，或添加照片或视频。",
+      "tooLong": "动态最多 {{max}} 个字符。",
+      "fileType": "{{name}} 不是支持的照片或视频格式。",
+      "photoTooLarge": "{{name}} 太大了。照片最大 {{mb}} MB。",
+      "videoTooLarge": "{{name}} 太大了。视频最大 {{mb}} MB。",
+      "duplicateFile": "{{name}} 已经添加过了。",
+      "tooManyFiles": "最多添加 {{max}} 张照片或视频。",
+      "tooManyVideos": "最多添加 {{max}} 个视频。"
+    },
+    "findStudents": "查找同学",
+    "actions": {
+      "label": "动态操作",
+      "like": "点赞",
+      "comment": "评论",
+      "share": "分享",
+      "shared": "已分享",
+      "save": "收藏",
+      "report": "举报",
+      "reported": "已举报"
+    },
+    "comments": {
+      "label": "评论",
+      "loading": "正在加载评论…",
+      "error": "无法加载评论。",
+      "empty": "还没有评论。来发表第一条评论吧。",
+      "loadMore": "显示更多评论",
+      "fieldLabel": "写评论",
+      "submit": "发表评论",
+      "edit": "编辑评论",
+      "delete": "删除评论",
+      "confirmDelete": "确定删除这条评论吗？",
+      "editLabel": "编辑你的评论",
+      "edited": "已编辑",
+      "emptyText": "请先写评论。"
+    },
+    "share": {
+      "title": "分享这条动态",
+      "textLabel": "添加你的想法（可选）",
+      "submit": "立即分享",
+      "done": "已分享，现在它会显示在你的动态中。",
+      "original": "{{name}} 的原动态",
+      "unavailable": "{{name}} 的原动态已不可用。"
+    },
+    "report": {
+      "title": "举报这条动态",
+      "reasonLabel": "原因",
+      "detailsLabel": "详细说明（可选）",
+      "submit": "提交举报",
+      "done": "谢谢，你的举报已提交。",
+      "hiddenDone": "谢谢，这条动态在审核期间已被隐藏。",
+      "reasons": {
+        "spam": "垃圾信息",
+        "harassment": "骚扰或欺凌",
+        "hate": "仇恨言论",
+        "violence": "暴力或威胁",
+        "nudity": "裸露或色情内容",
+        "misinformation": "虚假信息",
+        "other": "其他"
+      }
+    },
+    "hashtag": {
+      "subtitle": "带有此话题标签且你可以查看的动态。"
+    },
+    "trending": {
+      "title": "热门话题",
+      "empty": "本周还没有话题标签。",
+      "posts_one": "{{count}} 条动态",
+      "posts_other": "{{count}} 条动态"
+    },
+    "sidebar": "你的公共空间",
+    "allowance": {
+      "pausedTitle": "有了第一位好友后即可发帖",
+      "usedTitle": "已达到今日发帖上限"
+    },
+    "limits": {
+      "title": "每日发帖上限",
+      "friendsLabel": "好友",
+      "todayLabel": "今日帖子",
+      "none": "不能发帖",
+      "perDay_one": "每天 {{count}} 条",
+      "perDay_other": "每天 {{count}} 条",
+      "unlimited": "不限",
+      "friends_one": "{{count}} 位好友",
+      "friends_other": "{{count}} 位好友",
+      "friendsRange": "{{min}}–{{max}} 位好友",
+      "friendsOrMore_one": "{{count}} 位及以上好友",
+      "friendsOrMore_other": "{{count}} 位及以上好友",
+      "resets": "今日计数在午夜（IST）重新开始。"
+    },
+    "discover": {
+      "title": "扩展你的人脉",
+      "description": "添加好友可以每天发更多帖子，关注你想看到其帖子的同学。",
+      "notifications": "通知",
+      "unread_one": "{{count}} 条新通知",
+      "unread_other": "{{count}} 条新通知"
+    }
+  },
+  "internships": {
+    "title": "实习",
+    "subtitle": "找到与你技能匹配的实习，几分钟内即可申请。",
+    "searchLabel": "搜索实习",
+    "searchPlaceholder": "职位、公司或技能",
+    "results": "实习搜索结果",
+    "filters": {
+      "title": "筛选",
+      "show": "显示筛选",
+      "hide": "隐藏筛选",
+      "category": "类别",
+      "workMode": "工作方式",
+      "engagement": "类型",
+      "location": "城市",
+      "minStipend": "月补贴",
+      "maxDuration": "时长",
+      "any": "不限",
+      "anyCategory": "所有类别",
+      "anyCity": "所有城市",
+      "stipendAtLeast": "至少 {{amount}}",
+      "durationUpTo_one": "最长 {{count}} 个月",
+      "durationUpTo_other": "最长 {{count}} 个月",
+      "clear": "清除筛选"
+    },
+    "sort": {
+      "label": "排序方式",
+      "newest": "最新发布",
+      "stipend": "补贴最高",
+      "deadline": "即将截止"
+    },
+    "categories": {
+      "software_development": "软件开发",
+      "web_development": "网页开发",
+      "data_science": "数据科学与分析",
+      "design": "设计",
+      "marketing": "市场营销",
+      "content_writing": "内容写作",
+      "finance": "财务与会计",
+      "human_resources": "人力资源"
+    },
+    "workModes": {
+      "remote": "居家办公",
+      "office": "到岗办公",
+      "hybrid": "混合办公"
+    },
+    "engagements": {
+      "full_time": "全职",
+      "part_time": "兼职"
+    },
+    "hybridIn": "{{cities}}（混合办公）",
+    "facts": {
+      "startDate": "开始日期",
+      "duration": "时长",
+      "stipend": "补贴",
+      "deadline": "申请截止"
+    },
+    "startsImmediately": "立即开始",
+    "durationMonths_one": "{{count}} 个月",
+    "durationMonths_other": "{{count}} 个月",
+    "stipendRange": "{{min}} – {{max}} /月",
+    "stipendFixed": "{{amount}} /月",
+    "unpaid": "无补贴",
+    "posted": "发布于 {{time}}",
+    "applicants_one": "{{count}} 位申请者",
+    "applicants_other": "{{count}} 位申请者",
+    "openings_one": "{{count}} 个名额",
+    "openings_other": "{{count}} 个名额",
+    "moreSkills": "+{{count}} 项",
+    "loadMore": "显示更多实习",
+    "empty": "没有符合搜索条件的实习。请尝试其他关键词或减少筛选条件。",
+    "error": "无法加载实习。",
+    "detail": {
+      "back": "所有实习",
+      "about": "实习介绍",
+      "responsibilities": "日常职责",
+      "skills": "所需技能",
+      "requirements": "申请条件",
+      "perks": "福利",
+      "aboutCompany": "关于 {{company}}",
+      "applyNow": "立即申请",
+      "loginToApply": "登录后申请",
+      "applied": "你已于 {{date}} 申请。",
+      "withdrawn": "你于 {{date}} 申请，之后撤回了申请。",
+      "viewApplication": "查看你的申请",
+      "closed": "此实习已关闭，不再接受申请。",
+      "deadlinePassed": "此实习的截止日期已过，不再接受申请。",
+      "notFound": "此实习不存在。",
+      "applyTitle": "申请这份实习",
+      "applyBy": "申请截止日期：{{date}}",
+      "quotaNote": "每次申请会使用你套餐每月额度中的一次。",
+      "seePlans": "查看套餐",
+      "closedBadge": "不再接受申请",
+      "loadError": "无法加载这份实习。"
+    },
+    "sampleNotice": "所有职位均为虚构公司的示例数据，仅用于演示。",
+    "showing_one": "显示 {{count}} 份实习",
+    "showing_other": "显示 {{count}} 份实习",
+    "showingMore_one": "显示前 {{count}} 份实习",
+    "showingMore_other": "显示前 {{count}} 份实习",
+    "emptyTitle": "没有符合条件的实习",
+    "closesToday": "今天截止",
+    "closesIn_one": "{{count}} 天后截止",
+    "closesIn_other": "{{count}} 天后截止",
+    "chips": {
+      "label": "已使用的筛选条件",
+      "remove": "移除筛选条件：{{filter}}",
+      "clearAll": "全部清除"
+    }
+  },
+  "applications": {
+    "title": "我的申请",
+    "subtitle": "你申请过的所有实习，以及它们的状态和记录。",
+    "filtersLabel": "显示申请",
+    "filters": {
+      "all": "全部（{{count}}）",
+      "submitted": "已申请（{{count}}）",
+      "withdrawn": "已撤回（{{count}}）"
+    },
+    "status": {
+      "submitted": "已申请",
+      "withdrawn": "已撤回"
+    },
+    "appliedOn": "申请于 {{date}}",
+    "withdrawnOn": "撤回于 {{date}}",
+    "listingClosed": "已停止接受申请",
+    "viewListing": "查看实习",
+    "viewDetails": "查看申请",
+    "empty": "你还没有申请过任何实习。",
+    "emptyFiltered": "没有该状态的申请。",
+    "browse": "浏览实习",
+    "loadMore": "显示更多",
+    "error": "无法加载你的申请。",
+    "form": {
+      "title": "申请 {{title}}",
+      "back": "返回实习",
+      "coverLetter": "为什么应该录用你担任这个职位？",
+      "coverLetterHint": "至少 {{min}} 个字符。说明与此实习相匹配的技能、项目或经历。",
+      "characters": "{{count}} / {{max}} 个字符。",
+      "availability": "你能立即入职吗？",
+      "availableNow": "能，我可以立即入职",
+      "availableLater": "不能，我可以稍后入职",
+      "availabilityDetails": "你什么时候可以入职？",
+      "availabilityDetailsHint": "例如：11 月 15 日考试结束后。",
+      "questions": "{{company}} 的问题",
+      "optional": "（可选）",
+      "submit": "提交申请",
+      "submitting": "正在提交…",
+      "errors": {
+        "coverLetterShort": "请至少写 {{min}} 个字符，说明你为什么适合这个职位。",
+        "availabilityDetails": "请告诉公司你什么时候可以入职。",
+        "answerRequired": "请回答这个问题。"
+      },
+      "alreadyApplied": "你已经申请过这个实习。",
+      "notAccepting": "此实习已不再接受申请。",
+      "resume": "简历",
+      "resumeNone": "不附加简历",
+      "resumeDefault": "{{title}}（默认）",
+      "resumeHint": "从你的 PDF 简历中选择一份，随申请一起发送。",
+      "resumeEmpty": "你还没有 PDF 简历。可以在简历生成器中生成一份。"
+    },
+    "detail": {
+      "back": "我的申请",
+      "submitted": "你的申请已提交。",
+      "withdrawnNotice": "你的申请已撤回。",
+      "timeline": "记录",
+      "events": {
+        "submitted": "已申请",
+        "withdrawn": "已撤回"
+      },
+      "yourApplication": "你的申请",
+      "coverLetter": "为什么应该录用你",
+      "availability": "可入职时间",
+      "availableNow": "可立即入职",
+      "withdraw": "撤回申请",
+      "withdrawConfirm": "确定撤回这份申请吗？你将无法再次申请此实习。",
+      "withdrawYes": "是，撤回",
+      "keep": "保留我的申请",
+      "notFound": "这份申请不存在。",
+      "resume": "简历",
+      "resumeDownload": "下载 {{file}}",
+      "resumeNone": "未附加简历。"
+    }
+  },
+  "validation": {
+    "required": "此项为必填项。",
+    "fullName": "请输入你的姓名（至少 2 个字符）。",
+    "username": "请使用 3–30 个字母、数字、点或下划线。",
+    "email": "请输入有效的邮箱地址。",
+    "mobile": "请输入有效的手机号。",
+    "passwordLength": "密码至少需要 8 个字符。",
+    "passwordTooLong": "密码最多 128 个字符。",
+    "passwordLetterNumber": "密码必须至少包含一个字母和一个数字。",
+    "passwordMismatch": "两次输入的密码不一致。",
+    "passwordSame": "新密码必须与当前密码不同。",
+    "maxLength": "最多 {{max}} 个字符。",
+    "graduationYear": "请输入 1950 到 2100 之间的年份。",
+    "skills": "最多添加 30 项技能，每项不超过 40 个字符。"
+  },
+  "fieldErrors": {
+    "required": "此项为必填项。",
+    "tooShort": "请至少输入 {{min}} 个字符。",
+    "tooLong": "最多输入 {{max}} 个字符。",
+    "tooFew": "请至少添加 {{min}} 项。",
+    "tooMany": "最多添加 {{max}} 项。",
+    "tooSmall": "请输入 {{min}} 或更大的值。",
+    "tooBig": "请输入 {{max}} 或更小的值。",
+    "email": "请输入有效的邮箱地址。",
+    "url": "请输入以 https:// 开头的完整链接",
+    "format": "格式不正确。",
+    "choice": "请从选项中选择一项。",
+    "mobile": "请输入有效的手机号，例如 9876543210 或 +14155550123。",
+    "phone": "请输入有效的电话号码，例如 +91 98765 43210。",
+    "emailTaken": "该邮箱地址已被注册。",
+    "mobileTaken": "该手机号已被注册。",
+    "usernameTaken": "该用户名已被占用。",
+    "currentPasswordIncorrect": "当前密码不正确。",
+    "passwordSame": "新密码必须与当前密码不同。",
+    "availabilityDetails": "请告诉公司你什么时候可以入职。",
+    "answerRequired": "请回答这个问题。",
+    "answerDuplicate": "每个问题只能回答一次。",
+    "questionUnknown": "这个问题不属于该申请表。",
+    "resumeChoice": "请从你的 PDF 简历中选择一份。",
+    "endBeforeStart": "结束时间不能早于开始时间。"
+  },
+  "errors": {
+    "INVALID_CREDENTIALS": "邮箱/手机号或密码错误。",
+    "ACCOUNT_LOCKED": "失败次数过多。请在 {{minutes}} 分钟后重试。",
+    "ACCOUNT_EXISTS": "使用这些信息的账户已存在。",
+    "VALIDATION_ERROR": "请更正标出的字段。",
+    "RATE_LIMITED": "尝试次数过多。请等待几分钟后重试。",
+    "SESSION_EXPIRED": "你的会话已过期。请重新登录。",
+    "NETWORK_ERROR": "无法连接服务器。请检查网络连接后重试。",
+    "TIMEOUT": "服务器响应时间过长。请重试。",
+    "UNKNOWN_ERROR": "出错了。请重试。",
+    "PASSWORD_RESET_DAILY_LIMIT": "此选项每天只能使用一次。",
+    "ACCOUNT_NOT_FOUND": "没有使用这些信息注册的账户。",
+    "MOBILE_LOGIN_WINDOW": "手机登录仅允许在印度标准时间（IST）上午 10:00 至下午 1:00 之间进行。",
+    "OTP_INVALID": "验证码不正确。",
+    "OTP_INVALID_one": "验证码不正确。还剩 {{count}} 次机会。",
+    "OTP_INVALID_other": "验证码不正确。还剩 {{count}} 次机会。",
+    "OTP_EXPIRED": "此验证码已过期。请获取新的验证码。",
+    "OTP_ATTEMPTS_EXCEEDED": "错误的验证码次数过多。请重新开始。",
+    "OTP_ALREADY_USED": "此验证码已被使用。请重新开始。",
+    "OTP_RESEND_COOLDOWN": "请等待 {{seconds}} 秒后再获取新的验证码。",
+    "OTP_RESEND_LIMIT": "此请求无法再发送验证码。请重新开始。",
+    "CHALLENGE_NOT_FOUND": "此验证请求已过期。请重新开始。",
+    "MESSAGE_DELIVERY_FAILED": "目前无法发送消息。请几分钟后重试。",
+    "PASSWORD_CHANGE_REQUIRED": "请先修改密码再继续。",
+    "EMPTY_POST": "请写点什么，或添加照片或视频。",
+    "MEDIA_TYPE_NOT_ALLOWED": "只能上传 JPEG、PNG、GIF 或 WebP 照片，以及 MP4 或 WebM 视频。",
+    "MEDIA_TOO_LARGE": "照片或视频太大。",
+    "TOO_MANY_MEDIA": "最多添加 {{max}} 张照片或视频。",
+    "TOO_MANY_VIDEOS": "每条动态最多添加 {{max}} 个视频。",
+    "DUPLICATE_MEDIA_IN_POST": "同一个文件被添加了多次。",
+    "DUPLICATE_POST": "你在过去 {{hours}} 小时内已经发布过相同内容。",
+    "DUPLICATE_MEDIA": "你已经发布过这张照片或这个视频。",
+    "INVALID_UPLOAD": "无法读取上传的文件。请重试。",
+    "MEDIA_UPLOAD_FAILED": "你的照片或视频上传失败。请重试。",
+    "MEDIA_NOT_FOUND": "要移除的部分媒体已不在这条动态中。请刷新后重试。",
+    "POST_NOT_FOUND": "这条动态不存在，或你无权查看。",
+    "NOT_POST_OWNER": "你只能修改自己的动态。",
+    "NOTHING_TO_UPDATE": "没有任何更改。",
+    "EDIT_WINDOW_EXPIRED": "动态只能在发布后 {{minutes}} 分钟内编辑。你仍然可以更改谁能看到它。",
+    "DELETE_WINDOW_EXPIRED": "动态只能在发布后 {{minutes}} 分钟内删除。你仍然可以更改谁能看到它。",
+    "EDIT_CONFLICT": "这条动态已在别处被修改。请刷新页面后重试。",
+    "POSTING_NEEDS_FRIENDS": "至少添加一位好友才能在公共空间发布动态。",
+    "DAILY_POST_LIMIT": "你已达到今天的发布上限（{{limit}}）。添加更多好友即可更频繁地发布，或在午夜（IST）之后重试。",
+    "ALREADY_SHARED": "你已经分享过这条动态。",
+    "CANNOT_SHARE_OWN_POST": "你不能分享自己的动态。",
+    "SHARE_NOT_ALLOWED": "只能分享公开的动态。",
+    "ALREADY_REPORTED": "你已经举报过这条动态。谢谢。",
+    "CANNOT_REPORT_OWN_POST": "你不能举报自己的动态。",
+    "COMMENT_NOT_FOUND": "这条评论已不存在。",
+    "NOT_COMMENT_OWNER": "你只能修改自己的评论。",
+    "CANNOT_FRIEND_SELF": "你不能向自己发送好友请求。",
+    "ALREADY_FRIENDS": "你们已经是好友了。",
+    "FRIEND_REQUEST_EXISTS": "你已经向这位同学发送过好友请求。",
+    "INCOMING_FRIEND_REQUEST": "这位同学已经向你发送了好友请求，请直接接受。",
+    "FRIEND_REQUEST_NOT_FOUND": "此好友请求已不存在。",
+    "FRIEND_REQUEST_CONFLICT": "在你发送请求时，好友请求的状态发生了变化。请重试。",
+    "TOO_MANY_PENDING_REQUESTS": "你有太多好友请求尚未得到回复。请取消一些，或等待对方回复。",
+    "NOT_FRIENDS": "你和这位同学还不是好友。",
+    "CANNOT_FOLLOW_SELF": "你不能关注自己。",
+    "NOTIFICATION_NOT_FOUND": "此通知已不存在。",
+    "INVALID_CURSOR": "此页面已不可用。请刷新后重试。",
+    "INTERNSHIP_NOT_FOUND": "此实习不存在。",
+    "APPLICATIONS_CLOSED": "此实习已不再接受申请。",
+    "ALREADY_APPLIED": "你已经申请过这个实习。",
+    "APPLICATION_NOT_FOUND": "这份申请不存在。",
+    "APPLICATION_ALREADY_WITHDRAWN": "你已经撤回了这份申请。",
+    "PAYMENTS_NOT_CONFIGURED": "此服务器尚未设置在线支付。",
+    "PAYMENT_WINDOW_CLOSED": "只能在印度时间上午 5:00 至 11:45 之间付款。",
+    "CHECKOUT_IN_PROGRESS": "另一笔付款尚未完成。请完成或关闭它，然后重试。",
+    "PAYMENT_NOT_FOUND": "这笔付款不存在。",
+    "PAYMENT_VERIFICATION_FAILED": "无法验证这笔付款，因此你的套餐没有变化。",
+    "PAYMENT_NOT_COMPLETED": "这笔付款尚未完成，因此你的套餐没有变化。",
+    "PAYMENT_MISMATCH": "这笔付款与你的订单不符，因此你的套餐没有变化。",
+    "ORDER_ALREADY_PAID": "此订单已付款。",
+    "PAYMENT_ALREADY_USED": "这笔付款已用于另一个订单。",
+    "PAYMENT_GATEWAY_REJECTED": "支付服务未接受这笔付款。",
+    "PAYMENT_GATEWAY_ERROR": "支付服务无响应。请稍后重试。",
+    "CHECKOUT_UNAVAILABLE": "无法打开 Razorpay 付款窗口。请检查网络连接后重试。",
+    "APPLICATION_QUOTA_EXHAUSTED": "你已用完本计费周期内套餐的全部实习申请次数。立即升级套餐即可继续申请，或等待额度重置。",
+    "NEXT_CYCLE_ALREADY_PAID": "你的下一个计费周期已付款。如需为该周期选择其他套餐，请先取消订阅（预付款将被退还）。",
+    "SUBSCRIPTION_CHANGED": "由于之前的一笔付款已完成，你的套餐刚刚发生了变化。请查看你的套餐后重新选择。",
+    "NO_ACTIVE_PLAN": "你没有可取消的付费套餐。",
+    "INVOICE_NOT_FOUND": "这张发票不存在。",
+    "PREMIUM_REQUIRED": "简历生成器包含在付费套餐（Bronze、Silver 或 Gold）中。",
+    "RESUME_NOT_FOUND": "这份简历不存在。",
+    "RESUME_CONFLICT": "这份简历已在其他标签页或设备上被修改。",
+    "RESUME_LIMIT": "你最多可以保留 {{max}} 份简历。请删除一份后再创建。",
+    "VERSION_UNCHANGED": "自版本 {{number}} 以来没有任何变化。",
+    "VERSION_LIMIT": "每份简历最多保留 {{max}} 个版本。请先删除一个旧版本。",
+    "VERSION_NOT_FOUND": "此版本不存在。",
+    "PHOTO_TYPE_NOT_ALLOWED": "照片必须是 JPEG 或 PNG 格式的图片。",
+    "PHOTO_REQUIRED": "请选择要上传的照片。",
+    "PHOTO_NOT_FOUND": "你还没有添加简历照片。",
+    "RESUME_NOT_READY": "请先完善简历再生成 PDF（请查看检查清单）。",
+    "ALREADY_GENERATED": "你已经有这份简历当前内容的 PDF。请从你的 PDF 简历中下载，或先修改简历。",
+    "OTP_NOT_EXPECTED": "此 PDF 已不再等待验证码。请关闭此窗口后重新开始。",
+    "OTP_REQUIRED": "付款前请先验证发送到你邮箱的验证码。",
+    "GENERATION_EXPIRED": "此 PDF 的付款时间已过。请重新开始以获取新的验证码。",
+    "RESUME_ALREADY_PAID": "此 PDF 简历已付款。",
+    "GENERATION_IN_PROGRESS": "另一份 PDF 简历正在生成中。请先完成或取消它。",
+    "GENERATION_NOT_FOUND": "此 PDF 简历不存在。",
+    "PDF_NOT_READY": "此 PDF 简历尚未生成。",
+    "UNAUTHENTICATED": "请登录后继续。",
+    "BAD_REQUEST": "无法处理此请求。",
+    "NOT_FOUND": "未找到你要查找的内容。",
+    "INVALID_ID": "此链接无效。",
+    "INVALID_JSON": "无法读取请求。请重试。",
+    "PAYLOAD_TOO_LARGE": "你发送的内容太大。",
+    "UNSAFE_INPUT": "请求中包含不允许的数据。",
+    "DUPLICATE_RESOURCE": "该内容已存在。",
+    "ORIGIN_NOT_ALLOWED": "为了你的安全，此请求已被拦截。",
+    "INTERNAL_ERROR": "我们这边出了问题。请稍后重试。",
+    "FRENCH_VERIFICATION_REQUIRED": "只有在验证发送到你邮箱的验证码后才能选择法语。",
+    "LANGUAGE_ALREADY_ACTIVE": "法语已经是你的语言。",
+    "FRENCH_REQUEST_LIMIT": "你申请法语验证码的次数过多。请在 {{minutes}} 分钟后重试。",
+    "FRENCH_REQUEST_IN_PROGRESS": "法语验证码正在发送中。请稍后查看你的邮箱。",
+    "SIMULATED_PAYMENT": "这是一条模拟的演示记录，无法支付或验证，也没有扣款。"
+  },
+  "social": {
+    "people": {
+      "title": "好友和用户",
+      "subtitle": "查找同学、处理好友请求，并查看你关注的人。",
+      "tabsLabel": "用户",
+      "tabs": {
+        "discover": "查找同学",
+        "requests": "请求",
+        "friends": "好友",
+        "following": "关注",
+        "followers": "粉丝"
+      },
+      "searchLabel": "搜索同学",
+      "searchPlaceholder": "姓名或用户名",
+      "suggestions": "推荐的同学",
+      "results": "搜索结果",
+      "noResults": "没有符合搜索条件的同学。",
+      "noSuggestions": "暂时没有推荐。",
+      "incoming": "收到的请求",
+      "outgoing": "发出的请求",
+      "noIncoming": "没有待处理的好友请求。",
+      "noOutgoing": "你没有待处理的请求。",
+      "noFriends": "还没有好友。去查找同学并发送好友请求吧。",
+      "noFollowing": "你还没有关注任何人。",
+      "noFollowers": "还没有人关注你。",
+      "error": "无法加载此列表。",
+      "loadMore": "加载更多"
+    },
+    "actions": {
+      "addFriend": "加为好友",
+      "cancelRequest": "取消请求",
+      "accept": "接受",
+      "decline": "拒绝",
+      "friends": "好友",
+      "unfriend": "解除好友",
+      "confirmUnfriend": "确定将 {{name}} 从好友中移除吗？",
+      "follow": "关注"
+    },
+    "followsYou": "关注了你",
+    "counts": {
+      "friends_one": "{{count}} 位好友",
+      "friends_other": "{{count}} 位好友",
+      "followers_one": "{{count}} 位粉丝",
+      "followers_other": "{{count}} 位粉丝",
+      "following": "关注 {{count}}"
+    },
+    "profile": {
+      "notFound": "没有使用此用户名的同学。",
+      "thisIsYou": "其他同学看到的你的资料就是这样。",
+      "editProfile": "编辑我的资料",
+      "posts": "动态"
+    }
+  },
+  "notifications": {
+    "title": "通知",
+    "subtitle": "点赞、评论、分享、提及和好友请求。",
+    "filtersLabel": "显示通知",
+    "all": "全部",
+    "unread": "未读",
+    "markAllRead": "全部标为已读",
+    "markRead": "标为已读",
+    "markUnread": "标为未读",
+    "empty": "已经全部看完了，暂无新消息。",
+    "emptyUnread": "没有未读通知。",
+    "error": "无法加载通知。",
+    "loadMore": "加载更多",
+    "unreadLabel": "未读",
+    "types": {
+      "like": "{{name}} 赞了你的动态",
+      "comment": "{{name}} 评论了你的动态",
+      "share": "{{name}} 分享了你的动态",
+      "mention": "{{name}} 在动态中提到了你",
+      "mentionComment": "{{name}} 在评论中提到了你",
+      "friend_request": "{{name}} 向你发送了好友请求",
+      "friend_accept": "{{name}} 接受了你的好友请求"
+    }
+  },
+  "plans": {
+    "title": "套餐和价格",
+    "subtitle": "选择每月可以申请的实习数量。每个付费套餐有效期为一个月。",
+    "testMode": "付款使用 Razorpay 测试模式：不会扣除真实费用。",
+    "perMonth": "/月",
+    "free": "Free",
+    "applications_one": "每月 {{count}} 次实习申请",
+    "applications_other": "每月 {{count}} 次实习申请",
+    "unlimited": "不限次数的实习申请",
+    "validity": "自付款起有效一个月",
+    "choose": "选择 {{plan}}",
+    "starting": "正在打开付款页面…",
+    "verifying": "正在确认付款…",
+    "loginToChoose": "登录后选择",
+    "yourPlan": "你的套餐",
+    "activeUntil": "有效期至 {{date}} IST",
+    "current": {
+      "heading": "你当前的套餐",
+      "free": "{{plan}}：{{applications}}。",
+      "active": "{{plan}}：{{applications}}，有效期至 {{date}} IST。",
+      "expired": "你的 {{lastPlan}} 套餐已于 {{date}} IST 结束，因此你现在使用的是 Free 套餐。",
+      "status": {
+        "active": "有效",
+        "cancelled": "已取消"
+      },
+      "cycle": "计费周期：{{start}} 至 {{end}} IST。",
+      "renewal": "续费日期：{{date}} IST。如需继续使用，请在此之前在这里续费（付款时间为 IST 上午 5:00–11:45）。",
+      "cancelledNote": "已取消：你的 {{plan}} 套餐在 {{date}} IST 之前仍然有效，之后将转为 Free 套餐。",
+      "nextCycle": "下一个计费周期已付款：{{plan}}，{{start}} 至 {{end}} IST。",
+      "billingLink": "账单记录和发票",
+      "daysLeft_one": "本计费周期还剩 {{count}} 天",
+      "daysLeft_other": "本计费周期还剩 {{count}} 天",
+      "cycleShort": "{{start}} – {{end}}",
+      "demoNote": "演示订阅：此套餐由演示数据脚本用模拟付款创建，不是真实购买，也没有扣款。"
+    },
+    "window": {
+      "open": "今天付款开放至印度时间上午 11:45。",
+      "openAlways": "付款已开放。",
+      "closed": "只能在印度时间上午 5:00 至 11:45 之间付款。下次开放时间为 {{date}} IST。",
+      "disabled": "此服务器尚未设置在线支付，因此目前无法购买付费套餐。"
+    },
+    "result": {
+      "paid": "付款成功。你的 {{plan}} 套餐有效期至 {{date}} IST。",
+      "transaction": "交易 ID：{{id}}。确认信息已发送到你的邮箱。",
+      "cancelled": "付款已取消。你未被扣款。",
+      "failed": "付款未成功。你未被扣款。",
+      "failedReason": "原因：{{reason}}",
+      "attemptFailed": "本次尝试失败。你可以在付款窗口中重试。",
+      "dismiss": "关闭",
+      "upgraded": "付款成功。你现在使用 {{plan}} 套餐，有效期至 {{date}} IST；续费日期不变。",
+      "renewed": "付款成功。你的 {{plan}} 套餐已续费至下一个计费周期，即 {{start}} 至 {{end}} IST。",
+      "downgraded": "付款成功。你的套餐将于 {{date}} IST 变更为 {{plan}}。",
+      "refunded": "这笔付款到账时你的套餐已经变更，因此未被使用。{{amount}} 已退款。",
+      "refundRequested": "这笔付款到账时你的套餐已经变更，因此未被使用。已申请退款 {{amount}}。",
+      "transactionOnly": "交易 ID：{{id}}。",
+      "invoice": "下载发票 {{number}}"
+    },
+    "error": "无法加载套餐。",
+    "quota": {
+      "label": "实习申请",
+      "usedMonth": "本月已使用 {{used}} / {{limit}}",
+      "usedCycle": "本计费周期已使用 {{used}} / {{limit}}",
+      "unlimited_one": "不限次数 · 本计费周期已发送 {{count}} 份",
+      "unlimited_other": "不限次数 · 本计费周期已发送 {{count}} 份",
+      "remaining_one": "还剩 {{count}} 次申请",
+      "remaining_other": "还剩 {{count}} 次申请",
+      "none": "已无剩余",
+      "resets": "将于 {{date}} IST 重置",
+      "exhausted": "你暂时已用完 {{plan}} 套餐的全部实习申请次数。立即升级套餐即可继续申请，或等到 {{date}} IST。",
+      "seePlans": "查看套餐"
+    },
+    "actions": {
+      "upgrade": "立即升级 · {{amount}}",
+      "renewal": "续费下个月 · {{amount}}",
+      "downgrade": "于 {{date}} 切换 · {{amount}}"
+    },
+    "notes": {
+      "upgrade_one": "你只需为本计费周期剩余的 {{count}} 天支付差价（每月多 {{difference}}）。续费日期保持不变。",
+      "upgrade_other": "你只需为本计费周期剩余的 {{count}} 天支付差价（每月多 {{difference}}）。续费日期保持不变。",
+      "renewal": "已预付 {{start}} 至 {{end}} IST 的费用。",
+      "downgrade": "你的 {{current}} 套餐将持续到 {{date}} IST；之后开始使用 {{plan}}。",
+      "NEXT_CYCLE_ALREADY_PAID": "你的下一个计费周期已付款。"
+    },
+    "cancel": {
+      "button": "取消订阅",
+      "title": "确定取消订阅吗？",
+      "keepsCycle": "你的 {{plan}} 套餐在 {{date}} IST 之前仍然有效。当前计费周期不予退款，因为其中的申请次数可能已被使用。",
+      "refundsNext": "你为下一个计费周期（{{plan}}）预付的 {{amount}} 将被退还。",
+      "confirm": "是，取消",
+      "keep": "保留我的套餐",
+      "cancelling": "正在取消…",
+      "done": "你的订阅已取消。你的 {{plan}} 套餐在 {{date}} IST 之前仍然有效。",
+      "refunded": "下一个计费周期的 {{amount}} 已退款（退款 ID {{id}}）。",
+      "refundPending": "已申请退还下一个计费周期的 {{amount}}。退款完成后你会收到邮件。"
+    },
+    "bestValue": "最超值",
+    "taglines": {
+      "free": "适合入门",
+      "bronze": "适合有针对性的求职",
+      "silver": "适合积极求职",
+      "gold": "适合不限次数申请"
+    },
+    "features": {
+      "resumeBuilder": "简历生成器，每份 PDF ₹50",
+      "community": "公共空间和实习搜索"
+    }
+  },
+  "payments": {
+    "history": {
+      "title": "付款记录",
+      "empty": "你还没有任何付款。",
+      "error": "无法加载你的付款记录。",
+      "plan": "{{plan}} 套餐",
+      "started": "发起于 {{date}}",
+      "paid": "付款于 {{date}}",
+      "transaction": "交易 ID：{{id}}",
+      "validity": "有效期 {{start}} – {{end}}",
+      "loadMore": "显示更多",
+      "refund": {
+        "processed": "已于 {{date}} 退款 {{amount}}",
+        "pending": "已申请退款 {{amount}}",
+        "failed": "{{amount}} 退款失败。请联系客服。"
+      },
+      "invoice": "发票 {{number}}",
+      "resume": "PDF 简历",
+      "description": "你发起的每笔付款及其结果。"
+    },
+    "status": {
+      "created": "等待付款",
+      "paid": "已付款",
+      "cancelled": "已取消",
+      "failed": "失败",
+      "expired": "已过期",
+      "refunded": "已退款"
+    },
+    "testCheckout": {
+      "title": "测试付款",
+      "description": "此服务器使用测试支付网关而不是 Razorpay。请选择这笔付款的处理结果。",
+      "pay": "支付 {{amount}}",
+      "decline": "拒绝付款",
+      "declined": "付款已被拒绝。你可以重试或关闭此窗口。",
+      "close": "关闭"
+    }
+  },
+  "billing": {
+    "title": "账单和发票",
+    "subtitle": "你的发票、套餐记录和每一笔付款。",
+    "backToPlans": "套餐和价格",
+    "items": {
+      "new": "{{plan}} 套餐，1 个月",
+      "renewal": "{{plan}} 套餐续费，1 个月",
+      "upgrade": "在计费周期剩余时间内从 {{fromPlan}} 升级到 {{plan}}",
+      "downgrade": "自下一个计费周期起使用 {{plan}} 套餐，1 个月",
+      "resume": "PDF 简历：{{title}}"
+    },
+    "invoices": {
+      "title": "发票",
+      "empty": "你还没有发票。每笔成功的付款都会开具一张发票。",
+      "error": "无法加载你的发票。",
+      "number": "发票 {{number}}",
+      "issued": "开具于 {{date}}",
+      "period": "计费期间 {{start}} 至 {{end}}",
+      "download": "下载 PDF",
+      "downloadLabel": "下载发票 {{number}} 的 PDF",
+      "loadMore": "显示更多",
+      "status": {
+        "paid": "已付款",
+        "refunded": "已退款"
+      },
+      "description": "每笔已验证的付款都会生成一张带编号的发票。",
+      "view": "查看",
+      "viewLabel": "查看发票 {{number}}"
+    },
+    "history": {
+      "title": "订阅记录",
+      "empty": "还没有付费套餐。你当前使用的是 Free 套餐。",
+      "error": "无法加载你的订阅记录。",
+      "events": {
+        "new": "购买了 {{plan}} 套餐",
+        "renewal": "为下一个计费周期续费了 {{plan}} 套餐",
+        "upgrade": "从 {{fromPlan}} 升级到 {{plan}}",
+        "downgrade": "下一个计费周期切换为 {{plan}}",
+        "cancelled": "取消了订阅"
+      },
+      "period": "{{start}} 至 {{end}}",
+      "cancelledDetail": "{{plan}} 套餐在 {{date}} IST 之前仍然有效。",
+      "payment": "{{amount}} · 交易 ID {{id}}",
+      "invoice": "发票 {{number}}",
+      "status": {
+        "current": "当前",
+        "upcoming": "稍后开始",
+        "ended": "已结束",
+        "upgraded": "已升级",
+        "cancelled": "已取消并退款"
+      },
+      "description": "套餐购买、续订、升级、降级和取消。"
+    },
+    "comparePlans": "比较套餐",
+    "demoNotice": "演示账户：本页的套餐、发票和付款都是为演示创建的模拟记录，均不是真实交易，也没有扣款。",
+    "overview": {
+      "label": "套餐概览",
+      "plan": "当前套餐",
+      "status": {
+        "active": "有效",
+        "cancelled": "已取消",
+        "expired": "已过期",
+        "free": "免费套餐"
+      },
+      "renewal": "续订日期",
+      "ends": "套餐结束",
+      "noRenewal": "不续订",
+      "applications": "本周期申请",
+      "unlimited": "不限",
+      "used": "已用 {{used}} / {{limit}}",
+      "cycle": "计费周期",
+      "freeCycle": "按自然月计算"
+    },
+    "invoice": {
+      "preview": "发票预览",
+      "print": "打印",
+      "close": "关闭发票",
+      "demoBanner": "模拟演示发票：不是真实交易，未发生任何付款。",
+      "seller": "实习、申请和学生社区",
+      "title": "发票",
+      "date": "开票日期：{{date}}",
+      "billedTo": "付款人",
+      "description": "说明",
+      "amount": "金额",
+      "total": "实付总额",
+      "totalSimulated": "总额（模拟）",
+      "paymentDetails": "付款详情",
+      "status": "状态",
+      "statusPaid": "已支付",
+      "statusSimulated": "模拟演示记录（未扣款）",
+      "paidOn": "支付时间",
+      "method": "支付方式",
+      "transaction": "交易 ID",
+      "order": "订单 ID",
+      "receipt": "收据编号",
+      "methods": {
+        "card": "银行卡",
+        "upi": "UPI",
+        "netbanking": "网上银行",
+        "wallet": "电子钱包",
+        "emi": "分期付款",
+        "simulated": "模拟（演示记录）",
+        "razorpay": "Razorpay"
+      },
+      "footer": "通过 Razorpay 测试模式支付：未扣除真实款项。",
+      "footerDemo": "由 InternConnect 演示数据脚本为演示创建，不是 Razorpay 付款，也不是真实销售。"
+    }
+  },
+  "resume": {
+    "choose": "请选择…",
+    "list": {
+      "title": "简历生成器",
+      "subtitle": "创建适配 ATS 的简历，保存多个版本，并在申请中使用。",
+      "error": "无法加载你的简历。",
+      "mine": "我的简历（{{count}} / {{max}}）",
+      "empty": "你还没有简历。",
+      "noName": "尚未命名",
+      "updated": "编辑于 {{date}}",
+      "versions_one": "已保存 {{count}} 个版本",
+      "versions_other": "已保存 {{count}} 个版本",
+      "ready": "已就绪",
+      "missing_one": "还缺 {{count}} 项",
+      "missing_other": "还缺 {{count}} 项",
+      "deleteConfirm": "确定删除“{{title}}”及其所有版本吗？此操作无法撤销。",
+      "deleteYes": "是，删除",
+      "edit": "编辑",
+      "open": "打开",
+      "duplicate": "复制",
+      "duplicateLabel": "复制 {{title}}",
+      "delete": "删除",
+      "deleteLabel": "删除 {{title}}"
+    },
+    "premium": {
+      "title": "简历生成器是高级功能",
+      "description": "Bronze、Silver 和 Gold 套餐包含创建和编辑简历的功能。",
+      "keep": "你现有的简历仍保留在这里：你仍然可以打开和删除它们。",
+      "seePlans": "查看套餐"
+    },
+    "create": {
+      "title": "新建简历",
+      "name": "简历名称",
+      "nameHint": "只有你能看到，例如“前端岗位”。",
+      "start": "起始内容",
+      "profile": "我的资料（姓名、联系方式、个人标题、学校和技能）",
+      "blank": "空白简历",
+      "submit": "创建简历",
+      "titleRequired": "请为简历命名。",
+      "limit": "你已有 {{max}} 份简历，已达上限。请删除一份后再新建。"
+    },
+    "editor": {
+      "back": "所有简历",
+      "heading": "编辑简历 {{title}}",
+      "name": "简历名称",
+      "readOnly": "你的套餐已到期，因此这份简历为只读。选择付费套餐即可再次编辑。",
+      "conflictLoss": "刷新后将显示最近保存的草稿；自上次保存以来在此处所做的更改将会丢失。",
+      "reload": "重新加载简历",
+      "tools": "简历工具",
+      "notFound": "这份简历不存在。",
+      "views": "简历视图",
+      "view": {
+        "edit": "编辑",
+        "preview": "设计与预览"
+      }
+    },
+    "save": {
+      "saving": "正在保存…",
+      "dirty": "有未保存的更改",
+      "invalid": "请更正标出的字段后再保存",
+      "error": "未保存：{{reason}}",
+      "retry": "重试",
+      "saved": "所有更改已保存",
+      "savedAt": "已于 {{time}} 保存"
+    },
+    "errors": {
+      "email": "请输入有效的邮箱地址。",
+      "phone": "请输入有效的电话号码，例如 +91 98765 43210。",
+      "url": "请输入以 https:// 开头的完整链接",
+      "month": "请使用 2026-06 这样的月份格式。",
+      "endBeforeStart": "结束时间不能早于开始时间。"
+    },
+    "tags": {
+      "placeholder": "输入后按 Enter",
+      "hint": "已添加 {{count}} / {{max}}。每项输入后按 Enter 或输入逗号。",
+      "full": "你已添加 {{max}} 项",
+      "remove": "移除 {{value}}"
+    },
+    "entry": {
+      "moveUp": "上移 {{entry}}",
+      "moveDown": "下移 {{entry}}",
+      "remove": "移除 {{entry}}",
+      "full": "最多 {{max}} 项",
+      "count_one": "{{count}} 条",
+      "count_other": "{{count}} 条"
+    },
+    "readiness": {
+      "title": "可以生成了吗？",
+      "ready": "适配 ATS 的简历所需内容已全部填写。",
+      "missing_one": "还有 {{count}} 项需要完成：",
+      "missing_other": "还有 {{count}} 项需要完成："
+    },
+    "problems": {
+      "fullName": "请添加你的姓名",
+      "email": "请添加邮箱地址",
+      "phone": "请添加电话号码",
+      "objective": "请填写至少 {{min}} 个字符的求职意向",
+      "education": "请至少添加一条教育经历",
+      "skills": "请至少添加 {{min}} 项技能",
+      "institution": "请添加院校名称",
+      "degree": "请添加学位",
+      "startDate": "请添加开始月份",
+      "endDate": "请添加结束月份，或标记为至今",
+      "title": "请添加职位名称",
+      "organization": "请添加单位名称",
+      "projectName": "请添加项目名称",
+      "projectDescription": "请描述该项目",
+      "certificateName": "请添加证书名称",
+      "issuer": "请添加颁发机构",
+      "achievement": "请描述该成就",
+      "language": "请添加语言",
+      "proficiency": "请选择你的水平",
+      "link": "请添加链接",
+      "referenceName": "请添加姓名",
+      "referenceContact": "请添加邮箱或电话号码",
+      "latinOnly": "请只使用拉丁字母：PDF 无法打印 {{characters}}",
+      "photoFormat": "请重新上传 JPEG 或 PNG 格式的照片（PDF 无法显示 WebP 图片），或将其隐藏"
+    },
+    "personal": {
+      "title": "姓名和联系方式",
+      "description": "雇主如何联系你。",
+      "fields": {
+        "fullName": "姓名",
+        "headline": "个人标题",
+        "email": "邮箱",
+        "phone": "电话",
+        "location": "城市"
+      }
+    },
+    "objective": {
+      "title": "求职意向",
+      "description": "用两三句话说明你想做什么以及你能带来什么。",
+      "label": "你的求职意向",
+      "hint": "{{count}} / {{max}} 个字符（至少 50 个）。"
+    },
+    "skills": {
+      "title": "技能",
+      "description": "至少添加三项。请使用你想申请的实习中出现的关键词。",
+      "label": "技能"
+    },
+    "sections": {
+      "education": {
+        "title": "教育经历",
+        "description": "中学、大学和课程，按时间由近及远排列。",
+        "empty": "尚未添加教育经历。",
+        "entry": "教育经历 {{number}}",
+        "add": "添加教育经历",
+        "fields": {
+          "institution": "院校",
+          "degree": "学位或课程",
+          "fieldOfStudy": "专业",
+          "grade": "成绩或 CGPA",
+          "startDate": "开始月份",
+          "endDate": "结束月份",
+          "current": "我目前在此就读",
+          "description": "详细信息（可选）"
+        }
+      },
+      "experience": {
+        "title": "工作经历",
+        "description": "全职、兼职和自由职业工作。",
+        "empty": "尚未添加工作经历。",
+        "entry": "工作 {{number}}",
+        "add": "添加工作",
+        "fields": {
+          "title": "职位",
+          "organization": "公司或组织",
+          "location": "地点",
+          "startDate": "开始月份",
+          "endDate": "结束月份",
+          "current": "我目前在此工作",
+          "description": "工作内容"
+        }
+      },
+      "internships": {
+        "title": "实习经历",
+        "description": "你已完成或正在进行的实习。",
+        "empty": "尚未添加实习经历。",
+        "entry": "实习 {{number}}",
+        "add": "添加实习",
+        "fields": {
+          "title": "岗位",
+          "organization": "公司",
+          "location": "地点",
+          "startDate": "开始月份",
+          "endDate": "结束月份",
+          "current": "我目前正在进行这段实习",
+          "description": "工作内容"
+        }
+      },
+      "projects": {
+        "title": "项目经历",
+        "description": "课程、个人或开源项目。",
+        "empty": "尚未添加项目。",
+        "entry": "项目 {{number}}",
+        "add": "添加项目",
+        "fields": {
+          "name": "项目名称",
+          "role": "你的角色",
+          "link": "链接（可选）",
+          "startDate": "开始月份",
+          "endDate": "结束月份",
+          "current": "仍在进行中",
+          "technologies": "使用的技术",
+          "description": "项目用途以及你构建的内容"
+        }
+      },
+      "certifications": {
+        "title": "证书",
+        "description": "课程和证书。",
+        "empty": "尚未添加证书。",
+        "entry": "证书 {{number}}",
+        "add": "添加证书",
+        "fields": {
+          "name": "证书名称",
+          "issuer": "颁发机构",
+          "issueDate": "颁发月份",
+          "credentialUrl": "证书链接（可选）"
+        }
+      },
+      "achievements": {
+        "title": "成就",
+        "description": "奖项、竞赛和奖学金。",
+        "empty": "尚未添加成就。",
+        "entry": "成就 {{number}}",
+        "add": "添加成就",
+        "fields": {
+          "title": "成就",
+          "date": "月份",
+          "description": "详细信息（可选）"
+        }
+      },
+      "languages": {
+        "title": "语言能力",
+        "description": "你会说的语言及熟练程度。",
+        "empty": "尚未添加语言。",
+        "entry": "语言 {{number}}",
+        "add": "添加语言",
+        "fields": {
+          "language": "语言",
+          "proficiency": "水平"
+        }
+      },
+      "links": {
+        "title": "社交链接",
+        "description": "LinkedIn、GitHub、作品集或个人网站。",
+        "empty": "尚未添加链接。",
+        "entry": "链接 {{number}}",
+        "add": "添加链接",
+        "fields": {
+          "kind": "类型",
+          "url": "链接"
+        }
+      },
+      "references": {
+        "title": "推荐人",
+        "description": "可以为你提供推荐的人（可选）。",
+        "empty": "尚未添加推荐人。",
+        "entry": "推荐人 {{number}}",
+        "add": "添加推荐人",
+        "fields": {
+          "name": "姓名",
+          "designation": "职务",
+          "organization": "单位",
+          "email": "邮箱",
+          "phone": "电话"
+        }
+      }
+    },
+    "options": {
+      "proficiency": {
+        "basic": "基础",
+        "conversational": "日常交流",
+        "professional": "专业水平",
+        "fluent": "流利",
+        "native": "母语"
+      },
+      "kind": {
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "portfolio": "作品集",
+        "website": "网站",
+        "twitter": "X（Twitter）",
+        "other": "其他"
+      }
+    },
+    "photo": {
+      "title": "照片",
+      "alt": "你的简历照片",
+      "choose": "选择照片",
+      "upload": "上传照片",
+      "change": "更换照片",
+      "remove": "移除照片",
+      "hint": "所有简历共用一张照片：JPEG 或 PNG 格式（PDF 可显示的格式），不超过 {{max}} MB。",
+      "type": "请选择 JPEG 或 PNG 图片。",
+      "size": "照片最大 {{max}} MB。",
+      "include": "在这份简历上显示我的照片"
+    },
+    "versions": {
+      "title": "版本",
+      "description": "保存简历的当前状态，以便日后恢复（最多 {{max}} 个）。",
+      "label": "标签（可选）",
+      "labelPlaceholder": "例如：已发送给 Nimbus Labs",
+      "save": "保存为版本",
+      "saveFirst": "请先更正标出的字段，以便保存草稿。",
+      "saved": "已保存为版本 {{number}}。",
+      "restored": "版本 {{number}} 现在是你的草稿。",
+      "empty": "尚未保存任何版本。",
+      "number": "版本 {{number}}",
+      "restoreConfirm": "确定用版本 {{number}} 替换你的草稿吗？如需保留当前草稿，请先将其保存为版本。",
+      "deleteConfirm": "确定删除版本 {{number}} 吗？此操作无法撤销。",
+      "restoreYes": "是，恢复",
+      "deleteYes": "是，删除",
+      "view": "查看",
+      "restore": "恢复",
+      "delete": "删除",
+      "deleteLabel": "删除版本 {{number}}",
+      "dialogTitle": "版本 {{number}}",
+      "close": "关闭",
+      "noName": "未命名",
+      "current": "现在",
+      "restoreThis": "恢复此版本"
+    },
+    "preview": {
+      "description": "PDF 的实时预览：会随你的输入而变化。PDF 根据已保存的简历生成。",
+      "pageLabel": "简历预览",
+      "noName": "你的姓名",
+      "photo": "你的照片",
+      "live": "实时预览"
+    },
+    "design": {
+      "title": "设计",
+      "description": "所有模板均为单栏布局并使用标准标题，以便招聘管理系统（ATS）读取。",
+      "template": "模板",
+      "templates": {
+        "classic": {
+          "name": "经典",
+          "description": "姓名居中，深色标题下方配一条彩色线。"
+        },
+        "modern": {
+          "name": "现代",
+          "description": "顶部有彩色横条，姓名和标题使用彩色。"
+        },
+        "compact": {
+          "name": "紧凑",
+          "description": "文字和间距更小，一页能容纳更多内容。"
+        }
+      },
+      "color": "强调色",
+      "colors": {
+        "blue": "蓝色",
+        "teal": "青色",
+        "green": "绿色",
+        "maroon": "栗色",
+        "purple": "紫色",
+        "charcoal": "炭灰色"
+      },
+      "font": "字体",
+      "fonts": {
+        "sans": "无衬线（Helvetica）",
+        "serif": "衬线（Times）"
+      },
+      "atsNote": "所有模板都是单栏且适合 ATS，招聘系统可以读取。"
+    },
+    "generate": {
+      "title": "PDF 简历",
+      "description": "每份 PDF {{price}}，通过 Razorpay 支付。之后可随时免费重新下载。",
+      "notReady": "请先完成检查清单再生成 PDF。",
+      "makeDefault": "设为我的默认简历",
+      "start": "生成 PDF（{{price}}）",
+      "steps": "我们会先向你的邮箱发送验证码，然后你再付款。只有在付款验证通过后才会生成 PDF。",
+      "saveFirst": "请先更正标出的字段，以便保存草稿。",
+      "dialogTitle": "生成你的 PDF 简历",
+      "close": "关闭",
+      "codeSent": "我们已向 {{destination}} 发送了 6 位验证码。",
+      "codeDescription": "输入验证码即可解锁付款，{{minutes}} 分钟内有效。",
+      "verifyCode": "验证",
+      "verified": "验证码已验证。",
+      "payDescription": "支付 {{amount}} 即可生成“{{title}}”的 PDF。请在 {{time}} 之前开始付款。",
+      "pay": "支付 {{amount}}",
+      "paying": "等待付款…",
+      "verifying": "正在核验付款…",
+      "payCancelled": "付款已取消。你可以重试。",
+      "payFailed": "付款失败。你可以重试，例如换一种付款方式。",
+      "attemptFailed": "付款未成功：{{reason}}。你可以在同一窗口中重试。",
+      "testMode": "Razorpay 测试模式：不会扣除真实费用。",
+      "generating": "付款成功，正在生成 PDF。一分钟内它会出现在你的 PDF 简历中。",
+      "ready": "你的 PDF 简历已生成。",
+      "emailed": "我们还已将它连同发票一起发送到你的邮箱。",
+      "refunded": "此 PDF 已经付过款，因此第二笔付款将被退还。",
+      "download": "下载 {{file}}",
+      "expired": "此请求已结束。请关闭此窗口并重新生成 PDF。",
+      "perPdf": "每份 PDF {{price}}",
+      "progress": "获取 PDF 的步骤",
+      "step": {
+        "code": "邮箱验证码",
+        "pay": "支付 {{amount}}",
+        "download": "下载"
+      },
+      "stepDone": "已完成",
+      "premiumRequired": "生成 PDF 需要付费套餐（Bronze、Silver 或 Gold）。"
+    },
+    "pdfs": {
+      "title": "我的 PDF 简历",
+      "description": "你已付款的所有 PDF。可随时重新下载；默认简历会显示在你的资料中，并在申请时优先推荐。",
+      "empty": "还没有 PDF。打开一份简历，完成检查清单后即可生成 PDF。",
+      "error": "无法加载你的 PDF 简历。",
+      "generated": "生成于 {{date}}",
+      "download": "下载",
+      "downloadLabel": "下载 {{title}} 的 PDF",
+      "default": "默认",
+      "makeDefault": "设为默认",
+      "makeDefaultLabel": "将 {{title}} 的 PDF 设为我的默认简历",
+      "clearDefault": "取消默认",
+      "loadMore": "显示更多",
+      "template": "{{name}}模板",
+      "pages_one": "{{count}} 页",
+      "pages_other": "{{count}} 页",
+      "downloads_one": "已下载 1 次",
+      "downloads_other": "已下载 {{count}} 次",
+      "paid": "已支付 {{amount}} · 交易 ID {{id}}",
+      "paidNoId": "已支付 {{amount}}",
+      "invoice": "发票 {{number}}"
+    },
+    "downloads": {
+      "title": "下载记录",
+      "empty": "你的 PDF 简历尚未被下载过。",
+      "error": "无法加载下载记录。",
+      "from": "{{os}} 上的 {{browser}} · IP {{ip}}",
+      "loadMore": "显示更多"
+    },
+    "completion": {
+      "title": "简历完整度",
+      "percent": "已完成 {{percent}}%",
+      "next": "建议接下来添加",
+      "levels": {
+        "starting": "刚刚开始：请先填写下面的基本信息。",
+        "shaping": "初具雏形：再补充几个部分会更出色。",
+        "almost": "快完成了：补充最后的细节。",
+        "complete": "已完成：所有建议的部分都已填写。"
+      },
+      "items": {
+        "fullName": "添加你的全名",
+        "contact": "添加邮箱和电话号码",
+        "headline": "添加一句标题，例如：前端开发者",
+        "location": "添加你所在的城市",
+        "objective": "写一段至少 50 个字符的求职意向",
+        "education": "添加你的教育经历",
+        "skills": "至少添加 3 项技能",
+        "experience": "添加一段实习或工作经历",
+        "projects": "添加一个项目",
+        "links": "添加你的 LinkedIn、GitHub 或作品集链接",
+        "certifications": "添加一项证书",
+        "achievements": "添加一项成就",
+        "languages": "添加你会说的语言"
+      }
+    },
+    "nav": {
+      "label": "简历各部分",
+      "state": {
+        "done": "已填写",
+        "attention": "需要处理",
+        "empty": "未开始"
+      }
+    }
+  },
+  "security": {
+    "title": "安全与登录",
+    "subtitle": "你的账户在哪里登录、已知的设备，以及登录、密码重置和语言更改的记录。",
+    "tabsLabel": "安全设置分区",
+    "tabs": {
+      "sessions": "会话",
+      "devices": "设备",
+      "logins": "登录记录",
+      "resets": "密码重置",
+      "languages": "语言记录"
+    },
+    "time": "{{time}} IST",
+    "on": "{{os}} 上的 {{browser}}",
+    "ip": "IP {{ip}}",
+    "location": "{{location}} 附近",
+    "unknown": "未知",
+    "deviceTypes": {
+      "desktop": "电脑",
+      "mobile": "手机",
+      "tablet": "平板",
+      "tv": "电视",
+      "unknown": "未知设备"
+    },
+    "thisDevice": "当前设备",
+    "cancel": "取消",
+    "loadMore": "显示更多",
+    "error": "无法加载此列表。",
+    "retry": "重试",
+    "sessions": {
+      "description": "你的账户当前已登录的浏览器。退出某个会话后，该会话会立即结束。",
+      "started": "登录于 {{time}}",
+      "lastActive": "最近活动于 {{time}}",
+      "signOut": "退出登录",
+      "signOutLabel": "退出 {{name}} 会话",
+      "signOutOthers": "退出所有其他会话",
+      "confirmOthers": "确定在除此浏览器外的所有地方退出登录吗？",
+      "confirmYes": "是，退出登录",
+      "signedOut": "该会话已退出登录。",
+      "signedOutOthers_zero": "没有其他需要退出的会话。",
+      "signedOutOthers_one": "已退出另外 {{count}} 个会话。",
+      "signedOutOthers_other": "已退出另外 {{count}} 个会话。",
+      "onlyThis": "没有可显示的会话。"
+    },
+    "devices": {
+      "description": "使用过你账户的浏览器。在某台设备上确认邮箱验证码后，它就会成为受信任设备。移除设备会使其退出登录，它下次登录时会被视为新设备。",
+      "trusted": "受信任",
+      "trustedSince": "自 {{time}} 起受信任",
+      "notTrusted": "不受信任",
+      "firstSeen": "首次使用于 {{time}}",
+      "lastSeen": "最近使用于 {{time}}",
+      "remove": "移除",
+      "removeLabel": "移除 {{name}} 设备",
+      "confirmRemove": "确定移除此设备吗？它将退出登录。",
+      "confirmYes": "是，移除",
+      "removed_zero": "设备已移除。",
+      "removed_one": "设备已移除，{{count}} 个会话已退出登录。",
+      "removed_other": "设备已移除，{{count}} 个会话已退出登录。",
+      "empty": "还没有设备。"
+    },
+    "logins": {
+      "description": "你账户的每一次登录尝试，无论成功与否，按时间由近及远排列。",
+      "empty": "还没有登录记录。",
+      "events": {
+        "register": "创建账户",
+        "login": "登录",
+        "otp_verification": "邮箱验证码检查"
+      },
+      "results": {
+        "success": "成功",
+        "failure": "失败",
+        "otp_required": "已发送验证码"
+      },
+      "reasons": {
+        "invalid_password": "密码错误",
+        "account_locked": "账户已暂时锁定",
+        "outside_mobile_window": "在 IST 上午 10:00 至下午 1:00 之外使用手机登录",
+        "otp_delivery_failed": "无法发送验证码邮件",
+        "chrome_email_otp": "Google Chrome 需要邮箱验证码",
+        "otp_invalid": "验证码错误",
+        "otp_expired": "验证码已过期",
+        "otp_attempts_exceeded": "错误的验证码次数过多"
+      },
+      "verifiedByEmail": "已通过邮箱验证码验证",
+      "new": {
+        "device": "新设备",
+        "browser": "新浏览器",
+        "ip": "新 IP 地址"
+      }
+    },
+    "resets": {
+      "description": "你账户的忘记密码请求，按时间由近及远排列。",
+      "empty": "没有密码重置请求。",
+      "method": {
+        "email": "通过邮件发送验证码至 {{destination}}",
+        "mobile": "通过短信发送验证码至 {{destination}}"
+      },
+      "status": {
+        "pending": "已发送验证码，尚未输入",
+        "verified": "验证码已验证",
+        "expired": "验证码已过期",
+        "locked": "错误的验证码次数过多",
+        "rejected": "请求被拒绝",
+        "not_sent": "验证码未发送"
+      },
+      "outcome": {
+        "in_progress": "进行中",
+        "completed": "已发送新密码",
+        "failed": "失败"
+      },
+      "failure": {
+        "daily_limit": "每天只能申请一次",
+        "delivery_failed": "消息无法发送",
+        "otp_attempts_exceeded": "错误的验证码次数过多"
+      }
+    },
+    "languages": {
+      "description": "界面语言的每一次更改，按时间由近及远排列。只有在验证邮箱验证码后才会切换为法语。",
+      "empty": "你还没有更改过语言。",
+      "change": "{{from}} → {{to}}",
+      "verification": {
+        "none": "无需验证码",
+        "email_otp": "验证码已发送至 {{destination}}"
+      },
+      "results": {
+        "not_required": "已应用",
+        "pending": "等待验证码",
+        "verified": "验证码已验证，已应用",
+        "expired": "验证码已过期，未应用",
+        "attempts_exceeded": "错误的验证码次数过多，未应用",
+        "not_sent": "邮件未发送，未应用",
+        "cancelled": "已被更新的请求取代"
+      },
+      "attempts_one": "已输入 {{count}} 个验证码",
+      "attempts_other": "已输入 {{count}} 个验证码"
+    }
+  },
+  "demo": {
+    "badge": "演示 · 模拟",
+    "tooltip": "模拟演示记录：不是真实交易，也没有扣款。"
+  }
+}

@@ -1,18 +1,11 @@
 import { Briefcase, ClipboardList, Crown, FileText, MessagesSquare, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { getGeneratedResumes, resumePdfUrl } from '../api/resumes.js';
+import LanguageHistoryPanel from '../components/language/LanguageHistoryPanel.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
-
-// The parts of InternConnect available so far, shown as cards on the dashboard.
-const MODULES = [
-  { to: '/internships', icon: Briefcase, title: 'Internships', text: 'Browse open internships and apply with a cover letter.' },
-  { to: '/applications', icon: ClipboardList, title: 'My applications', text: 'See every internship you have applied for.' },
-  { to: '/plans', icon: Crown, title: 'Plans', text: 'See your plan and how many applications you have left this month.' },
-  { to: '/resume', icon: FileText, title: 'Resume Builder', text: 'Write your resume and get a professional PDF (premium, ₹50).' },
-  { to: '/public-space', icon: MessagesSquare, title: 'Public Space', text: 'Share posts, photos and videos with other students.' },
-  { to: '/friends', icon: Users, title: 'Friends', text: 'Find students, send friend requests and manage your friends.' },
-];
+import { LANGUAGES } from '../i18n/languages.js';
 
 function Detail({ label, value }) {
   return (
@@ -24,9 +17,20 @@ function Detail({ label, value }) {
 }
 
 export default function DashboardPage() {
+  const { t } = useTranslation();
   const { user } = useAuth();
-  const memberSince = new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  const memberSince = new Date(user.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
   const [profileResume, setProfileResume] = useState(undefined); // undefined while loading, null when there is none
+
+  // The parts of InternConnect available so far, shown as cards on the dashboard.
+  const modules = [
+    { to: '/internships', icon: Briefcase, title: t('nav.internships', 'Internships'), text: t('home.features.items.internships.description', 'Browse open internships and apply with a cover letter.') },
+    { to: '/applications', icon: ClipboardList, title: t('applications.title', 'My applications'), text: t('applications.subtitle', 'See every internship you have applied for.') },
+    { to: '/plans', icon: Crown, title: t('nav.plans', 'Plans'), text: t('plans.subtitle', 'See your plan and how many applications you have left this month.') },
+    { to: '/resume', icon: FileText, title: t('nav.resumeBuilder', 'Resume Builder'), text: t('resume.subtitle', 'Write your resume and get a professional PDF (premium, ₹50).') },
+    { to: '/public-space', icon: MessagesSquare, title: t('nav.community', 'Public Space'), text: t('home.features.items.community.description', 'Share posts, photos and videos with other students.') },
+    { to: '/friends', icon: Users, title: t('nav.people', 'Friends'), text: t('social.friends.subtitle', 'Find students, send friend requests and manage your friends.') },
+  ];
 
   // The paid resume PDF attached to the profile (the latest one).
   useEffect(() => {
@@ -35,41 +39,55 @@ export default function DashboardPage() {
       .catch(() => setProfileResume(null));
   }, []);
 
+  const preferredLang = LANGUAGES.find((l) => l.code === (user.preferredLanguage || 'en'));
+  const preferredLangDisplay = preferredLang ? preferredLang.nativeName : 'English';
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Welcome, {user.name}</h1>
-        <p className="mt-1 text-slate-600">You are logged in to InternConnect.</p>
+        <h1 className="text-2xl font-bold text-slate-900">
+          {t('dashboard.welcome', { name: user.name, defaultValue: `Welcome, ${user.name}` })}
+        </h1>
+        <p className="mt-1 text-slate-600">
+          {t('dashboard.loggedIn', 'You are logged in to InternConnect.')}
+        </p>
       </div>
 
-      <section className="max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Your account</h2>
-        <dl className="mt-2 divide-y divide-slate-100">
-          <Detail label="Name" value={user.name} />
-          <Detail label="Email" value={user.email} />
-          <Detail label="Mobile number" value={user.phone} />
-          <Detail label="Member since" value={memberSince} />
-          <Detail
-            label="Resume"
-            value={
-              profileResume === undefined ? (
-                'Loading…'
-              ) : profileResume ? (
-                <a href={resumePdfUrl(profileResume.id)} className="font-semibold text-brand-700 hover:underline">
-                  Download resume PDF
-                </a>
-              ) : (
-                <Link to="/resume" className="font-semibold text-brand-700 hover:underline">
-                  Create one in the Resume Builder
-                </Link>
-              )
-            }
-          />
-        </dl>
-      </section>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900">
+            {t('profile.account', 'Your account')}
+          </h2>
+          <dl className="mt-2 divide-y divide-slate-100">
+            <Detail label={t('auth.fields.fullName', 'Name')} value={user.name} />
+            <Detail label={t('auth.fields.email', 'Email')} value={user.email} />
+            <Detail label={t('auth.fields.mobile', 'Mobile number')} value={user.phone} />
+            <Detail label={t('profile.memberSince', 'Member since')} value={memberSince} />
+            <Detail label={t('language.label', 'Preferred language')} value={preferredLangDisplay} />
+            <Detail
+              label={t('profile.resume.title', 'Resume')}
+              value={
+                profileResume === undefined ? (
+                  t('common.loading', 'Loading…')
+                ) : profileResume ? (
+                  <a href={resumePdfUrl(profileResume.id)} className="font-semibold text-brand-700 hover:underline">
+                    {t('profile.resume.download', 'Download resume PDF')}
+                  </a>
+                ) : (
+                  <Link to="/resume" className="font-semibold text-brand-700 hover:underline">
+                    {t('profile.resume.create', 'Create one in the Resume Builder')}
+                  </Link>
+                )
+              }
+            />
+          </dl>
+        </section>
+
+        <LanguageHistoryPanel />
+      </div>
 
       <section className="grid gap-4 sm:grid-cols-2">
-        {MODULES.map(({ to, icon: Icon, title, text }) => (
+        {modules.map(({ to, icon: Icon, title, text }) => (
           <Link
             key={to}
             to={to}

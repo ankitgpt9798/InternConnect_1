@@ -8,6 +8,7 @@ const userResponse = (user) => ({
   name: user.name,
   email: user.email,
   phone: user.phone,
+  preferredLanguage: user.preferredLanguage || 'en',
   createdAt: user.createdAt,
 });
 

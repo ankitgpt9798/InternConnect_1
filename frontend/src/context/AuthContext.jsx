@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import api from '../api/axios.js';
+import { applyLanguage, startInStoredLanguage } from '../i18n/index.js';
 
 const AuthContext = createContext(null);
 
@@ -12,21 +13,51 @@ export function AuthProvider({ children }) {
 
   // On first load (and after a page refresh) ask the server who is logged in.
   useEffect(() => {
+    let ignore = false;
     api
       .get('/auth/me')
-      .then((res) => setUser(res.data.user))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        if (!ignore) {
+          const loadedUser = res.data.user;
+          setUser(loadedUser);
+          if (loadedUser?.preferredLanguage) {
+            applyLanguage(loadedUser.preferredLanguage).catch(() => {});
+          } else {
+            startInStoredLanguage().catch(() => {});
+          }
+        }
+      })
+      .catch(() => {
+        if (!ignore) {
+          setUser(null);
+          startInStoredLanguage().catch(() => {});
+        }
+      })
+      .finally(() => {
+        if (!ignore) setLoading(false);
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   async function register(details) {
     const res = await api.post('/auth/register', details);
-    setUser(res.data.user);
+    const registeredUser = res.data.user;
+    setUser(registeredUser);
+    if (registeredUser?.preferredLanguage) {
+      applyLanguage(registeredUser.preferredLanguage).catch(() => {});
+    }
   }
 
   async function login(identifier, password) {
     const res = await api.post('/auth/login', { identifier, password });
-    setUser(res.data.user);
+    const loggedInUser = res.data.user;
+    setUser(loggedInUser);
+    if (loggedInUser?.preferredLanguage) {
+      applyLanguage(loggedInUser.preferredLanguage).catch(() => {});
+    }
   }
 
   async function logout() {
@@ -37,7 +68,15 @@ export function AuthProvider({ children }) {
     }
   }
 
-  return <AuthContext.Provider value={{ user, loading, register, login, logout }}>{children}</AuthContext.Provider>;
+  function updateUser(updatedUser) {
+    setUser(updatedUser);
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, loading, register, login, logout, updateUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components -- the hook belongs with its provider
