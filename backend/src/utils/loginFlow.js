@@ -101,13 +101,23 @@ export async function finishChallenge(challenge, status, reason, at) {
   await LoginActivity.updateOne({ _id: challenge.loginActivity, status: 'otp_pending' }, { $set: { status: 'failed', reason, completedAt: at } });
 }
 
-// The newest unfinished code for this browser from the last minute (a double-click or retry finds the first one's).
-async function recentPendingChallenge(userId, clientKey, at) {
-  const since = new Date(at.getTime() - OTP_RESEND_SECONDS * 1000);
-  // The first request may still be creating it (password and code hashing take a moment under load): wait up to 3 s.
+const DUPLICATE_MS = 5000; // a second request this soon after the first is a double click (or a retry) still on its way
+
+// When the same browser key started a sign-in in the last minute: is THIS request a duplicate of it? Only then does it
+// get the code already sent (no second email). It is a duplicate if it carries that sign-in's own cookie (the same
+// window asking again), or if it came within 5 seconds (a double click whose first answer has not arrived yet). A code
+// that was already used or cancelled, or one that another window of the same browser started earlier, is not a reason
+// to make this request wait: it becomes a new sign-in (the hourly and resend limits still apply).
+async function duplicateOf({ userId, clientKey, cookieToken, startedAt, at }) {
   for (let tryNumber = 0; tryNumber < 30; tryNumber += 1) {
-    const found = await LoginChallenge.findOne({ user: userId, clientKey, status: 'pending', createdAt: { $gte: since } }).sort({ createdAt: -1 });
-    if (found) return found;
+    const latest = await LoginChallenge.findOne({ user: userId, clientKey, createdAt: { $gte: startedAt } }).sort({ createdAt: -1 });
+    if (latest) {
+      if (latest.status !== 'pending') return null;
+      if (cookieToken && hashToken(cookieToken) === latest.tokenHash) return latest;
+      return at.getTime() - latest.createdAt.getTime() <= DUPLICATE_MS ? latest : null;
+    }
+    // Not created yet. Only a request that is still on its way is worth waiting for (hashing takes a moment under load).
+    if (at.getTime() - startedAt.getTime() > DUPLICATE_MS) return null;
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   return null;
@@ -127,25 +137,28 @@ async function supersedePending({ userId, clientKey, cookieToken, at }) {
 }
 
 // After a correct password (or a new registration) when an email code is needed: creates the challenge, emails the
-// code and answers 202. A repeated request from the same browser within a minute gets the code already sent.
+// code and answers 202. A duplicate request (double click, same window again) gets the code already sent.
 export async function startChallenge({ req, res, user, purpose, decision, flags, deviceId = null, ctx }) {
   const { at, client, location } = ctx;
   const clientKey = hashToken(`${readDeviceCookie(req, user._id) ?? ''}|${client.ip}|${client.userAgent}`);
+  const cookieToken = req.cookies?.[CHALLENGE_COOKIE];
   const history = { otpReasons: decision.otpReasons, risk: decision.risk, flags };
+  const startWindowMs = OTP_RESEND_SECONDS * 1000;
 
-  const start = await takeQuota(`otp_start:${user._id}:${clientKey}`, { windowMs: OTP_RESEND_SECONDS * 1000, max: 1 }, at);
+  // Of several requests at the same moment, only the first starts a sign-in; the others look for its code.
+  const start = await takeQuota(`otp_start:${user._id}:${clientKey}`, { windowMs: startWindowMs, max: 1 }, at);
   if (!start.ok) {
-    const existing = await recentPendingChallenge(user._id, clientKey, at);
+    const startedAt = new Date(at.getTime() + start.retryAfterMs - startWindowMs); // when that first request started
+    const existing = await duplicateOf({ userId: user._id, clientKey, cookieToken, startedAt, at });
     if (existing) return res.status(202).json(challengeBody(existing, user, at));
-    const seconds = Math.ceil(start.retryAfterMs / 1000);
-    return res.status(429).json({ code: 'OTP_RESEND_COOLDOWN', message: `Please wait ${seconds} seconds before requesting a new code.`, retryAfterSeconds: seconds });
   }
+  const releaseStart = () => (start.ok ? start.release() : undefined);
 
-  await supersedePending({ userId: user._id, clientKey, cookieToken: req.cookies?.[CHALLENGE_COOKIE], at });
+  await supersedePending({ userId: user._id, clientKey, cookieToken, at });
 
   const quota = await takeQuota(`otp:${user._id}`, { windowMs: 60 * MINUTE, max: OTP_CODES_PER_HOUR }, at);
   if (!quota.ok) {
-    await start.release();
+    await releaseStart();
     await recordActivity({ user, event: purpose, status: 'rate_limited', reason: 'otp_hourly_limit', ctx, ...history });
     const seconds = Math.ceil(quota.retryAfterMs / 1000);
     return res.status(429).json({
@@ -184,7 +197,7 @@ export async function startChallenge({ req, res, user, purpose, decision, flags,
     await Promise.all([
       LoginChallenge.updateOne({ _id: challenge._id }, { $set: { status: 'delivery_failed' }, $unset: { codeHash: 1 } }),
       LoginActivity.updateOne({ _id: activity._id }, { $set: { status: 'failed', reason: 'otp_delivery_failed', completedAt: at } }),
-      start.release(),
+      releaseStart(),
       quota.release(),
     ]);
     return res.status(502).json({

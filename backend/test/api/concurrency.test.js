@@ -107,6 +107,56 @@ describe('simultaneous and duplicate requests', () => {
     assert.equal((await twin(lost).post('/api/auth/login/verify', { otp: code })).status, 401, 'not after 2 minutes');
   });
 
+  // Found during the real-browser checks: a fresh window of the same browser on the same network was told to wait.
+  it('a second window of the same browser can sign in right after another window finished its sign-in', async () => {
+    const student = newStudent();
+    const first = browsers.edge(server.base, '203.0.113.79');
+    await first.register(student); // its code step is finished (verified)
+    const second = browsers.edge(server.base, '203.0.113.79'); // same browser and network, no cookies yet
+    const before = emailsTo(student.email).length;
+    const started = await second.login(student);
+    assert.equal(started.status, 202, JSON.stringify(started.data));
+    assert.equal(emailsTo(student.email).length, before + 1);
+    assert.equal((await second.verifyLatestCode(student.email)).status, 200);
+  });
+
+  it('"Use a different account" and then logging in again straight away sends a new code', async () => {
+    const { student } = await registered();
+    const edge = browsers.edge(server.base, '203.0.113.80');
+    assert.equal((await edge.login(student)).status, 202);
+    const firstCode = latestCode(student.email);
+    await edge.post('/api/auth/login/cancel');
+    const again = await edge.login(student);
+    assert.equal(again.status, 202, JSON.stringify(again.data));
+    assert.notEqual(latestCode(student.email), firstCode);
+    assert.equal((await edge.verifyLatestCode(student.email)).status, 200);
+  });
+
+  it('a window that started a sign-in 10 seconds ago does not block another window', async () => {
+    const { student } = await registered();
+    const first = browsers.edge(server.base, '203.0.113.81');
+    assert.equal((await first.login(student)).status, 202);
+    advance(10_000);
+    const second = browsers.edge(server.base, '203.0.113.81');
+    const before = emailsTo(student.email).length;
+    assert.equal((await second.login(student)).status, 202);
+    assert.equal(emailsTo(student.email).length, before + 1, 'its own code');
+    assert.equal((await second.verifyLatestCode(student.email)).status, 200);
+  });
+
+  it('the same window logging in again (with its sign-in cookie) gets the code already sent', async () => {
+    const { student } = await registered();
+    const edge = browsers.edge(server.base, '203.0.113.82');
+    const first = await edge.login(student);
+    advance(20_000);
+    const before = emailsTo(student.email).length;
+    const again = await edge.login(student);
+    assert.equal(again.status, 202);
+    assert.equal(again.data.codeExpiresAt, first.data.codeExpiresAt, 'the same code');
+    assert.equal(emailsTo(student.email).length, before, 'no second email');
+    assert.equal((await edge.verifyLatestCode(student.email)).status, 200);
+  });
+
   it('two registrations with the same details at once create one account', async () => {
     const student = newStudent();
     const results = await Promise.all([browsers.edge(server.base, '203.0.113.77').post('/api/auth/register', student), browsers.firefox(server.base, '203.0.113.78').post('/api/auth/register', student)]);
