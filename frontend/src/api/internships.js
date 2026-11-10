@@ -1,7 +1,9 @@
 import api from './axios.js';
 
-// filters: { search, workMode }
-export const getInternships = (filters = {}) => api.get('/internships', { params: filters }).then((res) => res.data.internships);
+// The Internships page: filters are { search, category, workMode, engagement, city, minStipend, maxDuration, sort }.
+// Returns { internships, cities } (the cities that have open internships, for the City filter).
+export const searchInternships = (filters = {}) =>
+  api.get('/internships', { params: filters }).then((res) => ({ internships: res.data.internships, cities: res.data.cities ?? [] }));
 
 export const getInternship = (id) => api.get(`/internships/${id}`).then((res) => res.data.internship);
 
