@@ -76,19 +76,25 @@ export function AuthProvider({ children }) {
   }, [signedIn]);
 
   // When the session is due to end (phones and tablets: 1:00 PM IST), ask the server: it decides, and a 401 signs the
-  // app out with a clear message even if the page is just left open.
+  // app out with a clear message even if the page is just left open. Any 401 here counts (also "not logged in", e.g.
+  // when the browser has already dropped the cookie); the message then follows the kind of session that ended.
   useEffect(() => {
     if (!session?.expiresAt) return undefined;
     const delay = new Date(session.expiresAt).getTime() - (Date.now() + clockOffset.current);
     if (delay > MAX_TIMER_MS) return undefined;
+    const endedCode = session.deviceClass === 'mobile' || session.deviceClass === 'tablet' ? 'MOBILE_SESSION_ENDED' : 'SESSION_EXPIRED';
     const timer = setTimeout(() => {
       api
         .get('/auth/me')
         .then((res) => signedIn(res.data))
-        .catch(() => {});
+        .catch((error) => {
+          if (error.response?.status !== 401) return;
+          const code = error.response.data?.code;
+          endSession(SESSION_ENDED.has(code) ? code : endedCode);
+        });
     }, Math.max(0, delay) + 500);
     return () => clearTimeout(timer);
-  }, [session, signedIn]);
+  }, [session, signedIn, endSession]);
 
   // Returns { step: 'done' } when signed in, or { step: 'otp', challenge } when an email code is needed.
   async function login(identifier, password) {

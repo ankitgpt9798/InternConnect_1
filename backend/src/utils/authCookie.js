@@ -14,9 +14,13 @@ const secure = () => process.env.NODE_ENV === 'production';
 const sessionOptions = () => ({ httpOnly: true, sameSite: 'lax', secure: secure(), path: '/' });
 const authOnlyOptions = () => ({ httpOnly: true, sameSite: 'strict', secure: secure(), path: '/api/auth' });
 const maxAgeUntil = (expiresAt, at) => Math.max(0, expiresAt.getTime() - at.getTime());
+// The browser keeps the session cookie a little longer than the session itself. The server refuses it from the exact
+// end time either way, but while the browser still sends it the server can say WHY the session ended (e.g. "phone
+// access ends at 1:00 PM IST") instead of only "not logged in", and the app can show that message.
+export const SESSION_COOKIE_GRACE_MS = 5 * 60 * 1000;
 
 export function setSessionCookie(res, token, expiresAt, at) {
-  res.cookie(SESSION_COOKIE, token, { ...sessionOptions(), maxAge: maxAgeUntil(expiresAt, at) });
+  res.cookie(SESSION_COOKIE, token, { ...sessionOptions(), maxAge: maxAgeUntil(expiresAt, at) + SESSION_COOKIE_GRACE_MS });
 }
 
 export function clearSessionCookie(res) {

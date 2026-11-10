@@ -39,6 +39,24 @@ describe('session lifetime', () => {
     assert.equal(replay.data.code, 'SESSION_REVOKED');
   });
 
+  // Found in the real-clock T4 check: the cookie used to expire at the same moment as the session, so at 1:00 PM the
+  // browser sent no cookie, the server could only say "not logged in" and the app did not show the 1 PM message.
+  it('the browser keeps the session cookie 5 minutes past the session end, so it can be told why it ended', async () => {
+    setTime(ist(12, 40));
+    const phone = browsers.edgeAndroid(server.base);
+    await phone.register(newStudent());
+    assert.equal(Number(phone.jar.get('token').attrs['max-age']), 20 * 60 + 5 * 60, 'phone: until 13:00 IST + 5 minutes');
+    setTime(ist(13, 2));
+    const ended = await phone.get('/api/auth/me');
+    assert.equal(ended.status, 401);
+    assert.equal(ended.data.code, 'MOBILE_SESSION_ENDED', 'still sent after 1 PM, refused with the reason');
+
+    setTime(ist(11, 0));
+    const edge = browsers.edge(server.base);
+    await edge.register(newStudent());
+    assert.equal(Number(edge.jar.get('token').attrs['max-age']), 7 * 24 * 3600 + 5 * 60, 'computer: 7 days + 5 minutes');
+  });
+
   it('computer sessions last 7 days', async () => {
     const student = newStudent();
     const edge = browsers.edge(server.base);
