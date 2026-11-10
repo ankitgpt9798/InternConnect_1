@@ -9,7 +9,8 @@
     "save": "Enregistrer les modifications",
     "cancel": "Annuler",
     "showPassword": "Afficher le mot de passe",
-    "hidePassword": "Masquer le mot de passe"
+    "hidePassword": "Masquer le mot de passe",
+    "refresh": "Actualiser"
   },
   "nav": {
     "primary": "Principale",
@@ -31,7 +32,8 @@
     "people": "Amis et personnes",
     "applications": "Mes candidatures",
     "billing": "Facturation et factures",
-    "security": "Sécurité"
+    "security": "Sécurité",
+    "dashboard": "Tableau de bord"
   },
   "home": {
     "hero": {
@@ -74,7 +76,12 @@
     "cta": {
       "title": "Prêt à passer à l'étape suivante ?",
       "description": "Créez un compte gratuit et envoyez votre première candidature dès aujourd'hui.",
-      "button": "Créer votre compte gratuit"
+      "button": "Créer votre compte gratuit",
+      "memberDescription": "Trouvez votre prochain stage et envoyez votre candidature dès aujourd'hui.",
+      "memberButton": "Aller au tableau de bord"
+    },
+    "search": {
+      "button": "Rechercher"
     }
   },
   "notFound": {
@@ -133,7 +140,8 @@
     },
     "error": "La langue n'a pas été changée. {{reason}}",
     "loadFailed": "Impossible de télécharger cette langue. Vérifiez votre connexion et réessayez.",
-    "dismiss": "Fermer"
+    "dismiss": "Fermer",
+    "historyError": "Impossible de charger l'historique des langues."
   },
   "auth": {
     "fields": {
@@ -237,7 +245,16 @@
       "none": "Pas encore de CV par défaut. Générez un CV en PDF dans le Créateur de CV et il apparaîtra ici.",
       "generated": "Généré le {{date}}",
       "download": "Télécharger le PDF",
-      "manage": "Gérer les CV"
+      "manage": "Gérer les CV",
+      "create": "Créez-en un avec le Créateur de CV"
+    },
+    "account": "Votre compte",
+    "memberSince": "Membre depuis",
+    "sections": "Sections du profil",
+    "tabs": {
+      "account": "Compte",
+      "language": "Langue",
+      "security": "Sécurité"
     }
   },
   "publicSpace": {
@@ -852,6 +869,9 @@
       "thisIsYou": "Voici comment les autres étudiants voient votre profil.",
       "editProfile": "Modifier mon profil",
       "posts": "Publications"
+    },
+    "friends": {
+      "subtitle": "Trouvez des étudiants, envoyez des demandes d'ami et gérez vos amis."
     }
   },
   "notifications": {
@@ -1605,7 +1625,8 @@
         "attention": "à corriger",
         "empty": "pas commencée"
       }
-    }
+    },
+    "subtitle": "Rédigez votre CV et obtenez un PDF professionnel (premium, ₹50)."
   },
   "security": {
     "title": "Sécurité et connexions",
@@ -1969,5 +1990,11 @@
         "window_closed_at_verify": "La plage horaire des téléphones s'est terminée avant la saisie du code"
       }
     }
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {{name}}",
+    "subtitle": "Trouvez des stages, suivez vos candidatures et faites progresser votre carrière, tout depuis ici.",
+    "viewProfile": "Voir le profil",
+    "modulesTitle": "Découvrez InternConnect"
   }
 }

@@ -4,7 +4,7 @@ import ActiveSessionsPanel from './ActiveSessionsPanel.jsx';
 import LoginHistoryPanel from './LoginHistoryPanel.jsx';
 import TrustedDevicesPanel from './TrustedDevicesPanel.jsx';
 
-// Module 6 on the dashboard (the student's profile): active sessions, devices and the login history.
+// Module 6 on the Profile page (/profile#security): active sessions, devices and the login history.
 export default function SecuritySection() {
   const { t } = useTranslation();
   const devicesRef = useRef(null);

@@ -9,7 +9,8 @@
     "save": "Guardar cambios",
     "cancel": "Cancelar",
     "showPassword": "Mostrar contraseña",
-    "hidePassword": "Ocultar contraseña"
+    "hidePassword": "Ocultar contraseña",
+    "refresh": "Actualizar"
   },
   "nav": {
     "primary": "Principal",
@@ -31,7 +32,8 @@
     "people": "Amigos y personas",
     "applications": "Mis solicitudes",
     "billing": "Facturación y facturas",
-    "security": "Seguridad"
+    "security": "Seguridad",
+    "dashboard": "Panel"
   },
   "home": {
     "hero": {
@@ -74,7 +76,12 @@
     "cta": {
       "title": "¿Listo para dar el siguiente paso?",
       "description": "Crea una cuenta gratuita y envía tu primera solicitud hoy mismo.",
-      "button": "Crea tu cuenta gratuita"
+      "button": "Crea tu cuenta gratuita",
+      "memberDescription": "Encuentra tus próximas prácticas y envía tu solicitud hoy mismo.",
+      "memberButton": "Ir a tu panel"
+    },
+    "search": {
+      "button": "Buscar"
     }
   },
   "notFound": {
@@ -133,7 +140,8 @@
     },
     "error": "No se cambió el idioma. {{reason}}",
     "loadFailed": "No se pudo descargar este idioma. Revisa tu conexión e inténtalo de nuevo.",
-    "dismiss": "Cerrar"
+    "dismiss": "Cerrar",
+    "historyError": "No se pudo cargar el historial de idiomas."
   },
   "auth": {
     "fields": {
@@ -237,7 +245,16 @@
       "none": "Aún no tienes un currículum predeterminado. Genera un PDF de tu currículum en el Creador de CV y aparecerá aquí.",
       "generated": "Generado el {{date}}",
       "download": "Descargar PDF",
-      "manage": "Gestionar currículums"
+      "manage": "Gestionar currículums",
+      "create": "Crea uno en el Creador de CV"
+    },
+    "account": "Tu cuenta",
+    "memberSince": "Miembro desde",
+    "sections": "Secciones del perfil",
+    "tabs": {
+      "account": "Cuenta",
+      "language": "Idioma",
+      "security": "Seguridad"
     }
   },
   "publicSpace": {
@@ -852,6 +869,9 @@
       "thisIsYou": "Así ven tu perfil otros estudiantes.",
       "editProfile": "Editar mi perfil",
       "posts": "Publicaciones"
+    },
+    "friends": {
+      "subtitle": "Encuentra estudiantes, envía solicitudes de amistad y gestiona tus amigos."
     }
   },
   "notifications": {
@@ -1605,7 +1625,8 @@
         "attention": "necesita atención",
         "empty": "sin empezar"
       }
-    }
+    },
+    "subtitle": "Escribe tu CV y obtén un PDF profesional (premium, ₹50)."
   },
   "security": {
     "title": "Seguridad e inicios de sesión",
@@ -1969,5 +1990,11 @@
         "window_closed_at_verify": "El horario para teléfonos terminó antes de introducir el código"
       }
     }
+  },
+  "dashboard": {
+    "welcome": "Te damos la bienvenida, {{name}}",
+    "subtitle": "Encuentra prácticas, sigue tus solicitudes y haz crecer tu carrera, todo desde aquí.",
+    "viewProfile": "Ver perfil",
+    "modulesTitle": "Explora InternConnect"
   }
 }

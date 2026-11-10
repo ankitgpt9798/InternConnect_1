@@ -9,7 +9,8 @@
     "save": "Salvar alterações",
     "cancel": "Cancelar",
     "showPassword": "Mostrar senha",
-    "hidePassword": "Ocultar senha"
+    "hidePassword": "Ocultar senha",
+    "refresh": "Atualizar"
   },
   "nav": {
     "primary": "Principal",
@@ -31,7 +32,8 @@
     "people": "Amigos e pessoas",
     "applications": "Minhas candidaturas",
     "billing": "Cobrança e faturas",
-    "security": "Segurança"
+    "security": "Segurança",
+    "dashboard": "Painel"
   },
   "home": {
     "hero": {
@@ -74,7 +76,12 @@
     "cta": {
       "title": "Pronto para dar o próximo passo?",
       "description": "Crie uma conta gratuita e envie sua primeira candidatura hoje mesmo.",
-      "button": "Crie sua conta gratuita"
+      "button": "Crie sua conta gratuita",
+      "memberDescription": "Encontre seu próximo estágio e envie sua candidatura hoje mesmo.",
+      "memberButton": "Ir para seu painel"
+    },
+    "search": {
+      "button": "Pesquisar"
     }
   },
   "notFound": {
@@ -133,7 +140,8 @@
     },
     "error": "O idioma não foi alterado. {{reason}}",
     "loadFailed": "Não foi possível baixar este idioma. Verifique sua conexão e tente novamente.",
-    "dismiss": "Fechar"
+    "dismiss": "Fechar",
+    "historyError": "Não foi possível carregar o histórico de idiomas."
   },
   "auth": {
     "fields": {
@@ -237,7 +245,16 @@
       "none": "Você ainda não tem um currículo padrão. Gere um PDF do currículo no Criador de Currículo e ele aparecerá aqui.",
       "generated": "Gerado em {{date}}",
       "download": "Baixar PDF",
-      "manage": "Gerenciar currículos"
+      "manage": "Gerenciar currículos",
+      "create": "Crie um no Criador de Currículo"
+    },
+    "account": "Sua conta",
+    "memberSince": "Membro desde",
+    "sections": "Seções do perfil",
+    "tabs": {
+      "account": "Conta",
+      "language": "Idioma",
+      "security": "Segurança"
     }
   },
   "publicSpace": {
@@ -852,6 +869,9 @@
       "thisIsYou": "É assim que outros estudantes veem seu perfil.",
       "editProfile": "Editar meu perfil",
       "posts": "Publicações"
+    },
+    "friends": {
+      "subtitle": "Encontre estudantes, envie pedidos de amizade e gerencie seus amigos."
     }
   },
   "notifications": {
@@ -1605,7 +1625,8 @@
         "attention": "precisa de atenção",
         "empty": "não iniciada"
       }
-    }
+    },
+    "subtitle": "Escreva seu currículo e receba um PDF profissional (premium, ₹50)."
   },
   "security": {
     "title": "Segurança e acessos",
@@ -1969,5 +1990,11 @@
         "window_closed_at_verify": "O horário para celulares terminou antes de o código ser digitado"
       }
     }
+  },
+  "dashboard": {
+    "welcome": "Boas-vindas, {{name}}",
+    "subtitle": "Encontre estágios, acompanhe suas candidaturas e desenvolva sua carreira, tudo a partir daqui.",
+    "viewProfile": "Ver perfil",
+    "modulesTitle": "Explore o InternConnect"
   }
 }

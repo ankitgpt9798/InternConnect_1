@@ -125,7 +125,7 @@ export default function InternshipsPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[17rem_minmax(0,1fr)]">
-        <aside className="lg:sticky lg:top-6 lg:self-start">
+        <aside className="lg:sticky lg:top-22 lg:self-start">
           <InternshipFilters filters={filters} cities={cities} onChange={(key, value) => update({ [key]: value })} onClear={clearAll} />
         </aside>
 
