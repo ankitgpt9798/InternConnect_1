@@ -1,8 +1,36 @@
 import mongoose from 'mongoose';
 import Application, { COVER_LETTER_MAX, COVER_LETTER_MIN } from '../models/Application.js';
+import ApplicationResume from '../models/ApplicationResume.js';
+import GeneratedResume from '../models/GeneratedResume.js';
 import Internship, { ENGAGEMENTS, INTERNSHIP_CATEGORIES, WORK_MODES } from '../models/Internship.js';
 import { getApplicationQuota } from '../utils/quota.js';
+import { resumePdfBuffer } from '../utils/resumePdf.js';
 import { escapeRegex, toText } from '../utils/validators.js';
+
+// What the student sees about the resume sent with an application (never the file itself).
+const resumeInfo = (application) =>
+  application?.resume?.file ? { fileName: application.resume.fileName, size: application.resume.size, source: application.resume.source } : null;
+
+// A real PDF starts with "%PDF-" (allowed within the first 1 KB) and ends with "%%EOF" (allowed a little before the
+// end). Checking the bytes means a renamed photo or document is refused even if it is sent as "application/pdf".
+function looksLikePdf(buffer) {
+  if (!buffer || buffer.length < 16) return false;
+  return buffer.subarray(0, 1024).includes('%PDF-') && buffer.subarray(Math.max(0, buffer.length - 2048)).includes('%%EOF');
+}
+
+// "My Resume (final).pdf" stays readable; paths, quotes and unusual characters are removed.
+function safePdfName(original) {
+  const base = String(original ?? '')
+    .split(/[\\/]/)
+    .pop()
+    .replace(/\.pdf$/i, '');
+  const clean = base
+    .replace(/[^A-Za-z0-9 ._()-]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 80);
+  return `${clean || 'resume'}.pdf`;
+}
 
 function internshipResponse(internship, application = null) {
   return {
@@ -20,6 +48,8 @@ function internshipResponse(internship, application = null) {
     applyBy: internship.applyBy,
     isOpen: internship.applyBy > new Date(),
     appliedAt: application ? application.createdAt : null, // null = not applied yet
+    applicationId: application ? application._id : null,
+    resume: resumeInfo(application), // the resume sent with the student's application, if any
   };
 }
 
@@ -102,7 +132,10 @@ export async function getInternship(req, res) {
   res.json({ internship: internshipResponse(internship, application) });
 }
 
-// POST /api/internships/:id/apply  { coverLetter }
+// POST /api/internships/:id/apply - a cover letter and a resume, which is either
+//   an uploaded PDF (form field "resume", sent as multipart/form-data with "coverLetter"), or
+//   the student's InternConnect resume PDF from the Resume Builder ({ coverLetter, generatedResumeId }).
+// Everything is checked before anything is saved; the resume and the application are then saved together.
 export async function applyToInternship(req, res) {
   if (!mongoose.isValidObjectId(req.params.id)) return notFound(res);
   const internship = await Internship.findById(req.params.id);
@@ -112,6 +145,23 @@ export async function applyToInternship(req, res) {
   if (coverLetter.length < COVER_LETTER_MIN || coverLetter.length > COVER_LETTER_MAX) {
     return res.status(400).json({ message: `Write a cover letter of ${COVER_LETTER_MIN} to ${COVER_LETTER_MAX} characters.` });
   }
+
+  const generatedResumeId = toText(req.body?.generatedResumeId);
+  if (req.file && generatedResumeId) {
+    return res.status(400).json({ code: 'RESUME_CHOOSE_ONE', message: 'Choose one resume: upload a PDF or use your InternConnect resume.' });
+  }
+  if (!req.file && !generatedResumeId) {
+    return res.status(400).json({ code: 'RESUME_REQUIRED', message: 'Attach your resume as a PDF, or use your InternConnect resume.' });
+  }
+  if (req.file && !looksLikePdf(req.file.buffer)) {
+    return res.status(400).json({ code: 'RESUME_NOT_PDF', message: 'This file is not a valid PDF. Save your resume as a PDF and try again.' });
+  }
+  let generated = null;
+  if (generatedResumeId) {
+    generated = mongoose.isValidObjectId(generatedResumeId) ? await GeneratedResume.findOne({ _id: generatedResumeId, user: req.user._id }).lean() : null;
+    if (!generated) return res.status(400).json({ code: 'RESUME_NOT_FOUND', message: 'That InternConnect resume was not found. Upload a PDF instead.' });
+  }
+
   if (internship.applyBy <= new Date()) {
     return res.status(400).json({ message: 'Applications for this internship are closed.' });
   }
@@ -129,18 +179,66 @@ export async function applyToInternship(req, res) {
     });
   }
 
+  const resumeFile = req.file
+    ? { fileName: safePdfName(req.file.originalname), data: req.file.buffer, source: 'upload' }
+    : {
+        fileName: `${generated.content.personal.fullName.replace(/[^A-Za-z0-9]+/g, '-')}-Resume.pdf`,
+        data: await resumePdfBuffer(generated.content),
+        source: 'internconnect',
+      };
+
+  let application = null;
   try {
-    const application = await Application.create({ user: req.user._id, internship: internship._id, coverLetter });
-    res.status(201).json({
-      message: `You applied for ${internship.title} at ${internship.company}.`,
-      appliedAt: application.createdAt,
-      quota: await getApplicationQuota(req.user),
+    // One transaction: if the application cannot be saved, its resume is not kept either.
+    await mongoose.connection.transaction(async (dbSession) => {
+      const [stored] = await ApplicationResume.create(
+        [{ user: req.user._id, fileName: resumeFile.fileName, size: resumeFile.data.length, source: resumeFile.source, data: resumeFile.data }],
+        { session: dbSession },
+      );
+      [application] = await Application.create(
+        [
+          {
+            user: req.user._id,
+            internship: internship._id,
+            coverLetter,
+            resume: { file: stored._id, fileName: stored.fileName, size: stored.size, source: stored.source },
+          },
+        ],
+        { session: dbSession },
+      );
     });
   } catch (error) {
     // Two applications sent at the same moment: the unique index stops the second one.
     if (error.code === 11000) return res.status(409).json({ message: 'You have already applied for this internship.' });
     throw error;
   }
+
+  res.status(201).json({
+    message: `You applied for ${internship.title} at ${internship.company}.`,
+    appliedAt: application.createdAt,
+    applicationId: application._id,
+    resume: resumeInfo(application),
+    quota: await getApplicationQuota(req.user),
+  });
+}
+
+// GET /api/applications/:id/resume - the resume PDF sent with one of the student's own applications. Anyone else
+// (another student, or an application without a resume) gets "not found", so it does not reveal that it exists.
+export async function downloadApplicationResume(req, res) {
+  const missing = () => res.status(404).json({ message: 'Resume not found.' });
+  if (!mongoose.isValidObjectId(req.params.id)) return missing();
+  const application = await Application.findOne({ _id: req.params.id, user: req.user._id }).lean();
+  if (!application?.resume?.file) return missing();
+  const file = await ApplicationResume.findOne({ _id: application.resume.file, user: req.user._id });
+  if (!file) return missing();
+
+  res.set({
+    'Content-Type': 'application/pdf',
+    'Content-Disposition': `attachment; filename="${file.fileName.replace(/["\\\r\n]/g, '')}"`,
+    'X-Content-Type-Options': 'nosniff',
+    'Cache-Control': 'private, no-store',
+  });
+  res.send(Buffer.from(file.data));
 }
 
 // GET /api/applications - the logged-in student's applications, newest first
@@ -154,6 +252,7 @@ export async function getMyApplications(req, res) {
         id: application._id,
         coverLetter: application.coverLetter,
         appliedAt: application.createdAt,
+        resume: resumeInfo(application),
         internship: internshipResponse(application.internship, application),
       })),
   });

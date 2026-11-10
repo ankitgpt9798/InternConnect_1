@@ -1,3 +1,4 @@
+import { PassThrough } from 'node:stream';
 import PDFDocument from 'pdfkit';
 
 // One ATS-friendly template: a single column of real text in reading order, built-in fonts, no images or tables,
@@ -72,4 +73,16 @@ export function writeResumePdf(content, output) {
   }
 
   doc.end();
+}
+
+// The same PDF as bytes (for a copy kept with an internship application).
+export function resumePdfBuffer(content) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    const output = new PassThrough();
+    output.on('data', (chunk) => chunks.push(chunk));
+    output.on('end', () => resolve(Buffer.concat(chunks)));
+    output.on('error', reject);
+    writeResumePdf(content, output);
+  });
 }

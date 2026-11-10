@@ -1,9 +1,11 @@
+import { FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { getMyApplications } from '../api/internships.js';
+import { applicationResumeUrl, getMyApplications } from '../api/internships.js';
 import Alert from '../components/ui/Alert.jsx';
 import { formatDate, WORK_MODE_LABELS } from '../utils/format.js';
 import { getErrorMessage } from '../utils/getErrorMessage.js';
+import { formatFileSize } from '../utils/resumeFile.js';
 
 export default function ApplicationsPage() {
   const [applications, setApplications] = useState(null);
@@ -35,17 +37,29 @@ export default function ApplicationsPage() {
         </p>
       ) : (
         <ul className="divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          {applications.map(({ id, internship, appliedAt }) => (
-            <li key={id}>
-              <Link to={`/internships/${internship.id}`} className="flex flex-wrap items-center justify-between gap-2 px-5 py-4 hover:bg-slate-50">
-                <div className="min-w-0">
-                  <p className="font-semibold text-slate-900">{internship.title}</p>
+          {applications.map(({ id, internship, appliedAt, resume }) => (
+            <li key={id} className="px-5 py-4 hover:bg-slate-50">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Link to={`/internships/${internship.id}`} className="group min-w-0">
+                  <p className="font-semibold text-slate-900 group-hover:text-brand-700">{internship.title}</p>
                   <p className="text-sm text-slate-600">
                     {internship.company} · {internship.location} · {WORK_MODE_LABELS[internship.workMode]}
                   </p>
-                </div>
+                </Link>
                 <span className="text-sm text-slate-500">Applied {formatDate(appliedAt)}</span>
-              </Link>
+              </div>
+              {resume ? (
+                <p className="mt-2 flex flex-wrap items-center gap-1.5 text-sm text-slate-600">
+                  <FileText className="size-4 text-brand-700" aria-hidden="true" />
+                  Resume:
+                  <a href={applicationResumeUrl(id)} className="font-semibold break-all text-brand-700 hover:underline">
+                    {resume.fileName}
+                  </a>
+                  <span className="text-slate-500">({formatFileSize(resume.size)})</span>
+                </p>
+              ) : (
+                <p className="mt-2 text-sm text-slate-500">No resume attached</p>
+              )}
             </li>
           ))}
         </ul>

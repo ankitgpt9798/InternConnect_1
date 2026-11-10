@@ -63,6 +63,33 @@ export class Browser {
     return this.request('POST', path, body);
   }
 
+  // Sends a form with files (multipart/form-data), e.g. an internship application with a resume PDF.
+  async postForm(path, form) {
+    const headers = { 'user-agent': this.userAgent, 'x-forwarded-for': this.ip, ...this.headers };
+    const cookies = [...this.jar.entries()].filter(([, cookie]) => path.startsWith(cookie.path)).map(([name, cookie]) => `${name}=${cookie.value}`);
+    if (cookies.length > 0) headers.cookie = cookies.join('; ');
+    const response = await fetch(this.base + path, { method: 'POST', headers, body: form });
+    this.storeCookies(response);
+    const text = await response.text();
+    let data = text;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // not JSON
+    }
+    return { status: response.status, data, headers: response.headers };
+  }
+
+  // Downloads a file and returns its bytes.
+  async download(path) {
+    const headers = { 'user-agent': this.userAgent, 'x-forwarded-for': this.ip, ...this.headers };
+    const cookies = [...this.jar.entries()].filter(([, cookie]) => path.startsWith(cookie.path)).map(([name, cookie]) => `${name}=${cookie.value}`);
+    if (cookies.length > 0) headers.cookie = cookies.join('; ');
+    const response = await fetch(this.base + path, { headers });
+    this.storeCookies(response);
+    return { status: response.status, bytes: Buffer.from(await response.arrayBuffer()), headers: response.headers };
+  }
+
   login(student, client) {
     return this.post('/api/auth/login', { identifier: student.email, password: student.password, ...(client && { client }) });
   }
