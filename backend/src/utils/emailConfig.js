@@ -1,50 +1,29 @@
-// Which mail server InternConnect sends its emails through (sign-in codes, new passwords, invoices). Every setting comes
-// from environment variables; nothing secret is written in the code.
-//   Development and testing: Mailtrap Email Testing, a sandbox inbox that never delivers to real addresses
-//     (MAILTRAP_USER, MAILTRAP_PASS; MAILTRAP_HOST and MAILTRAP_PORT are optional, e.g. for a local email catcher).
-//   Production: a real SMTP service, Brevo (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and EMAIL_FROM, a sender address
-//     verified in Brevo). Port 587 must switch to TLS before logging in; port 465 uses TLS from the start.
+// Every email InternConnect sends (sign-in codes, new passwords, invoices) goes to the Mailtrap Email Testing sandbox:
+// an inbox at mailtrap.io that never delivers to real addresses. This is the same in development and in the Render
+// demo; during a demo the codes are read from the Mailtrap inbox. All settings come from environment variables:
+//   MAILTRAP_USER, MAILTRAP_PASS (required); MAILTRAP_HOST, MAILTRAP_PORT (optional, e.g. for a local email catcher).
 const SANDBOX_HOST = 'sandbox.smtp.mailtrap.io';
-const DEV_FROM = '"InternConnect" <no-reply@internconnect.test>';
+const FROM = '"InternConnect" <no-reply@internconnect.test>';
 
 export function emailSettings(env = process.env) {
-  if (env.SMTP_HOST) {
-    const port = Number(env.SMTP_PORT) || 587;
-    return {
-      provider: 'smtp',
-      transport: { host: env.SMTP_HOST, port, secure: port === 465, requireTLS: port === 587, auth: { user: env.SMTP_USER, pass: env.SMTP_PASS } },
-      from: env.EMAIL_FROM,
-    };
-  }
   return {
-    provider: 'mailtrap',
-    transport: { host: env.MAILTRAP_HOST || SANDBOX_HOST, port: Number(env.MAILTRAP_PORT) || 2525, auth: { user: env.MAILTRAP_USER, pass: env.MAILTRAP_PASS } },
-    from: env.EMAIL_FROM || DEV_FROM,
+    transport: {
+      host: env.MAILTRAP_HOST || SANDBOX_HOST,
+      port: Number(env.MAILTRAP_PORT) || 2525,
+      auth: { user: env.MAILTRAP_USER, pass: env.MAILTRAP_PASS },
+    },
+    from: FROM,
   };
 }
 
-const missing = (env, keys) => keys.filter((key) => !env[key]);
-const hasAddress = (from) => /<[^<>\s@]+@[^<>\s@]+\.[^<>\s@]+>$|^[^<>\s@]+@[^<>\s@]+\.[^<>\s@]+$/.test(String(from ?? '').trim());
-
-// Problems that stop the server from starting. Production must use the real SMTP service, never the sandbox.
+// Problems that stop the server from starting.
 export function emailConfigProblems(env = process.env) {
-  if (env.NODE_ENV === 'production') {
-    const gaps = missing(env, ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS', 'EMAIL_FROM']);
-    if (gaps.length > 0) return [`Production sends real email through SMTP (Brevo): set ${gaps.join(', ')}. The Mailtrap sandbox is for development and testing only.`];
-    if (env.SMTP_HOST.trim().toLowerCase() === SANDBOX_HOST) return ['SMTP_HOST is the Mailtrap sandbox, which never delivers email. Use the Brevo SMTP server in production.'];
-    if (!hasAddress(env.EMAIL_FROM)) return ['EMAIL_FROM must be an email address, e.g. InternConnect <no-reply@your-domain.com> (verified in Brevo).'];
-    return [];
-  }
-  if (env.SMTP_HOST) {
-    const gaps = missing(env, ['SMTP_USER', 'SMTP_PASS', 'EMAIL_FROM']);
-    return gaps.length > 0 ? [`SMTP_HOST is set, so also set ${gaps.join(', ')}.`] : [];
-  }
-  const gaps = missing(env, ['MAILTRAP_USER', 'MAILTRAP_PASS']);
-  return gaps.length > 0 ? [`Set ${gaps.join(', ')} (Mailtrap Email Testing) for development, or SMTP_* for a real mail server.`] : [];
+  const missing = ['MAILTRAP_USER', 'MAILTRAP_PASS'].filter((key) => !env[key]);
+  return missing.length > 0 ? [`Set ${missing.join(', ')} (Mailtrap Email Testing): sign-in codes and other emails are sent there.`] : [];
 }
 
-// "Brevo/SMTP smtp-relay.brevo.com:587" or "Mailtrap sandbox": for the startup log (never the login or password).
+// "Mailtrap sandbox" (or the local catcher's address) for the startup log; never the login or password.
 export function describeEmail(env = process.env) {
-  const { provider, transport } = emailSettings(env);
-  return provider === 'smtp' ? `SMTP ${transport.host}:${transport.port}` : `Mailtrap ${transport.host === SANDBOX_HOST ? 'sandbox' : `${transport.host}:${transport.port}`}`;
+  const { host, port } = emailSettings(env).transport;
+  return host === SANDBOX_HOST ? 'Mailtrap sandbox' : `Mailtrap-compatible server ${host}:${port}`;
 }

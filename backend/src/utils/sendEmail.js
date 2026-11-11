@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import { emailSettings } from './emailConfig.js';
 
-// Development and testing: the Mailtrap sandbox (nothing reaches real inboxes). Production: Brevo SMTP. See emailConfig.js.
+// Mailtrap Email Testing keeps every email in a sandbox inbox (mailtrap.io) and never delivers it to real addresses.
 const settings = emailSettings();
 const transporter = nodemailer.createTransport(settings.transport);
 

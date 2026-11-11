@@ -15,7 +15,7 @@ console.log(`Target database: ${database}`);
 
 // Production data is only added on purpose: a production database (name containing "prod", or NODE_ENV=production)
 // needs the database name repeated on the command line, e.g.
-//   npm run seed:internships -- --confirm-production=internconnect_prod
+//   npm run seed:internships -- --confirm-production=<database name>
 const isProductionTarget = /prod/i.test(database) || process.env.NODE_ENV === 'production';
 const confirmed = process.argv.includes(`--confirm-production=${database}`);
 if (isProductionTarget && !confirmed) {

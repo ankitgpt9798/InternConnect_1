@@ -34,7 +34,7 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-// Development and testing use the Mailtrap sandbox; production must use the real SMTP service (Brevo).
+// Emails (sign-in codes, new passwords, invoices) go to the Mailtrap sandbox, locally and in the Render demo.
 const emailProblems = emailConfigProblems();
 if (emailProblems.length > 0) {
   console.error(emailProblems.join(' '));
