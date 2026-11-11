@@ -7,10 +7,13 @@ import Device from './models/Device.js';
 import LoginActivity from './models/LoginActivity.js';
 import LoginChallenge from './models/LoginChallenge.js';
 import Session from './models/Session.js';
+import { describeEmail, emailConfigProblems } from './utils/emailConfig.js';
 import { loadGeoIp } from './utils/geoip.js';
 import { sessionTestMinutes, windowTestMode } from './utils/mobileLoginWindow.js';
 import { testOverrideActive } from './utils/paymentWindow.js';
 import { startSecuritySweeper } from './utils/securitySweeper.js';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const REQUIRED_ENV = [
   'MONGODB_URI',
@@ -18,15 +21,29 @@ const REQUIRED_ENV = [
   'CLOUDINARY_CLOUD_NAME',
   'CLOUDINARY_API_KEY',
   'CLOUDINARY_API_SECRET',
-  'MAILTRAP_USER',
-  'MAILTRAP_PASS',
   'RAZORPAY_KEY_ID',
   'RAZORPAY_KEY_SECRET',
+  // Behind Render's proxy every request seems to come from the proxy unless it is trusted; the sign-in limits and
+  // the new-IP checks (Module 6) need the student's real address.
+  ...(isProduction ? ['TRUST_PROXY'] : []),
 ];
 const missing = REQUIRED_ENV.filter((key) => !process.env[key]);
 if (missing.length > 0) {
-  console.error(`Missing environment variables: ${missing.join(', ')}. Copy backend/.env.example to backend/.env.`);
+  const where = isProduction ? 'Set them in the Render dashboard (Environment).' : 'Copy backend/.env.example to backend/.env.';
+  console.error(`Missing environment variables: ${missing.join(', ')}. ${where}`);
   process.exit(1);
+}
+
+// Development and testing use the Mailtrap sandbox; production must use the real SMTP service (Brevo).
+const emailProblems = emailConfigProblems();
+if (emailProblems.length > 0) {
+  console.error(emailProblems.join(' '));
+  process.exit(1);
+}
+
+// Session cookies are "Secure" in production, so the site must be served over HTTPS.
+if (isProduction && !process.env.CLIENT_URL.startsWith('https://')) {
+  console.warn('CLIENT_URL should be the https:// address of the site in production (session cookies are sent over HTTPS only).');
 }
 
 // This project uses Razorpay Test Mode only, so live keys are refused.
@@ -61,5 +78,5 @@ if (!geo.loaded) {
 startSecuritySweeper();
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT} (${isProduction ? 'production' : process.env.NODE_ENV || 'development'}; email: ${describeEmail()})`);
 });

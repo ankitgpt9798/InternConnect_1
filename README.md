@@ -261,7 +261,7 @@ npm run install:all
 # Create the backend settings file and fill in the values (never commit it)
 Copy-Item backend\.env.example backend\.env
 
-# Load the 12 sample internship listings (fictional companies; safe to run again, it only refreshes deadlines)
+# Load the 20 sample internship listings (fictional companies; safe to run again, it only refreshes them)
 npm run seed:internships
 
 # Optional: approximate sign-in locations (see "Login security"): save GeoLite2-City.mmdb in backend\data\
@@ -273,8 +273,8 @@ npm run dev
 npm test
 ```
 
-Open http://localhost:5173. The **System status** card shows `Online` and `connected` when the React app can reach
-the API and the API can reach MongoDB. You can also open http://localhost:5000/api/health directly. Use
+Open http://localhost:5173. The **Service status** in the footer shows `Online` when the React app can reach the API
+and the API can reach MongoDB. You can also open http://localhost:5000/api/health directly. Use
 **Register** to create an account; you then land on your dashboard.
 
 ## Scripts (run from the project root)
@@ -286,7 +286,9 @@ the API and the API can reach MongoDB. You can also open http://localhost:5000/a
 | `npm run dev:backend`  | Starts only the API (restarts on file changes) |
 | `npm run dev:frontend` | Starts only the React app                      |
 | `npm run build`        | Production build of the React app (`frontend/dist`) |
-| `npm run seed:internships` | Adds the sample internship listings, or refreshes their deadlines |
+| `npm run render-build` | Render's build: installs the backend (without test tools) and the frontend, then builds the React app |
+| `npm start`            | Starts the API in the current environment (Render runs this; in production it also serves `frontend/dist`) |
+| `npm run seed:internships` | Adds the sample internship listings, or refreshes them. Refuses production databases unless confirmed (see Deploy on Render) |
 | `npm run lint`         | Checks the frontend code with ESLint           |
 | `npm test`             | Runs the backend tests (unit and API tests against an in-memory MongoDB) |
 
@@ -304,10 +306,46 @@ git-ignored and must never be committed.
 | `TRUST_PROXY` | Optional: proxies allowed to report the client IP. Empty = only the local Vite dev server; in production the number of proxies in front of the API, e.g. `1` (`true` is refused) |
 | `GEOIP_DB_PATH` | Optional: path of the GeoLite2 City database (default `backend/data/GeoLite2-City.mmdb`) |
 | `MOBILE_LOGIN_WINDOW_TEST`, `MOBILE_SESSION_TEST_MINUTES` | Optional, local testing only: force the phone/tablet window `open`/`closed`, end phone sessions after N minutes (ignored in production) |
-| `MAILTRAP_USER`, `MAILTRAP_PASS` | Mailtrap Email Testing sandbox for OTP and invoice emails |
+| `MAILTRAP_USER`, `MAILTRAP_PASS` | Development and testing: Mailtrap Email Testing sandbox for codes and invoices (nothing reaches real inboxes) |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM` | Production: Brevo SMTP for real email delivery, and the sender verified in Brevo. Required when `NODE_ENV=production`; when `SMTP_HOST` is set it is used instead of Mailtrap |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys (only `rzp_test_` keys are accepted) |
 | `PAYMENT_WINDOW_TEST_OPEN` | Optional, local testing only: `true` allows plan payments outside 5:00-11:45 AM IST (ignored in production) |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Photo and video uploads |
+
+The three environments are kept apart:
+
+| | Development | Testing | Production (Render) |
+| --- | --- | --- | --- |
+| Settings | `backend/.env` (from `.env.example`) | set by the tests themselves (`backend/test/helpers/testServer.js`) | Render dashboard > Environment (listed in `render.yaml`) |
+| Database | Atlas `internconnect_new` | in-memory MongoDB, deleted after each run | Atlas `internconnect_prod` |
+| Email | Mailtrap sandbox | captured by the tests, never sent | Brevo SMTP |
+| Payments | Razorpay Test Mode | not called | Razorpay Test Mode |
+
+## Deploy on Render
+
+InternConnect runs on Render as **one Web Service**: Express serves the API and the built React app from the same
+`https://…onrender.com` address. Two separate services would put the site and the API on different sites, and the
+session cookies (`SameSite`) would not be sent. `render.yaml` describes the service; no secret is stored in it.
+
+1. **MongoDB Atlas**: in Network Access allow `0.0.0.0/0` (Render's Free plan has no fixed IP address), and use a
+   database user with a strong password. The production connection string ends in `/internconnect_prod`; the
+   database is created empty when the app first starts. `internconnect_new` (development) is not touched.
+2. **Brevo**: create an SMTP key (SMTP & API settings) and verify the sender address you will use in `EMAIL_FROM`.
+3. **Render**: New > Blueprint > choose this repository. Render reads `render.yaml` and asks for each secret:
+   `CLIENT_URL` (the service's own address, e.g. `https://internconnect.onrender.com`), `MONGODB_URI`,
+   `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, the Razorpay Test Mode keys and the Cloudinary keys.
+4. **Deploy**. Render runs `npm run render-build`, then `npm start`, and checks `/api/health`. The server refuses to
+   start without the production email settings or `TRUST_PROXY`, and with live Razorpay keys.
+5. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
+   real public IP. If it shows a Render address instead, set `TRUST_PROXY` to `2` and redeploy.
+
+Notes:
+
+- **Free plan**: the service sleeps after 15 minutes without visits; the next visit takes about a minute to wake it.
+- **Sample listings in production** are never added automatically. To add them on purpose:
+  `npm run seed:internships -- --confirm-production=internconnect_prod`, with `MONGODB_URI` pointing at the
+  production database. Without the confirmation the script stops before writing anything.
+- **Sign-in locations** show "Unknown" in production (no GeoLite2 file is deployed).
 
 ## Project structure
 

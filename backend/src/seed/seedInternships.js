@@ -10,6 +10,21 @@ import { SAMPLE_INTERNSHIPS } from './sampleInternships.js';
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 await connectDB();
+const database = mongoose.connection.name;
+console.log(`Target database: ${database}`);
+
+// Production data is only added on purpose: a production database (name containing "prod", or NODE_ENV=production)
+// needs the database name repeated on the command line, e.g.
+//   npm run seed:internships -- --confirm-production=internconnect_prod
+const isProductionTarget = /prod/i.test(database) || process.env.NODE_ENV === 'production';
+const confirmed = process.argv.includes(`--confirm-production=${database}`);
+if (isProductionTarget && !confirmed) {
+  console.error(`"${database}" is a production database, so nothing was added. To add the sample listings on purpose, run:`);
+  console.error(`  npm run seed:internships -- --confirm-production=${database}`);
+  await mongoose.disconnect();
+  process.exit(1);
+}
+
 const now = Date.now();
 let created = 0;
 let updated = 0;
