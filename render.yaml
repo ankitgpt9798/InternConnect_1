@@ -1,4 +1,4 @@
-# Render Blueprint for the InternConnect demo. Render > New > Blueprint > this repository.
+# Render Blueprint for InternConnect. Render > New > Blueprint > this repository.
 # One Web Service runs the API and serves the built React app from the same address, which the session cookies need.
 # Secrets are NOT stored here: every "sync: false" variable is typed in the Render dashboard when the Blueprint is
 # created (or later under Environment). Local development settings stay in backend/.env (see backend/.env.example).
@@ -25,10 +25,19 @@ services:
       # The same Atlas connection string as in backend/.env (database internconnect_new)
       - key: MONGODB_URI
         sync: false
-      # Mailtrap Email Testing: sign-in codes, new passwords and invoices are read in the Mailtrap inbox
-      - key: MAILTRAP_USER
+      # Brevo SMTP: sign-in codes, password reset codes and invoices go to each student's own email address.
+      # Encrypted connection (STARTTLS required on 2525, certificate checked). The server refuses to start without these.
+      - key: SMTP_HOST
+        value: smtp-relay.brevo.com
+      - key: SMTP_PORT
+        value: '2525'
+      # Brevo > SMTP & API > SMTP: the "Login" (…@smtp-brevo.com) and an SMTP key
+      - key: SMTP_USER
         sync: false
-      - key: MAILTRAP_PASS
+      - key: SMTP_PASS
+        sync: false
+      # The sender verified in Brevo, e.g. InternConnect <your-project-mailbox@gmail.com>
+      - key: EMAIL_FROM
         sync: false
       # Razorpay Test Mode keys only (rzp_test_...); live keys are refused by the server
       - key: RAZORPAY_KEY_ID

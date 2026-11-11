@@ -9,7 +9,11 @@ import { buttonClasses } from '../components/ui/buttonStyles.js';
 import FormField from '../components/ui/FormField.jsx';
 import { getErrorMessage } from '../utils/getErrorMessage.js';
 
-// Three steps: 1. email or mobile number -> 2. the 6-digit code -> 3. the new password, shown once.
+// The deployed site (production build) has no SMS provider, so it asks for the email address only; the server refuses
+// mobile numbers there too. In local development the mock SMS (code in the backend terminal) still works.
+const SMS_AVAILABLE = !import.meta.env.PROD;
+
+// Three steps: 1. email (or, locally, mobile number) -> 2. the 6-digit code -> 3. the new password, shown once.
 export default function ForgotPasswordPage() {
   const [identifier, setIdentifier] = useState('');
   const [sent, setSent] = useState(null); // the server's answer once a code was sent
@@ -50,7 +54,7 @@ export default function ForgotPasswordPage() {
   async function handleRequest(event) {
     event.preventDefault();
     if (!identifier.trim()) {
-      setError('Enter your email or mobile number.');
+      setError(SMS_AVAILABLE ? 'Enter your email or mobile number.' : 'Enter your registered email address.');
       return;
     }
     await sendCode();
@@ -127,7 +131,9 @@ export default function ForgotPasswordPage() {
   return (
     <AuthCard
       title="Forgot password"
-      subtitle={sent ? 'Enter the code we sent you.' : 'We will send a 6-digit code to your email or mobile number.'}
+      subtitle={
+        sent ? 'Enter the code we sent you.' : SMS_AVAILABLE ? 'We will send a 6-digit code to your email or mobile number.' : 'We will send a 6-digit code to your registered email address.'
+      }
       footer={
         <Link to="/login" className="font-semibold text-brand-700 hover:underline">
           Back to log in
@@ -169,7 +175,7 @@ export default function ForgotPasswordPage() {
         <form onSubmit={handleRequest} noValidate className="space-y-4">
           {error && <Alert>{error}</Alert>}
           <FormField
-            label="Email or mobile number"
+            label={SMS_AVAILABLE ? 'Email or mobile number' : 'Email address'}
             id="identifier"
             value={identifier}
             onChange={(event) => setIdentifier(event.target.value)}

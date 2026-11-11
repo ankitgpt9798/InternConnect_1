@@ -13,7 +13,7 @@ import {
 } from '../utils/otp.js';
 import { sendEmail } from '../utils/sendEmail.js';
 import { revokeAllAccess } from '../utils/sessions.js';
-import { sendSms } from '../utils/sendSms.js';
+import { sendSms, smsAvailable } from '../utils/sendSms.js';
 import { EMAIL_REGEX, PHONE_REGEX, toText } from '../utils/validators.js';
 
 const PURPOSE = 'password_reset';
@@ -31,6 +31,12 @@ async function findAccount(req, res) {
 
   if (byEmail ? !EMAIL_REGEX.test(identifier) : !PHONE_REGEX.test(identifier)) {
     res.status(400).json({ message: 'Enter a valid email address or 10-digit mobile number.' });
+    return null;
+  }
+  // Production has no SMS provider, so a mobile number is refused before any lookup (this also does not reveal whether
+  // an account uses that number). Locally the mock SMS still works.
+  if (!byEmail && !smsAvailable()) {
+    res.status(400).json({ code: 'SMS_UNAVAILABLE', message: 'Password reset by mobile number is not available here. Enter your registered email address instead.' });
     return null;
   }
   const user = await User.findOne(byEmail ? { email: identifier } : { phone: identifier });
