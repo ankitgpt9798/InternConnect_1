@@ -306,46 +306,50 @@ git-ignored and must never be committed.
 | `TRUST_PROXY` | Optional: proxies allowed to report the client IP. Empty = only the local Vite dev server; in production the number of proxies in front of the API, e.g. `1` (`true` is refused) |
 | `GEOIP_DB_PATH` | Optional: path of the GeoLite2 City database (default `backend/data/GeoLite2-City.mmdb`) |
 | `MOBILE_LOGIN_WINDOW_TEST`, `MOBILE_SESSION_TEST_MINUTES` | Optional, local testing only: force the phone/tablet window `open`/`closed`, end phone sessions after N minutes (ignored in production) |
-| `MAILTRAP_USER`, `MAILTRAP_PASS` | Development and testing: Mailtrap Email Testing sandbox for codes and invoices (nothing reaches real inboxes) |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM` | Production: Brevo SMTP for real email delivery, and the sender verified in Brevo. Required when `NODE_ENV=production`; when `SMTP_HOST` is set it is used instead of Mailtrap |
+| `MAILTRAP_USER`, `MAILTRAP_PASS` | Mailtrap Email Testing sandbox for sign-in codes, new passwords and invoices, locally and in the Render demo (nothing reaches real inboxes) |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys (only `rzp_test_` keys are accepted) |
 | `PAYMENT_WINDOW_TEST_OPEN` | Optional, local testing only: `true` allows plan payments outside 5:00-11:45 AM IST (ignored in production) |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Photo and video uploads |
 
-The three environments are kept apart:
+Where each environment gets its settings:
 
-| | Development | Testing | Production (Render) |
+| | Local development | Tests | Render demo |
 | --- | --- | --- | --- |
 | Settings | `backend/.env` (from `.env.example`) | set by the tests themselves (`backend/test/helpers/testServer.js`) | Render dashboard > Environment (listed in `render.yaml`) |
-| Database | Atlas `internconnect_new` | in-memory MongoDB, deleted after each run | Atlas `internconnect_prod` |
-| Email | Mailtrap sandbox | captured by the tests, never sent | Brevo SMTP |
+| Database | Atlas `internconnect_new` | in-memory MongoDB, deleted after each run | Atlas `internconnect_new` (the same data as local development) |
+| Email | Mailtrap sandbox | captured by the tests, never sent | Mailtrap sandbox |
 | Payments | Razorpay Test Mode | not called | Razorpay Test Mode |
 
-## Deploy on Render
+## Deploy on Render (demo)
 
-InternConnect runs on Render as **one Web Service**: Express serves the API and the built React app from the same
-`https://…onrender.com` address. Two separate services would put the site and the API on different sites, and the
-session cookies (`SameSite`) would not be sent. `render.yaml` describes the service; no secret is stored in it.
+InternConnect is an academic and portfolio project. It can be shown online on Render's **Free** plan as **one Web
+Service**: Express serves the API and the built React app from the same `https://…onrender.com` address. Two separate
+services would put the site and the API on different sites, and the session cookies (`SameSite`) would not be sent.
+`render.yaml` describes the service; no secret is stored in it. No paid service is needed.
 
-1. **MongoDB Atlas**: in Network Access allow `0.0.0.0/0` (Render's Free plan has no fixed IP address), and use a
-   database user with a strong password. The production connection string ends in `/internconnect_prod`; the
-   database is created empty when the app first starts. `internconnect_new` (development) is not touched.
-2. **Brevo**: create an SMTP key (SMTP & API settings) and verify the sender address you will use in `EMAIL_FROM`.
-3. **Render**: New > Blueprint > choose this repository. Render reads `render.yaml` and asks for each secret:
+1. **MongoDB Atlas**: in Network Access allow `0.0.0.0/0` (Render's Free plan has no fixed IP address). Use the same
+   connection string as in `backend/.env` (database `internconnect_new`); keep a strong database password.
+2. **Render**: New > Blueprint > choose this repository. Render reads `render.yaml` and asks for each secret:
    `CLIENT_URL` (the service's own address, e.g. `https://internconnect.onrender.com`), `MONGODB_URI`,
-   `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, the Razorpay Test Mode keys and the Cloudinary keys.
-4. **Deploy**. Render runs `npm run render-build`, then `npm start`, and checks `/api/health`. The server refuses to
-   start without the production email settings or `TRUST_PROXY`, and with live Razorpay keys.
-5. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
+   `MAILTRAP_USER`, `MAILTRAP_PASS`, the Razorpay Test Mode keys and the Cloudinary keys.
+3. **Deploy**. Render runs `npm run render-build`, then `npm start`, and checks `/api/health`. The server refuses to
+   start without `TRUST_PROXY` or the Mailtrap login, and with live Razorpay keys.
+4. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
    real public IP. If it shows a Render address instead, set `TRUST_PROXY` to `2` and redeploy.
 
-Notes:
+Tips for a reliable demo:
 
-- **Free plan**: the service sleeps after 15 minutes without visits; the next visit takes about a minute to wake it.
-- **Sample listings in production** are never added automatically. To add them on purpose:
-  `npm run seed:internships -- --confirm-production=internconnect_prod`, with `MONGODB_URI` pointing at the
-  production database. Without the confirmation the script stops before writing anything.
-- **Sign-in locations** show "Unknown" in production (no GeoLite2 file is deployed).
+- **Sign-in codes** go to the **Mailtrap inbox** (as in local development): open Mailtrap during the demo to read
+  them. The free sandbox has a monthly email limit, so prefer **Edge** for demos: after one code, a browser is
+  trusted for 30 days. Google Chrome always asks for a code (Module 6 rule).
+- **Free plan**: the service sleeps after 15 minutes without visits; open the site about a minute before the demo.
+- **Shared data**: the demo and local `npm run dev` both use `internconnect_new`, so accounts and posts created in
+  one also appear in the other.
+- **Time rules** are features and also apply in the demo: phones and tablets can sign in only from 10:00 AM to
+  1:00 PM IST, and plan purchases (Razorpay Test Mode) are possible only from 5:00 to 11:45 AM IST.
+- **Sign-in locations** show "Unknown" (no GeoLite2 file is deployed).
+- The seed script refuses databases whose name contains "prod" unless confirmed with
+  `npm run seed:internships -- --confirm-production=<database name>`; `internconnect_new` is not affected.
 
 ## Project structure
 

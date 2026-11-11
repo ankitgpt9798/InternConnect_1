@@ -1,12 +1,12 @@
-# Render Blueprint for InternConnect (production). Render > New > Blueprint > this repository.
+# Render Blueprint for the InternConnect demo. Render > New > Blueprint > this repository.
 # One Web Service runs the API and serves the built React app from the same address, which the session cookies need.
 # Secrets are NOT stored here: every "sync: false" variable is typed in the Render dashboard when the Blueprint is
-# created (or later under Environment). Development settings stay in backend/.env (see backend/.env.example).
+# created (or later under Environment). Local development settings stay in backend/.env (see backend/.env.example).
 services:
   - type: web
     name: internconnect
     runtime: node
-    plan: free # Free: sleeps after 15 minutes without visits. Change only after deciding on a paid plan.
+    plan: free # Free: sleeps after 15 minutes without visits; the next visit takes about a minute to wake it.
     region: singapore
     branch: main
     buildCommand: npm run render-build
@@ -22,20 +22,13 @@ services:
       # The site's own https address on Render, e.g. https://internconnect.onrender.com
       - key: CLIENT_URL
         sync: false
-      # Atlas connection string ending in /internconnect_prod (the production database, separate from development)
+      # The same Atlas connection string as in backend/.env (database internconnect_new)
       - key: MONGODB_URI
         sync: false
-      # Brevo SMTP (real email delivery for sign-in codes, new passwords and invoices)
-      - key: SMTP_HOST
-        value: smtp-relay.brevo.com
-      - key: SMTP_PORT
-        value: '587'
-      - key: SMTP_USER
+      # Mailtrap Email Testing: sign-in codes, new passwords and invoices are read in the Mailtrap inbox
+      - key: MAILTRAP_USER
         sync: false
-      - key: SMTP_PASS
-        sync: false
-      # A sender verified in Brevo, e.g. InternConnect <no-reply@your-domain.com>
-      - key: EMAIL_FROM
+      - key: MAILTRAP_PASS
         sync: false
       # Razorpay Test Mode keys only (rzp_test_...); live keys are refused by the server
       - key: RAZORPAY_KEY_ID
