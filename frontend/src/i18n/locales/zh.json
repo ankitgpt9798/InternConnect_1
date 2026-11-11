@@ -9,7 +9,8 @@
     "save": "保存更改",
     "cancel": "取消",
     "showPassword": "显示密码",
-    "hidePassword": "隐藏密码"
+    "hidePassword": "隐藏密码",
+    "refresh": "刷新"
   },
   "nav": {
     "primary": "主导航",
@@ -30,7 +31,8 @@
     "people": "好友和用户",
     "applications": "我的申请",
     "billing": "账单和发票",
-    "security": "安全"
+    "security": "安全",
+    "dashboard": "仪表板"
   },
   "home": {
     "hero": {
@@ -73,7 +75,12 @@
     "cta": {
       "title": "准备好迈出下一步了吗？",
       "description": "创建免费账户，今天就发出你的第一份申请。",
-      "button": "创建免费账户"
+      "button": "创建免费账户",
+      "memberDescription": "找到你的下一份实习，今天就发出申请。",
+      "memberButton": "前往仪表板"
+    },
+    "search": {
+      "button": "搜索"
     }
   },
   "notFound": {
@@ -132,7 +139,8 @@
     },
     "error": "语言未更改。{{reason}}",
     "loadFailed": "无法下载该语言。请检查网络连接后重试。",
-    "dismiss": "关闭"
+    "dismiss": "关闭",
+    "historyError": "无法加载语言记录。"
   },
   "auth": {
     "fields": {
@@ -235,7 +243,16 @@
       "none": "还没有默认简历。在简历生成器中生成 PDF 简历后，它会显示在这里。",
       "generated": "生成于 {{date}}",
       "download": "下载 PDF",
-      "manage": "管理简历"
+      "manage": "管理简历",
+      "create": "在简历生成器中创建"
+    },
+    "account": "你的账户",
+    "memberSince": "注册时间",
+    "sections": "资料分区",
+    "tabs": {
+      "account": "账户",
+      "language": "语言",
+      "security": "安全"
     }
   },
   "publicSpace": {
@@ -828,6 +845,9 @@
       "thisIsYou": "其他同学看到的你的资料就是这样。",
       "editProfile": "编辑我的资料",
       "posts": "动态"
+    },
+    "friends": {
+      "subtitle": "查找同学、发送好友请求并管理你的好友。"
     }
   },
   "notifications": {
@@ -1570,7 +1590,8 @@
         "attention": "需要处理",
         "empty": "未开始"
       }
-    }
+    },
+    "subtitle": "填写简历，获取专业 PDF（高级版，₹50）。"
   },
   "security": {
     "title": "安全与登录",
@@ -1917,5 +1938,11 @@
         "window_closed_at_verify": "输入验证码之前，手机登录时段已结束"
       }
     }
+  },
+  "dashboard": {
+    "welcome": "欢迎，{{name}}",
+    "subtitle": "在这里查找实习、跟踪申请并发展你的职业。",
+    "viewProfile": "查看资料",
+    "modulesTitle": "探索 InternConnect"
   }
 }

@@ -15,6 +15,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx';
 import NotificationsPage from './pages/NotificationsPage.jsx';
 import PlansPage from './pages/PlansPage.jsx';
 import PostDetailPage from './pages/PostDetailPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import PublicSpacePage from './pages/PublicSpacePage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import ResumeBuilderPage from './pages/ResumeBuilderPage.jsx';
@@ -35,6 +36,7 @@ export default function App() {
         {/* Only for logged-in users */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/public-space" element={<PublicSpacePage />} />
           <Route path="/posts/:id" element={<PostDetailPage />} />
           <Route path="/hashtags/:tag" element={<HashtagPage />} />

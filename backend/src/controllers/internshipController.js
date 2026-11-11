@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import Application, { COVER_LETTER_MAX, COVER_LETTER_MIN } from '../models/Application.js';
-import Internship, { WORK_MODES } from '../models/Internship.js';
+import Internship, { ENGAGEMENTS, INTERNSHIP_CATEGORIES, WORK_MODES } from '../models/Internship.js';
 import { getApplicationQuota } from '../utils/quota.js';
 import { escapeRegex, toText } from '../utils/validators.js';
 
@@ -11,6 +11,8 @@ function internshipResponse(internship, application = null) {
     company: internship.company,
     location: internship.location,
     workMode: internship.workMode,
+    category: internship.category ?? null, // null for a listing saved before categories existed
+    engagement: internship.engagement ?? 'full_time',
     stipend: { min: internship.stipend.min, max: internship.stipend.max },
     durationMonths: internship.durationMonths,
     skills: internship.skills,
@@ -23,9 +25,31 @@ function internshipResponse(internship, application = null) {
 
 const notFound = (res) => res.status(404).json({ message: 'Internship not found.' });
 
-// GET /api/internships?search=react&workMode=remote - open internships, closing soonest first
+// The orders the list can be shown in; closing soonest first unless the student picks another.
+const SORTS = {
+  deadline: { applyBy: 1, _id: 1 },
+  newest: { createdAt: -1, _id: -1 },
+  stipend: { 'stipend.max': -1, applyBy: 1, _id: 1 },
+};
+
+// A whole number from the query string within [min, max], or null (then the filter is not used).
+function wholeNumber(value, min, max) {
+  const text = toText(value);
+  if (!/^\d{1,7}$/.test(text)) return null;
+  const number = Number(text);
+  return number >= min && number <= max ? number : null;
+}
+
+// GET /api/internships - open internships. Optional filters (an unknown or invalid value is ignored):
+//   search       words in the title, company, skills or city
+//   category     one of INTERNSHIP_CATEGORIES        workMode    remote | office | hybrid
+//   engagement   full_time | part_time               city        exact city name (any letter case)
+//   minStipend   the top of the stipend range is at least this many rupees a month
+//   maxDuration  lasts at most this many months      sort        deadline (default) | newest | stipend
+// The answer also lists the cities that have open internships, for the City filter.
 export async function getInternships(req, res) {
-  const filter = { applyBy: { $gt: new Date() } };
+  const now = new Date();
+  const filter = { applyBy: { $gt: now } };
 
   const search = toText(req.query.search).slice(0, 50);
   if (search) {
@@ -35,13 +59,36 @@ export async function getInternships(req, res) {
   const workMode = toText(req.query.workMode);
   if (WORK_MODES.includes(workMode)) filter.workMode = workMode;
 
-  const internships = await Internship.find(filter).sort({ applyBy: 1 });
+  const category = toText(req.query.category);
+  if (INTERNSHIP_CATEGORIES.includes(category)) filter.category = category;
+
+  const engagement = toText(req.query.engagement);
+  // A listing saved before this field existed counts as full time (the default).
+  if (ENGAGEMENTS.includes(engagement)) filter.engagement = engagement === 'full_time' ? { $in: ['full_time', null] } : engagement;
+
+  const city = toText(req.query.city).slice(0, 50);
+  if (city) filter.location = { $regex: `^${escapeRegex(city)}$`, $options: 'i' };
+
+  const minStipend = wholeNumber(req.query.minStipend, 1, 1_000_000);
+  if (minStipend !== null) filter['stipend.max'] = { $gte: minStipend };
+
+  const maxDuration = wholeNumber(req.query.maxDuration, 1, 24);
+  if (maxDuration !== null) filter.durationMonths = { $lte: maxDuration };
+
+  const sortKey = toText(req.query.sort);
+  const sort = Object.hasOwn(SORTS, sortKey) ? SORTS[sortKey] : SORTS.deadline;
+
+  const [internships, locations] = await Promise.all([
+    Internship.find(filter).sort(sort),
+    Internship.distinct('location', { applyBy: { $gt: now }, workMode: { $ne: 'remote' } }),
+  ]);
   const applications = await Application.find({ user: req.user._id, internship: { $in: internships.map((item) => item._id) } });
 
   res.json({
     internships: internships.map((internship) =>
       internshipResponse(internship, applications.find((application) => application.internship.equals(internship._id))),
     ),
+    cities: locations.filter((location) => location.toLowerCase() !== 'remote').sort((a, b) => a.localeCompare(b, 'en')),
   });
 }
 

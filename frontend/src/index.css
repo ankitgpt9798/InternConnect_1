@@ -16,6 +16,11 @@
   --color-brand-700: #1d5fd8;
   --color-brand-800: #1e4daf;
   --color-brand-900: #1e438a;
+
+  /* Cards rest on a soft shadow and lift a little on hover (shadow-card, shadow-card-hover). */
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-raised: 0 12px 32px -8px rgb(15 23 42 / 0.18), 0 4px 8px -4px rgb(15 23 42 / 0.08);
 }
 
 @layer base {

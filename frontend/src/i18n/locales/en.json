@@ -9,7 +9,8 @@
     "save": "Save changes",
     "cancel": "Cancel",
     "showPassword": "Show password",
-    "hidePassword": "Hide password"
+    "hidePassword": "Hide password",
+    "refresh": "Refresh"
   },
   "nav": {
     "primary": "Primary",
@@ -30,7 +31,8 @@
     "people": "Friends and people",
     "applications": "My applications",
     "billing": "Billing and invoices",
-    "security": "Security"
+    "security": "Security",
+    "dashboard": "Dashboard"
   },
   "home": {
     "hero": {
@@ -73,7 +75,12 @@
     "cta": {
       "title": "Ready to take the next step?",
       "description": "Create a free account and send your first application today.",
-      "button": "Create your free account"
+      "button": "Create your free account",
+      "memberDescription": "Find your next internship and send your application today.",
+      "memberButton": "Go to your dashboard"
+    },
+    "search": {
+      "button": "Search"
     }
   },
   "notFound": {
@@ -132,7 +139,8 @@
     },
     "error": "The language was not changed. {{reason}}",
     "loadFailed": "This language could not be downloaded. Check your connection and try again.",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "historyError": "Could not load language history."
   },
   "auth": {
     "fields": {
@@ -235,7 +243,16 @@
       "none": "No default resume yet. Generate a resume PDF in the Resume Builder and it appears here.",
       "generated": "Generated {{date}}",
       "download": "Download PDF",
-      "manage": "Manage resumes"
+      "manage": "Manage resumes",
+      "create": "Create one in the Resume Builder"
+    },
+    "account": "Your account",
+    "memberSince": "Member since",
+    "sections": "Profile sections",
+    "tabs": {
+      "account": "Account",
+      "language": "Language",
+      "security": "Security"
     }
   },
   "publicSpace": {
@@ -828,6 +845,9 @@
       "thisIsYou": "This is how other students see your profile.",
       "editProfile": "Edit my profile",
       "posts": "Posts"
+    },
+    "friends": {
+      "subtitle": "Find students, send friend requests and manage your friends."
     }
   },
   "notifications": {
@@ -1570,7 +1590,8 @@
         "attention": "needs attention",
         "empty": "not started"
       }
-    }
+    },
+    "subtitle": "Write your resume and get a professional PDF (premium, ₹50)."
   },
   "security": {
     "title": "Security and sign-ins",
@@ -1924,5 +1945,11 @@
         "window_closed_at_verify": "The phone sign-in window closed before the code was entered"
       }
     }
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "subtitle": "Find internships, track your applications and grow your career, all from here.",
+    "viewProfile": "View profile",
+    "modulesTitle": "Explore InternConnect"
   }
 }
