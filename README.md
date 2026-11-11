@@ -70,8 +70,10 @@ connect with other students in a shared Public Space.
   same email or phone. The old password stops working.
 - A password can be reset **once per day** (calendar day in India time); after that the student sees
   "You can use this option only once per day."
-- Emails go to the **Mailtrap** sandbox inbox (mailtrap.io), not to real addresses. **SMS is simulated:** no SMS
-  provider is set up, so the text, including the code, is printed in the backend terminal.
+- Locally, emails go to the **Mailtrap** sandbox inbox (mailtrap.io), not to real addresses; on Render they go to the
+  student's own address through **Brevo**. **SMS is simulated locally only:** no SMS provider is set up, so the text,
+  including the code, is printed in the backend terminal. In production (Render) reset by mobile number is turned off
+  (the server answers `SMS_UNAVAILABLE` before looking up any account) and codes are never printed in the logs.
 
 ## Internships and applications
 
@@ -180,7 +182,7 @@ Every rule is enforced by the server; the app only shows the result.
   on and the app shows why). A new IP address alone never refuses a sign-in.
 - **Registration:** every new account confirms its email with a code before it gets a session. A phone or tablet
   outside the window creates the account but is not signed in.
-- Codes go to the **registered email** (Mailtrap), work for 10 minutes, only in the browser that typed the password,
+- Codes go to the **registered email** (Mailtrap locally, Brevo on Render), work for 10 minutes, only in the browser that typed the password,
   and are stored only as a bcrypt hash. 5 wrong codes end the sign-in; a new code needs 60 seconds; at most 3 new codes
   per sign-in and **6 codes per account per hour**. The email says which browser, approximate place, IP address and
   time the sign-in came from.
@@ -306,21 +308,23 @@ git-ignored and must never be committed.
 | `TRUST_PROXY` | Optional: proxies allowed to report the client IP. Empty = only the local Vite dev server; in production the number of proxies in front of the API, e.g. `1` (`true` is refused) |
 | `GEOIP_DB_PATH` | Optional: path of the GeoLite2 City database (default `backend/data/GeoLite2-City.mmdb`) |
 | `MOBILE_LOGIN_WINDOW_TEST`, `MOBILE_SESSION_TEST_MINUTES` | Optional, local testing only: force the phone/tablet window `open`/`closed`, end phone sessions after N minutes (ignored in production) |
-| `MAILTRAP_USER`, `MAILTRAP_PASS` | Mailtrap Email Testing sandbox for sign-in codes, new passwords and invoices, locally and in the Render demo (nothing reaches real inboxes) |
+| `MAILTRAP_USER`, `MAILTRAP_PASS` | Local development: Mailtrap Email Testing sandbox for sign-in codes, new passwords and invoices (nothing reaches real inboxes) |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM` | Render (production): Brevo SMTP, delivering every email to the student's own address, and the sender verified in Brevo. Required when `NODE_ENV=production`; always encrypted (STARTTLS required, certificate checked). Set only in the Render dashboard |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys (only `rzp_test_` keys are accepted) |
 | `PAYMENT_WINDOW_TEST_OPEN` | Optional, local testing only: `true` allows plan payments outside 5:00-11:45 AM IST (ignored in production) |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Photo and video uploads |
 
 Where each environment gets its settings:
 
-| | Local development | Tests | Render demo |
+| | Local development | Tests | Render |
 | --- | --- | --- | --- |
 | Settings | `backend/.env` (from `.env.example`) | set by the tests themselves (`backend/test/helpers/testServer.js`) | Render dashboard > Environment (listed in `render.yaml`) |
 | Database | Atlas `internconnect_new` | in-memory MongoDB, deleted after each run | Atlas `internconnect_new` (the same data as local development) |
-| Email | Mailtrap sandbox | captured by the tests, never sent | Mailtrap sandbox |
+| Email | Mailtrap sandbox | captured by the tests, never sent | Brevo SMTP to each student's own address |
+| Password reset by mobile | mock SMS (code printed in the terminal) | tested | turned off (no SMS provider; email only) |
 | Payments | Razorpay Test Mode | not called | Razorpay Test Mode |
 
-## Deploy on Render (demo)
+## Deploy on Render
 
 InternConnect is an academic and portfolio project. It can be shown online on Render's **Free** plan as **one Web
 Service**: Express serves the API and the built React app from the same `https://…onrender.com` address. Two separate
@@ -329,19 +333,23 @@ services would put the site and the API on different sites, and the session cook
 
 1. **MongoDB Atlas**: in Network Access allow `0.0.0.0/0` (Render's Free plan has no fixed IP address). Use the same
    connection string as in `backend/.env` (database `internconnect_new`); keep a strong database password.
-2. **Render**: New > Blueprint > choose this repository. Render reads `render.yaml` and asks for each secret:
-   `CLIENT_URL` (the service's own address, e.g. `https://internconnect.onrender.com`), `MONGODB_URI`,
-   `MAILTRAP_USER`, `MAILTRAP_PASS`, the Razorpay Test Mode keys and the Cloudinary keys.
-3. **Deploy**. Render runs `npm run render-build`, then `npm start`, and checks `/api/health`. The server refuses to
-   start without `TRUST_PROXY` or the Mailtrap login, and with live Razorpay keys.
-4. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
+2. **Brevo** (free plan, 300 emails a day): create an account, verify the sender address you will use in `EMAIL_FROM`
+   (Senders, Domains & Dedicated IPs > Senders), and generate an **SMTP key** (SMTP & API > SMTP). Use a separate
+   project mailbox as the sender, not a personal one. Without your own domain, some emails may land in spam.
+3. **Render**: New > Blueprint > choose this repository. Render reads `render.yaml` and asks for each secret:
+   `CLIENT_URL` (the service's own address, e.g. `https://internconnect.onrender.com`), `MONGODB_URI`, `SMTP_USER`
+   (the Brevo SMTP login), `SMTP_PASS` (the SMTP key), `EMAIL_FROM`, the Razorpay Test Mode keys and the Cloudinary keys.
+4. **Deploy**. Render runs `npm run render-build`, then `npm start`, and checks `/api/health`. The server refuses to
+   start without `TRUST_PROXY` or the Brevo settings (it never falls back to the sandbox or skips the codes), and with
+   live Razorpay keys.
+5. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
    real public IP. If it shows a Render address instead, set `TRUST_PROXY` to `2` and redeploy.
 
 Tips for a reliable demo:
 
-- **Sign-in codes** go to the **Mailtrap inbox** (as in local development): open Mailtrap during the demo to read
-  them. The free sandbox has a monthly email limit, so prefer **Edge** for demos: after one code, a browser is
-  trusted for 30 days. Google Chrome always asks for a code (Module 6 rule).
+- **Sign-in codes** go to each person's **own email address** (Brevo). Ask evaluators to check their spam folder if a
+  code does not arrive within a minute. All Module 6 rules apply: Google Chrome always asks for a code, a new browser
+  or device asks once, then it is trusted for 30 days.
 - **Free plan**: the service sleeps after 15 minutes without visits; open the site about a minute before the demo.
 - **Shared data**: the demo and local `npm run dev` both use `internconnect_new`, so accounts and posts created in
   one also appear in the other.
@@ -405,7 +413,7 @@ InternConnect_1/
 | POST   | `/api/auth/login/cancel` | No (sign-in cookie) | Ends the unfinished sign-in ("Use a different account") |
 | POST   | `/api/auth/logout`   | No  | Ends this browser's session on the server and clears the cookie |
 | GET    | `/api/auth/me`       | Yes | The logged-in user and `session: { id, deviceClass, expiresAt, serverTime }`; 401 with `code` `NOT_LOGGED_IN`, `SESSION_EXPIRED`, `SESSION_REVOKED`, `MOBILE_SESSION_ENDED` or `SESSION_CONTEXT_CHANGED` (every protected route answers the same way) |
-| POST   | `/api/auth/forgot-password` | No | Body `{ identifier }` (email or mobile number). Sends a 6-digit code by email (Mailtrap) or mock SMS. 404 unknown account; 429 "You can use this option only once per day." or "Please wait N seconds" (60 s between codes) |
+| POST   | `/api/auth/forgot-password` | No | Body `{ identifier }` (email or mobile number). Sends a 6-digit code by email (Mailtrap locally, Brevo on Render) or, locally only, mock SMS (400 `SMS_UNAVAILABLE` in production). 404 unknown account; 429 "You can use this option only once per day." or "Please wait N seconds" (60 s between codes) |
 | POST   | `/api/auth/reset-password` | No | Body `{ identifier, otp }`. With the right code: a new 12-letter password (upper- and lowercase letters only) is saved, returned once as `password` and sent to the same email or phone. Every session is signed out and every trusted device removed (`signedOutEverywhere: true`). 400 wrong (with `attemptsLeft`), expired or locked code |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page). `&feed=friends`: only your friends' posts and yours; `&tag=internship`: only posts with that hashtag |
 | POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file, plus optional `mentions` (ids of your friends, up to 10). Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. Up to 10 `#hashtags` are taken from the caption. 403 with no friends, 429 when today's limit is reached |

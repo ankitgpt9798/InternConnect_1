@@ -1,7 +1,9 @@
 import nodemailer from 'nodemailer';
 import { emailSettings } from './emailConfig.js';
 
-// Mailtrap Email Testing keeps every email in a sandbox inbox (mailtrap.io) and never delivers it to real addresses.
+// Local development: the Mailtrap sandbox (nothing reaches real inboxes). Render: Brevo SMTP over an encrypted
+// connection, delivering to each student's own address. See emailConfig.js. The message text (which may contain a
+// code) is never logged.
 const settings = emailSettings();
 const transporter = nodemailer.createTransport(settings.transport);
 
