@@ -1,24 +1,46 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { applyToInternship, getInternship } from '../api/internships.js';
+import { applicationResumeUrl, applyToInternship, getInternship } from '../api/internships.js';
+import { getGeneratedResumes } from '../api/resumes.js';
 import { getMySubscription } from '../api/subscriptions.js';
 import { InternshipFacts } from '../components/internships/InternshipCard.jsx';
+import ResumeChoice from '../components/internships/ResumeChoice.jsx';
 import QuotaSummary from '../components/QuotaSummary.jsx';
 import Alert from '../components/ui/Alert.jsx';
 import Button from '../components/ui/Button.jsx';
 import { formatDate } from '../utils/format.js';
 import { getErrorMessage } from '../utils/getErrorMessage.js';
+import { formatFileSize, resumeFileProblem } from '../utils/resumeFile.js';
 
 // The same limits as the backend (backend/src/models/Application.js).
 const COVER_LETTER_MIN = 50;
 const COVER_LETTER_MAX = 1000;
+
+// "Resume sent: Asha-Resume.pdf (240 KB)" with a download link, after applying.
+function SentResume({ internship }) {
+  if (!internship.resume) return <p className="mt-2 text-sm text-slate-500">No resume was attached to this application.</p>;
+  return (
+    <p className="mt-2 flex flex-wrap items-center gap-1.5 text-sm text-slate-600">
+      <FileText className="size-4 text-brand-700" aria-hidden="true" />
+      Resume sent:
+      <a href={applicationResumeUrl(internship.applicationId)} className="font-semibold break-all text-brand-700 hover:underline">
+        {internship.resume.fileName}
+      </a>
+      <span className="text-slate-500">({formatFileSize(internship.resume.size)})</span>
+    </p>
+  );
+}
 
 export default function InternshipDetailPage() {
   const { id } = useParams();
   const [internship, setInternship] = useState(null);
   const [quota, setQuota] = useState(null); // applications used and left on the student's plan
   const [coverLetter, setCoverLetter] = useState('');
+  // The InternConnect resume PDF the student can send instead of a file (the one on their profile, else the newest).
+  const [internconnectResume, setInternconnectResume] = useState(null);
+  const [resumeSource, setResumeSource] = useState('upload'); // 'upload' | 'internconnect'
+  const [resumeFile, setResumeFile] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [sending, setSending] = useState(false);
@@ -31,7 +53,18 @@ export default function InternshipDetailPage() {
     getMySubscription()
       .then(setQuota)
       .catch(() => {});
+    // Without it, the student uploads a PDF (the only choice then).
+    getGeneratedResumes()
+      .then((resumes) => setInternconnectResume(resumes.find((resume) => resume.onProfile) ?? resumes[0] ?? null))
+      .catch(() => {});
   }, [id]);
+
+  // A wrong file is pointed out as soon as it is chosen (and not kept).
+  function chooseFile(file) {
+    const problem = file ? resumeFileProblem(file) : '';
+    setError(problem);
+    setResumeFile(problem ? null : file);
+  }
 
   async function handleApply(event) {
     event.preventDefault();
@@ -40,12 +73,22 @@ export default function InternshipDetailPage() {
       setError(`Write a cover letter of ${COVER_LETTER_MIN} to ${COVER_LETTER_MAX} characters.`);
       return;
     }
+    const useInternconnect = resumeSource === 'internconnect' && internconnectResume;
+    const problem = useInternconnect ? '' : resumeFileProblem(resumeFile);
+    if (problem) {
+      setError(problem);
+      return;
+    }
     setSending(true);
     setError('');
     try {
-      const data = await applyToInternship(id, coverLetter);
+      const data = await applyToInternship(id, {
+        coverLetter,
+        resumeFile: useInternconnect ? null : resumeFile,
+        generatedResumeId: useInternconnect ? internconnectResume.id : null,
+      });
       setSuccess(data.message);
-      setInternship({ ...internship, appliedAt: data.appliedAt });
+      setInternship({ ...internship, appliedAt: data.appliedAt, applicationId: data.applicationId, resume: data.resume });
       setQuota(data.quota);
     } catch (err) {
       setError(getErrorMessage(err));
@@ -93,13 +136,16 @@ export default function InternshipDetailPage() {
               </div>
             )}
             {internship.appliedAt ? (
-              <p className="mt-2 text-sm text-slate-600">
-                You applied on {formatDate(internship.appliedAt)}. See it in{' '}
-                <Link to="/applications" className="font-semibold text-brand-700 hover:underline">
-                  My applications
-                </Link>
-                .
-              </p>
+              <>
+                <p className="mt-2 text-sm text-slate-600">
+                  You applied on {formatDate(internship.appliedAt)}. See it in{' '}
+                  <Link to="/applications" className="font-semibold text-brand-700 hover:underline">
+                    My applications
+                  </Link>
+                  .
+                </p>
+                <SentResume internship={internship} />
+              </>
             ) : !internship.isOpen ? (
               <p className="mt-2 text-sm text-slate-600">Applications for this internship are closed.</p>
             ) : (
@@ -120,6 +166,16 @@ export default function InternshipDetailPage() {
                 <p className="text-xs text-slate-500">
                   {coverLetter.trim().length}/{COVER_LETTER_MAX} characters (at least {COVER_LETTER_MIN})
                 </p>
+                <ResumeChoice
+                  internconnectResume={internconnectResume}
+                  source={resumeSource}
+                  onSourceChange={(source) => {
+                    setResumeSource(source);
+                    setError('');
+                  }}
+                  file={resumeFile}
+                  onFileChange={chooseFile}
+                />
                 <Button type="submit" loading={sending} disabled={quota?.remaining === 0}>
                   Submit application
                 </Button>
