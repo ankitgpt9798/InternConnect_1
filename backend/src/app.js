@@ -1,7 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
+import { securityHeaders } from './middleware/securityHeaders.js';
+import { serveFrontend } from './middleware/serveFrontend.js';
 import applicationRoutes from './routes/applicationRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import friendRoutes from './routes/friendRoutes.js';
@@ -16,6 +19,8 @@ import userRoutes from './routes/userRoutes.js';
 import { parseTrustProxy } from './utils/ip.js';
 
 const app = express();
+app.disable('x-powered-by'); // do not announce the server software
+app.use(securityHeaders);
 
 // Which proxies may say where a request came from (X-Forwarded-For), so req.ip is the student's real address.
 // Default "loopback" (the Vite dev server); set TRUST_PROXY to the number of proxies in production.
@@ -37,6 +42,13 @@ app.use('/api/applications', applicationRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/resumes', resumeRoutes);
+
+// Production (Render): the same server also serves the built React app. In development Vite serves it instead.
+if (process.env.NODE_ENV === 'production') {
+  const frontend = serveFrontend(fileURLToPath(new URL('../../frontend/dist', import.meta.url)));
+  if (frontend) app.use(frontend);
+  else console.warn('frontend/dist was not found, so only the API is served. Build the app first: npm run build');
+}
 
 // Must come after all routes.
 app.use(notFound);
