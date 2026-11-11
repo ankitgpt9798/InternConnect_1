@@ -43,7 +43,9 @@ export default function ApplicationsPage() {
                 <Link to={`/internships/${internship.id}`} className="group min-w-0">
                   <p className="font-semibold text-slate-900 group-hover:text-brand-700">{internship.title}</p>
                   <p className="text-sm text-slate-600">
-                    {internship.company} · {internship.location} · {WORK_MODE_LABELS[internship.workMode]}
+                    {/* Remote listings have "Remote" as their location, so the work mode is not repeated. */}
+                    {internship.company} ·{' '}
+                    {internship.workMode === 'remote' ? WORK_MODE_LABELS.remote : `${internship.location} · ${WORK_MODE_LABELS[internship.workMode]}`}
                   </p>
                 </Link>
                 <span className="text-sm text-slate-500">Applied {formatDate(appliedAt)}</span>

@@ -1,6 +1,6 @@
 import { ArrowLeft, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useLocation, useParams } from 'react-router';
 import { applicationResumeUrl, applyToInternship, getInternship } from '../api/internships.js';
 import { getGeneratedResumes } from '../api/resumes.js';
 import { getMySubscription } from '../api/subscriptions.js';
@@ -34,6 +34,9 @@ function SentResume({ internship }) {
 
 export default function InternshipDetailPage() {
   const { id } = useParams();
+  // The results list this page was opened from (with its filters); otherwise the full list.
+  const { state } = useLocation();
+  const backTo = typeof state?.backTo === 'string' && state.backTo.startsWith('/internships') ? state.backTo : '/internships';
   const [internship, setInternship] = useState(null);
   const [quota, setQuota] = useState(null); // applications used and left on the student's plan
   const [coverLetter, setCoverLetter] = useState('');
@@ -100,7 +103,7 @@ export default function InternshipDetailPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      <Link to="/internships" className="inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:underline">
+      <Link to={backTo} className="inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:underline">
         <ArrowLeft className="size-4" />
         Back to internships
       </Link>
