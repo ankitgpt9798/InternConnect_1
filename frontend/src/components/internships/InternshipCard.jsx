@@ -1,7 +1,7 @@
 import { ArrowRight, Briefcase, CalendarClock, Check, Clock, Hourglass, IndianRupee, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { formatDateIn, formatLocationText, formatStipendText } from '../../utils/internshipFormat.js';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -66,14 +66,17 @@ const initials = (name) =>
     .map((word) => word[0].toUpperCase())
     .join('');
 
-// One listing in the results. The whole card opens the internship.
+// One listing in the results. The whole card opens the internship; it remembers the results address (with its
+// filters), so "Back to internships" on the internship's page returns to the same list.
 export default function InternshipCard({ internship }) {
   const { t } = useTranslation();
+  const location = useLocation();
   const extraSkills = internship.skills.length - MAX_SKILLS;
 
   return (
     <Link
       to={`/internships/${internship.id}`}
+      state={{ backTo: location.pathname + location.search }}
       className="group block rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card transition-[border-color,box-shadow] hover:border-brand-200 hover:shadow-card-hover focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none"
     >
       <div className="flex gap-4">
