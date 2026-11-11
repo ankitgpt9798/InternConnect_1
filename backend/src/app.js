@@ -13,8 +13,13 @@ import postRoutes from './routes/postRoutes.js';
 import resumeRoutes from './routes/resumeRoutes.js';
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import { parseTrustProxy } from './utils/ip.js';
 
 const app = express();
+
+// Which proxies may say where a request came from (X-Forwarded-For), so req.ip is the student's real address.
+// Default "loopback" (the Vite dev server); set TRUST_PROXY to the number of proxies in production.
+app.set('trust proxy', parseTrustProxy(process.env.TRUST_PROXY));
 
 // Allow the React app to call the API and send cookies.
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));

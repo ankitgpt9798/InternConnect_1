@@ -1,22 +1,49 @@
-import jwt from 'jsonwebtoken';
+import { createHash } from 'node:crypto';
 
-export const AUTH_COOKIE = 'token';
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+// Module 6 cookies. All are httpOnly (page JavaScript cannot read them) and Secure (HTTPS only) in production.
+//   token        the session token. Path "/", so the resume PDF download links keep working. SameSite=Lax.
+//   ic_signin    the sign-in challenge between the password step and the email code. Only for /api/auth.
+//   icd_<key>    the device token of one account in this browser (one cookie per account). Only for /api/auth.
+export const SESSION_COOKIE = 'token';
+export const CHALLENGE_COOKIE = 'ic_signin';
+const DEVICE_COOKIE_PREFIX = 'icd_';
+const DEVICE_COOKIE_DAYS = 90;
 
-// The same options are used to set and to clear the cookie; if they differ, the browser keeps the old one.
-const cookieOptions = {
-  httpOnly: true, // page JavaScript cannot read it (protects the token from XSS)
-  sameSite: 'lax', // sent by our own pages (localhost:5173 and :5000 are the same site), not by other sites' forms
-  secure: process.env.NODE_ENV === 'production', // HTTPS-only in production; plain http is fine on localhost
-  path: '/',
-};
+const secure = () => process.env.NODE_ENV === 'production';
+// The same options are used to set and to clear a cookie; if they differ, the browser keeps the old one.
+const sessionOptions = () => ({ httpOnly: true, sameSite: 'lax', secure: secure(), path: '/' });
+const authOnlyOptions = () => ({ httpOnly: true, sameSite: 'strict', secure: secure(), path: '/api/auth' });
+const maxAgeUntil = (expiresAt, at) => Math.max(0, expiresAt.getTime() - at.getTime());
+// The browser keeps the session cookie a little longer than the session itself. The server refuses it from the exact
+// end time either way, but while the browser still sends it the server can say WHY the session ended (e.g. "phone
+// access ends at 1:00 PM IST") instead of only "not logged in", and the app can show that message.
+export const SESSION_COOKIE_GRACE_MS = 5 * 60 * 1000;
 
-// Creates a login token valid for 7 days and stores it in the cookie.
-export function setAuthCookie(res, userId) {
-  const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.cookie(AUTH_COOKIE, token, { ...cookieOptions, maxAge: SEVEN_DAYS_MS });
+export function setSessionCookie(res, token, expiresAt, at) {
+  res.cookie(SESSION_COOKIE, token, { ...sessionOptions(), maxAge: maxAgeUntil(expiresAt, at) + SESSION_COOKIE_GRACE_MS });
 }
 
-export function clearAuthCookie(res) {
-  res.clearCookie(AUTH_COOKIE, cookieOptions);
+export function clearSessionCookie(res) {
+  res.clearCookie(SESSION_COOKIE, sessionOptions());
 }
+
+export function setChallengeCookie(res, token, expiresAt, at) {
+  res.cookie(CHALLENGE_COOKIE, token, { ...authOnlyOptions(), maxAge: maxAgeUntil(expiresAt, at) });
+}
+
+export function clearChallengeCookie(res) {
+  res.clearCookie(CHALLENGE_COOKIE, authOnlyOptions());
+}
+
+// The cookie name comes from a hash of the account id, so it does not show which account it belongs to.
+export const deviceCookieName = (userId) => `${DEVICE_COOKIE_PREFIX}${createHash('sha256').update(String(userId)).digest('hex').slice(0, 16)}`;
+
+export function setDeviceCookie(res, userId, token) {
+  res.cookie(deviceCookieName(userId), token, { ...authOnlyOptions(), maxAge: DEVICE_COOKIE_DAYS * 24 * 60 * 60 * 1000 });
+}
+
+export function clearDeviceCookie(res, userId) {
+  res.clearCookie(deviceCookieName(userId), authOnlyOptions());
+}
+
+export const readDeviceCookie = (req, userId) => req.cookies?.[deviceCookieName(userId)] ?? null;

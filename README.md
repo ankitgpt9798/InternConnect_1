@@ -3,7 +3,7 @@
 InternConnect is a MERN stack web app where students find and apply for internships, build a resume and
 connect with other students in a shared Public Space.
 
-> **Status:** done so far: project setup; registration and login with email or phone (JWT in an httpOnly cookie,
+> **Status:** done so far: project setup; registration and login with email or phone (a server-side session in an httpOnly cookie,
 > protected pages); Public Space posts with photo and video uploads, likes, comments, shares, saves and reports;
 > friend requests and a friends list; a daily posting limit based on the number of friends; a friends feed,
 > hashtags, mentions and notifications (Module 1 complete); forgot password with an OTP by email or mock SMS and a
@@ -12,7 +12,9 @@ connect with other students in a shared Public Space.
 > complete); the Resume Builder with saved drafts and a premium ATS-friendly PDF after an email code and a ₹50
 > Razorpay payment (Module 4 complete); six languages (English, Spanish, Hindi, Portuguese, Chinese, French) with
 > direct switching, email OTP verification required for French, persistent account language preferences and language
-> change history (Module 5 complete). Module 6 follows.
+> change history (Module 5 complete); login security with an email code for Google Chrome, new or untrusted devices
+> and unusual sign-ins, phone and tablet sign-in only from 10:00 AM to 1:00 PM IST, a detailed login history, active
+> sessions with "sign out other devices" and trusted devices (Module 6 complete).
 
 ## Modules
 
@@ -23,15 +25,16 @@ connect with other students in a shared Public Space.
 | 3 | Subscription-based internship applications (Razorpay Test Mode) | Done |
 | 4 | Premium Resume Builder with PDF generation (₹50 test payment) | Done |
 | 5 | Six languages, with OTP verification for French | Done |
-| 6 | Login activity tracking and device security | Planned |
+| 6 | Login activity tracking and device security | Done |
 
 ## Tech stack
 
 | Layer    | Technology                                   |
 | -------- | -------------------------------------------- |
 | Frontend | React 19, Vite, Tailwind CSS 4, React Router, Axios, Context API, i18next, react-i18next |
-| Backend  | Node.js, Express 5, Mongoose, JWT (jsonwebtoken), bcryptjs, cookie-parser, Multer, Cloudinary, Nodemailer, Razorpay, PDFKit |
+| Backend  | Node.js, Express 5, Mongoose, server-side sessions (hashed tokens), bcryptjs, cookie-parser, Multer, Cloudinary, Nodemailer, Razorpay, PDFKit, bowser (browser detection), maxmind (offline GeoLite2 lookups) |
 | Database | MongoDB Atlas                                |
+| Tests    | Node.js test runner (`node:test`), mongodb-memory-server (in-memory MongoDB, development only) |
 
 ## Authentication
 
@@ -39,12 +42,15 @@ connect with other students in a shared Public Space.
   email or their mobile number.
 - Passwords are hashed with **bcryptjs** before they are saved; the hash is never sent back by the API.
 - Emails are stored in lowercase, so `Asha@Example.com` and `asha@example.com` count as the same account.
-- After registering or logging in, the server puts a **JWT** (valid for 7 days) in a cookie named `token`:
-  `httpOnly` (page JavaScript cannot read it), `SameSite=Lax` (other websites cannot send it), and `Secure`
-  (HTTPS only) when `NODE_ENV=production`. Logging out clears it with the same settings.
+- After signing in (see [Login security](#login-security-and-device-trust-module-6)), the browser gets a random
+  **session token** in a cookie named `token`: `httpOnly` (page JavaScript cannot read it), `SameSite=Lax` (other
+  websites cannot send it), `Path=/`, and `Secure` (HTTPS only) when `NODE_ENV=production`. The server stores only a
+  SHA-256 hash of the token in a `Session` record and checks that record on every request, so logging out (or signing
+  a session out from another device) ends it at once.
 - Axios sends the cookie with every request (`withCredentials: true`), and CORS allows credentials from `CLIENT_URL`.
 - In React, `AuthContext` asks `GET /api/auth/me` on page load, so a refresh keeps the student logged in.
   `ProtectedRoute` sends guests to the login page; `GuestRoute` sends logged-in users away from login and register.
+  When any request answers that the session has ended, the app returns to the login page and says why.
 
 | Field    | Rule |
 | -------- | ---- |
@@ -153,6 +159,78 @@ Portuguese (`pt`), Simplified Chinese (`zh`) and French (`fr`).
   (previous language, new language, verification method `none` or `email_otp`, masked email destination and timestamp).
   Students can review their complete change history in the **Language History** panel on the Dashboard.
 
+## Login security and device trust (Module 6)
+
+Every rule is enforced by the server; the app only shows the result.
+
+### Who needs an email code, and when phones can sign in
+
+| Situation (after a correct password) | Result |
+| ------------------------------------ | ------ |
+| Phone or tablet, any browser, outside **10:00 AM – 1:00 PM IST** | Refused (checked before the password, so nothing is revealed and no code is sent) |
+| **Google Chrome** (computer, phone or tablet) | 6-digit email code on **every** login, even on a trusted device |
+| Any browser on a **new, untrusted or changed device** | Email code; the browser then becomes a **trusted device for 30 days** |
+| Trusted device, new IP address in a country the account has not signed in from | Email code |
+| Trusted device, many recent failed attempts from other IP addresses | Email code |
+| Trusted device, new IP address in a known country | Signed in, plus a "New sign-in" alert email (at most one per IP address per day) |
+| Trusted device, known IP address (Edge, Firefox, Safari, …) | Signed in with the password |
+
+- Chrome on a phone or tablet must be inside the window **and** enter the code; the window is checked again when the
+  code is entered. Phone and tablet sessions end at **exactly 1:00 PM IST** (the server refuses every request from then
+  on and the app shows why). A new IP address alone never refuses a sign-in.
+- **Registration:** every new account confirms its email with a code before it gets a session. A phone or tablet
+  outside the window creates the account but is not signed in.
+- Codes go to the **registered email** (Mailtrap), work for 10 minutes, only in the browser that typed the password,
+  and are stored only as a bcrypt hash. 5 wrong codes end the sign-in; a new code needs 60 seconds; at most 3 new codes
+  per sign-in and **6 codes per account per hour**. The email says which browser, approximate place, IP address and
+  time the sign-in came from.
+- **Browser detection** uses the User-Agent (bowser) and Client Hints; a request counts as Chrome, or as a phone or
+  tablet, if any of them says so. The browser reports these itself, so someone who deliberately fakes them can get
+  around the Chrome and phone rules; the password, the email codes and trusted devices are the real protection.
+
+### Login history, sessions and devices
+
+The **Security and sign-ins** section of the Dashboard shows:
+
+- **Login history** (newest first): every attempt, successful or not, with browser name and version, system, device
+  type, model (when the browser shows it), IP address, approximate location, date and time (IST), the result and the
+  reason, whether an email code was used, and badges for a first-time device, browser or IP address.
+- **Active sessions**: each signed-in browser, where and when it was last used; **Sign out** one, or **Sign out all
+  other devices** (both need the password).
+- **Devices**: the browsers the account has used and whether they are trusted (until when). **Remove** ends its
+  sessions, and its next sign-in needs a code.
+
+A successful **password reset** signs out every session, removes every trusted device and cancels unfinished sign-ins.
+
+### How it is protected
+
+- Session, device and sign-in tokens are 256-bit random values; only their SHA-256 hashes are stored. The session token
+  is replaced every 15 minutes (the previous one keeps working for 60 seconds for requests already on their way; if an
+  old token is used after that, the whole session ends). A session or device cookie used by another browser, system or
+  kind of device is refused. There is no separate refresh token: the server-side session is the only credential.
+- **Failed passwords** have progressive cooldowns for one account from one IP address (after 5 failures in 15 minutes:
+  1 minute, then 2, 4, 8 and at most 15) and for one IP address (20 failures: 5 minutes, 30: 15, 40: 60). An account is
+  never locked as a whole, so someone guessing passwords cannot lock the real student out; a trusted device is not
+  slowed down by other people's failures on a shared IP address. Limits are counted atomically, so parallel requests
+  cannot get past them.
+- Unknown accounts get the same answer (and the same response time) as wrong passwords.
+- Only the student sees their own IP addresses and devices. Attempts on unknown accounts are kept (without the typed
+  email or phone) but never shown. Login logs and codes are kept for 90 days, ended sessions for 30 days and unused
+  devices for 90 days (MongoDB deletes them automatically). No fingerprinting and no coordinates are stored.
+- **Location** is approximate (city, region, country) and comes from the free **MaxMind GeoLite2 City** database read
+  on this server; IP addresses are never sent to an outside service. Without the database, locations show "Unknown",
+  and addresses on the local network show "Local network". This product includes GeoLite2 data created by MaxMind,
+  available from https://www.maxmind.com.
+
+To add the GeoLite2 database: create a free MaxMind account, generate a licence key, download **GeoLite2 City** in
+`.mmdb` format and save it as `backend/data/GeoLite2-City.mmdb` (the folder is git-ignored), or set `GEOIP_DB_PATH`.
+MaxMind's licence asks you to keep it up to date; the server picks up a replaced file by itself.
+
+Local testing: `MOBILE_LOGIN_WINDOW_TEST=open` (or `closed`) forces the phone window, and
+`MOBILE_SESSION_TEST_MINUTES=2` ends phone sessions 2 minutes after sign-in, to see the 1 PM sign-out without waiting.
+Both are ignored when `NODE_ENV=production`. To try phone rules on a computer, use the browser's device toolbar
+(Chrome or Edge DevTools, Firefox responsive mode).
+
 ## Public Space posting limit
 
 The number of posts a student may publish per day depends on their number of friends:
@@ -186,8 +264,13 @@ Copy-Item backend\.env.example backend\.env
 # Load the 12 sample internship listings (fictional companies; safe to run again, it only refreshes deadlines)
 npm run seed:internships
 
+# Optional: approximate sign-in locations (see "Login security"): save GeoLite2-City.mmdb in backend\data\
+
 # Start the API (http://localhost:5000) and the React app (http://localhost:5173) together
 npm run dev
+
+# Run the backend tests (an in-memory MongoDB is downloaded the first time)
+npm test
 ```
 
 Open http://localhost:5173. The **System status** card shows `Online` and `connected` when the React app can reach
@@ -205,6 +288,7 @@ the API and the API can reach MongoDB. You can also open http://localhost:5000/a
 | `npm run build`        | Production build of the React app (`frontend/dist`) |
 | `npm run seed:internships` | Adds the sample internship listings, or refreshes their deadlines |
 | `npm run lint`         | Checks the frontend code with ESLint           |
+| `npm test`             | Runs the backend tests (unit and API tests against an in-memory MongoDB) |
 
 ## Environment variables
 
@@ -217,7 +301,9 @@ git-ignored and must never be committed.
 | `CLIENT_URL` | Address of the React app, allowed by CORS |
 | `MONGODB_URI` | MongoDB Atlas connection string |
 | `DNS_SERVERS` | Optional: DNS servers for networks where Node cannot resolve `mongodb+srv://` addresses |
-| `JWT_SECRET` | Signs login tokens |
+| `TRUST_PROXY` | Optional: proxies allowed to report the client IP. Empty = only the local Vite dev server; in production the number of proxies in front of the API, e.g. `1` (`true` is refused) |
+| `GEOIP_DB_PATH` | Optional: path of the GeoLite2 City database (default `backend/data/GeoLite2-City.mmdb`) |
+| `MOBILE_LOGIN_WINDOW_TEST`, `MOBILE_SESSION_TEST_MINUTES` | Optional, local testing only: force the phone/tablet window `open`/`closed`, end phone sessions after N minutes (ignored in production) |
 | `MAILTRAP_USER`, `MAILTRAP_PASS` | Mailtrap Email Testing sandbox for OTP and invoice emails |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay Test Mode keys (only `rzp_test_` keys are accepted) |
 | `PAYMENT_WINDOW_TEST_OPEN` | Optional, local testing only: `true` allows plan payments outside 5:00-11:45 AM IST (ignored in production) |
@@ -230,28 +316,33 @@ InternConnect_1/
 ├── backend/                 Express REST API
 │   ├── src/
 │   │   ├── config/          MongoDB connection
-│   │   ├── controllers/     Request handlers (auth, password reset, posts, friends, notifications, internships,
-│   │   │                    subscriptions, payments, resumes, health)
-│   │   ├── middleware/      auth.js (logged-in users only), upload.js (photo/video files), 404 and error handling
+│   │   ├── controllers/     Request handlers (auth, login, password reset, posts, friends, notifications, internships,
+│   │   │                    subscriptions, payments, resumes, languages, security, health)
+│   │   ├── middleware/      auth.js (checks the server-side session), upload.js (photo/video files), 404 and errors
 │   │   ├── models/          Mongoose models (User, Post, FriendRequest, Notification, Otp, Internship, Application,
-│   │   │                    Payment, Resume, GeneratedResume)
+│   │   │                    Payment, Resume, GeneratedResume, LanguageChange, LoginActivity, LoginChallenge,
+│   │   │                    Session, Device, AuthThrottle)
 │   │   ├── seed/            Sample internship listings (npm run seed:internships)
 │   │   ├── routes/          API routes (mounted under /api)
-│   │   ├── utils/           Login cookie (JWT), input validation, Cloudinary uploads, hashtags, posting limit,
+│   │   ├── utils/           Session, device and sign-in cookies, input validation, Cloudinary uploads, hashtags, posting limit,
 │   │   │                    IST dates, notifications, OTP codes, email (Mailtrap), mock SMS, masking,
 │   │   │                    letters-only password generator, plans, application quotas, payment window,
 │   │   │                    Razorpay (orders, signature check), completing a payment and the invoice email,
-│   │   │                    resume content rules, resume PDF template
+│   │   │                    resume content rules, resume PDF template; Module 6: browser/device detection,
+│   │   │                    GeoLite2 lookups, phone window, sign-in rules, limits, sessions, devices, emails
 │   │   ├── app.js           Express app (middleware and routes)
 │   │   └── server.js        Loads .env, connects to MongoDB, starts the server
+│   ├── test/                Unit and API tests (npm test)
 │   └── .env.example
 ├── frontend/                React app (Vite)
 │   ├── public/              Static files (favicon)
 │   └── src/
-│       ├── api/             Axios instance and API calls (posts, friends, notifications, password reset, internships,
-│       │                    subscriptions, payments, resumes)
-│       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards
-│       ├── context/         AuthContext (logged-in user, login, register, logout)
+│       ├── api/             Axios instance and API calls (auth, posts, friends, notifications, password reset,
+│       │                    internships, subscriptions, payments, resumes, languages, security)
+│       ├── components/      Layout, ui/ (button, form field, alert), posts/ (composer, post card), route guards,
+│       │                    auth/ (email-code step, sign-out notice), security/ (sessions, devices, login history)
+│       ├── context/         AuthContext (logged-in user, login and email code, register, logout, session end)
+│       ├── i18n/            The six interface languages
 │       ├── pages/           One component per page (home, login, register, forgot password, dashboard, Public Space, post, hashtag,
 │       │                    friends, notifications, internships, internship, my applications, plans, resume, 404)
 │       ├── utils/           Form validation, API error messages, "time ago" dates, formatting, Razorpay Checkout
@@ -265,12 +356,15 @@ InternConnect_1/
 | Method | Route                | Login needed | Description |
 | ------ | -------------------- | ------------ | ----------- |
 | GET    | `/api/health`        | No  | API status and MongoDB connection state |
-| POST   | `/api/auth/register` | No  | Body `{ name, email, phone, password }`. 201 with the user and the login cookie; 400 invalid fields; 409 email or phone already registered |
-| POST   | `/api/auth/login`    | No  | Body `{ identifier, password }` (identifier = email or mobile number). 200 with the user and the login cookie; 401 wrong details |
-| POST   | `/api/auth/logout`   | No  | Clears the login cookie |
-| GET    | `/api/auth/me`       | Yes | The logged-in user; 401 when not logged in or the session has expired |
+| POST   | `/api/auth/register` | No  | Body `{ name, email, phone, password, client? }`. 202 `OTP_REQUIRED`: the account is created and a code is emailed (no session yet); 201 `ACCOUNT_CREATED_NO_SESSION` for a phone or tablet outside 10 AM–1 PM IST; 400 invalid fields; 409 email or phone already registered (`errorCodes` per field) |
+| POST   | `/api/auth/login`    | No  | Body `{ identifier, password, client? }` (identifier = email or mobile number; `client` = optional device details). 200 with the user and the session cookie; 202 `OTP_REQUIRED` `{ reasons, destination, codeExpiresAt, resendAvailableAt, attemptsLeft }`; 401 `INVALID_CREDENTIALS`; 403 `MOBILE_LOGIN_WINDOW` `{ opensAt }`; 429 `LOGIN_COOLDOWN` / `LOGIN_BUSY` / `OTP_HOURLY_LIMIT` `{ retryAfterSeconds }`; 502 `OTP_DELIVERY_FAILED` |
+| POST   | `/api/auth/login/verify` | No (sign-in cookie) | Body `{ otp }`. 200 with the user and the session cookie (the device becomes trusted); 400 `OTP_INVALID` `{ attemptsLeft }`; 401 `NO_CHALLENGE`; 403 `MOBILE_LOGIN_WINDOW`; 410 `OTP_EXPIRED` / `CHALLENGE_EXPIRED`; 429 `OTP_LOCKED` |
+| POST   | `/api/auth/login/resend` | No (sign-in cookie) | Sends a new code. 429 `OTP_RESEND_COOLDOWN` (60 s), `OTP_RESEND_LIMIT` (3 per sign-in), `OTP_HOURLY_LIMIT` (6 per hour) |
+| POST   | `/api/auth/login/cancel` | No (sign-in cookie) | Ends the unfinished sign-in ("Use a different account") |
+| POST   | `/api/auth/logout`   | No  | Ends this browser's session on the server and clears the cookie |
+| GET    | `/api/auth/me`       | Yes | The logged-in user and `session: { id, deviceClass, expiresAt, serverTime }`; 401 with `code` `NOT_LOGGED_IN`, `SESSION_EXPIRED`, `SESSION_REVOKED`, `MOBILE_SESSION_ENDED` or `SESSION_CONTEXT_CHANGED` (every protected route answers the same way) |
 | POST   | `/api/auth/forgot-password` | No | Body `{ identifier }` (email or mobile number). Sends a 6-digit code by email (Mailtrap) or mock SMS. 404 unknown account; 429 "You can use this option only once per day." or "Please wait N seconds" (60 s between codes) |
-| POST   | `/api/auth/reset-password` | No | Body `{ identifier, otp }`. With the right code: a new 12-letter password (upper- and lowercase letters only) is saved, returned once as `password` and sent to the same email or phone. 400 wrong (with `attemptsLeft`), expired or locked code |
+| POST   | `/api/auth/reset-password` | No | Body `{ identifier, otp }`. With the right code: a new 12-letter password (upper- and lowercase letters only) is saved, returned once as `password` and sent to the same email or phone. Every session is signed out and every trusted device removed (`signedOutEverywhere: true`). 400 wrong (with `attemptsLeft`), expired or locked code |
 | GET    | `/api/posts?page=1`  | Yes | Public Space posts, newest first, 10 per page (`hasMore` says if there is another page). `&feed=friends`: only your friends' posts and yours; `&tag=internship`: only posts with that hashtag |
 | POST   | `/api/posts`         | Yes | Multipart form: `caption` (up to 1000 characters) and/or one `media` file, plus optional `mentions` (ids of your friends, up to 10). Photos JPEG/PNG/WebP/GIF up to 5 MB, videos MP4/WebM/MOV up to 30 MB, stored on Cloudinary. Up to 10 `#hashtags` are taken from the caption. 403 with no friends, 429 when today's limit is reached |
 | GET    | `/api/posts/saved`   | Yes | Posts you saved, newest first (same paging) |
@@ -315,6 +409,12 @@ author's accepted friends.
 | POST   | `/api/resumes/me/otp/verify` | Yes | Body `{ otp }`. With the right code: creates the ₹50 Razorpay order and returns `{ checkout }`; then pay and call `/api/payments/verify` |
 | GET    | `/api/resumes/generated` | Yes | Your paid resume PDFs, newest first (`onProfile` marks the one on your profile) |
 | GET    | `/api/resumes/generated/:id/pdf` | Yes | Downloads the PDF (owner only) |
+| GET    | `/api/users/me/login-history?before=&limit=20` | Yes | Your sign-in attempts, newest first (up to 50 per page, `nextCursor` for the next page) |
+| GET    | `/api/users/me/sessions` | Yes | Your active sessions (`current` marks this browser) |
+| POST   | `/api/users/me/sessions/:id/revoke` | Yes | Body `{ password }`. Signs that session out; 403 `PASSWORD_INCORRECT`; 404 not one of yours |
+| POST   | `/api/users/me/sessions/revoke-others` | Yes | Body `{ password }`. Signs out every other session; `{ revokedCount }` |
+| GET    | `/api/users/me/devices` | Yes | Browsers your account has used, with `trusted` and `trustExpiresAt` |
+| POST   | `/api/users/me/devices/:id/remove` | Yes | Body `{ password }`. Removes the device and ends its sessions |
 | GET    | `/api/notifications` | Yes | The latest 30 notifications, newest first, with `unreadCount` |
 | GET    | `/api/notifications/unread-count` | Yes | `{ unreadCount }` for the bell in the navbar |
 | POST   | `/api/notifications/read-all` | Yes | Marks every notification as read |

@@ -1749,5 +1749,225 @@
   "demo": {
     "badge": "Demo · simulado",
     "tooltip": "Registro de demonstração simulado: não é uma transação real, e nenhum dinheiro foi cobrado."
+  },
+  "authPages": {
+    "pleaseWait": "Aguarde…",
+    "login": {
+      "title": "Entrar",
+      "subtitle": "Que bom ter você de volta ao InternConnect.",
+      "submit": "Entrar",
+      "noAccount": "Novo no InternConnect?",
+      "createAccount": "Crie uma conta",
+      "forgotPassword": "Esqueceu a senha?",
+      "securityNote": "Celulares e tablets podem entrar entre 10:00 e 13:00 (IST). O Google Chrome e dispositivos novos precisam de um código enviado ao seu e-mail."
+    },
+    "register": {
+      "title": "Crie sua conta",
+      "subtitle": "Entre no InternConnect para se candidatar a estágios e se conectar com outros estudantes.",
+      "submit": "Criar conta",
+      "haveAccount": "Já tem uma conta?",
+      "logIn": "Entrar",
+      "emailHint": "Enviaremos um código de 6 dígitos para este endereço para confirmá-lo.",
+      "phoneHint": "Número de celular indiano com 10 dígitos",
+      "passwordHint": "De 8 a 64 caracteres",
+      "createdTitle": "Conta criada",
+      "createdBody": "Sua conta está pronta. Celulares e tablets só podem entrar entre 10:00 e 13:00 (IST), então entre a partir das {{time}} (IST).",
+      "goToLogin": "Ir para o login"
+    },
+    "fields": {
+      "identifier": "E-mail ou número de celular",
+      "password": "Senha",
+      "name": "Nome completo",
+      "email": "E-mail",
+      "phone": "Número de celular"
+    },
+    "validation": {
+      "identifierRequired": "Digite seu e-mail ou número de telefone.",
+      "passwordRequired": "Digite sua senha.",
+      "nameLength": "O nome deve ter de 2 a 50 caracteres.",
+      "emailInvalid": "Digite um endereço de e-mail válido.",
+      "phoneInvalid": "Digite um número de celular indiano válido com 10 dígitos.",
+      "passwordLength": "A senha deve ter de 8 a 64 caracteres."
+    },
+    "fieldErrors": {
+      "EMAIL_TAKEN": "Este e-mail já está cadastrado.",
+      "PHONE_TAKEN": "Este número de telefone já está cadastrado.",
+      "NAME_LENGTH": "O nome deve ter de 2 a 50 caracteres.",
+      "EMAIL_INVALID": "Digite um endereço de e-mail válido.",
+      "PHONE_INVALID": "Digite um número de celular indiano válido com 10 dígitos.",
+      "PASSWORD_LENGTH": "A senha deve ter de 8 a 64 caracteres."
+    },
+    "errors": {
+      "network": "Não foi possível conectar ao servidor. Verifique sua conexão e tente de novo.",
+      "generic": "Algo deu errado. Tente de novo.",
+      "missingFields": "Digite seu e-mail ou número de telefone e sua senha.",
+      "fixFields": "Corrija os campos destacados.",
+      "invalidCredentials": "E-mail/telefone ou senha incorretos.",
+      "mobileWindow": "Celulares e tablets só podem entrar entre 10:00 e 13:00 (IST). Você poderá entrar de novo às {{time}} (IST).",
+      "cooldown": "Muitas tentativas sem sucesso. Tente de novo em {{wait}}.",
+      "busy": "Muitas tentativas de login ao mesmo tempo. Tente de novo em instantes.",
+      "hourlyLimit": "Muitos códigos foram enviados para esta conta. Tente de novo em {{wait}}.",
+      "resendCooldown": "Aguarde {{wait}} antes de pedir um novo código.",
+      "resendLimit": "Não é possível enviar mais códigos para este login. Entre de novo mais tarde.",
+      "deliveryFailed": "Não foi possível enviar o código. Tente de novo.",
+      "deliveryFailedAccountCreated": "Sua conta foi criada, mas não foi possível enviar o código. Entre para receber um novo código.",
+      "otpFormat": "Digite o código de 6 dígitos.",
+      "otpInvalid_one": "Código incorreto. Resta {{count}} tentativa.",
+      "otpInvalid_many": "Código incorreto. Restam {{count}} tentativas.",
+      "otpInvalid_other": "Código incorreto. Restam {{count}} tentativas.",
+      "otpExpired": "Este código expirou. Peça um novo código.",
+      "otpLocked": "Muitos códigos incorretos. Entre de novo para receber um novo código.",
+      "challengeEnded": "Este login terminou. Entre de novo.",
+      "accountExists": "Já existe uma conta com estes dados.",
+      "passwordRequired": "Digite sua senha para confirmar.",
+      "passwordIncorrect": "Senha incorreta.",
+      "notFound": "Isso já foi encerrado ou removido."
+    },
+    "wait": {
+      "seconds_one": "{{count}} segundo",
+      "seconds_many": "{{count}} segundos",
+      "seconds_other": "{{count}} segundos",
+      "minutes_one": "{{count}} minuto",
+      "minutes_many": "{{count}} minutos",
+      "minutes_other": "{{count}} minutos"
+    }
+  },
+  "otp": {
+    "title": "Confira seu e-mail",
+    "titleRegister": "Confirme seu e-mail",
+    "sentTo": "Enviamos um código de 6 dígitos para {{destination}}. Ele expira em 10 minutos.",
+    "codeLabel": "Código de 6 dígitos",
+    "verify": "Verificar e entrar",
+    "verifyRegister": "Verificar e concluir",
+    "resend": "Enviar um novo código",
+    "resendIn_one": "Enviar um novo código em {{count}} segundo",
+    "resendIn_many": "Enviar um novo código em {{count}} segundos",
+    "resendIn_other": "Enviar um novo código em {{count}} segundos",
+    "resent": "Um novo código foi enviado.",
+    "noResends": "Não é possível enviar mais códigos para este login.",
+    "codeExpired": "Este código expirou. Envie um novo código para continuar.",
+    "useDifferentAccount": "Usar outra conta",
+    "startAgain": "Começar de novo",
+    "reasons": {
+      "chrome": "Logins pelo Google Chrome sempre precisam de um código.",
+      "newDevice": "Este navegador ainda não foi verificado na sua conta.",
+      "unusual": "Este login parece diferente dos seus logins habituais.",
+      "newAccount": "Digite o código para confirmar seu e-mail e concluir a criação da conta."
+    }
+  },
+  "sessionNotice": {
+    "mobileEnded": "O acesso por celulares e tablets termina às 13:00 (IST). Você pode entrar de novo a partir das 10:00 (IST).",
+    "revoked": "Você saiu da conta neste dispositivo.",
+    "contextChanged": "Seu navegador ou dispositivo mudou, então encerramos a sessão para proteger sua conta.",
+    "expired": "Sua sessão expirou. Entre de novo.",
+    "dismiss": "Fechar"
+  },
+  "accountSecurity": {
+    "title": "Segurança e logins",
+    "subtitle": "Onde sua conta está conectada, os dispositivos confiáveis e cada tentativa de login. Horários em IST.",
+    "link": "Ver sessões e histórico de login",
+    "refresh": "Atualizar",
+    "loading": "Carregando…",
+    "loadError": "Não foi possível carregar esta lista.",
+    "retry": "Tentar de novo",
+    "showMore": "Mostrar mais",
+    "unknown": "Desconhecido",
+    "deviceLabel": "{{browser}} no {{os}}",
+    "deviceTypes": {
+      "desktop": "Computador",
+      "mobile": "Celular",
+      "tablet": "Tablet",
+      "unknown": "Dispositivo desconhecido"
+    },
+    "location": {
+      "approximate": "Perto de {{place}} (aproximado)",
+      "local": "Rede local",
+      "unknown": "Local desconhecido"
+    },
+    "ip": "IP {{ip}}",
+    "time": "{{time}} IST",
+    "thisDevice": "Este dispositivo",
+    "confirm": {
+      "password": "Senha",
+      "cancel": "Cancelar",
+      "description": "Digite sua senha para confirmar."
+    },
+    "sessions": {
+      "title": "Sessões ativas",
+      "description": "Navegadores em que sua conta está conectada agora. Sessões em celulares e tablets terminam às 13:00 (IST).",
+      "empty": "Nenhuma sessão ativa.",
+      "started": "Entrou {{time}}",
+      "lastActive": "última atividade {{time}}",
+      "endsAt": "Termina às {{time}} IST",
+      "trusted": "Dispositivo confiável",
+      "signOut": "Sair",
+      "signOutLabel": "Sair de {{name}}",
+      "signOutOthers": "Sair de todos os outros dispositivos",
+      "confirmOneTitle": "Encerrar esta sessão?",
+      "confirmOthersTitle": "Sair de todos os outros dispositivos?",
+      "signedOut": "Essa sessão foi encerrada.",
+      "signedOutOthers_one": "{{count}} outra sessão foi encerrada.",
+      "signedOutOthers_many": "{{count}} outras sessões foram encerradas.",
+      "signedOutOthers_other": "{{count}} outras sessões foram encerradas.",
+      "noOthers": "Não havia outras sessões para encerrar."
+    },
+    "devices": {
+      "title": "Dispositivos",
+      "description": "Navegadores em que sua conta foi usada. Um navegador fica confiável por 30 dias depois que você digita nele um código do e-mail; o Google Chrome sempre precisa de um código.",
+      "empty": "Nenhum dispositivo ainda.",
+      "trustedUntil": "Confiável até {{date}}",
+      "notTrusted": "Não confiável",
+      "firstSeen": "Usado pela primeira vez {{time}}",
+      "lastSeen": "último uso {{time}}",
+      "remove": "Remover",
+      "removeLabel": "Remover {{name}}",
+      "confirmTitle": "Remover este dispositivo?",
+      "confirmDescription": "A sessão dele será encerrada e o próximo login nele vai precisar de um código do e-mail. Digite sua senha para confirmar.",
+      "removed": "O dispositivo foi removido.",
+      "removedWithSessions_one": "O dispositivo foi removido e {{count}} sessão foi encerrada.",
+      "removedWithSessions_many": "O dispositivo foi removido e {{count}} sessões foram encerradas.",
+      "removedWithSessions_other": "O dispositivo foi removido e {{count}} sessões foram encerradas."
+    },
+    "history": {
+      "title": "Histórico de login",
+      "description": "Cada tentativa de login na sua conta, da mais recente para a mais antiga. Os locais são aproximados e baseados no endereço IP.",
+      "empty": "Nenhum login registrado ainda.",
+      "thisSession": "Esta sessão",
+      "geoAttribution": "Este produto inclui dados GeoLite2 criados pela MaxMind, disponíveis em https://www.maxmind.com.",
+      "verifiedByEmail": "Verificado com um código do e-mail",
+      "codesSent_one": "{{count}} código enviado",
+      "codesSent_many": "{{count}} códigos enviados",
+      "codesSent_other": "{{count}} códigos enviados",
+      "events": {
+        "register": "Conta criada",
+        "login": "Login"
+      },
+      "status": {
+        "success": "Conectado",
+        "failed": "Falhou",
+        "blocked": "Bloqueado",
+        "rate_limited": "Em pausa",
+        "otp_pending": "Aguardando o código"
+      },
+      "flags": {
+        "newDevice": "Novo dispositivo",
+        "newBrowser": "Novo navegador",
+        "newIp": "Novo endereço IP"
+      },
+      "reasons": {
+        "wrong_password": "Senha incorreta",
+        "unknown_account": "Conta desconhecida",
+        "outside_mobile_window": "Celular ou tablet fora do horário das 10:00 às 13:00 (IST)",
+        "cooldown_account_ip": "Em pausa após muitas tentativas sem sucesso nesta rede",
+        "cooldown_ip": "Em pausa após muitas tentativas sem sucesso nesta rede",
+        "otp_hourly_limit": "Muitos códigos pedidos",
+        "otp_expired": "O código não foi digitado a tempo",
+        "otp_locked": "Muitos códigos incorretos",
+        "otp_delivery_failed": "Não foi possível enviar o e-mail com o código",
+        "otp_cancelled": "Cancelado",
+        "otp_superseded": "Substituído por um login mais recente",
+        "window_closed_at_verify": "O horário para celulares terminou antes de o código ser digitado"
+      }
+    }
   }
 }

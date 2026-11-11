@@ -1711,5 +1711,218 @@
   "demo": {
     "badge": "Demo · simulated",
     "tooltip": "Simulated demo record: not a real transaction, and no money was charged."
+  },
+  "authPages": {
+    "pleaseWait": "Please wait…",
+    "login": {
+      "title": "Log in",
+      "subtitle": "Welcome back to InternConnect.",
+      "submit": "Log in",
+      "noAccount": "New to InternConnect?",
+      "createAccount": "Create an account",
+      "forgotPassword": "Forgot password?",
+      "securityNote": "Phones and tablets can sign in between 10:00 AM and 1:00 PM IST. Google Chrome and new devices need a code sent to your email."
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join InternConnect to apply for internships and connect with students.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "logIn": "Log in",
+      "emailHint": "We'll send a 6-digit code to this address to confirm it.",
+      "phoneHint": "10-digit Indian mobile number",
+      "passwordHint": "8 to 64 characters",
+      "createdTitle": "Account created",
+      "createdBody": "Your account is ready. Phones and tablets can sign in only between 10:00 AM and 1:00 PM IST, so please log in from {{time}} IST.",
+      "goToLogin": "Go to login"
+    },
+    "fields": {
+      "identifier": "Email or mobile number",
+      "password": "Password",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Mobile number"
+    },
+    "validation": {
+      "identifierRequired": "Enter your email or phone number.",
+      "passwordRequired": "Enter your password.",
+      "nameLength": "Name must be 2 to 50 characters.",
+      "emailInvalid": "Enter a valid email address.",
+      "phoneInvalid": "Enter a valid 10-digit Indian mobile number.",
+      "passwordLength": "Password must be 8 to 64 characters."
+    },
+    "fieldErrors": {
+      "EMAIL_TAKEN": "This email is already registered.",
+      "PHONE_TAKEN": "This phone number is already registered.",
+      "NAME_LENGTH": "Name must be 2 to 50 characters.",
+      "EMAIL_INVALID": "Enter a valid email address.",
+      "PHONE_INVALID": "Enter a valid 10-digit Indian mobile number.",
+      "PASSWORD_LENGTH": "Password must be 8 to 64 characters."
+    },
+    "errors": {
+      "network": "Cannot reach the server. Please check your connection and try again.",
+      "generic": "Something went wrong. Please try again.",
+      "missingFields": "Enter your email or phone number and your password.",
+      "fixFields": "Please correct the highlighted fields.",
+      "invalidCredentials": "Incorrect email/phone or password.",
+      "mobileWindow": "Phones and tablets can sign in only between 10:00 AM and 1:00 PM IST. You can sign in again at {{time}} IST.",
+      "cooldown": "Too many failed attempts. Please try again in {{wait}}.",
+      "busy": "Too many sign-in attempts at the same time. Please try again in a moment.",
+      "hourlyLimit": "Too many codes were sent to this account. Please try again in {{wait}}.",
+      "resendCooldown": "Please wait {{wait}} before asking for a new code.",
+      "resendLimit": "No more codes can be sent for this sign-in. Please log in again later.",
+      "deliveryFailed": "The code could not be sent. Please try again.",
+      "deliveryFailedAccountCreated": "Your account was created, but the code could not be sent. Please log in to get a new code.",
+      "otpFormat": "Enter the 6-digit code.",
+      "otpInvalid_one": "Incorrect code. {{count}} try left.",
+      "otpInvalid_other": "Incorrect code. {{count}} tries left.",
+      "otpExpired": "This code has expired. Please ask for a new code.",
+      "otpLocked": "Too many incorrect codes. Please log in again to get a new code.",
+      "challengeEnded": "This sign-in has ended. Please log in again.",
+      "accountExists": "An account with these details already exists.",
+      "passwordRequired": "Enter your password to confirm.",
+      "passwordIncorrect": "Incorrect password.",
+      "notFound": "It has already been signed out or removed."
+    },
+    "wait": {
+      "seconds_one": "{{count}} second",
+      "seconds_other": "{{count}} seconds",
+      "minutes_one": "{{count}} minute",
+      "minutes_other": "{{count}} minutes"
+    }
+  },
+  "otp": {
+    "title": "Check your email",
+    "titleRegister": "Confirm your email",
+    "sentTo": "We sent a 6-digit code to {{destination}}. It expires in 10 minutes.",
+    "codeLabel": "6-digit code",
+    "verify": "Verify and log in",
+    "verifyRegister": "Verify and finish",
+    "resend": "Send a new code",
+    "resendIn_one": "Send a new code in {{count}} second",
+    "resendIn_other": "Send a new code in {{count}} seconds",
+    "resent": "A new code has been sent.",
+    "noResends": "No more codes can be sent for this sign-in.",
+    "codeExpired": "This code has expired. Send a new code to continue.",
+    "useDifferentAccount": "Use a different account",
+    "startAgain": "Start again",
+    "reasons": {
+      "chrome": "Sign-ins from Google Chrome always need a code.",
+      "newDevice": "This browser hasn't been verified on your account yet.",
+      "unusual": "This sign-in looks different from your usual ones.",
+      "newAccount": "Enter the code to confirm your email and finish creating your account."
+    }
+  },
+  "sessionNotice": {
+    "mobileEnded": "Phone and tablet access ends at 1:00 PM IST. You can sign in again from 10:00 AM IST.",
+    "revoked": "You were signed out of this device.",
+    "contextChanged": "Your browser or device changed, so you were signed out to keep your account safe.",
+    "expired": "Your session has expired. Please log in again.",
+    "dismiss": "Dismiss"
+  },
+  "accountSecurity": {
+    "title": "Security and sign-ins",
+    "subtitle": "Where your account is signed in, the devices it trusts and every sign-in attempt. Times are in IST.",
+    "link": "View sessions and login history",
+    "refresh": "Refresh",
+    "loading": "Loading…",
+    "loadError": "This list could not be loaded.",
+    "retry": "Try again",
+    "showMore": "Show more",
+    "unknown": "Unknown",
+    "deviceLabel": "{{browser}} on {{os}}",
+    "deviceTypes": {
+      "desktop": "Computer",
+      "mobile": "Phone",
+      "tablet": "Tablet",
+      "unknown": "Unknown device"
+    },
+    "location": {
+      "approximate": "Near {{place}} (approximate)",
+      "local": "Local network",
+      "unknown": "Location unknown"
+    },
+    "ip": "IP {{ip}}",
+    "time": "{{time}} IST",
+    "thisDevice": "This device",
+    "confirm": {
+      "password": "Password",
+      "cancel": "Cancel",
+      "description": "Enter your password to confirm."
+    },
+    "sessions": {
+      "title": "Active sessions",
+      "description": "Browsers where your account is signed in right now. Phone and tablet sessions end at 1:00 PM IST.",
+      "empty": "No active sessions.",
+      "started": "Signed in {{time}}",
+      "lastActive": "last active {{time}}",
+      "endsAt": "Ends at {{time}} IST",
+      "trusted": "Trusted device",
+      "signOut": "Sign out",
+      "signOutLabel": "Sign out {{name}}",
+      "signOutOthers": "Sign out all other devices",
+      "confirmOneTitle": "Sign out this session?",
+      "confirmOthersTitle": "Sign out all other devices?",
+      "signedOut": "That session has been signed out.",
+      "signedOutOthers_one": "{{count}} other session has been signed out.",
+      "signedOutOthers_other": "{{count}} other sessions have been signed out.",
+      "noOthers": "There were no other sessions to sign out."
+    },
+    "devices": {
+      "title": "Devices",
+      "description": "Browsers your account has been used from. A browser is trusted for 30 days after you enter an email code on it; Google Chrome always needs a code.",
+      "empty": "No devices yet.",
+      "trustedUntil": "Trusted until {{date}}",
+      "notTrusted": "Not trusted",
+      "firstSeen": "First used {{time}}",
+      "lastSeen": "last used {{time}}",
+      "remove": "Remove",
+      "removeLabel": "Remove {{name}}",
+      "confirmTitle": "Remove this device?",
+      "confirmDescription": "It will be signed out, and its next sign-in will need an email code. Enter your password to confirm.",
+      "removed": "The device has been removed.",
+      "removedWithSessions_one": "The device has been removed and {{count}} session was signed out.",
+      "removedWithSessions_other": "The device has been removed and {{count}} sessions were signed out."
+    },
+    "history": {
+      "title": "Login history",
+      "description": "Every sign-in attempt on your account, newest first. Locations are approximate and based on the IP address.",
+      "empty": "No sign-ins recorded yet.",
+      "thisSession": "This session",
+      "geoAttribution": "This product includes GeoLite2 data created by MaxMind, available from https://www.maxmind.com.",
+      "verifiedByEmail": "Verified with an email code",
+      "codesSent_one": "{{count}} code sent",
+      "codesSent_other": "{{count}} codes sent",
+      "events": {
+        "register": "Account created",
+        "login": "Login"
+      },
+      "status": {
+        "success": "Signed in",
+        "failed": "Failed",
+        "blocked": "Blocked",
+        "rate_limited": "Paused",
+        "otp_pending": "Waiting for the code"
+      },
+      "flags": {
+        "newDevice": "New device",
+        "newBrowser": "New browser",
+        "newIp": "New IP address"
+      },
+      "reasons": {
+        "wrong_password": "Wrong password",
+        "unknown_account": "Unknown account",
+        "outside_mobile_window": "Phone or tablet outside 10:00 AM – 1:00 PM IST",
+        "cooldown_account_ip": "Paused after too many failed attempts from this network",
+        "cooldown_ip": "Paused after too many failed attempts from this network",
+        "otp_hourly_limit": "Too many codes requested",
+        "otp_expired": "The code was not entered in time",
+        "otp_locked": "Too many wrong codes",
+        "otp_delivery_failed": "The code email could not be sent",
+        "otp_cancelled": "Cancelled",
+        "otp_superseded": "Replaced by a newer sign-in",
+        "window_closed_at_verify": "The phone sign-in window closed before the code was entered"
+      }
+    }
   }
 }
