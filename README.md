@@ -305,7 +305,7 @@ git-ignored and must never be committed.
 | `CLIENT_URL` | Address of the React app, allowed by CORS |
 | `MONGODB_URI` | MongoDB Atlas connection string |
 | `DNS_SERVERS` | Optional: DNS servers for networks where Node cannot resolve `mongodb+srv://` addresses |
-| `TRUST_PROXY` | Optional: proxies allowed to report the client IP. Empty = only the local Vite dev server; in production the number of proxies in front of the API, e.g. `1` (`true` is refused) |
+| `TRUST_PROXY` | Proxies allowed to report the client IP. Empty = only the local Vite dev server. On Render: `loopback, linklocal, uniquelocal` (only proxies on private addresses, however many there are). A number of proxies also works where it is known; `true` is refused |
 | `GEOIP_DB_PATH` | Optional: path of the GeoLite2 City database (default `backend/data/GeoLite2-City.mmdb`) |
 | `MOBILE_LOGIN_WINDOW_TEST`, `MOBILE_SESSION_TEST_MINUTES` | Optional, local testing only: force the phone/tablet window `open`/`closed`, end phone sessions after N minutes (ignored in production) |
 | `MAILTRAP_USER`, `MAILTRAP_PASS` | Local development: Mailtrap Email Testing sandbox for sign-in codes, new passwords and invoices (nothing reaches real inboxes) |
@@ -343,7 +343,8 @@ services would put the site and the API on different sites, and the session cook
    start without `TRUST_PROXY` or the Brevo settings (it never falls back to the sandbox or skips the codes), and with
    live Razorpay keys.
 5. **Check the IP address**: sign in, open Profile > Security and compare the IP in the login history with your
-   real public IP. If it shows a Render address instead, set `TRUST_PROXY` to `2` and redeploy.
+   real public IP. `render.yaml` sets `TRUST_PROXY` to `loopback, linklocal, uniquelocal`, which was verified on
+   Render (with `1`, the history showed Render's private proxy address instead).
 
 Tips for a reliable demo:
 
