@@ -15,10 +15,11 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      # Render's proxy sits in front of the app; trusting one proxy gives the student's real IP address to the
-      # sign-in limits and login history (Module 6). Check the IP shown in Profile > Security after the first login.
+      # Render puts more than one proxy in front of the app, all on private addresses. Trusting only private-network
+      # proxies (not a fixed count) gives the student's real public IP address to the sign-in limits, new-IP alerts and
+      # login history (Module 6). Verified on Render: Profile > Security shows the visitor's public IP.
       - key: TRUST_PROXY
-        value: '1'
+        value: 'loopback, linklocal, uniquelocal'
       # The site's own https address on Render, e.g. https://internconnect.onrender.com
       - key: CLIENT_URL
         sync: false
